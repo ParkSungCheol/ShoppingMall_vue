@@ -1,14 +1,26 @@
 <template>
   <div class="hello">
-    <h1>테스트 마지막입니다.</h1>
+    <button v-on="testAxios">AxiosTest</button>
   </div>
 </template>
 
 <script>
 export default {
   name: 'HelloWorld',
-  props: {
-    msg: String
+  data () {
+    return {
+      msg: 'Hello New World',
+      posts: []
+    }
+  },
+  methods: {
+    testAxios: function() {
+      const baseURI = 'http://ec2-3-39-250-156.ap-northeast-2.compute.amazonaws.com:8080';
+      this.$http.get(`${baseURI}/data`)
+        .then((result) => {
+          console.log(result);
+        })
+    }
   }
 }
 </script>
