@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>테스트 네번째입니다.</h1>
+    <h1>테스트 마지막입니다.</h1>
   </div>
 </template>
 
