@@ -1,10 +1,12 @@
 <template>
   <div class="hello">
-    <button v-on="testAxios">AxiosTest</button>
+    <button v-on:click="testAxios">AxiosTest</button>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'HelloWorld',
   data () {
@@ -15,8 +17,7 @@ export default {
   },
   methods: {
     testAxios: function() {
-      const baseURI = 'http://ec2-3-39-250-156.ap-northeast-2.compute.amazonaws.com:8080';
-      this.$http.get(`${baseURI}/data`)
+      axios.get('api/data')
         .then((result) => {
           console.log(result);
         })
