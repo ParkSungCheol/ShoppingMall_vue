@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <h1>테스트입니다.</h1>
   </div>
 </template>
 
