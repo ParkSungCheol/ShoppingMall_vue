@@ -1,5 +1,8 @@
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
+  rules: {
+    'vue/multi-word-component-names':'off'
+  },
   transpileDependencies: true,
   devServer: {
     allowedHosts: "all",
