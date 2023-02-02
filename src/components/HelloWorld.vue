@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+    <p>test..</p>
     <button v-on:click="testAxios">AxiosTest</button>
   </div>
 </template>
