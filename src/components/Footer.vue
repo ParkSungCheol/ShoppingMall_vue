@@ -16,7 +16,7 @@ export default {
   },
   methods: {
     testAxios: function() {
-      const baseURI = 'http://ec2-3-39-250-156.ap-northeast-2.compute.amazonaws.com:8080';
+      const baseURI = 'https://www.jurospring.o-r.kr';
       axios.get(`${baseURI}/data`)
         .then((result) => {
           console.log(result);
