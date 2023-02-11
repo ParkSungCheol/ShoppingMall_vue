@@ -17,7 +17,7 @@ export default {
   methods: {
     testAxios: function() {
       const baseURI = 'https://www.jurospring.o-r.kr';
-      axios.get(`${baseURI}/data`)
+      axios.get(`${baseURI}/user`)
         .then((result) => {
           console.log(result);
         })
