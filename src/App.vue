@@ -1,8 +1,8 @@
 <template>
-  <Navigation/>
-  <Header/>
-  <Section/>
-  <Footer/>
+  <Navigation v-on:click="clickOutside"/>
+  <Header v-on:click="clickOutside"/>
+  <Section v-on:click="clickOutside" v-bind:showMenu="showMenu" @toggleMenu="toggleMenu"/>
+  <Footer v-on:click="clickOutside"/>
 </template>
 
 <script>
@@ -13,11 +13,24 @@ import Footer from './components/Footer.vue'
 
 export default {
   name: 'App',
+  data () {
+    return {
+      showMenu: false
+    }
+  },
   components: {
     Navigation,
     Header,
     Section,
     Footer
+  },
+  methods: {
+    clickOutside(e) {
+      if(e.target.parentNode !== this.$refs.menu) this.showMenu = false;
+    },
+    toggleMenu() {
+      this.showMenu = !this.showMenu;
+    }
   }
 }
 </script>
@@ -31,4 +44,5 @@ export default {
   color: #2c3e50;
 }
 @import "../css/styles.css";
+
 </style>
