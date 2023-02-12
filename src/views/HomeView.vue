@@ -1,8 +1,8 @@
 <template>
-  <Header></Header>
-  <Navigation></Navigation>
-  <Section></Section>
-  <Footer></Footer>
+  <Header v-on:click="clickOutside"></Header>
+  <Navigation v-on:click="clickOutside"></Navigation>
+  <Section v-on:click="clickOutside" v-bind:showMenu="showMenu" @toggleMenu="toggleMenu"></Section>
+  <Footer v-on:click="clickOutside"></Footer>
 </template>
 
 <script>
@@ -14,11 +14,24 @@ import Section from '@/components/Section.vue'
 
 export default {
   name: 'HomeView',
+  data () {
+    return {
+      showMenu: false
+    }
+  },
   components: {
     Header,
     Footer,
     Navigation,
     Section
+  },
+  methods: {
+    clickOutside(e) {
+      if(e.target.parentNode !== this.$refs.menu) this.showMenu = false;
+    },
+    toggleMenu() {
+      this.showMenu = !this.showMenu;
+    }
   }
 }
 </script>

@@ -6,7 +6,7 @@
             <div class="btn-group sort-btn">
             <button v-on:click='toggleShow' class="btn btn-primary" style="width:80px">{{ sortMsg }}</button>
             <button class="btn btn-primary" data-sort="none" v-on:click="sorting"><i class="fa fa-sort" ref="toggle"></i></button><!-- .dropdown-toggle adds rounded borders and reduces padding. It does not trigger dropdowns. -->
-            <ul v-if='showMenu' class='dropdown-menu' style="margin-top:40px; display: inline-block;" ref="menu">
+            <ul v-if="showMenu" class='dropdown-menu' style="margin-top:40px; display: inline-block;" ref="menu">
               <option v-for='sort in sorts' href="#" tabindex="-1" data-type="alpha" v-on:click="selectSort" :value="sort">{{ sort }}</option>
             </ul>
             </div>
@@ -52,7 +52,12 @@ export default {
       sorts : ['Name', 'Price'],
     }
   },
-  props: ['showMenu'],
+  props: {
+    showMenu: {
+      type: Boolean,
+      default: false
+    }
+  },
   mounted() {
     this.getGoods();
   }
