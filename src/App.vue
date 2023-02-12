@@ -1,39 +1,6 @@
 <template>
-  <Navigation v-on:click="clickOutside"/>
-  <Header v-on:click="clickOutside"/>
-  <Section v-on:click="clickOutside" v-bind:showMenu="showMenu" @toggleMenu="toggleMenu"/>
-  <Footer v-on:click="clickOutside"/>
+  <router-view/>
 </template>
-
-<script>
-import Navigation from './components/Navigation.vue'
-import Header from './components/Header.vue'
-import Section from './components/Section.vue'
-import Footer from './components/Footer.vue'
-
-export default {
-  name: 'App',
-  data () {
-    return {
-      showMenu: false
-    }
-  },
-  components: {
-    Navigation,
-    Header,
-    Section,
-    Footer
-  },
-  methods: {
-    clickOutside(e) {
-      if(e.target.parentNode !== this.$refs.menu) this.showMenu = false;
-    },
-    toggleMenu() {
-      this.showMenu = !this.showMenu;
-    }
-  }
-}
-</script>
 
 <style>
 #app {
@@ -43,6 +10,19 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-@import "../css/styles.css";
 
+nav {
+  padding: 30px;
+}
+
+nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+nav a.router-link-exact-active {
+  color: #42b983;
+}
+
+@import "../css/styles.css";
 </style>
