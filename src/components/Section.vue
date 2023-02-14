@@ -66,7 +66,8 @@ export default {
       const baseURI = 'https://www.jurospring.o-r.kr';
       axios.get(`${baseURI}/goods`)
       .then((result) => {
-          this.goods = result.data;
+        console.log(result);
+        this.goods = result.data;
       });
     },
     sorting(event) {
