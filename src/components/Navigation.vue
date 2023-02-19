@@ -21,10 +21,10 @@
                   <button class="btn btn-outline-dark" type="submit">
                       <i class="bi-cart-fill me-1"></i>
                       Cart
-                      <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                      <i class="bi-cart-fill me-1"></i>
-                      login
-                      <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                      <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>                   
+                  </button>
+                  <button class="btn btn-outline-dark" type="submit">
+                    <router-link to="/login">로그인</router-link>              
                   </button>
               </form>
           </div>
