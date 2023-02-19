@@ -14,6 +14,7 @@
             <button type="submit" class="w3-button w3-green w3-round">Login</button>
           </p>
         </form>
+        <button v-on:click="getSession">Session</button>
       </div>
     </div>
   </div>
@@ -29,29 +30,46 @@ export default {
       user_id: '',
       user_pw: '',
       loginSuccess:false,
-      loginSuccess:false,
       error:false
     }
   },
   methods: {
     async fnLogin() {
-      const baseURI = 'localhost:9090';
+      const baseURI = 'http://localhost:8081';
      //const baseURI = 'https://www.jurospring.o-r.kr';
       try{
-        const result = await axios.get(`${baseURI}/loginProc`,{
-          auth:{
-            username:this.user_id,
-            password:this.user_pw
+        const result = await axios.get(`${baseURI}/login`,
+        {
+          params : {
+            id:this.user_id,
+            pwd:this.user_pw
           }
-        });
+        },
+        {withCredentials : true}
+        );
+
         if(result.status === 200){
           this.loginSuccess = true;
         }
+
+        console.log("session required");
+
       } catch(err){
-        this.loginError = true;
-        throw new Error(err);
+        console.log(err);
       }
 
+    },
+    async getSession() {
+      const baseURI = 'http://localhost:8081';
+     //const baseURI = 'https://www.jurospring.o-r.kr';
+      try{
+        const result = await axios.get(`${baseURI}/getSession`,
+        {},
+        {withCredentials : true}
+        );
+      } catch(err){
+        console.log(err);
+      }
     }
   }
 }
