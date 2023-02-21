@@ -35,8 +35,7 @@ export default {
   },
   methods: {
     async fnLogin() {
-      const baseURI = 'http://localhost:8081';
-     //const baseURI = 'https://www.jurospring.o-r.kr';
+     const baseURI = 'https://www.jurospring.o-r.kr';
       try{
         const result = await axios.get(`${baseURI}/login`,
         {
@@ -60,13 +59,15 @@ export default {
 
     },
     async getSession() {
-      const baseURI = 'http://localhost:8081';
-     //const baseURI = 'https://www.jurospring.o-r.kr';
+     const baseURI = 'https://www.jurospring.o-r.kr';
       try{
         const result = await axios.get(`${baseURI}/getSession`,
         {},
         {withCredentials : true}
-        );
+        ).then(res => {
+          console.log(res);
+        });
+
       } catch(err){
         console.log(err);
       }
