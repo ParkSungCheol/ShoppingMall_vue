@@ -41,6 +41,7 @@ export default {
         {
           headers: {
             'Access-Control-Allow-Origin' : baseURI,
+            'Access-Control-Allow-Credentials': true,
           },
           params : {
             id:this.user_id,
