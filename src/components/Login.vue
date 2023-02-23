@@ -68,6 +68,7 @@ export default {
         {
           headers: {
             'Access-Control-Allow-Origin' : baseURI,
+            'Access-Control-Allow-Credentials': true,
           }
         },
         {withCredentials : true, xsrfHeaderName : "X-CSRFTOKEN", xsrfCookieName : "csrftoken"}
