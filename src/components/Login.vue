@@ -37,7 +37,7 @@ export default {
     async fnLogin() {
      const baseURI = 'https://www.jurospring.o-r.kr';
       try{
-        const result = await axios.get(`${baseURI}/login`,
+        const result = await axios.post(`${baseURI}/login`,
         {
           headers: {
             'Access-Control-Allow-Origin' : baseURI,
