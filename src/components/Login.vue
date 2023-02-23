@@ -62,7 +62,6 @@ export default {
      const baseURI = 'https://www.jurospring.o-r.kr';
       try{
         const result = await axios.get(`${baseURI}/getSession`,
-        {},
         {withCredentials : true}
         ).then(res => {
           console.log(res);
