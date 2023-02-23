@@ -44,7 +44,7 @@ export default {
             pwd:this.user_pw
           }
         },
-        {withCredentials : true}
+        {withCredentials : true, xsrfHeaderName : "X-CSRFTOKEN", xsrfCookieName : "csrftoken"}
         );
 
         if(result.status === 200){
@@ -62,7 +62,8 @@ export default {
      const baseURI = 'https://www.jurospring.o-r.kr';
       try{
         const result = await axios.get(`${baseURI}/getSession`,
-        {withCredentials : true}
+        {},
+        {withCredentials : true, xsrfHeaderName : "X-CSRFTOKEN", xsrfCookieName : "csrftoken"}
         ).then(res => {
           console.log(res);
         });
