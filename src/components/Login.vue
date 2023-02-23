@@ -39,6 +39,9 @@ export default {
       try{
         const result = await axios.get(`${baseURI}/login`,
         {
+          headers: {
+            'Access-Control-Allow-Origin' : baseURI,
+          },
           params : {
             id:this.user_id,
             pwd:this.user_pw
@@ -62,7 +65,11 @@ export default {
      const baseURI = 'https://www.jurospring.o-r.kr';
       try{
         const result = await axios.get(`${baseURI}/getSession`,
-        {},
+        {
+          headers: {
+            'Access-Control-Allow-Origin' : baseURI,
+          }
+        },
         {withCredentials : true, xsrfHeaderName : "X-CSRFTOKEN", xsrfCookieName : "csrftoken"}
         ).then(res => {
           console.log(res);
