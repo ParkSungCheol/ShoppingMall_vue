@@ -39,16 +39,12 @@ export default {
       try{
         const result = await axios.get(`${baseURI}/login`,
         {
-          headers: {
-            'Access-Control-Allow-Origin' : baseURI,
-            'Access-Control-Allow-Credentials': true,
-          },
           params : {
             id:this.user_id,
             pwd:this.user_pw
           }
         },
-        {withCredentials : true, xsrfHeaderName : "X-CSRFTOKEN", xsrfCookieName : "csrftoken"}
+        {withCredentials : true}
         );
 
         if(result.status === 200){
@@ -66,13 +62,8 @@ export default {
      const baseURI = 'https://www.jurospring.o-r.kr';
       try{
         const result = await axios.get(`${baseURI}/getSession`,
-        {
-          headers: {
-            'Access-Control-Allow-Origin' : baseURI,
-            'Access-Control-Allow-Credentials': true,
-          }
-        },
-        {withCredentials : true, xsrfHeaderName : "X-CSRFTOKEN", xsrfCookieName : "csrftoken"}
+        {},
+        {withCredentials : true}
         ).then(res => {
           console.log(res);
         });
