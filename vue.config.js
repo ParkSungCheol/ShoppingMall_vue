@@ -2,6 +2,7 @@ const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
   lintOnSave:false,
   transpileDependencies: true,
+  historyApiFallback: true,
   devServer: {
     allowedHosts: "all",
     proxy: {
