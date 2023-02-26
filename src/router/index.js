@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import NotFoundComponent from '../components/NotFound.vue'
 
 const routes = [
   {
@@ -27,7 +28,7 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes: [{ path: '/:pathMatch(.*)', component: NotFoundComponent }]
 })
 
 export default router
