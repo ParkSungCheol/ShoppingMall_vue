@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     async fnLogin() {
-     const baseURI = 'https://www.jurospring.o-r.kr';
+     const baseURI = 'https://api.jurospring.o-r.kr';
       try{
         const result = await axios.get(`${baseURI}/login`,
         {
@@ -59,7 +59,7 @@ export default {
 
     },
     async getSession() {
-     const baseURI = 'https://www.jurospring.o-r.kr';
+     const baseURI = 'https://api.jurospring.o-r.kr';
       try{
         const result = await axios.get(`${baseURI}/getSession`,
         {},

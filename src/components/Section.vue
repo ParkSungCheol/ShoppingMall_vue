@@ -63,7 +63,7 @@ export default {
   }
   ,methods: {
     getGoods() {
-      const baseURI = 'https://www.jurospring.o-r.kr';
+      const baseURI = 'https://api.jurospring.o-r.kr';
       axios.get(`${baseURI}/goods`)
       .then((result) => {
         console.log(result);
