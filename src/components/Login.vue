@@ -37,14 +37,16 @@ export default {
     async fnLogin() {
      const baseURI = 'https://api.jurospring.o-r.kr';
       try{
-        const result = await axios.get(`${baseURI}/login`,
+        const axiosInstance = axios.create({
+          withCredentials: true,
+        });
+        const result = await axiosInstance.get(`${baseURI}/login`,
         {
           params : {
             id:this.user_id,
             pwd:this.user_pw
           }
         },
-        {withCredentials : true}
         );
 
         if(result.status === 200){
@@ -61,9 +63,11 @@ export default {
     async getSession() {
      const baseURI = 'https://api.jurospring.o-r.kr';
       try{
-        const result = await axios.get(`${baseURI}/getSession`,
+        const axiosInstance = axios.create({
+          withCredentials: true,
+        });
+        const result = await axiosInstance.get(`${baseURI}/getSession`,
         {},
-        {withCredentials : true}
         ).then(res => {
           console.log(res);
         });
