@@ -46,7 +46,7 @@ export default {
     }
   },
   method: {
-    logout(event) {
+    logout: function(event) {
       event.stopPropagation();
       event.preventDefault();
 
