@@ -1,6 +1,7 @@
 <template>
   <Header></Header>
   <Navigation></Navigation>
+  <h1>상세 페이지 입니다. 권한검증이 완료되었습니다.</h1>
   <Footer></Footer>
 </template>
 
