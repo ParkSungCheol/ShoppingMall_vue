@@ -23,9 +23,9 @@
                       Cart
                       <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>                   
                   </button>
-                  <router-link class="btn btn-outline-dark" v-if="!loginSuccess" to="/login">로그인</router-link>       
+                  <router-link class="btn btn-outline-dark" v-if="!loginSuccess" to="/login">로그인</router-link>   
+                  <button class="btn btn-outline-dark" v-if="loginSuccess" v-on:click="logout">로그아웃</button>      
               </form>
-              <button class="btn btn-outline-dark" v-if="loginSuccess" v-on:click="logout">로그아웃</button>  
           </div>
       </div>
   </nav>
