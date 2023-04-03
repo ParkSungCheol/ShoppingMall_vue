@@ -60,6 +60,7 @@ router.beforeEach(async (to, from, next) => {
           console.log(res);
         });
 
+        debugger;
         if(result.status === 200){
           next();
         }
