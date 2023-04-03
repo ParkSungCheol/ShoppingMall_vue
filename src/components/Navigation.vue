@@ -25,7 +25,7 @@
                   </button>
                   <button class="btn btn-outline-dark" type="submit">
                     <router-link v-if="!loginSuccess" to="/login">로그인</router-link>              
-                    <router-link v-if="loginSuccess" to="/login">로그아웃</router-link>     
+                    <a v-if="loginSuccess" v-on:click="logout">로그아웃</a>     
                   </button>
               </form>
           </div>
@@ -34,6 +34,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'Navigation',
   data () {
@@ -45,5 +47,14 @@ export default {
       default: false
     }
   },
+  method: {
+    logout() {
+      const baseURI = 'https://api.jurospring.o-r.kr';
+      axios.get(`${baseURI}/logout`)
+      .then((result) => {
+        console.log(result);
+      });
+    }
+  }
 }
 </script>

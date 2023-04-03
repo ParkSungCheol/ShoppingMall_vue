@@ -8,7 +8,7 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView,
-    meta: { requireLogin: false }
+    meta: { requireLogin: false, notRequireLogin: false, }
   },
   {
     path: '/detail',
@@ -17,7 +17,7 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/DetailView.vue'),
-    meta: { requireLogin: true }
+    meta: { requireLogin: true, notRequireLogin: false, }
   },
   {
     path: '/login',
@@ -26,18 +26,18 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue'),
-    meta: { requireLogin: false }
+    meta: { requireLogin: false, notRequireLogin: true, }
   },
   {
     path: "/404",
     name: "notFound",
     component: NotFoundComponent,
-    meta: { requireLogin: false }
+    meta: { requireLogin: false, notRequireLogin: false, }
   },
   {
     path: '/:pathMatch(.*)*',
     redirect: "/404",
-    meta: { requireLogin: false }
+    meta: { requireLogin: false, notRequireLogin: false, }
   },
 ]
 
@@ -75,7 +75,33 @@ router.beforeEach(async (to, from, next) => {
         alert("로그인이 필요합니다.");
         next('/login');
       }
-	} else {
+	} else if(to.meta.notRequireLogin) {
+    const baseURI = 'https://api.jurospring.o-r.kr';
+    try{
+      const axiosInstance = axios.create({
+        withCredentials: true,
+      });
+      const result = await axiosInstance.get(`${baseURI}/getSession`,
+      {},
+      ).then(res => {
+        console.log(res);
+        return res;
+      });
+
+      console.log(result);
+      if(result.status === 200){
+        alert("이미 로그인하셨습니다.");
+        next('/');
+      }
+      else {
+        next();
+      }
+
+    } catch(err){
+      console.log(err);
+      next();
+    }
+  } else {
 		next();
 	}
 });
