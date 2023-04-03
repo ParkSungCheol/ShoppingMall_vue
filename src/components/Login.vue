@@ -14,7 +14,6 @@
             <button type="submit" class="w3-button w3-green w3-round">Login</button>
           </p>
         </form>
-        <button v-on:click="getSession">Session</button>
       </div>
     </div>
   </div>
@@ -47,35 +46,24 @@ export default {
             pwd:this.user_pw
           }
         },
-        );
+        ).then(res => {
+          console.log(res);
+          return res;
+        });
 
         if(result.status === 200){
           this.loginSuccess = true;
+          this.$router.push('/');
+        } else {
+          alert("로그인에 실패하였습니다.");
         }
-
-        console.log("session required");
 
       } catch(err){
         console.log(err);
+        alert("로그인에 실패하였습니다.");
       }
 
     },
-    async getSession() {
-     const baseURI = 'https://api.jurospring.o-r.kr';
-      try{
-        const axiosInstance = axios.create({
-          withCredentials: true,
-        });
-        const result = await axiosInstance.get(`${baseURI}/getSession`,
-        {},
-        ).then(res => {
-          console.log(res);
-        });
-
-      } catch(err){
-        console.log(err);
-      }
-    }
   }
 }
 </script>
