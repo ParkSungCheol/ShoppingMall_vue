@@ -46,15 +46,31 @@ export default {
     }
   },
   methods: {
-    logout: function(event) {
+    logout: async function(event) {
       event.stopPropagation();
       event.preventDefault();
 
       const baseURI = 'https://api.jurospring.o-r.kr';
-      axios.get(`${baseURI}/logout`)
-      .then((result) => {
-        console.log(result);
-      });
+      try{
+        const axiosInstance = axios.create({
+          withCredentials: true,
+        });
+        const result = await axiosInstance.get(`${baseURI}/logout`,
+        ).then(res => {
+          console.log(res);
+          return res;
+        });
+
+        if(result.status === 200){
+          this.$router.push('/');
+        } else {
+          alert("로그아웃에 실패하였습니다.");
+        }
+
+      } catch(err){
+        console.log(err);
+        alert("로그아웃에 실패하였습니다.");
+      }
     }
   }
 }
