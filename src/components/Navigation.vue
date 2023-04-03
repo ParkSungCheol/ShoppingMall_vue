@@ -46,7 +46,10 @@ export default {
     }
   },
   method: {
-    logout() {
+    logout(event) {
+      event.stopPropagation();
+      event.preventDefault();
+
       const baseURI = 'https://api.jurospring.o-r.kr';
       axios.get(`${baseURI}/logout`)
       .then((result) => {
