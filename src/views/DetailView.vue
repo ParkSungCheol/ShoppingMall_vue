@@ -12,7 +12,7 @@ import Footer from '@/components/Footer.vue'
 import Navigation from '@/components/Navigation.vue'
 
 export default {
-  name: 'HomeView',
+  name: 'DatailView',
   components: {
     Header,
     Footer,

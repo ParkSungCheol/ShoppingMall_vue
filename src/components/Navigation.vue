@@ -24,7 +24,8 @@
                       <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>                   
                   </button>
                   <button class="btn btn-outline-dark" type="submit">
-                    <router-link to="/login">로그인</router-link>              
+                    <router-link v-if="!loginSuccess" to="/login">로그인</router-link>              
+                    <router-link v-if="loginSuccess" to="/login">로그아웃</router-link>     
                   </button>
               </form>
           </div>
@@ -37,6 +38,12 @@ export default {
   name: 'Navigation',
   data () {
     return {}
+  },
+  props: {
+    loginSuccess: {
+      type: Boolean,
+      default: false
+    }
   },
 }
 </script>
