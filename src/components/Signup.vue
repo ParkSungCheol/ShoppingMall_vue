@@ -132,11 +132,11 @@ export default {
       let idval = this.$refs.idValue.value;
       let idvalcheck = /^[A-Za-z0-9]$/
       if (!idvalcheck.test(idval) || idval.length<6 || idval.length>20){
-        ValidId = false;
+        this.ValidId = false;
         this.$refs.idValue.focus();
       }
       else {
-        ValidId = true;
+        this.ValidId = true;
       }
     }
   }
