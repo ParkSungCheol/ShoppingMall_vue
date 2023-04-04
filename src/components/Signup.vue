@@ -130,7 +130,7 @@ export default {
     },
     keyPress() {
       let idval = this.$refs.idValue.value;
-      let idvalcheck = new RegExp('/^[a-zA-Z0-9]{6,20}$/');
+      let idvalcheck = new RegExp('^[a-zA-Z0-9]{6,20}$');
       console.log(idval);
       console.log(idvalcheck.test(idval));
       if (!idvalcheck.test(idval)){
