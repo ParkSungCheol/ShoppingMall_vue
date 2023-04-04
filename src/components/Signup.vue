@@ -4,7 +4,6 @@
       <h2>Please Sign In</h2>
       <div class="member">
         <!-- 1. 로고 -->
-        <img class="logo" src="./images/images2/logo-naver.png">
 
         <!-- 2. 필드 -->
         <div class="field">
