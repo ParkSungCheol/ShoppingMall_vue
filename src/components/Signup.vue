@@ -132,8 +132,8 @@ export default {
     keyPress($event, targetObject) {
       let idval = $event.target.value;
       let idvalcheck = null;
-      if(targetObject == 'id') idvalcheck = new RegExp('^[a-zA-Z0-9]{6,20}$');
-      if(targetObject == 'pwd') idvalcheck = new RegExp('^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{10,}$');
+      if(targetObject == 'id') idvalcheck = new RegExp(/^[a-zA-Z0-9]{6,20}$/);
+      if(targetObject == 'pwd') idvalcheck = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{10,}$/);
       console.log(idval);
       console.log(idvalcheck.test(idval));
       if (!idvalcheck.test(idval)){
