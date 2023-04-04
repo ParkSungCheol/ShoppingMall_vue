@@ -48,8 +48,8 @@
                     <option value="12">12월</option>
                 </select>
                 <input type="number" placeholder="일" ref="day" v-on:keyup="keyPress($event, 'birthday')">
-                <b style="color:red; display:'block';" v-show="birthday">연도 4자리, 일 2자리로 입력하세요</b>
             </div>
+            <b style="color:red" v-show="birthday">연도 4자리, 일 2자리로 입력하세요</b>
         </div>
 
         <!-- 4. 필드(성별) -->
