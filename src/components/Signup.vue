@@ -137,7 +137,7 @@ export default {
       if(targetObject == 'id') idvalcheck = new RegExp(/^[a-zA-Z0-9]{6,20}$/);
       if(targetObject == 'pwd') idvalcheck = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{10,}$/);
       if(targetObject == 'pwdConfirm') {
-        let pwd = this.$refs.pwd.value;
+        let pwd = "^" + this.$refs.pwd.value + "$";
         console.log(pwd);
         idvalcheck = new RegExp(pwd);
       }
