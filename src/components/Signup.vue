@@ -8,7 +8,7 @@
         <!-- 2. 필드 -->
         <div class="field">
             <b>아이디</b>
-            <span class="placehold-text"><input v-on:keyup="keyPress(this.value)" type="text"></span>
+            <span class="placehold-text"><input v-on:keyup="keyPress($event)" type="text"></span>
             <b style="color:red" v-show="ValidId">아이디는 영문대소문자, 숫자로 6-20자로 구성해주세요!</b>
         </div>
         <div class="field">
@@ -128,7 +128,8 @@ export default {
       }
 
     },
-    keyPress(idval) {
+    keyPress($event) {
+      let idval = $event.target.value;
       let idvalcheck = new RegExp('^[a-zA-Z0-9]{6,20}$');
       console.log(idval);
       console.log(idvalcheck.test(idval));
