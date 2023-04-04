@@ -8,7 +8,7 @@
         <!-- 2. 필드 -->
         <div class="field">
             <b>아이디</b>
-            <span class="placehold-text"></span>
+            <span class="placehold-text"><input type="text"></span>
         </div>
         <div class="field">
             <b>비밀번호</b>
