@@ -139,7 +139,7 @@ export default {
       if(targetObject == 'pwdConfirm') {
         let pwd = this.$refs.pwd.value;
         console.log(pwd);
-        idvalcheck = new RegExp(`[${pwd}]`);
+        idvalcheck = new RegExp(pwd);
       }
       console.log(idval);
       console.log(idvalcheck.test(idval));
