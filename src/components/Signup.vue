@@ -31,23 +31,24 @@
         <div class="field birth">
             <b>생년월일</b>
             <div>
-                <input type="number" placeholder="년(4자)">                
-                <select>
+                <input type="number" placeholder="년(4자)" ref="year" v-on:keyup="keyPress($event, 'birthday')">                
+                <select ref="month" v-on:keyup="keyPress($event, 'birthday')">
                     <option value="">월</option>
-                    <option value="">1월</option>
-                    <option value="">2월</option>
-                    <option value="">3월</option>
-                    <option value="">4월</option>
-                    <option value="">5월</option>
-                    <option value="">6월</option>
-                    <option value="">7월</option>
-                    <option value="">8월</option>
-                    <option value="">9월</option>
-                    <option value="">10월</option>
-                    <option value="">11월</option>
-                    <option value="">12월</option>
+                    <option value="01">1월</option>
+                    <option value="02">2월</option>
+                    <option value="03">3월</option>
+                    <option value="04">4월</option>
+                    <option value="05">5월</option>
+                    <option value="06">6월</option>
+                    <option value="07">7월</option>
+                    <option value="08">8월</option>
+                    <option value="09">9월</option>
+                    <option value="10">10월</option>
+                    <option value="11">11월</option>
+                    <option value="12">12월</option>
                 </select>
-                <input type="number" placeholder="일">
+                <input type="number" placeholder="일" ref="day" v-on:keyup="keyPress($event, 'birthday')">
+                <b style="color:red" v-show="birthday">연도 4자리, 일 2자리로 입력하세요</b>
             </div>
         </div>
 
@@ -97,6 +98,7 @@ export default {
       pwd: true,
       pwdConfirm: true,
       name: true,
+      birthday: true,
       loginSuccess:false,
       error:false
     }
@@ -144,6 +146,13 @@ export default {
         idvalcheck = new RegExp(pwd);
       }
       else if(targetObject == 'name') idvalcheck = new RegExp(/^[ㄱ-ㅣ가-힣]{2,4}$/);
+      else if(targetObject == 'birthday') {
+        idvalcheck = new RegExp(/(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])/);
+        let year = this.$refs.year.value;
+        let month = this.$refs.month.value;
+        let day = this.$refs.day.value;
+        idval = year + month + day;
+      }
       console.log(idval);
       console.log(idvalcheck.test(idval));
       if (!idvalcheck.test(idval)){
