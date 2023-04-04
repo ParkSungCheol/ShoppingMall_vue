@@ -23,7 +23,8 @@
         </div>
         <div class="field">
             <b>이름</b>
-            <input type="text">
+            <input type="text" v-on:keyup="keyPress($event, 'name')">
+            <b style="color:red" v-show="name">한글 2-4자 입력하세요</b>
         </div>
 
         <!-- 3. 필드(생년월일) -->
@@ -95,6 +96,7 @@ export default {
       id: true,
       pwd: true,
       pwdConfirm: true,
+      name: true,
       loginSuccess:false,
       error:false
     }
@@ -135,12 +137,13 @@ export default {
       let idval = $event.target.value;
       let idvalcheck = null;
       if(targetObject == 'id') idvalcheck = new RegExp(/^[a-zA-Z0-9]{6,20}$/);
-      if(targetObject == 'pwd') idvalcheck = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{10,}$/);
-      if(targetObject == 'pwdConfirm') {
+      else if(targetObject == 'pwd') idvalcheck = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{10,}$/);
+      else if(targetObject == 'pwdConfirm') {
         let pwd = "^" + this.$refs.pwd.value + "$";
         console.log(pwd);
         idvalcheck = new RegExp(pwd);
       }
+      else if(targetObject == 'name') idvalcheck = new RegExp(/^[ㄱ-ㅣ가-힣]{2,4}$/);
       console.log(idval);
       console.log(idvalcheck.test(idval));
       if (!idvalcheck.test(idval)){
