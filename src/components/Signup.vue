@@ -90,7 +90,7 @@ export default {
   name:'login',
   data() {
     return {
-      ValidId: false,
+      ValidId: true,
       user_pw: '',
       loginSuccess:false,
       error:false
@@ -132,11 +132,11 @@ export default {
       let idval = this.$refs.idValue.value;
       let idvalcheck = /^[A-Za-z0-9]$/
       if (!idvalcheck.test(idval) || idval.length<6 || idval.length>20){
-        this.ValidId = false;
+        this.ValidId = true;
         this.$refs.idValue.focus();
       }
       else {
-        this.ValidId = true;
+        this.ValidId = false;
       }
     }
   }
