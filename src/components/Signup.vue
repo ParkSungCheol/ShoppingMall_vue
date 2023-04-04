@@ -9,17 +9,17 @@
         <div class="field">
             <b>아이디</b>
             <span class="placehold-text"><input v-on:keyup="keyPress($event, 'id')" type="text"></span>
-            <b style="color:red" v-show="id">아이디는 영문대소문자, 숫자 조합의 6-20자로 구성해주세요!</b>
+            <b style="color:red" v-show="id">영문대소문자, 숫자 6-20자 입력하세요</b>
         </div>
         <div class="field">
             <b>비밀번호</b>
             <input class="userpw" type="password" v-on:keyup="keyPress($event, 'pwd')" ref="pwd">
-            <b style="color:red" v-show="pwd">비밀번호는 영문대소문자, 숫자, 특수문자 조합의 10자 이상으로 구성해주세요!</b>
+            <b style="color:red" v-show="pwd">영문대소문자, 숫자, 특수문자 10자 이상 입력하세요</b>
         </div>
         <div class="field">
             <b>비밀번호 재확인</b>
             <input class="userpw-confirm" type="password" v-on:keyup="keyPress($event, 'pwdConfirm')">
-            <b style="color:red" v-show="pwdConfirm">입력하신 비밀번호가 일치하지 않습니다!</b>
+            <b style="color:red" v-show="pwdConfirm">비밀번호가 일치하지 않습니다</b>
         </div>
         <div class="field">
             <b>이름</b>
