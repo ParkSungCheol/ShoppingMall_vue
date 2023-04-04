@@ -190,12 +190,12 @@ input[type=radio] {
 
 .member input[type=button],
 .member input[type=submit]{
-background-color: #2db400;
+background-color: black;
 color:#fff
 }
 
 .member input:focus, .member select:focus{
-    border: 1px solid #2db400;
+    border: 1px solid black;
 }
 
 .field.birth div{ /*field 이면서 birth*/
