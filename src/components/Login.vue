@@ -11,8 +11,8 @@
             <input name="password" class="w3-input" placeholder="Enter your password" v-model="user_pw" type="password">
           </p>
           <p>
-            <button type="submit" class="w3-button w3-green w3-round">Login</button>
-            <router-link class="w3-button w3-green w3-round" to="/signup">회원가입</router-link>       
+            <button type="submit" class="btn btn-outline-dark">Login</button>
+            <router-link class="btn btn-outline-dark" to="/signup">회원가입</router-link>       
           </p>
         </form>
       </div>
