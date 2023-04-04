@@ -13,12 +13,13 @@
         </div>
         <div class="field">
             <b>비밀번호</b>
-            <input class="userpw" type="password" v-on:keyup="keyPress($event, 'pwd')">
+            <input class="userpw" type="password" v-on:keyup="keyPress($event, 'pwd')" ref="pwd">
             <b style="color:red" v-show="pwd">비밀번호는 영문대소문자, 숫자, 특수문자 조합의 10자 이상으로 구성해주세요!</b>
         </div>
         <div class="field">
             <b>비밀번호 재확인</b>
-            <input class="userpw-confirm" type="password">
+            <input class="userpw-confirm" type="password" v-on:keyup="keyPress($event, 'pwdConfirm')">
+            <b style="color:red" v-show="pwdConfirm">입력하신 비밀번호가 일치하지 않습니다!</b>
         </div>
         <div class="field">
             <b>이름</b>
@@ -93,6 +94,7 @@ export default {
     return {
       id: true,
       pwd: true,
+      pwdConfirm: true,
       loginSuccess:false,
       error:false
     }
@@ -134,6 +136,10 @@ export default {
       let idvalcheck = null;
       if(targetObject == 'id') idvalcheck = new RegExp(/^[a-zA-Z0-9]{6,20}$/);
       if(targetObject == 'pwd') idvalcheck = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{10,}$/);
+      if(targetObject == 'pwdConfirm') {
+        let pwd = this.$refs.pwd.value;
+        idvalcheck = new RegExp(`[${pwd}]`);
+      }
       console.log(idval);
       console.log(idvalcheck.test(idval));
       if (!idvalcheck.test(idval)){
