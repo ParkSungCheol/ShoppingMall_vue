@@ -29,6 +29,15 @@ const routes = [
     meta: { requireLogin: false, notRequireLogin: true, }
   },
   {
+    path: '/signup',
+    name: 'signup',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/Signup.vue'),
+    meta: { requireLogin: false, notRequireLogin: true, }
+  },
+  {
     path: "/404",
     name: "notFound",
     component: NotFoundComponent,
