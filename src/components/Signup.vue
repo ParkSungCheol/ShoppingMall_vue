@@ -8,7 +8,8 @@
         <!-- 2. 필드 -->
         <div class="field">
             <b>아이디</b>
-            <span class="placehold-text"><input type="text"></span>
+            <span class="placehold-text"><input v-on:keyup="keyPress" type="text" ref="idValue"></span>
+            <b style="color:red" v-show="ValidId">아이디는 영문대소문자, 숫자로 6-20자로 구성해주세요!</b>
         </div>
         <div class="field">
             <b>비밀번호</b>
@@ -89,7 +90,7 @@ export default {
   name:'login',
   data() {
     return {
-      user_id: '',
+      ValidId: false,
       user_pw: '',
       loginSuccess:false,
       error:false
@@ -127,6 +128,17 @@ export default {
       }
 
     },
+    keyPress() {
+      let idval = this.$refs.idValue.value;
+      let idvalcheck = /^[A-Za-z0-9]$/
+      if (!idvalcheck.test(idval) || idval.length<6 || idval.length>20){
+        ValidId = false;
+        this.$refs.idValue.focus();
+      }
+      else {
+        ValidId = true;
+      }
+    }
   }
 }
 </script>
