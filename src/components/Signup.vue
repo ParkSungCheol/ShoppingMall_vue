@@ -8,7 +8,7 @@
         <!-- 2. 필드 -->
         <div class="field">
             <b>아이디</b>
-            <span class="placehold-text"><input v-on:keyup="keyPress" type="text" ref="idValue"></span>
+            <span class="placehold-text"><input v-on:keyup="keyPress(this.value)" type="text"></span>
             <b style="color:red" v-show="ValidId">아이디는 영문대소문자, 숫자로 6-20자로 구성해주세요!</b>
         </div>
         <div class="field">
@@ -128,14 +128,12 @@ export default {
       }
 
     },
-    keyPress() {
-      let idval = this.$refs.idValue.value;
+    keyPress(idval) {
       let idvalcheck = new RegExp('^[a-zA-Z0-9]{6,20}$');
       console.log(idval);
       console.log(idvalcheck.test(idval));
       if (!idvalcheck.test(idval)){
         this.ValidId = true;
-        this.$refs.idValue.focus();
       }
       else {
         this.ValidId = false;
