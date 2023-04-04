@@ -236,13 +236,11 @@ color:#fff
 }
 
 .userpw{
-    background:url(./images/images2/icon-01.png) no-repeat center right 15px;
     background-size: 20px;
     background-color: #fff;
 }
 
 .userpw-confirm{
-    background:url(./images/images2/icon-02.png) no-repeat center right 15px;
     background-size: 20px;
     background-color: #fff;
 }
