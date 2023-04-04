@@ -31,7 +31,7 @@
         <div class="field birth">
             <b>생년월일</b>
             <div>
-                <input type="number" placeholder="년(4자)" ref="year" v-on:keyup="keyPress($event, 'birthday')">                
+                <input type="number" placeholder="년(4자)" ref="year" v-on:keyup="keyPress($event, 'birthday')" maxlength="4">                
                 <select ref="month" v-on:change="keyPress($event, 'birthday')">
                     <option value="">월</option>
                     <option value="01">1월</option>
@@ -47,7 +47,7 @@
                     <option value="11">11월</option>
                     <option value="12">12월</option>
                 </select>
-                <input type="number" placeholder="일" ref="day" v-on:keyup="keyPress($event, 'birthday')">
+                <input type="number" placeholder="일" ref="day" v-on:keyup="keyPress($event, 'birthday')" maxlength="2">
             </div>
             <b style="color:red" v-show="birthday">연도 4자리, 일 2자리로 입력하세요</b>
         </div>
@@ -150,7 +150,7 @@ export default {
         idvalcheck = new RegExp(/(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])/);
         let year = this.$refs.year.value;
         let month = this.$refs.month.value;
-        let day = this.$refs.day.value;
+        let day = this.$refs.day.value < 10? "0"+this.$refs.day.value : this.$refs.day.value;
         idval = year + month + day;
       }
       console.log(idval);
