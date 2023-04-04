@@ -32,7 +32,7 @@
             <b>생년월일</b>
             <div>
                 <input type="number" placeholder="년(4자)" ref="year" v-on:keyup="keyPress($event, 'birthday')">                
-                <select ref="month" v-on:keyup="keyPress($event, 'birthday')">
+                <select ref="month" v-on:change="keyPress($event, 'birthday')">
                     <option value="">월</option>
                     <option value="01">1월</option>
                     <option value="02">2월</option>
