@@ -9,11 +9,12 @@
         <div class="field">
             <b>아이디</b>
             <span class="placehold-text"><input v-on:keyup="keyPress($event, 'id')" type="text"></span>
-            <b style="color:red" v-show="id">아이디는 영문대소문자, 숫자로 6-20자로 구성해주세요!</b>
+            <b style="color:red" v-show="id">아이디는 영문대소문자, 숫자 조합의 6-20자로 구성해주세요!</b>
         </div>
         <div class="field">
             <b>비밀번호</b>
-            <input class="userpw" type="password">
+            <input class="userpw" type="password" v-on:keyup="keyPress($event, 'pwd')">
+            <b style="color:red" v-show="pwd">비밀번호는 영문대소문자, 숫자, 특수문자 조합의 10자 이상으로 구성해주세요!</b>
         </div>
         <div class="field">
             <b>비밀번호 재확인</b>
@@ -91,7 +92,7 @@ export default {
   data() {
     return {
       id: true,
-      user_pw: '',
+      pwd: true,
       loginSuccess:false,
       error:false
     }
@@ -132,6 +133,7 @@ export default {
       let idval = $event.target.value;
       let idvalcheck = null;
       if(targetObject == 'id') idvalcheck = new RegExp('^[a-zA-Z0-9]{6,20}$');
+      if(targetObject == 'pwd') idvalcheck = new RegExp('^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{10,}$');
       console.log(idval);
       console.log(idvalcheck.test(idval));
       if (!idvalcheck.test(idval)){
