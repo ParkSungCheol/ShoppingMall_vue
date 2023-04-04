@@ -8,8 +8,8 @@
         <!-- 2. 필드 -->
         <div class="field">
             <b>아이디</b>
-            <span class="placehold-text"><input v-on:keyup="keyPress($event)" type="text"></span>
-            <b style="color:red" v-show="ValidId">아이디는 영문대소문자, 숫자로 6-20자로 구성해주세요!</b>
+            <span class="placehold-text"><input v-on:keyup="keyPress($event, 'id')" type="text"></span>
+            <b style="color:red" v-show="id">아이디는 영문대소문자, 숫자로 6-20자로 구성해주세요!</b>
         </div>
         <div class="field">
             <b>비밀번호</b>
@@ -90,7 +90,7 @@ export default {
   name:'login',
   data() {
     return {
-      ValidId: true,
+      id: true,
       user_pw: '',
       loginSuccess:false,
       error:false
@@ -128,16 +128,17 @@ export default {
       }
 
     },
-    keyPress($event) {
+    keyPress($event, targetObject) {
       let idval = $event.target.value;
-      let idvalcheck = new RegExp('^[a-zA-Z0-9]{6,20}$');
+      let idvalcheck = null;
+      if(targetObject == 'id') idvalcheck = new RegExp('^[a-zA-Z0-9]{6,20}$');
       console.log(idval);
       console.log(idvalcheck.test(idval));
       if (!idvalcheck.test(idval)){
-        this.ValidId = true;
+        this[targetObject] = true;
       }
       else {
-        this.ValidId = false;
+        this[targetObject] = false;
       }
     }
   }
