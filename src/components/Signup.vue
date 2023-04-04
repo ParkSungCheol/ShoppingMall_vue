@@ -8,7 +8,7 @@
         <!-- 2. 필드 -->
         <div class="field">
             <b>아이디</b>
-            <span class="placehold-text"><input type="text"></span>
+            <span class="placehold-text"></span>
         </div>
         <div class="field">
             <b>비밀번호</b>
@@ -184,6 +184,10 @@ a{
     margin-bottom: 5px;
 }
 
+input[type=radio] {
+  margin-left: 10px;
+}
+
 .member input[type=button],
 .member input[type=submit]{
 background-color: #2db400;
@@ -228,7 +232,6 @@ color:#fff
 }
 
 .placehold-text:before{ 
-    content : "@naver.com";
     position:absolute; /*before은 inline 요소이기 때문에 span으로 감싸줌 */
     right : 20px;
     top:13px;
