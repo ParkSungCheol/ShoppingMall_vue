@@ -64,11 +64,14 @@
         <div class="field email-number">
             <b>본인 확인 이메일</b>
             <div>
-              <input type="email" v-on:keyup="keyPress($event, 'email')" ref="email">
-              <input type="button" value="인증번호 받기" v-on:click="sendEmail">
+              <input type="email" v-on:keyup="keyPress($event, 'email')" ref="sendEmail">
+              <input type="button" value="인증번호 받기" v-on:click="email('sendEmail')">
             </div>
             <b style="color:red" v-show="email">입력한 이메일을 확인하세요</b>
-            <input type="number" placeholder="인증번호를 입력하세요">
+            <div>
+              <input type="number" placeholder="인증번호를 입력하세요" ref="checkEmail">
+              <input type="button" value="인증번호 확인" v-on:click="email('checkEmail')">
+            </div>
         </div>
         
         <div class="field tel-number">
@@ -134,21 +137,24 @@ export default {
         this[targetObject] = false;
       }
     },
-    async sendEmail() {
+    async email(targetObject) {
       if(this.email) {
         alert("이메일을 확인해주세요!");
         return;
       }
+
+      let successMessage = targetObject == "sendEmail"? "이메일을 정상적으로 발송했습니다." : "이메일 인증되었습니다.";
+      let failureMessage = targetObject == "sendEmail"? "이메일발송에 실패하였습니다." : "인증코드를 확인해주세요.";
       
       const baseURI = 'https://api.jurospring.o-r.kr';
       try{
         const axiosInstance = axios.create({
           withCredentials: true,
         });
-        const result = await axiosInstance.get(`${baseURI}/sendEmail`,
+        const result = await axiosInstance.get(`${baseURI}/` + targetObject,
         {
           params : {
-            email: this.$refs.email.value
+            email: this.$refs[targetObject].value
           }
         },
         ).then(res => {
@@ -158,15 +164,15 @@ export default {
 
         console.log(result);
         if(result.status === 200){
-          alert("이메일을 정상적으로 발송했습니다.");
+          alert(successMessage);
         }
         else {
-          alert("이메일발송에 실패하였습니다.");
+          alert(failureMessage);
         }
 
       } catch(err){
         console.log(err);
-        alert("이메일발송에 실패하였습니다.");
+        alert(failureMessage);
       }
     }
   }
