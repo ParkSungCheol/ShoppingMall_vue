@@ -210,7 +210,7 @@ color:#fff
     flex:1;
 } */
 
-.field.tel-number div, .filed.email-number div {
+.field.tel-number div, .field.email-number div {
     display: flex;
 }
 
