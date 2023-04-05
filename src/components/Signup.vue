@@ -65,12 +65,12 @@
             <b>본인 확인 이메일</b>
             <div>
               <input type="email" v-on:keyup="keyPress($event, 'email')" ref="sendEmail">
-              <input type="button" value="인증번호 받기" v-on:click="email('sendEmail')">
+              <input type="button" value="인증번호 받기" v-on:click="emailCheck('sendEmail')">
             </div>
             <b style="color:red" v-show="email">입력한 이메일을 확인하세요</b>
             <div>
               <input type="text" placeholder="인증번호를 입력하세요" ref="checkEmail" maxlength="30">
-              <input type="button" value="인증번호 확인" v-on:click="email('checkEmail')">
+              <input type="button" value="인증번호 확인" v-on:click="emailCheck('checkEmail')">
             </div>
         </div>
         
@@ -138,7 +138,7 @@ export default {
       }
       console.log(this[targetObject]);
     },
-    async email(targetObject) {
+    async emailCheck(targetObject) {
       if(this.email) {
         alert("이메일을 확인해주세요!");
         return;
