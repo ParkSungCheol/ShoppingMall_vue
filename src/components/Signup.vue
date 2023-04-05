@@ -136,6 +136,7 @@ export default {
       else {
         this[targetObject] = false;
       }
+      console.log(this[targetObject]);
     },
     async email(targetObject) {
       if(this.email) {
