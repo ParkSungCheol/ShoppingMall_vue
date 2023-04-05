@@ -64,8 +64,8 @@
         <div class="field email-number">
             <b>본인 확인 이메일</b>
             <div>
-              <input type="email" v-on:keyup="keyPress($event, 'email')">
-              <input type="button" value="인증번호 받기">
+              <input type="email" v-on:keyup="keyPress($event, 'email')" ref="email">
+              <input type="button" value="인증번호 받기" v-on:click="sendEmail">
             </div>
             <b style="color:red" v-show="email">입력한 이메일을 확인하세요</b>
             <input type="number" placeholder="인증번호를 입력하세요">
@@ -132,6 +132,41 @@ export default {
       }
       else {
         this[targetObject] = false;
+      }
+    },
+    async sendEmail() {
+      if(email) {
+        alert("이메일을 확인해주세요!");
+        return;
+      }
+      
+      const baseURI = 'https://api.jurospring.o-r.kr';
+      try{
+        const axiosInstance = axios.create({
+          withCredentials: true,
+        });
+        const result = await axiosInstance.get(`${baseURI}/sendEmail`,
+        {
+          params : {
+            email: this.$refs.email.value
+          }
+        },
+        ).then(res => {
+          console.log(res);
+          return res;
+        });
+
+        console.log(result);
+        if(result.status === 200){
+          alert("이메일을 정상적으로 발송했습니다.");
+        }
+        else {
+          alert("이메일발송에 실패하였습니다.");
+        }
+
+      } catch(err){
+        console.log(err);
+        alert("이메일발송에 실패하였습니다.");
       }
     }
   }
