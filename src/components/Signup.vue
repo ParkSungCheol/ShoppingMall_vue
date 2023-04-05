@@ -69,7 +69,7 @@
             </div>
             <b style="color:red" v-show="email">입력한 이메일을 확인하세요</b>
             <div>
-              <input type="number" placeholder="인증번호를 입력하세요" ref="checkEmail">
+              <input type="text" placeholder="인증번호를 입력하세요" ref="checkEmail" maxlength="30">
               <input type="button" value="인증번호 확인" v-on:click="email('checkEmail')">
             </div>
         </div>
