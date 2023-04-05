@@ -135,13 +135,12 @@ export default {
       }
     },
     async sendEmail() {
-      if(email) {
+      if(this.email) {
         alert("이메일을 확인해주세요!");
         return;
       }
       
       const baseURI = 'https://api.jurospring.o-r.kr';
-      console.log(this.$refs);
       try{
         const axiosInstance = axios.create({
           withCredentials: true,
