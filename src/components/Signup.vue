@@ -61,7 +61,7 @@
         </div>
 
         <!-- 5. 이메일_전화번호 -->
-        <div class="field tel-number">
+        <div class="field email-number">
             <b>본인 확인 이메일</b>
             <div>
               <input type="email" v-on:keyup="keyPress($event, 'email')">
@@ -210,12 +210,16 @@ color:#fff
     flex:1;
 } */
 
-.field.tel-number div {
+.field.tel-number div, .filed.email-number div {
     display: flex;
 }
 
 .field.tel-number div input:nth-child(1){
     flex:2;
+}
+
+.field.tel-number div input:nth-child(2), .field.email-number div input:nth-child(1) {
+    flex:1;
 }
 
 .field.tel-number div input:nth-child(2){
