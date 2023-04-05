@@ -57,13 +57,13 @@
         <!-- 4. 주소 -->
         <div class="field">
             <b>주소</b>
-            <input type="email" placeholder="선택입력">
+            <input type="address">
         </div>
 
         <!-- 5. 이메일_전화번호 -->
         <div class="field">
             <b>본인 확인 이메일</b>
-            <input type="email" placeholder="선택입력">
+            <input type="email">
         </div>
         
         <div class="field tel-number">
