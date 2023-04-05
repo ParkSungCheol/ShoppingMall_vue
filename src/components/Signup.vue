@@ -218,7 +218,7 @@ color:#fff
     flex:2;
 }
 
-.field.tel-number div input:nth-child(2) {
+.field.tel-number div input:nth-child(2), .field.email-number div input:nth-child(2) {
     flex:1;
 }
 
