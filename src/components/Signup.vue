@@ -214,11 +214,11 @@ color:#fff
     display: flex;
 }
 
-.field.tel-number div input:nth-child(1){
+.field.tel-number div input:nth-child(1), .field.email-number div input:nth-child(1) {
     flex:2;
 }
 
-.field.tel-number div input:nth-child(2), .field.email-number div input:nth-child(1) {
+.field.tel-number div input:nth-child(2) {
     flex:1;
 }
 
