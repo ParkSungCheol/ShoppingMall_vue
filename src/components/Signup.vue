@@ -31,7 +31,7 @@
         <div class="field birth">
             <b>생년월일</b>
             <div>
-                <input type="number" placeholder="년(4자)" ref="year" v-on:change="keyPress($event, 'birthday')" 
+                <input type="number" placeholder="년(4자)" ref="year" v-on:change="keyPress($event, 'birthday')" v-on:keyup="keyPress($event, 'birthday')" 
                 oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="4">                
                 <select ref="month" v-on:change="keyPress($event, 'birthday')">
                     <option value="">월</option>
@@ -48,7 +48,7 @@
                     <option value="11">11월</option>
                     <option value="12">12월</option>
                 </select>
-                <input type="number" placeholder="일" ref="day" v-on:change="keyPress($event, 'birthday')" 
+                <input type="number" placeholder="일" ref="day" v-on:change="keyPress($event, 'birthday')" v-on:keyup="keyPress($event, 'birthday')" 
                 oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="2">
             </div>
             <b style="color:red" v-show="birthday">연도 4자리, 일 2자리로 입력하세요</b>
