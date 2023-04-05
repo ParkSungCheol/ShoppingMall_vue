@@ -61,7 +61,7 @@
         </div>
 
         <!-- 5. 이메일_전화번호 -->
-        <div class="field">
+        <div class="field tel-number">
             <b>본인 확인 이메일</b>
             <div>
               <input type="email" v-on:keyup="keyPress($event, 'email')">
