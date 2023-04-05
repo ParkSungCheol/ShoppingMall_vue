@@ -63,7 +63,12 @@
         <!-- 5. 이메일_전화번호 -->
         <div class="field">
             <b>본인 확인 이메일</b>
-            <input type="email">
+            <div>
+              <input type="email" v-on:keyup="keyPress($event, 'email')">
+              <input type="button" value="인증번호 받기">
+            </div>
+            <b style="color:red" v-show="email">입력한 이메일을 확인하세요</b>
+            <input type="number" placeholder="인증번호를 입력하세요">
         </div>
         
         <div class="field tel-number">
@@ -97,42 +102,10 @@ export default {
       pwdConfirm: true,
       name: true,
       birthday: true,
-      loginSuccess:false,
-      error:false
+      email: true,
     }
   },
   methods: {
-    async fnLogin() {
-     const baseURI = 'https://api.jurospring.o-r.kr';
-      try{
-        const axiosInstance = axios.create({
-          withCredentials: true,
-        });
-        const result = await axiosInstance.get(`${baseURI}/login`,
-        {
-          params : {
-            id:this.user_id,
-            pwd:this.user_pw
-          }
-        },
-        ).then(res => {
-          console.log(res);
-          return res;
-        });
-
-        if(result.status === 200){
-          this.loginSuccess = true;
-          this.$router.push('/');
-        } else {
-          alert("로그인에 실패하였습니다.");
-        }
-
-      } catch(err){
-        console.log(err);
-        alert("로그인에 실패하였습니다.");
-      }
-
-    },
     keyPress($event, targetObject) {
       let idval = $event.target.value;
       let idvalcheck = null;
@@ -151,6 +124,7 @@ export default {
         let day = this.$refs.day.value < 10? "0"+this.$refs.day.value : this.$refs.day.value;
         idval = year + month + day;
       }
+      else if(targetObject == 'email') idvalcheck = new RegExp(/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/);
       console.log(idval);
       console.log(idvalcheck.test(idval));
       if (!idvalcheck.test(idval)){
