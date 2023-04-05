@@ -54,19 +54,15 @@
             <b style="color:red" v-show="birthday">연도 4자리, 일 2자리로 입력하세요</b>
         </div>
 
-        <!-- 4. 필드(성별) -->
-        <div class="field gender">
-            <b>성별</b>
-            <div>
-                <label><input type="radio" name="gender">남자</label>
-                <label><input type="radio" name="gender">여자</label>
-                <label><input type="radio" name="gender">선택안함</label>
-            </div>
+        <!-- 4. 주소 -->
+        <div class="field">
+            <b>주소</b>
+            <input type="email" placeholder="선택입력">
         </div>
 
         <!-- 5. 이메일_전화번호 -->
         <div class="field">
-            <b>본인 확인 이메일<small>(선택)</small></b>
+            <b>본인 확인 이메일</b>
             <input type="email" placeholder="선택입력">
         </div>
         
@@ -219,10 +215,6 @@ a{
     padding: 15px;
     width: 100%;
     margin-bottom: 5px;
-}
-
-input[type=radio] {
-  margin-left: 10px;
 }
 
 .member input[type=button],
