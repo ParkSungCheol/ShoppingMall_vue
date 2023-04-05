@@ -141,6 +141,7 @@ export default {
       }
       
       const baseURI = 'https://api.jurospring.o-r.kr';
+      console.log(this.$refs);
       try{
         const axiosInstance = axios.create({
           withCredentials: true,
