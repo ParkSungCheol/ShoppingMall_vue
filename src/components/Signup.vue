@@ -222,10 +222,6 @@ color:#fff
     flex:1;
 }
 
-.field.tel-number div input:nth-child(2){
-    flex:1;
-}
-
 .field.gender div{
     border: 1px solid #dadada;
     padding: 15px 5px;
