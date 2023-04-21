@@ -55,10 +55,12 @@
         </div>
 
         <!-- 4. 주소 -->
-        <div class="address field">
-          <h3>ADDRESS</h3>
-          <input type="text" id="postcode" placeholder="우편번호">
-          <button @click="search()">우편번호 찾기</button><br>
+        <div class="field email-number">
+          <b>주소</b>
+          <div>
+            <input type="text" id="postcode" placeholder="우편번호">
+            <button @click="search()">우편번호 찾기</button><br>
+          </div>
           <!--onclick이 아니라 @click으로 바꿔야한다. -->
           <input type="text" id="roadAddress" placeholder="도로명주소">
           <input type="text" id="jibunAddress" placeholder="지번주소">
