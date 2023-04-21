@@ -62,23 +62,23 @@
             <input type="button" value="우편번호 찾기" v-on:click="search()">
           </div>
           <!--onclick이 아니라 @click으로 바꿔야한다. -->
-          <input type="text" id="roadAddress" placeholder="도로명주소">
-          <input type="text" id="jibunAddress" placeholder="지번주소">
+          <input type="text" id="roadAddress" placeholder="도로명주소" disabled>
+          <input type="text" id="jibunAddress" placeholder="지번주소" disabled>
           <span id="guide" style="color:#000;display:none"></span>
           <input type="text" id="detailAddress" placeholder="상세주소">
-          <input type="text" id="extraAddress" placeholder="참고항목">
+          <input type="text" id="extraAddress" placeholder="참고항목" disabled>
         </div>
 
         <!-- 5. 이메일_전화번호 -->
         <div class="field email-number">
             <b>본인 확인 이메일</b>
             <div>
-              <input type="email" v-on:keyup="keyPress($event, 'email')" ref="sendEmail">
+              <input type="email" v-on:keyup="keyPress($event, 'email')" ref="sendEmail" :disabled="!checkEmail">
               <input type="button" value="인증번호 받기" v-on:click="emailCheck('sendEmail')">
             </div>
             <b style="color:red" v-show="email">입력한 이메일을 확인하세요</b>
             <div>
-              <input type="text" placeholder="인증번호를 입력하세요" ref="checkEmail" maxlength="30">
+              <input type="text" placeholder="인증번호를 입력하세요" ref="checkEmail" maxlength="30" :disabled="!checkEmail">
               <input type="button" value="인증번호 확인" v-on:click="emailCheck('checkEmail')">
             </div>
         </div>
@@ -115,6 +115,7 @@ export default {
       name: true,
       birthday: true,
       email: true,
+      checkEmail : true,
     }
   },
   methods: {
@@ -175,6 +176,9 @@ export default {
         console.log(result);
         if(result.status === 200){
           alert(successMessage);
+          if(targetObject == "checkEmail") {
+            this.checkEmail = false;
+          }
         }
         else {
           alert(failureMessage);
