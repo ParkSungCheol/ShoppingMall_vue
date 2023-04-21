@@ -74,12 +74,12 @@
             <b>본인 확인 이메일</b>
             <div>
               <input type="email" v-on:keyup="keyPress($event, 'email')" ref="sendEmail" :disabled="!checkEmail">
-              <input type="button" value="인증번호 받기" v-on:click="emailCheck('sendEmail')">
+              <input type="button" value="인증번호 받기" v-on:click="emailCheck('sendEmail')" :disabled="!checkEmail">
             </div>
             <b style="color:red" v-show="email">입력한 이메일을 확인하세요</b>
             <div>
               <input type="text" placeholder="인증번호를 입력하세요" ref="checkEmail" maxlength="30" :disabled="!checkEmail">
-              <input type="button" value="인증번호 확인" v-on:click="emailCheck('checkEmail')">
+              <input type="button" value="인증번호 확인" v-on:click="emailCheck('checkEmail')" :disabled="!checkEmail">
             </div>
         </div>
         
