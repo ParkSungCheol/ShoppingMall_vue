@@ -59,7 +59,7 @@
           <b>주소</b>
           <div>
             <input type="text" id="postcode" placeholder="우편번호">
-            <button @click="search()">우편번호 찾기</button><br>
+            <input type="button" value="우편번호 찾기" v-on:click="search()">
           </div>
           <!--onclick이 아니라 @click으로 바꿔야한다. -->
           <input type="text" id="roadAddress" placeholder="도로명주소">
