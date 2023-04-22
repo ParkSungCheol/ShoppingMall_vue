@@ -69,7 +69,7 @@ export default {
 }
 </script>
 
-<style>
+<style scope>
 * {
   text-align: center;
 }
