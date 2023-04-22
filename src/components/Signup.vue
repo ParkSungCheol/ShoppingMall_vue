@@ -224,7 +224,7 @@ export default {
         if(result.status === 200){
           alert(successMessage);
           if(targetObject == "checkMessage") {
-            this.checkEmail = false;
+            this.checkMessage = false;
           }
         }
         else {
