@@ -70,8 +70,7 @@ export default {
 </script>
 
 <style>
-#loginForm {
-  width: 500px;
-  margin: auto;
+* {
+  text-align: center;
 }
 </style>

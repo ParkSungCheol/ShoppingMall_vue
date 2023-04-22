@@ -1,7 +1,6 @@
 <template>
   <div>
     <div>
-      <h2>Please Sign In</h2>
       <div class="member">
         <!-- 1. 로고 -->
 
