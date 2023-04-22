@@ -2,12 +2,13 @@
   <div>
     <div>
       <div class="member">
+        <form @submit.prevent="fnSignUp">
         <!-- 1. 로고 -->
 
         <!-- 2. 필드 -->
         <div class="field">
             <b>아이디</b>
-            <span class="placehold-text"><input v-on:keyup="keyPress($event, 'id')" type="text"></span>
+            <span class="placehold-text"><input v-on:keyup="keyPress($event, 'id')" type="text" ref="id"></span>
             <b style="color:red" v-show="id">영문대소문자, 숫자 6-20자 입력하세요</b>
         </div>
         <div class="field">
@@ -22,7 +23,7 @@
         </div>
         <div class="field">
             <b>이름</b>
-            <input type="text" v-on:keyup="keyPress($event, 'name')">
+            <input type="text" v-on:keyup="keyPress($event, 'name')" ref="name">
             <b style="color:red" v-show="name">한글 2-4자 입력하세요</b>
         </div>
 
@@ -57,15 +58,16 @@
         <div class="field email-number">
           <b>주소</b>
           <div>
-            <input type="text" id="postcode" placeholder="우편번호" disabled>
+            <input type="text" id="postcode" placeholder="우편번호" disabled ref="addressNumber">
             <input type="button" value="우편번호 찾기" v-on:click="search()">
           </div>
           <!--onclick이 아니라 @click으로 바꿔야한다. -->
-          <input type="text" id="roadAddress" placeholder="도로명주소" disabled>
+          <input type="text" id="roadAddress" placeholder="도로명주소" disabled ref="address">
           <input type="text" id="jibunAddress" placeholder="지번주소" disabled>
           <span id="guide" style="color:#000;display:none"></span>
-          <input type="text" id="detailAddress" placeholder="상세주소">
-          <input type="text" id="extraAddress" placeholder="참고항목" disabled>
+          <input type="text" id="detailAddress" placeholder="상세주소" ref="addressDetail">
+          <input type="text" id="extraAddress" placeholder="참고항목" disabled ref="addressDetail2">
+          <b style="color:red" v-show="address">우편번호 찾기를 진행해주세요</b>
         </div>
 
         <!-- 5. 이메일_전화번호 -->
@@ -100,6 +102,7 @@
 
         <!-- 6. 가입하기 버튼 -->
         <input type="submit" value="가입하기">
+        </form>
     </div>
     </div>
   </div>
@@ -117,6 +120,7 @@ export default {
       pwdConfirm: true,
       name: true,
       birthday: true,
+      address: true,
       email: true,
       checkEmail : true,
       phone: true,
@@ -287,10 +291,61 @@ export default {
                 guideTextBox.innerHTML = '';
                 guideTextBox.style.display = 'none';
             }
+            
+            this.address = false;
         }
     }).open();
-    
-    
+    },
+    async fnSignUp() {
+      if(!this.id) { alert("아이디를 확인해주세요."); return;}
+      if(!this.pwd) { alert("비밀번호를 확인해주세요."); return;}
+      if(!this.pwdConfirm) { alert("비밀번호 재입력을 확인해주세요."); return;}
+      if(!this.name) { alert("이름을 확인해주세요."); return;}
+      if(!this.birthday) { alert("생년월일을 확인해주세요."); return;}
+      if(!this.address) { alert("주소를 확인해주세요."); return;}
+      if(!this.checkEmail) { alert("이메일을 인증해주세요."); return;}
+      if(!this.checkMessage) { alert("휴대전화를 인증해주세요."); return;}
+
+      const baseURI = 'https://api.jurospring.o-r.kr';
+      try{
+        const axiosInstance = axios.create({
+          withCredentials: true,
+        });
+        const result = await axiosInstance.get(`${baseURI}/` + "signup",
+        {
+          params : {
+            id: this.$refs.id.value,
+            pwd: this.$refs.pwd.value,
+            name: this.$refs.name.value,
+            year: this.$refs.year.value,
+            month: this.$refs.month.value,
+            day: this.$refs.day.value,
+            addressNumber: this.$refs.addressNumber.value,
+            address: this.$refs.address.value,
+            addressDetail: this.$refs.addressDetail.value,
+            addressDetail2: this.$refs.addressDetail2.value,
+            email: this.$refs.sendEmail.value,
+            phone: this.$refs.sendMessage.value,
+          }
+        },
+        ).then(res => {
+          console.log(res);
+          return res;
+        });
+
+        console.log(result);
+        if(result.status === 200){
+          alert("회원가입이 완료되었습니다.");
+          this.$router.push('/');
+        }
+        else {
+          alert("회원가입에 실패하였습니다.");
+        }
+
+      } catch(err){
+        console.log(err);
+        alert("회원가입에 실패하였습니다.");
+      }
     }
   }
 }
