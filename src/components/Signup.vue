@@ -108,7 +108,7 @@
 import axios from 'axios'
 
 export default {
-  name:'login',
+  name:'SignUp',
   data() {
     return {
       id: true,
