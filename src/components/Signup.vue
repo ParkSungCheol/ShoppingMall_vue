@@ -91,6 +91,7 @@
                 <input type="tel" placeholder="전화번호 입력" v-on:keyup="keyPress($event, 'phone')" ref="sendMessage" :disabled="!checkMessage">
                 <input type="button" value="인증번호 받기" v-on:click="messageCheck('sendMessage')" :disabled="!checkMessage">
             </div>
+            <b style="color:red" v-show="phone">입력한 핸드폰번호를 확인하세요</b>
             <div>
               <input type="text" placeholder="인증번호를 입력하세요" ref="checkMessage" maxlength="30" :disabled="!checkMessage">
               <input type="button" value="인증번호 확인" v-on:click="messageCheck('checkMessage')" :disabled="!checkMessage">
@@ -211,7 +212,7 @@ export default {
         const result = await axiosInstance.get(`${baseURI}/` + targetObject,
         {
           params : {
-            phone : this.$refs[targetObject].value
+            phone : this.$refs[targetObject].value.replace("-", "")
           }
         },
         ).then(res => {
