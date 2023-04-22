@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div>
+    <div id="loginForm">
       <h2>Please Log In</h2>
-      <div id="loginForm">
+      <div>
         <form @submit.prevent="fnLogin">
           <p>
             <input class="w3-input" name="uid" placeholder="Enter your ID" v-model="user_id"><br>
@@ -70,7 +70,7 @@ export default {
 </script>
 
 <style scope>
-* {
+#loginForm {
   text-align: center;
 }
 </style>
