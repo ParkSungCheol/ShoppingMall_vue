@@ -72,7 +72,7 @@
         <div class="field email-number">
             <b>본인 확인 이메일</b>
             <div>
-              <input type="email" v-on:keyup="keyPress($event, 'email')" ref="sendEmail" :disabled="!checkEmail">
+              <input type="email" placeholder="이메일 입력" v-on:keyup="keyPress($event, 'email')" ref="sendEmail" :disabled="!checkEmail">
               <input type="button" value="인증번호 받기" v-on:click="emailCheck('sendEmail')" :disabled="!checkEmail">
             </div>
             <b style="color:red" v-show="email">입력한 이메일을 확인하세요</b>
@@ -88,10 +88,13 @@
                 <option value="">대한민국 +82</option>
             </select>
             <div>
-                <input type="tel" placeholder="전화번호 입력">
-                <input type="button" value="인증번호 받기">
+                <input type="tel" placeholder="전화번호 입력" v-on:keyup="keyPress($event, 'phone')" ref="sendMessage" :disabled="!checkMessage">
+                <input type="button" value="인증번호 받기" v-on:click="messageCheck('sendMessage')" :disabled="!checkMessage">
             </div>
-            <input type="number" placeholder="인증번호를 입력하세요">
+            <div>
+              <input type="text" placeholder="인증번호를 입력하세요" ref="checkMessage" maxlength="30" :disabled="!checkMessage">
+              <input type="button" value="인증번호 확인" v-on:click="messageCheck('checkMessage')" :disabled="!checkMessage">
+            </div>
         </div>
 
         <!-- 6. 가입하기 버튼 -->
@@ -115,6 +118,8 @@ export default {
       birthday: true,
       email: true,
       checkEmail : true,
+      phone: true,
+      checkMessage : true,
     }
   },
   methods: {
@@ -137,6 +142,7 @@ export default {
         idval = year + month + day;
       }
       else if(targetObject == 'email') idvalcheck = new RegExp(/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/);
+      else if(targetObject == 'phone') idvalcheck = new RegExp(/^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/);
       console.log(idval);
       console.log(idvalcheck.test(idval));
       if (!idvalcheck.test(idval)){
@@ -176,6 +182,47 @@ export default {
         if(result.status === 200){
           alert(successMessage);
           if(targetObject == "checkEmail") {
+            this.checkEmail = false;
+          }
+        }
+        else {
+          alert(failureMessage);
+        }
+
+      } catch(err){
+        console.log(err);
+        alert(failureMessage);
+      }
+    },
+    async messageCheck(targetObject) {
+      if(this.phone) {
+        alert("핸드폰 번호를 확인해주세요!");
+        return;
+      }
+
+      let successMessage = targetObject == "sendMessage"? "인증번호를 정상적으로 발송했습니다." : "핸드폰 인증되었습니다.";
+      let failureMessage = targetObject == "sendMessage"? "인증번호 발송에 실패하였습니다." : "인증코드를 확인해주세요.";
+      
+      const baseURI = 'https://api.jurospring.o-r.kr';
+      try{
+        const axiosInstance = axios.create({
+          withCredentials: true,
+        });
+        const result = await axiosInstance.get(`${baseURI}/` + targetObject,
+        {
+          params : {
+            phone : this.$refs[targetObject].value
+          }
+        },
+        ).then(res => {
+          console.log(res);
+          return res;
+        });
+
+        console.log(result);
+        if(result.status === 200){
+          alert(successMessage);
+          if(targetObject == "checkMessage") {
             this.checkEmail = false;
           }
         }
