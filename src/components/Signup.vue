@@ -84,7 +84,7 @@
         
         <div class="field tel-number">
             <b>휴대전화</b>
-            <select>
+            <select :disabled="!checkMessage">
                 <option value="">대한민국 +82</option>
             </select>
             <div>
