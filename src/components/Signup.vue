@@ -357,14 +357,14 @@ export default {
     }).open();
     },
     async fnSignUp() {
-      if(!this.id) { alert("아이디를 확인해주세요."); return;}
-      if(!this.pwd) { alert("비밀번호를 확인해주세요."); return;}
-      if(!this.pwdConfirm) { alert("비밀번호 재입력을 확인해주세요."); return;}
-      if(!this.name) { alert("이름을 확인해주세요."); return;}
-      if(!this.birthday) { alert("생년월일을 확인해주세요."); return;}
-      if(!this.address) { alert("주소를 확인해주세요."); return;}
-      if(!this.checkEmail) { alert("이메일을 인증해주세요."); return;}
-      if(!this.checkMessage) { alert("휴대전화를 인증해주세요."); return;}
+      if(this.id) { alert("아이디를 확인해주세요."); return;}
+      if(this.pwd) { alert("비밀번호를 확인해주세요."); return;}
+      if(this.pwdConfirm) { alert("비밀번호 재입력을 확인해주세요."); return;}
+      if(this.name) { alert("이름을 확인해주세요."); return;}
+      if(this.birthday) { alert("생년월일을 확인해주세요."); return;}
+      if(this.address) { alert("주소를 확인해주세요."); return;}
+      if(this.checkEmail) { alert("이메일을 인증해주세요."); return;}
+      if(this.checkMessage) { alert("휴대전화를 인증해주세요."); return;}
 
       const baseURI = 'https://api.jurospring.o-r.kr';
       try{
