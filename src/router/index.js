@@ -79,55 +79,50 @@ function getUser() {
 
 router.beforeEach(async (to, from, next) => {
 	console.log(to);
-	if (to.meta.requireLogin || to.meta.notRequireLogin) {
-		const baseURI = 'https://api.jurospring.o-r.kr';
-      try{
-        const axiosInstance = axios.create({
-          withCredentials: true,
-        });
-        const result = await axiosInstance.get(`${baseURI}/getSession`,
-        {},
-        ).then(res => {
-          console.log(res);
-          return res;
-        });
+  const baseURI = 'https://api.jurospring.o-r.kr';
+    try{
+      const axiosInstance = axios.create({
+        withCredentials: true,
+      });
+      const result = await axiosInstance.get(`${baseURI}/getSession`,
+      {},
+      ).then(res => {
+        console.log(res);
+        return res;
+      });
 
-        console.log(result);
-        if(result.status === 200 && to.meta.requireLogin){
-          user = result.data;
-          next();
-        }
-        else if(result.status === 200 && to.meta.notRequireLogin) {
-          alert("이미 로그인하셨습니다.");
-          user = result.data;
-          next('/');
-        }
-        else if(to.meta.requireLogin) {
-          alert("로그인이 필요합니다.");
-          user = null;
-          next('/login');
-        }
-        else if(to.meta.notRequireLogin) {
-          user = null;
-          next();
-        }
-
-      } catch(err){
-        console.log(err);
-        if(to.meta.requireLogin) {
-          alert("로그인이 필요합니다.");
-          user = null;
-          next('/login');
-        }
-        else if(to.meta.notRequireLogin) {
-          user = null;
-          next();
-        }
+      console.log(result);
+      if(result.status === 200 && to.meta.requireLogin){
+        user = result.data;
+        next();
       }
-	} else {
-    user = null;
-		next();
-	}
+      else if(result.status === 200 && to.meta.notRequireLogin) {
+        alert("이미 로그인하셨습니다.");
+        user = result.data;
+        next('/');
+      }
+      else if(to.meta.requireLogin) {
+        alert("로그인이 필요합니다.");
+        user = null;
+        next('/login');
+      }
+      else if(to.meta.notRequireLogin) {
+        user = null;
+        next();
+      }
+
+    } catch(err){
+      console.log(err);
+      if(to.meta.requireLogin) {
+        alert("로그인이 필요합니다.");
+        user = null;
+        next('/login');
+      }
+      else if(to.meta.notRequireLogin) {
+        user = null;
+        next();
+      }
+    }
 });
 
 export default router
