@@ -8,7 +8,8 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView,
-    meta: { requireLogin: false, notRequireLogin: false, }
+    meta: { requireLogin: false, notRequireLogin: false, },
+    props: { default: true }
   },
   {
     path: '/detail',

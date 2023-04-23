@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import { booleanLiteral } from '@babel/types';
 import axios from 'axios'
 
 export default {
@@ -41,11 +42,14 @@ export default {
     return {}
   },
   props : {
-    user : Object
+    user : Object,
+    default : Boolean,
   },
   methods: {
     test: function() {
+      console.log("test");
       console.log(this.user);
+      console.log(this.default);
     },
     logout: async function(event) {
       event.stopPropagation();
