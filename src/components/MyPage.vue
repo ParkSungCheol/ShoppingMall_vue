@@ -8,11 +8,7 @@
         <!-- 2. 필드 -->
         <div class="field email-number">
             <b>아이디</b>
-            <div>
-              <input v-on:keyup="keyPress($event, 'id')" type="text" ref="id" :disabled="!checkId">
-              <input type="button" value="중복검사" v-on:click="existCheck('id')" :disabled="!checkId">
-            </div>
-            <b style="color:red" v-show="id">영문대소문자, 숫자 6-20자 입력하세요</b>
+            <input type="text" value="{{ user.id }}" disabled>
         </div>
         <div class="field">
             <b>비밀번호</b>
@@ -114,11 +110,16 @@
 <script>
 export default {
   name:'MyPage',
-  data() {
-    return {}
+  data () {
+    return {
+      user : null,
+    }
   },
   props : {
-    user : Object
+    getUser : Function,
+  },
+  mounted : function() {
+    this.user = this.getUser();
   },
 }
 </script>
