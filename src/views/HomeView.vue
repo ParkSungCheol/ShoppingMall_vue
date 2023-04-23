@@ -1,6 +1,6 @@
 <template>
   <Header v-on:click="clickOutside"></Header>
-  <Navigation v-on:click="clickOutside"></Navigation>
+  <Navigation v-on:click="clickOutside" v-bind:getUser="getUser"></Navigation>
   <Section v-on:click="clickOutside" v-bind:showMenu="showMenu" @toggleMenu="toggleMenu"></Section>
   <Footer v-on:click="clickOutside"></Footer>
 </template>
@@ -19,6 +19,7 @@ export default {
       showMenu: false,
     }
   },
+  props: ['getUser'],
   components: {
     Header,
     Footer,

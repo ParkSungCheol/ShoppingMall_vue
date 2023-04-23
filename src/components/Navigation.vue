@@ -41,12 +41,12 @@ export default {
     return {}
   },
   props : {
-    user : String,
+    getUser : Function,
   },
   methods: {
     test: function() {
       console.log("test");
-      console.log(this.user);
+      console.log(this.getUser());
     },
     logout: async function(event) {
       event.stopPropagation();

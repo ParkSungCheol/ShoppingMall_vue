@@ -9,7 +9,7 @@ const routes = [
     name: 'home',
     component: HomeView,
     meta: { requireLogin: false, notRequireLogin: false, },
-    props: { user: "1" }
+    props: { getUser : getUser }
   },
   {
     path: '/detail',
@@ -19,6 +19,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/DetailView.vue'),
     meta: { requireLogin: true, notRequireLogin: false, },
+    props: { getUser : getUser }
   },
   {
     path: '/login',
@@ -28,7 +29,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue'),
     meta: { requireLogin: false, notRequireLogin: true, },
-    props: { user: "1" }
+    props: { getUser : getUser }
   },
   {
     path: '/signup',
@@ -38,6 +39,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Signup.vue'),
     meta: { requireLogin: false, notRequireLogin: true, },
+    props: { getUser : getUser }
   },
   {
     path: '/mypage',
@@ -47,17 +49,20 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/MyPage.vue'),
     meta: { requireLogin: true, notRequireLogin: false, },
+    props: { getUser : getUser }
   },
   {
     path: "/404",
     name: "notFound",
     component: NotFoundComponent,
     meta: { requireLogin: false, notRequireLogin: false, },
+    props: { getUser : getUser }
   },
   {
     path: '/:pathMatch(.*)*',
     redirect: "/404",
     meta: { requireLogin: false, notRequireLogin: false, },
+    props: { getUser : getUser }
   },
 ]
 
@@ -65,6 +70,12 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
+var user;
+
+function getUser() {
+  return user;
+}
 
 router.beforeEach(async (to, from, next) => {
 	console.log(to);
@@ -83,17 +94,21 @@ router.beforeEach(async (to, from, next) => {
 
         console.log(result);
         if(result.status === 200 && to.meta.requireLogin){
+          user = result.data;
           next();
         }
         else if(result.status === 200 && to.meta.notRequireLogin) {
           alert("이미 로그인하셨습니다.");
+          user = result.data;
           next('/');
         }
         else if(to.meta.requireLogin) {
           alert("로그인이 필요합니다.");
+          user = null;
           next('/login');
         }
         else if(to.meta.notRequireLogin) {
+          user = null;
           next();
         }
 
@@ -101,13 +116,16 @@ router.beforeEach(async (to, from, next) => {
         console.log(err);
         if(to.meta.requireLogin) {
           alert("로그인이 필요합니다.");
+          user = null;
           next('/login');
         }
         else if(to.meta.notRequireLogin) {
+          user = null;
           next();
         }
       }
 	} else {
+    user = null;
 		next();
 	}
 });
