@@ -25,7 +25,7 @@
               </button>
               <router-link class="btn btn-outline-dark" v-if="!user" to="/login">로그인</router-link>       
           </form>
-          <button class="btn btn-outline-dark" v-on:click="test">{{ user.id }}</button> 
+          <button class="btn btn-outline-dark" v-on:click="test">test</button> 
           <button class="btn btn-outline-dark" v-if="user" v-on:click="logout">로그아웃</button>  
           <router-link class="btn btn-outline-dark" v-if="user" to="/mypage">마이페이지</router-link>
       </div>
