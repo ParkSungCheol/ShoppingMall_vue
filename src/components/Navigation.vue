@@ -41,12 +41,12 @@ export default {
     return {}
   },
   props : {
-    user : Object,
+    getProps : Function,
   },
   methods: {
     test: function() {
       console.log("test");
-      console.log(this.user);
+      console.log(this.getProps());
       console.log(this.$route.params);
     },
     logout: async function(event) {

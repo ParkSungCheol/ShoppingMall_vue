@@ -9,7 +9,7 @@ const routes = [
     name: 'home',
     component: HomeView,
     meta: { requireLogin: false, notRequireLogin: false, },
-    props: getProps
+    props: {getProps : getProps}
   },
   {
     path: '/detail',
@@ -19,7 +19,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/DetailView.vue'),
     meta: { requireLogin: true, notRequireLogin: false, },
-    props: getProps
+    props: {getProps : getProps}
   },
   {
     path: '/login',
@@ -29,7 +29,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue'),
     meta: { requireLogin: false, notRequireLogin: true, },
-    props: getProps
+    props: {getProps : getProps}
   },
   {
     path: '/signup',
@@ -39,7 +39,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Signup.vue'),
     meta: { requireLogin: false, notRequireLogin: true, },
-    props: getProps
+    props: {getProps : getProps}
   },
   {
     path: '/mypage',
@@ -49,20 +49,20 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/MyPage.vue'),
     meta: { requireLogin: true, notRequireLogin: false, },
-    props: getProps
+    props: {getProps : getProps}
   },
   {
     path: "/404",
     name: "notFound",
     component: NotFoundComponent,
     meta: { requireLogin: false, notRequireLogin: false, },
-    props: getProps
+    props: {getProps : getProps}
   },
   {
     path: '/:pathMatch(.*)*',
     redirect: "/404",
     meta: { requireLogin: false, notRequireLogin: false, },
-    props: getProps
+    props: {getProps : getProps}
   },
 ]
 
