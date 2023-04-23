@@ -47,7 +47,7 @@ export default {
     test: function() {
       console.log("test");
       console.log(this.user);
-      console.log(this.$route.params.user);
+      console.log(this.$route.params);
     },
     logout: async function(event) {
       event.stopPropagation();
