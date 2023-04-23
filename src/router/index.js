@@ -66,7 +66,7 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
 	console.log(to);
-	if (to.meta.requireLogin) {
+	if (to.meta.requireLogin || to.meta.notRequireLogin) {
 		const baseURI = 'https://api.jurospring.o-r.kr';
       try{
         const axiosInstance = axios.create({
@@ -80,46 +80,32 @@ router.beforeEach(async (to, from, next) => {
         });
 
         console.log(result);
-        if(result.status === 200){
-          next();
+        if(result.status === 200 && to.meta.requireLogin){
+          next({user: result.data[0]});
         }
-        else {
+        else if(result.status === 200 && to.meta.notRequireLogin) {
+          alert("이미 로그인하셨습니다.");
+          next('/', {user: result.data[0]});
+        }
+        else if(to.meta.requireLogin) {
           alert("로그인이 필요합니다.");
           next('/login');
+        }
+        else if(to.meta.notRequireLogin) {
+          next();
         }
 
       } catch(err){
         console.log(err);
-        alert("로그인이 필요합니다.");
-        next('/login');
+        if(to.meta.requireLogin) {
+          alert("로그인이 필요합니다.");
+          next('/login');
+        }
+        else if(to.meta.notRequireLogin) {
+          next();
+        }
       }
-	} else if(to.meta.notRequireLogin) {
-    const baseURI = 'https://api.jurospring.o-r.kr';
-    try{
-      const axiosInstance = axios.create({
-        withCredentials: true,
-      });
-      const result = await axiosInstance.get(`${baseURI}/getSession`,
-      {},
-      ).then(res => {
-        console.log(res);
-        return res;
-      });
-
-      console.log(result);
-      if(result.status === 200){
-        alert("이미 로그인하셨습니다.");
-        next('/');
-      }
-      else {
-        next();
-      }
-
-    } catch(err){
-      console.log(err);
-      next();
-    }
-  } else {
+	} else {
 		next();
 	}
 });

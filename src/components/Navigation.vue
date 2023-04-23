@@ -41,35 +41,15 @@ export default {
       loginSuccess: false
     }
   },
+  props : {
+    product : Object
+  },
   mounted() {
-    this.getSession();
+    this.start();
   },
   methods: {
-    async getSession() {
-      const baseURI = 'https://api.jurospring.o-r.kr';
-      try{
-        const axiosInstance = axios.create({
-          withCredentials: true,
-        });
-        const result = await axiosInstance.get(`${baseURI}/getSession`,
-        {},
-        ).then(res => {
-          console.log(res);
-          return res;
-        });
-
-        console.log(result);
-        if(result.status === 200){
-          this.loginSuccess = true;
-        }
-        else {
-          this.loginSuccess = false;
-        }
-
-      } catch(err){
-        console.log(err);
-        this.loginSuccess = false;
-      }
+    async start() {
+      console.log(this.user);
     },
     logout: async function(event) {
       event.stopPropagation();
