@@ -92,34 +92,34 @@ router.beforeEach(async (to, from, next) => {
       });
 
       console.log(result);
-      if(result.status === 200 && to.meta.requireLogin){
+      if(result.status === 200){
         user = result.data;
-        next();
+        if(to.meta.notRequireLogin) {
+          alert("이미 로그인하셨습니다.");
+          next('/');
+        }
+        else {
+          next();
+        }
       }
-      else if(result.status === 200 && to.meta.notRequireLogin) {
-        alert("이미 로그인하셨습니다.");
-        user = result.data;
-        next('/');
-      }
-      else if(to.meta.requireLogin) {
-        alert("로그인이 필요합니다.");
+      else {
         user = null;
-        next('/login');
+        if(to.meta.requireLogin) {
+          alert("로그인이 필요합니다.");
+          next('/login');
+        }
+        else {
+          next();
+        }
       }
-      else if(to.meta.notRequireLogin) {
-        user = null;
-        next();
-      }
-
     } catch(err){
       console.log(err);
+      user = null;
       if(to.meta.requireLogin) {
         alert("로그인이 필요합니다.");
-        user = null;
         next('/login');
       }
-      else if(to.meta.notRequireLogin) {
-        user = null;
+      else {
         next();
       }
     }
