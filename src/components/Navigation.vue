@@ -33,7 +33,6 @@
 </template>
 
 <script>
-import { booleanLiteral } from '@babel/types';
 import axios from 'axios'
 
 export default {
