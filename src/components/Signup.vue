@@ -396,7 +396,7 @@ export default {
         console.log(result);
         if(result.status === 200){
           alert("회원가입이 완료되었습니다.");
-          this.$router.push('/');
+          this.$router.push('/login');
         }
         else {
           alert("회원가입에 실패하였습니다.");
