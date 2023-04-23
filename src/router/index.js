@@ -9,6 +9,7 @@ const routes = [
     name: 'home',
     component: HomeView,
     meta: { requireLogin: false, notRequireLogin: false, },
+    props: {user: true}
   },
   {
     path: '/detail',
