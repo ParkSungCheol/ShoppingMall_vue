@@ -49,7 +49,10 @@ export default {
   },
   methods: {
     async start() {
-      console.log(this.user);
+      if(this.user) {
+        this.loginSuccess = true;
+        console.log(this.user.id);
+      }
     },
     logout: async function(event) {
       event.stopPropagation();
