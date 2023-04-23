@@ -26,6 +26,7 @@
               <router-link class="btn btn-outline-dark" v-if="!loginSuccess" to="/login">로그인</router-link>       
           </form>
           <button class="btn btn-outline-dark" v-if="loginSuccess" v-on:click="logout">로그아웃</button>  
+          <router-link class="btn btn-outline-dark" v-if="loginSuccess" to="/mypage">마이페이지</router-link>
       </div>
   </nav>
 </template>
