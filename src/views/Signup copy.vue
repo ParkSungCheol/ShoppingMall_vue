@@ -1,6 +1,6 @@
 <template>
   <Header></Header>
-  <SignupForm></SignupForm>
+  <MyPageForm></MyPageForm>
   <Footer></Footer>
 </template>
 
@@ -8,14 +8,14 @@
 // @ is an alias to /src
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
-import SignupForm from '@/components/Signup.vue'
+import MyPageForm from '@/components/MyPage.vue'
 
 export default {
-  name: 'SignUp',
+  name: 'MyPage',
   components: {
     Header,
     Footer,
-    SignupForm
+    MyPageForm
   }
 }
 </script>
