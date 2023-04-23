@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     test: function() {
-      debugger;
+      console.log(this.user);
     },
     logout: async function(event) {
       event.stopPropagation();
