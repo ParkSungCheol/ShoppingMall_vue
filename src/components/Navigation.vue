@@ -23,10 +23,10 @@
                   Cart
                   <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>                   
               </button>
-              <router-link class="btn btn-outline-dark" v-if="!loginSuccess" to="/login">로그인</router-link>       
+              <router-link class="btn btn-outline-dark" v-if="!user" to="/login">로그인</router-link>       
           </form>
-          <button class="btn btn-outline-dark" v-if="loginSuccess" v-on:click="logout">로그아웃</button>  
-          <router-link class="btn btn-outline-dark" v-if="loginSuccess" to="/mypage">마이페이지</router-link>
+          <button class="btn btn-outline-dark" v-if="user" v-on:click="logout">로그아웃</button>  
+          <router-link class="btn btn-outline-dark" v-if="user" to="/mypage">마이페이지</router-link>
       </div>
   </nav>
 </template>
@@ -37,21 +37,12 @@ import axios from 'axios'
 export default {
   name: 'Navigation',
   data () {
-    return {
-      loginSuccess: false
-    }
+    return {}
   },
   props : {
     user : Object
   },
-  mounted() {
-    this.start();
-  },
   methods: {
-    async start() {
-      console.log("mounted");
-      console.log(this.user);
-    },
     logout: async function(event) {
       event.stopPropagation();
       event.preventDefault();
