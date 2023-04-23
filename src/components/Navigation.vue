@@ -43,13 +43,11 @@ export default {
   },
   props : {
     user : Object,
-    default : Boolean,
   },
   methods: {
     test: function() {
       console.log("test");
       console.log(this.user);
-      console.log(this.default);
     },
     logout: async function(event) {
       event.stopPropagation();
