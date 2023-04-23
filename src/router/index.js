@@ -9,7 +9,9 @@ const routes = [
     name: 'home',
     component: HomeView,
     meta: { requireLogin: false, notRequireLogin: false, },
-    props: {user : getProps()}
+    props: {user : function () {
+      return user;
+    }}
   },
   {
     path: '/detail',
@@ -19,7 +21,9 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/DetailView.vue'),
     meta: { requireLogin: true, notRequireLogin: false, },
-    props: {user : getProps()}
+    props: {user : function () {
+      return user;
+    }}
   },
   {
     path: '/login',
@@ -29,7 +33,9 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue'),
     meta: { requireLogin: false, notRequireLogin: true, },
-    props: {user : getProps()}
+    props: {user : function () {
+      return user;
+    }}
   },
   {
     path: '/signup',
@@ -39,7 +45,9 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Signup.vue'),
     meta: { requireLogin: false, notRequireLogin: true, },
-    props: {user : getProps()}
+    props: {user : function () {
+      return user;
+    }}
   },
   {
     path: '/mypage',
@@ -49,20 +57,26 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/MyPage.vue'),
     meta: { requireLogin: true, notRequireLogin: false, },
-    props: {user : getProps()}
+    props: {user : function () {
+      return user;
+    }}
   },
   {
     path: "/404",
     name: "notFound",
     component: NotFoundComponent,
     meta: { requireLogin: false, notRequireLogin: false, },
-    props: {user : getProps()}
+    props: {user : function () {
+      return user;
+    }}
   },
   {
     path: '/:pathMatch(.*)*',
     redirect: "/404",
     meta: { requireLogin: false, notRequireLogin: false, },
-    props: {user : getProps()}
+    props: {user : function () {
+      return user;
+    }}
   },
 ]
 
@@ -72,10 +86,6 @@ const router = createRouter({
 })
 
 var user;
-
-function getProps() {
-    return user;
-}
 
 router.beforeEach(async (to, from, next) => {
 	console.log(to);
