@@ -25,7 +25,6 @@
               </button>
               <router-link class="btn btn-outline-dark" v-if="!user" to="/login">로그인</router-link>       
           </form>
-          <button class="btn btn-outline-dark" v-on:click="test">test</button> 
           <button class="btn btn-outline-dark" v-if="user" v-on:click="logout">로그아웃</button>  
           <router-link class="btn btn-outline-dark" v-if="user" to="/mypage">마이페이지</router-link>
       </div>
@@ -38,16 +37,17 @@ import axios from 'axios'
 export default {
   name: 'Navigation',
   data () {
-    return {}
+    return {
+      user : null,
+    }
   },
   props : {
     getUser : Function,
   },
+  mounted : function() {
+    this.user = this.getUser();
+  },
   methods: {
-    test: function() {
-      console.log("test");
-      console.log(this.getUser());
-    },
     logout: async function(event) {
       event.stopPropagation();
       event.preventDefault();
