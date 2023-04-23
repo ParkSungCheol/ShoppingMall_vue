@@ -9,7 +9,7 @@ const routes = [
     name: 'home',
     component: HomeView,
     meta: { requireLogin: false, notRequireLogin: false, },
-    props: {user: true}
+    props: { user: "1" }
   },
   {
     path: '/detail',
@@ -28,6 +28,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue'),
     meta: { requireLogin: false, notRequireLogin: true, },
+    props: { user: "1" }
   },
   {
     path: '/signup',
@@ -82,13 +83,11 @@ router.beforeEach(async (to, from, next) => {
 
         console.log(result);
         if(result.status === 200 && to.meta.requireLogin){
-          to.query.user = result.data;
-          next({query: to.query});
+          next();
         }
         else if(result.status === 200 && to.meta.notRequireLogin) {
           alert("이미 로그인하셨습니다.");
-          to.query.user = result.data;
-          next('/', {query: to.query});
+          next('/');
         }
         else if(to.meta.requireLogin) {
           alert("로그인이 필요합니다.");

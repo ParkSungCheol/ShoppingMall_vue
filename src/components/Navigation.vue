@@ -41,13 +41,12 @@ export default {
     return {}
   },
   props : {
-    user : Object,
+    user : String,
   },
   methods: {
     test: function() {
       console.log("test");
       console.log(this.user);
-      console.log(this.$route.query.user);
     },
     logout: async function(event) {
       event.stopPropagation();
