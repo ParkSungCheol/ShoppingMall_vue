@@ -89,12 +89,18 @@ router.beforeEach(async (to, from, next) => {
         console.log(result);
         if(result.status === 200 && to.meta.requireLogin){
           const params = {...to.params, ...{user: result.data}};
-          next(params);
+          next({
+            path: to.fullPath,
+            params: params
+          });
         }
         else if(result.status === 200 && to.meta.notRequireLogin) {
           alert("이미 로그인하셨습니다.");
           const params = {...to.params, ...{user: result.data}};
-          next(params);
+          next({
+            path: to.fullPath,
+            params: params
+          });
         }
         else if(to.meta.requireLogin) {
           alert("로그인이 필요합니다.");
