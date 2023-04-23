@@ -180,8 +180,8 @@ export default {
         {
           params : {
             id: targetObject == "id"? this.$refs.id.value : undefined,
-            email: targetObject == "email"? this.$refs.email.value : undefined,
-            phone: targetObject == "phone"? this.$refs.phone.value : undefined,
+            email: targetObject == "email"? this.$refs.sendEmail.value : undefined,
+            phone: targetObject == "phone"? this.$refs.sendMessage.value : undefined,
           }
         },
         ).then(res => {
