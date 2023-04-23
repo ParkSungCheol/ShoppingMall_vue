@@ -1,6 +1,6 @@
 <template>
   <Header></Header>
-  <MyPageForm></MyPageForm>
+  <MyPageForm v-bind:getUser="getUser"></MyPageForm>
   <Footer></Footer>
 </template>
 
@@ -12,6 +12,7 @@ import MyPageForm from '@/components/MyPage.vue'
 
 export default {
   name: 'MyPage',
+  props: ['getUser'],
   components: {
     Header,
     Footer,
