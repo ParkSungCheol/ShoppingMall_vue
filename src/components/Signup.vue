@@ -6,9 +6,12 @@
         <!-- 1. 로고 -->
 
         <!-- 2. 필드 -->
-        <div class="field">
+        <div class="field email-number">
             <b>아이디</b>
-            <span class="placehold-text"><input v-on:keyup="keyPress($event, 'id')" type="text" ref="id"></span>
+            <div>
+              <input v-on:keyup="keyPress($event, 'id')" type="text" ref="id" :disabled="!checkId">
+              <input type="button" value="중복검사" v-on:click="existCheck('id')" :disabled="!checkId">
+            </div>
             <b style="color:red" v-show="id">영문대소문자, 숫자 6-20자 입력하세요</b>
         </div>
         <div class="field">
@@ -116,6 +119,7 @@ export default {
   data() {
     return {
       id: true,
+      checkId: true,
       pwd: true,
       pwdConfirm: true,
       name: true,
@@ -158,10 +162,61 @@ export default {
       }
       console.log(this[targetObject]);
     },
+    async existCheck(targetObject) {
+      if(targetObject == "id" && this[targetObject]) {
+        alert("아이디를 확인해주세요!");
+        return;
+      }
+
+      let successMessage = targetObject == "id"? "사용가능한 아이디입니다." : "";
+      let failureMessage = "이미 존재합니다.";
+      
+      const baseURI = 'https://api.jurospring.o-r.kr';
+      try{
+        const axiosInstance = axios.create({
+          withCredentials: true,
+        });
+        const result = await axiosInstance.get(`${baseURI}/` + "existCheck",
+        {
+          params : {
+            id: targetObject == "id"? this.$refs.id.value : undefined,
+            email: targetObject == "email"? this.$refs.email.value : undefined,
+            phone: targetObject == "phone"? this.$refs.phone.value : undefined,
+          }
+        },
+        ).then(res => {
+          console.log(res);
+          return res;
+        });
+
+        console.log(result);
+        if(result.status === 200){
+          if(successMessage) {
+            alert(successMessage);
+            this.checkId = false;
+          }
+          return true;
+        }
+        else {
+          alert(failureMessage);
+          return false;
+        }
+
+      } catch(err){
+        console.log(err);
+        alert(failureMessage);
+        return false;
+      }
+    },
     async emailCheck(targetObject) {
       if(this.email) {
         alert("이메일을 확인해주세요!");
         return;
+      }
+
+      let isExist = await this.existCheck('email');
+      if(!isExist) {
+        return false;
       }
 
       let successMessage = targetObject == "sendEmail"? "이메일을 정상적으로 발송했습니다." : "이메일 인증되었습니다.";
@@ -203,6 +258,11 @@ export default {
       if(this.phone) {
         alert("핸드폰 번호를 확인해주세요!");
         return;
+      }
+
+      let isExist = await this.existCheck('phone');
+      if(!isExist) {
+        return false;
       }
 
       let successMessage = targetObject == "sendMessage"? "인증번호를 정상적으로 발송했습니다." : "핸드폰 인증되었습니다.";
