@@ -42,7 +42,7 @@ export default {
     }
   },
   props : {
-    product : Object
+    user : Object
   },
   mounted() {
     this.start();
