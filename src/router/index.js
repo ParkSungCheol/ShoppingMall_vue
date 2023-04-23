@@ -73,6 +73,7 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
 	console.log(to);
+  this.$route.params = {test : 'test'};
 	if (to.meta.requireLogin || to.meta.notRequireLogin) {
 		const baseURI = 'https://api.jurospring.o-r.kr';
       try{
