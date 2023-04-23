@@ -8,7 +8,7 @@
         <!-- 2. 필드 -->
         <div class="field email-number">
             <b>아이디</b>
-            <input type="text" value="{{ user.id }}" disabled>
+            <input type="text" :value="user.id" disabled>
         </div>
         <div class="field">
             <b>비밀번호</b>
