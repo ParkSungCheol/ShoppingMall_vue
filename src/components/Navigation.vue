@@ -49,10 +49,8 @@ export default {
   },
   methods: {
     async start() {
-      if(this.user) {
-        this.loginSuccess = true;
-        console.log(this.user.id);
-      }
+      console.log("mounted");
+      console.log(this.user);
     },
     logout: async function(event) {
       event.stopPropagation();
