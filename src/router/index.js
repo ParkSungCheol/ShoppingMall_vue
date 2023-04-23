@@ -90,11 +90,11 @@ router.beforeEach(async (to, from, next) => {
 
         console.log(result);
         if(result.status === 200 && to.meta.requireLogin){
-          user = result.data[0];
+          user = result.data;
           next();
         }
         else if(result.status === 200 && to.meta.notRequireLogin) {
-          user = result.data[0];
+          user = result.data;
           alert("이미 로그인하셨습니다.");
           next('/');
         }
