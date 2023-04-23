@@ -73,7 +73,6 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
 	console.log(to);
-  this.$route.params = {test : 'test'};
 	if (to.meta.requireLogin || to.meta.notRequireLogin) {
 		const baseURI = 'https://api.jurospring.o-r.kr';
       try{
@@ -91,6 +90,7 @@ router.beforeEach(async (to, from, next) => {
         if(result.status === 200 && to.meta.requireLogin){
           const params = {...to.params, ...{user: result.data}};
           to.params = params;
+          console.log(to);
           next();
         }
         else if(result.status === 200 && to.meta.notRequireLogin) {
