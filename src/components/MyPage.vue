@@ -227,7 +227,7 @@ export default {
         {
           params : {
             id: this.user.id,
-            name: this.$refs.name.value,
+            name: this.$refs.nameCheck.value,
             year: this.$refs.year.value,
             month: this.$refs.month.value,
             day: this.$refs.day.value,
