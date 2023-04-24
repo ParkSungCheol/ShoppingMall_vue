@@ -246,6 +246,7 @@ export default {
             this.checkEmail = true;
           }
           if(targetObject == "checkEmail") {
+            this.sendEmail = false;
             this.checkEmail = false;
           }
         }
@@ -295,6 +296,7 @@ export default {
             this.checkMessage = true;
           }
           if(targetObject == "checkMessage") {
+            this.sendMessage = false;
             this.checkMessage = false;
           }
         }
