@@ -143,9 +143,10 @@ export default {
         idvalcheck = new RegExp(/(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])/);
         let year = this.$refs.year.value;
         let month = this.$refs.month.value;
-        let day = this.$refs.day.length < 2? "0"+this.$refs.day.value : this.$refs.day.value;
-        console.log((String)(this.$refs.day).length);
-        console.log(this.$refs.day.length < 2);
+        let day = this.$refs.day.value.length < 2? "0"+this.$refs.day.value : this.$refs.day.value;
+        console.log((String)(this.$refs.day.value).length);
+        console.log(this.$refs.day.value.length);
+        console.log(this.$refs.day.value.length < 2);
         idval = year + month + day;
       }
       else if(targetObject == 'email') idvalcheck = new RegExp(/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/);
