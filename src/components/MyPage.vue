@@ -386,7 +386,8 @@ export default {
     padding-top: 0;
 }
 .btn_duo_popup .btn_item.on {
-    background-color: #03d580;
+    background-color: #000;
+    color: #fff;
 }
 .btn_duo_popup .btn_item:first-child {
     width: 35%;
