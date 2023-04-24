@@ -144,7 +144,7 @@
                                 <span id="b_txt_phoneNo_reg" class="btn_text">변경</span>
                             </a>
                         </div>
-                        <button type="button" class="close_popup" onclick="excuteNclicksCloseAsPhoneYn();hidePhoneNumberChangePopUp()"><span class="blind">닫기</span></button>
+                        <button type="button" class="close_popup"><span class="blind">닫기</span></button>
                     </div>
                 </div>
             </div>
