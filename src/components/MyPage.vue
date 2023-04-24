@@ -2,7 +2,7 @@
   <div>
     <div>
       <div class="member">
-        <form @submit.prevent="fnSignUp">
+        <form @submit.prevent="fnUpdate">
         <!-- 1. 로고 -->
 
         <!-- 2. 필드 -->
@@ -17,8 +17,8 @@
         </div>
         <div class="field">
             <b>이름</b>
-            <input type="text" v-on:keyup="keyPress($event, 'name')" ref="name" v-model="user.name">
-            <b style="color:red" v-show="name">한글 2-4자 입력하세요</b>
+            <input type="text" v-on:keyup="keyPress($event, 'nameCheck')" ref="nameCheck" v-model="name">
+            <b style="color:red" v-show="nameCheck">한글 2-4자 입력하세요</b>
         </div>
 
         <!-- 3. 필드(생년월일) -->
@@ -92,6 +92,7 @@ export default {
       user : null,
       id : null,
       name : false,
+      nameCheck : false,
       year : null,
       month : null,
       day : null,
@@ -109,6 +110,7 @@ export default {
   mounted : function() {
     this.user = this.getUser();
     this.id = this.user.id;
+    this.name = this.user.name;
     this.year = this.user.birth.substr(0,4);
     this.month = this.user.birth.substr(4,2);
     this.day = this.user.birth.substr(6,2);
@@ -205,6 +207,56 @@ export default {
         }
     }).open();
     },
+    async fnUpdate() {
+      if(this.nameCheck) { alert("이름을 확인해주세요."); return;}
+      if(this.birthday) { alert("생년월일을 확인해주세요."); return;}
+      if(this.address) { alert("주소를 확인해주세요."); return;}
+      let day = this.$refs.day.value < 10? "0"+this.$refs.day.value : this.$refs.day.value;
+      let birth = this.year + this.month + day;
+      let address = this.addressDetail? this.addressCode+"^"+this.addressMain+"^"+this.addressDetail+"^"+this.addressDetail2 : this.addressCode+"^"+this.addressMain+"^"+this.addressDetail2;
+      if(this.name == this.user.name && birth == this.user.birth && address == this.user.address) { alert("변경사항이 없습니다."); return; }
+
+    //   const baseURI = 'https://api.jurospring.o-r.kr';
+    //   try{
+    //     const axiosInstance = axios.create({
+    //       withCredentials: true,
+    //     });
+    //     const result = await axiosInstance.get(`${baseURI}/` + "signup",
+    //     {
+    //       params : {
+    //         id: this.$refs.id.value,
+    //         pwd: this.$refs.pwd.value,
+    //         name: this.$refs.name.value,
+    //         year: this.$refs.year.value,
+    //         month: this.$refs.month.value,
+    //         day: this.$refs.day.value,
+    //         addressNumber: this.$refs.addressNumber.value,
+    //         address: this.$refs.address.value,
+    //         addressDetail: this.$refs.addressDetail.value,
+    //         addressDetail2: this.$refs.addressDetail2.value,
+    //         email: this.$refs.sendEmail.value,
+    //         phone: this.$refs.sendMessage.value,
+    //       }
+    //     },
+    //     ).then(res => {
+    //       console.log(res);
+    //       return res;
+    //     });
+
+    //     console.log(result);
+    //     if(result.status === 200){
+    //       alert("회원가입이 완료되었습니다.");
+    //       this.$router.push('/login');
+    //     }
+    //     else {
+    //       alert("회원가입에 실패하였습니다.");
+    //     }
+
+    //   } catch(err){
+    //     console.log(err);
+    //     alert("회원가입에 실패하였습니다.");
+    //   }
+    }
   }
 }
 </script>
