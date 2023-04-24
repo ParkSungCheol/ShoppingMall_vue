@@ -1,6 +1,6 @@
-<template>
+<template ref="body">
   <div>
-    <div ref="body">
+    <div>
       <div class="member">
         <form @submit.prevent="fnUpdate">
         <!-- 1. 로고 -->
