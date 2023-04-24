@@ -283,6 +283,12 @@ color:#fff
     display: flex;
 }
 
+.field.tel-number div, .field.email-number div input[type=button],
+.field.tel-number div, .field.email-number div input[type=submit]{
+    background-color: white;
+    color:#000
+}
+
 .field.tel-number div input:nth-child(1), .field.email-number div input:nth-child(1) {
     flex:2;
 }
