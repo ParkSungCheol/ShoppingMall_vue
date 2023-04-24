@@ -137,14 +137,14 @@
                             <p id="e_phoneNo" class="popup_error"></p>
                         </div>
                         <div class="btn_duo_popup">
-                            <a href="javascript:;" class="btn_item" role="button" onclick="excuteNclicksCancelAsPhoneYn();hidePhoneNumberChangePopUp()">
+                            <a href="javascript:;" class="btn_item" role="button" onclick="">
                                 <span class="btn_text">취소</span>
                             </a>
-                            <a href="javascript:;" class="btn_item on" role="button" onclick="checkAuthNoForChangePhoneNo()">
+                            <a href="javascript:;" class="btn_item on" role="button" onclick="">
                                 <span id="b_txt_phoneNo_reg" class="btn_text">변경</span>
                             </a>
                         </div>
-                        <button type="button" class="close_popup"><span class="blind">닫기</span></button>
+                        <button type="button" class="close_popup" onclick=""><span class="blind">닫기</span></button>
                     </div>
                 </div>
             </div>
