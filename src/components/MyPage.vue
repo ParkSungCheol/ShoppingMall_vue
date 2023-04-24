@@ -17,7 +17,7 @@
         </div>
         <div class="field">
             <b>이름</b>
-            <input type="text" v-on:keyup="keyPress($event, 'name')" ref="name" :value="user.name">
+            <input type="text" v-on:keyup="keyPress($event, 'name')" ref="name" v-model="user.name">
             <b style="color:red" v-show="name">한글 2-4자 입력하세요</b>
         </div>
 
