@@ -86,7 +86,7 @@
             <div class="popup_layer_inner">
                 <div class="popup_content">
                     <!--팝업콘텐츠영역-->
-                    <div class="contact_edit_popup" style="width:329px;">
+                    <div class="contact_edit_popup field" style="width:329px;">
                         <h4 class="contact_edit_title">
                                 <strong class="bold">{{user.name}}님</strong>의 회원정보 중
                                 <em class="accent">{{ target }}</em>를 <span id="p_txt_phoneNo_changeYn">수정</span>하기 위해
@@ -101,9 +101,11 @@
                                   <option value="82"> 대한민국 +82</option>
                                 </select>
                             </div>
-                            <div class="popup_row rightgap">
+                            <div class="popup_row rightgap email-number">
+                              <div>
                                 <input type="tel" id="phoneNo" placeholder="전화번호" name="phoneNo" maxlength="14" class="popup_input" onkeydown="check_num_ajax3('phoneNo', '2', 'e_phoneNo')">
                                 <button type="button" class="btn_contact" onclick="sendSmsForChangePhoneNo()">인증</button>
+                              </div>                            
                             </div>
                             <div class="popup_row">
                                 <input type="tel" id="authNo" placeholder="인증번호 입력" class="popup_input" onkeydown="check_num_ajax3('authNo', '2', 'e_phoneNo')" oninput="changeVerifyToPopupInput('authNo')" disabled="">
@@ -118,7 +120,7 @@
                                 <span id="b_txt_phoneNo_reg" class="btn_text">변경</span>
                             </a>
                         </div>
-                        <button type="button" class="close_popup" onclick=""><span class="blind">닫기</span></button>
+                        <button type="button" class="close_popup" onclick=""></button>
                     </div>
                 </div>
             </div>
@@ -325,6 +327,8 @@ export default {
     background-image: url(https://ssl.pstatic.net/static/nid/account/m_sp_01_home_0272fa08.png);
     background-size: 264px 230px;
     background-repeat: no-repeat;
+    border: none;
+    background-color: white;
 }
 .dimmed {
     position: fixed;
