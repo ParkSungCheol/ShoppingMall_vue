@@ -49,7 +49,7 @@
         </div>
 
         <!-- 4. 주소 -->
-        <div class="field email-number">
+        <div class="field tel-number">
           <b>주소</b>
           <div>
             <input type="text" id="postcode" placeholder="우편번호" disabled ref="addressNumber" v-model="addressCode">
@@ -70,7 +70,7 @@
             </div>
         </div>
         
-        <div class="field tel-number">
+        <div class="field email-number">
             <div>
                 <input type="button" value="휴대전화 변경" v-on:click="search()">
             </div>
@@ -283,8 +283,8 @@ color:#fff
     display: flex;
 }
 
-.field.tel-number div, .field.email-number div input[type=button],
-.field.tel-number div, .field.email-number div input[type=submit]{
+.field.email-number div input[type=button],
+.field.email-number div input[type=submit]{
     background-color: white;
     color:#000
 }
