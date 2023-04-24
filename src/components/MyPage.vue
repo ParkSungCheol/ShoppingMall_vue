@@ -178,7 +178,7 @@ export default {
     closePopUp() {
       this.$refs.dimmed.style.display = 'none';
       this.$refs.layer.style.display = 'none';
-      this.$refs.body.style.overflow = 'hidden';
+      this.$refs.body.style.overflow = 'hidden !important';
     },
     popUp(target) {
       this.target = target;
