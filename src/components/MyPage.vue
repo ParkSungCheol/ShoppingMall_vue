@@ -12,7 +12,7 @@
         </div>
         <div class="field email-number">
             <div>
-                <input type="button" value="비밀번호 변경" v-on:click="search()">
+                <input type="button" value="비밀번호 변경" v-on:click="popUp('비밀번호')">
             </div>
         </div>
         <div class="field">
@@ -66,18 +66,64 @@
         <!-- 5. 이메일_전화번호 -->
         <div class="field email-number">
             <div>
-                <input type="button" value="이메일 변경" v-on:click="search()">
+                <input type="button" value="이메일 변경" v-on:click="popUp('이메일')">
             </div>
         </div>
         
         <div class="field email-number">
             <div>
-                <input type="button" value="휴대전화 변경" v-on:click="search()">
+                <input type="button" value="휴대전화 변경" v-on:click="popUp('휴대전화')">
             </div>
         </div>
 
         <!-- 6. 가입하기 버튼 -->
         <input type="submit" value="수정하기">
+        </form>
+        <div id="dimmed" area-hidden="true" style="display:none;" ref="dimmed"></div>
+        <form>
+          <div class="layer" area-hidden="true" style="display:none;" ref="layer">
+            <div class="popup_layer">
+            <div class="popup_layer_inner">
+                <div class="popup_content">
+                    <!--팝업콘텐츠영역-->
+                    <div class="contact_edit_popup" style="width:329px;">
+                        <h4 class="contact_edit_title">
+                                <strong class="bold">{{user.name}}님</strong>의 회원정보 중
+                                <em class="accent">{{ target }}</em>를 <span id="p_txt_phoneNo_changeYn">수정</span>하기 위해
+                                인증절차가 필요합니다.
+                        </h4>
+                        <div id="phoneNoForm" class="row_item phone" style="display: block;">
+                            <span id="p_txt_phoneNo" class="item_text">+82 10-7***-0***</span>
+                        </div>
+                        <div class="contact_form">
+                            <div class="popup_row select">
+                                <select id="internationalCode" name="internationalCode" title="전화번호" class="popup_input">
+                                  <option value="82"> 대한민국 +82</option>
+                                </select>
+                            </div>
+                            <div class="popup_row rightgap">
+                                <input type="tel" id="phoneNo" placeholder="전화번호" name="phoneNo" maxlength="14" class="popup_input" onkeydown="check_num_ajax3('phoneNo', '2', 'e_phoneNo')">
+                                <button type="button" class="btn_contact" onclick="sendSmsForChangePhoneNo()">인증</button>
+                            </div>
+                            <div class="popup_row">
+                                <input type="tel" id="authNo" placeholder="인증번호 입력" class="popup_input" onkeydown="check_num_ajax3('authNo', '2', 'e_phoneNo')" oninput="changeVerifyToPopupInput('authNo')" disabled="">
+                            </div>
+                            <p id="e_phoneNo" class="popup_error"></p>
+                        </div>
+                        <div class="btn_duo_popup">
+                            <a href="javascript:;" class="btn_item" role="button" onclick="">
+                                <span class="btn_text">취소</span>
+                            </a>
+                            <a href="javascript:;" class="btn_item on" role="button" onclick="">
+                                <span id="b_txt_phoneNo_reg" class="btn_text">변경</span>
+                            </a>
+                        </div>
+                        <button type="button" class="close_popup" onclick=""><span class="blind">닫기</span></button>
+                    </div>
+                </div>
+            </div>
+            </div>
+          </div>
         </form>
     </div>
     </div>
@@ -104,6 +150,7 @@ export default {
       addressDetail : null,
       addressDetail2 : null,
       address : false,
+      target : null,
     }
   },
   props : {
@@ -128,6 +175,11 @@ export default {
     }
   },
   methods: {
+    popUp(target) {
+      this.target = target;
+      this.$refs.dimmed.style.display = 'block';
+      this.$refs.layer.style.display = 'block';
+    },
     keyPress($event, targetObject) {
       let idval = $event.target.value;
       let idvalcheck = null;
@@ -269,6 +321,63 @@ export default {
 </script>
 
 <style scope>
+.dimmed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0,0,0,.5);
+    z-index: 200;
+}
+.popup_layer {
+    display: table;
+    table-layout: fixed;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    z-index: 210;
+}
+.popup_layer_inner {
+    display: table-cell;
+    vertical-align: middle;
+    background-color: rgba(0,0,0,.5);
+}
+.popup_content {
+    margin: 45px 0;
+    vertical-align: top;
+    z-index: 220;
+}
+.contact_2step_popup, .contact_edit_popup {
+    position: relative;
+    margin: 0 auto;
+    padding: 30px 24px 58px;
+    border-radius: 12px;
+    box-shadow: 0 2px 2px 0 rgba(64,117,161,.1);
+    background-color: #fff;
+    box-sizing: border-box;
+    text-align: left;
+}
+.contact_edit_title {
+    margin-bottom: 20px;
+    padding: 30px 0 14px;
+    border-bottom: 1px solid #303038;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 28px;
+    letter-spacing: -.8px;
+    color: #1e1e23;
+    word-break: break-all;
+}
+.contact_2step_popup .row_item, .contact_edit_popup .row_item {
+    padding: 0 0 20px 30px;
+}
+.contact_2step_popup .row_item+.contact_form, .contact_edit_popup .row_item+.contact_form {
+    padding-top: 0;
+}
 #member {
     box-sizing: border-box; /*전체에 박스사이징*/
     outline: none; /*focus 했을때 테두리 나오게 */
