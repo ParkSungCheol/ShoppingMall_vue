@@ -8,7 +8,7 @@
         <!-- 2. 필드 -->
         <div class="field">
             <b>아이디</b>
-            <input type="text" v-model="user.id" disabled>
+            <input type="text" v-model="id" disabled>
         </div>
         <div class="field email-number">
             <div>
@@ -90,6 +90,7 @@ export default {
   data () {
     return {
       user : null,
+      id : null,
       name : false,
       year : null,
       month : null,
@@ -107,6 +108,7 @@ export default {
   },
   mounted : function() {
     this.user = this.getUser();
+    this.id = this.user.id;
     this.year = this.user.birth.substr(0,4);
     this.month = this.user.birth.substr(4,2);
     this.day = this.user.birth.substr(6,2);
@@ -264,8 +266,6 @@ a{
 .member input[type=submit]{
 background-color: black;
 color:#fff;
-border-block: 1px;
-border-block-color: black;
 }
 
 .member input:focus, .member select:focus{
@@ -288,7 +288,8 @@ border-block-color: black;
 .field.email-number div input[type=button],
 .field.email-number div input[type=submit]{
     background-color: white;
-    color:#000
+    color:#000;
+    border: 1px solid #000;
 }
 
 .field.tel-number div input:nth-child(1), .field.email-number div input:nth-child(1) {
