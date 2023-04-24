@@ -43,7 +43,7 @@
                     <option value="12">12월</option>
                 </select>
                 <input type="number" placeholder="일" ref="day" v-on:change="keyPress($event, 'birthday')" v-on:keyup="keyPress($event, 'birthday')" 
-                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="2" v-model="day">
+                oninput="javascript: if (this.value.length > this.maxLength) {this.value = this.value.slice(0, this.maxLength);} if(this.value < 1) {this.value = null;}" maxlength="2" v-model="day">
             </div>
             <b style="color:red" v-show="birthday">연도 4자리, 일 2자리로 입력하세요</b>
         </div>
@@ -136,7 +136,7 @@ export default {
         console.log(pwd);
         idvalcheck = new RegExp(pwd);
       }
-      else if(targetObject == 'name') idvalcheck = new RegExp(/^[ㄱ-ㅣ가-힣]{2,4}$/);
+      else if(targetObject == 'nameCheck') idvalcheck = new RegExp(/^[ㄱ-ㅣ가-힣]{2,4}$/);
       else if(targetObject == 'birthday') {
         idvalcheck = new RegExp(/(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])/);
         let year = this.$refs.year.value;
