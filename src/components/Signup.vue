@@ -511,6 +511,7 @@ export default {
 #member {
     box-sizing: border-box; /*전체에 박스사이징*/
     outline: none; /*focus 했을때 테두리 나오게 */
+    background-color: rgba(0,0,0,.5);
 }
 .btn_duo_popup {
     position: absolute;
