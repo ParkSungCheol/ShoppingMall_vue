@@ -438,6 +438,7 @@ body{
     line-height: 1.5em;
     color : #222;
     margin: 0;
+    text-align: center;
 }
 
 a{
@@ -481,7 +482,7 @@ a{
 .member input[type=button],
 .member input[type=submit]{
 background-color: black;
-color:#fff;
+color:#fff
 }
 
 .member input:focus, .member select:focus{

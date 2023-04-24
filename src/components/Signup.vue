@@ -415,7 +415,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #member {
     box-sizing: border-box; /*전체에 박스사이징*/
     outline: none; /*focus 했을때 테두리 나오게 */
