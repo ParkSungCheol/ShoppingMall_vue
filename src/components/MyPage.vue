@@ -263,7 +263,9 @@ a{
 .member input[type=button],
 .member input[type=submit]{
 background-color: black;
-color:#fff
+color:#fff;
+border-block: 1px;
+border-block-color: black;
 }
 
 .member input:focus, .member select:focus{
