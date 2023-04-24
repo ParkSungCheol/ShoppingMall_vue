@@ -105,9 +105,9 @@
         <!-- 6. 가입하기 버튼 -->
         <input type="submit" value="가입하기">
         </form>
-        <div id="dimmed" area-hidden="true" style="display:block;"></div>
+        <div id="dimmed" area-hidden="true" style="display:none;"></div>
         <form>
-          <div class="layer" area-hidden="true" style="display:block;">
+          <div class="layer" area-hidden="true" style="display:none;">
             <div class="popup_layer">
             <div class="popup_layer_inner">
                 <div class="popup_content">
