@@ -119,7 +119,7 @@ export default {
 }
 </script>
 
-<style scope>
+<style scoped>
 option {
   text-decoration: none !important;
   display: block !important;

@@ -69,7 +69,7 @@ export default {
 }
 </script>
 
-<style scope>
+<style scoped>
 #loginForm {
   text-align: center;
 }
