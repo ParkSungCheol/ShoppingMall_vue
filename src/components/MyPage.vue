@@ -411,8 +411,18 @@ export default {
     vertical-align: middle;
     background-color: #959eae;
 }
+
+.btn_duo_popup {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+    text-align: center;
+}
+
 .popup_row.rightgap .popup_input {
-    padding: 9px 50px 9px 11px;
+    padding: 9px 20px 9px 11px;
     max-width: max-content;
 }
 .btn_contact {
