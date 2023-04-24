@@ -86,7 +86,7 @@
             <div class="popup_layer_inner">
                 <div class="popup_content">
                     <!--팝업콘텐츠영역-->
-                    <div class="contact_edit_popup field" style="width:329px;">
+                    <div class="contact_edit_popup" style="width:329px;">
                         <h4 class="contact_edit_title">
                                 <strong class="bold">{{user.name}}님</strong>의 회원정보 중
                                 <em class="accent">{{ target }}</em>를 <span id="p_txt_phoneNo_changeYn">수정</span>하기 위해
@@ -101,11 +101,9 @@
                                   <option value="82"> 대한민국 +82</option>
                                 </select>
                             </div>
-                            <div class="popup_row rightgap email-number">
-                              <div>
+                            <div class="popup_row rightgap">
                                 <input type="tel" id="phoneNo" placeholder="전화번호" name="phoneNo" maxlength="14" class="popup_input" onkeydown="check_num_ajax3('phoneNo', '2', 'e_phoneNo')">
-                                <button type="button" class="btn_contact" onclick="sendSmsForChangePhoneNo()">인증</button>
-                              </div>                            
+                                <button type="button" class="btn_contact" onclick="sendSmsForChangePhoneNo()">인증</button>                          
                             </div>
                             <div class="popup_row">
                                 <input type="tel" id="authNo" placeholder="인증번호 입력" class="popup_input" onkeydown="check_num_ajax3('authNo', '2', 'e_phoneNo')" oninput="changeVerifyToPopupInput('authNo')" disabled="">
