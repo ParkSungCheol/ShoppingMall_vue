@@ -17,13 +17,8 @@
             </div>
         </div>
         <div class="field">
-            <b>비밀번호 재확인</b>
-            <input class="userpw-confirm" type="password" v-on:keyup="keyPress($event, 'pwdConfirm')">
-            <b style="color:red" v-show="pwdConfirm">비밀번호가 일치하지 않습니다</b>
-        </div>
-        <div class="field">
             <b>이름</b>
-            <input type="text" v-on:keyup="keyPress($event, 'name')" ref="name">
+            <input type="text" v-on:keyup="keyPress($event, 'name')" ref="name" :value="user.name">
             <b style="color:red" v-show="name">한글 2-4자 입력하세요</b>
         </div>
 
@@ -114,6 +109,7 @@ export default {
   data () {
     return {
       user : null,
+      name : false,
     }
   },
   props : {
