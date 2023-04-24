@@ -185,6 +185,7 @@ export default {
       this.$refs.dimmed.style.display = 'block';
       this.$refs.layer.style.display = 'block';
       document.querySelector("*").style.overflow = 'hidden';
+      window.scrollTo(0,0);
     },
     keyPress($event, targetObject) {
       let idval = $event.target.value;
