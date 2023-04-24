@@ -76,8 +76,8 @@
         <div class="field email-number">
             <b>본인 확인 이메일</b>
             <div>
-              <input type="email" placeholder="이메일 입력" v-on:keyup="keyPress($event, 'email')" ref="sendEmail" :disabled="!checkEmail">
-              <input type="button" value="인증번호 받기" v-on:click="emailCheck('sendEmail')" :disabled="!checkEmail">
+              <input type="email" placeholder="이메일 입력" v-on:keyup="keyPress($event, 'email')" ref="sendEmail" :disabled="!sendEmail">
+              <input type="button" value="인증번호 받기" v-on:click="emailCheck('sendEmail')" :disabled="!sendEmail">
             </div>
             <b style="color:red" v-show="email">입력한 이메일을 확인하세요</b>
             <div>
@@ -92,8 +92,8 @@
                 <option value="">대한민국 +82</option>
             </select>
             <div>
-                <input type="tel" placeholder="전화번호 입력" v-on:keyup="keyPress($event, 'phone')" ref="sendMessage" :disabled="!checkMessage">
-                <input type="button" value="인증번호 받기" v-on:click="messageCheck('sendMessage')" :disabled="!checkMessage">
+                <input type="tel" placeholder="전화번호 입력" v-on:keyup="keyPress($event, 'phone')" ref="sendMessage" :disabled="!sendMessage">
+                <input type="button" value="인증번호 받기" v-on:click="messageCheck('sendMessage')" :disabled="!sendMessage">
             </div>
             <b style="color:red" v-show="phone">입력한 핸드폰번호를 확인하세요</b>
             <div>
@@ -125,9 +125,11 @@ export default {
       birthday: true,
       address: true,
       email: true,
-      checkEmail : true,
+      sendEmail : true,
+      sendMessage : true,
+      checkEmail : false,
+      checkMessage : false,
       phone: true,
-      checkMessage : true,
     }
   },
   methods: {
@@ -240,6 +242,9 @@ export default {
         console.log(result);
         if(result.status === 200){
           alert(successMessage);
+          if(targetObject == "sendEmail") {
+            this.checkEmail = true;
+          }
           if(targetObject == "checkEmail") {
             this.checkEmail = false;
           }
@@ -286,6 +291,9 @@ export default {
         console.log(result);
         if(result.status === 200){
           alert(successMessage);
+          if(targetObject == "sendMessage") {
+            this.checkMessage = true;
+          }
           if(targetObject == "checkMessage") {
             this.checkMessage = false;
           }
@@ -410,27 +418,7 @@ export default {
     box-sizing: border-box; /*전체에 박스사이징*/
     outline: none; /*focus 했을때 테두리 나오게 */
 }
-.btn_duo_popup {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: block;
-    text-align: center;
-}
-html[lang=ko] body, html[lang=ko] button, html[lang=ko] input, html[lang=ko] select, html[lang=ko] table {
-    font-family: -apple-system,BlinkMacSystemFont,helvetica,"Apple SD Gothic Neo",sans-serif;
-}
-.close_popup {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    vertical-align: top;
-    background-position: -164px -96px;
-    background-repeat: no-repeat;
-    width: 40px;
-    height: 40px;
-}
+
 body{
     font-family: 'Noto Sans KR', sans-serif;
     font-size:14px;
