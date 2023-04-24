@@ -108,6 +108,7 @@
         <div id="dimmed" area-hidden="true" style="display:block;"></div>
         <form>
           <div class="layer" area-hidden="true" style="display:block;">
+            <div class="popup_layer">
             <div class="popup_layer_inner">
                 <div class="popup_content">
                     <!--팝업콘텐츠영역-->
@@ -146,6 +147,7 @@
                         <button type="button" class="close_popup" onclick="excuteNclicksCloseAsPhoneYn();hidePhoneNumberChangePopUp()"><span class="blind">닫기</span></button>
                     </div>
                 </div>
+            </div>
             </div>
           </div>
         </form>
