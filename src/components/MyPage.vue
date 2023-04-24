@@ -221,7 +221,8 @@ export default {
       let birth = this.$refs.year.value + this.$refs.month.value + day;
       let address = this.$refs.addressDetail.value? this.$refs.addressCode.value+"^"+this.$refs.addressMain.value+"^"+this.$refs.addressDetail.value+"^"+this.$refs.addressDetail2.value : this.$refs.addressCode.value+"^"+this.$refs.addressMain.value+"^"+this.$refs.addressDetail2.value;
       if(this.name == this.user.name && birth == this.user.birth && address == this.user.address) { alert("변경사항이 없습니다."); return; }
-
+      let isConfirmed = confirm("개인정보를 수정하시겠습니까?");
+      if(!isConfirmed) return;
       const baseURI = 'https://api.jurospring.o-r.kr';
       try{
         const axiosInstance = axios.create({
