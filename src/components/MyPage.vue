@@ -129,7 +129,9 @@ export default {
   },
   methods: {
     test() {
-        debugger;
+        let address = this.$refs.addressDetail.value? this.$refs.addressCode.value+"^"+this.$refs.addressMain.value+"^"+this.$refs.addressDetail.value+"^"+this.$refs.addressDetail2.value : this.$refs.addressCode.value+"^"+this.$refs.addressMain.value+"^"+this.$refs.addressDetail2.value;
+        console.log(address);
+        console.log(this.user.address);
     },
     keyPress($event, targetObject) {
       let idval = $event.target.value;
