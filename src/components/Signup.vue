@@ -17,7 +17,7 @@
         <div class="field">
             <b>비밀번호</b>
             <input class="userpw" type="password" v-on:keyup="keyPress($event, 'pwd')" ref="pwd">
-            <b style="color:red" v-show="pwd">영문대소문자, 숫자, 특수문자 10자 이상 입력하세요</b>
+            <b style="color:red; font-size: 15px;" v-show="pwd">영문대소문자, 숫자, 특수문자 10자 이상 입력하세요</b>
         </div>
         <div class="field">
             <b>비밀번호 재확인</b>
