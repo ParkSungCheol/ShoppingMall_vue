@@ -404,6 +404,25 @@ export default {
     vertical-align: middle;
     background-color: #959eae;
 }
+.popup_row.rightgap .popup_input {
+    padding: 9px 50px 9px 11px;
+}
+.btn_contact {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    min-width: 40px;
+    padding: 4px 5px 4px;
+    border-radius: 4px;
+    background-color: #959eae;
+    font-size: 13px;
+    line-height: 16px;
+    font-weight: 600;
+    letter-spacing: -.43px;
+    text-align: center;
+    color: #fff;
+    box-sizing: border-box;
+}
 #member {
     box-sizing: border-box; /*전체에 박스사이징*/
     outline: none; /*focus 했을때 테두리 나오게 */
