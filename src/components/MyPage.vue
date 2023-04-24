@@ -212,8 +212,8 @@ export default {
       if(this.birthday) { alert("생년월일을 확인해주세요."); return;}
       if(this.address) { alert("주소를 확인해주세요."); return;}
       let day = this.$refs.day.value < 10? "0"+this.$refs.day.value : this.$refs.day.value;
-      let birth = this.year + this.month + day;
-      let address = this.addressDetail? this.addressCode+"^"+this.addressMain+"^"+this.addressDetail+"^"+this.addressDetail2 : this.addressCode+"^"+this.addressMain+"^"+this.addressDetail2;
+      let birth = this.$refs.year.value + this.$refs.month.value + day;
+      let address = this.$refs.addressDetail.value? this.$refs.addressCode.value+"^"+this.$refs.addressMain.value+"^"+this.$refs.addressDetail.value+"^"+this.$refs.addressDetail2.value : this.$refs.addressCode.value+"^"+this.$refs.addressMain.value+"^"+this.$refs.addressDetail2.value;
       console.log(address);
       console.log(this.user);
       if(this.name == this.user.name && birth == this.user.birth && address == this.user.address) { alert("변경사항이 없습니다."); return; }
