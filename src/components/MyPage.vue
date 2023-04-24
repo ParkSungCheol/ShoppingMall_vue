@@ -26,8 +26,8 @@
             <b>생년월일</b>
             <div>
                 <input type="number" placeholder="년(4자)" ref="year" v-on:change="keyPress($event, 'birthday')" v-on:keyup="keyPress($event, 'birthday')" 
-                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="4" :value="user.birth.substr(0,4)">                
-                <select ref="month" v-on:change="keyPress($event, 'birthday')">
+                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="4" v-model="year">                
+                <select ref="month" v-on:change="keyPress($event, 'birthday')" v-model="month">
                     <option value="">월</option>
                     <option value="01">1월</option>
                     <option value="02">2월</option>
@@ -43,7 +43,7 @@
                     <option value="12">12월</option>
                 </select>
                 <input type="number" placeholder="일" ref="day" v-on:change="keyPress($event, 'birthday')" v-on:keyup="keyPress($event, 'birthday')" 
-                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="2">
+                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="2" v-model="day">
             </div>
             <b style="color:red" v-show="birthday">연도 4자리, 일 2자리로 입력하세요</b>
         </div>
@@ -109,6 +109,10 @@ export default {
     return {
       user : null,
       name : false,
+      year : null,
+      month : null,
+      day : null,
+      birthday : false,
     }
   },
   props : {
@@ -116,6 +120,9 @@ export default {
   },
   mounted : function() {
     this.user = this.getUser();
+    this.year = this.user.birth.substr(0,4);
+    this.month = this.user.birth.substr(4,6);
+    this.day = this.user.birth.substr(6,8);
   },
   methods: {
     keyPress($event, targetObject) {
