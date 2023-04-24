@@ -52,7 +52,7 @@
                     <option value="12">12월</option>
                 </select>
                 <input type="number" placeholder="일" ref="day" v-on:change="keyPress($event, 'birthday')" v-on:keyup="keyPress($event, 'birthday')" 
-                oninput="javascript: if (this.value.length > this.maxLength) {this.value = this.value.slice(0, this.maxLength);} if(this.value < 1) {this.value = null;}" maxlength="2">
+                oninput="javascript: if (this.value.length > this.maxLength) {this.value = this.value.slice(0, this.maxLength);} if(this.value.length > 1 && this.value < 1) {this.value = null;}" maxlength="2">
             </div>
             <b style="color:red" v-show="birthday">연도 4자리, 일 2자리로 입력하세요</b>
         </div>
@@ -146,7 +146,7 @@ export default {
         idvalcheck = new RegExp(/(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])/);
         let year = this.$refs.year.value;
         let month = this.$refs.month.value;
-        let day = this.$refs.day.length < 2 ? "0"+this.$refs.day.value : this.$refs.day.value;
+        let day = this.$refs.day.value.length < 2 ? "0"+this.$refs.day.value : this.$refs.day.value;
         idval = year + month + day;
       }
       else if(targetObject == 'email') idvalcheck = new RegExp(/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/);

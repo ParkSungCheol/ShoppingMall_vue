@@ -43,7 +43,7 @@
                     <option value="12">12월</option>
                 </select>
                 <input type="number" placeholder="일" ref="day" v-on:change="keyPress($event, 'birthday')" v-on:keyup="keyPress($event, 'birthday')" 
-                oninput="javascript: if (this.value.length > this.maxLength) {this.value = this.value.slice(0, this.maxLength);} if(this.value < 1) {this.value = null;}" maxlength="2" v-model="day">
+                oninput="javascript: if (this.value.length > this.maxLength) {this.value = this.value.slice(0, this.maxLength);} if(this.value.length > 1 && this.value < 1) {this.value = null;}" maxlength="2" v-model="day">
             </div>
             <b style="color:red" v-show="birthday">연도 4자리, 일 2자리로 입력하세요</b>
         </div>
@@ -144,9 +144,6 @@ export default {
         let year = this.$refs.year.value;
         let month = this.$refs.month.value;
         let day = this.$refs.day.value.length < 2? "0"+this.$refs.day.value : this.$refs.day.value;
-        console.log((String)(this.$refs.day.value).length);
-        console.log(this.$refs.day.value.length);
-        console.log(this.$refs.day.value.length < 2);
         idval = year + month + day;
       }
       else if(targetObject == 'email') idvalcheck = new RegExp(/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/);
@@ -220,7 +217,7 @@ export default {
       if(this.nameCheck) { alert("이름을 확인해주세요."); return;}
       if(this.birthday) { alert("생년월일을 확인해주세요."); return;}
       if(this.address) { alert("주소를 확인해주세요."); return;}
-      let day = this.$refs.day.length < 2? "0"+this.$refs.day.value : this.$refs.day.value;
+      let day = this.$refs.day.value.length < 2? "0"+this.$refs.day.value : this.$refs.day.value;
       let birth = this.$refs.year.value + this.$refs.month.value + day;
       let address = this.$refs.addressDetail.value? this.$refs.addressCode.value+"^"+this.$refs.addressMain.value+"^"+this.$refs.addressDetail.value+"^"+this.$refs.addressDetail2.value : this.$refs.addressCode.value+"^"+this.$refs.addressMain.value+"^"+this.$refs.addressDetail2.value;
       if(this.name == this.user.name && birth == this.user.birth && address == this.user.address) { alert("변경사항이 없습니다."); return; }
