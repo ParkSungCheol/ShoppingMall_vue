@@ -184,13 +184,17 @@ export default {
 
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
             document.getElementById('postcode').value = data.zonecode;
+            this.addressCode = data.zonecode;
             document.getElementById("roadAddress").value = roadAddr;
-            
+            this.addressMain = roadAddr;
+
             // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
             if(roadAddr !== ''){
                 document.getElementById("extraAddress").value = extraRoadAddr;
+                this.addressDetail2 = extraRoadAddr;
             } else {
                 document.getElementById("extraAddress").value = '';
+                this.addressDetail2 = '';
             }
 
             var guideTextBox = document.getElementById("guide");
