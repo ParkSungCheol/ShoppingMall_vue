@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <div class="member">
+      <div class="member is_fixed">
         <form @submit.prevent="fnSignUp">
         <!-- 1. 로고 -->
 
@@ -452,6 +452,12 @@ export default {
 </script>
 
 <style scope>
+.is_fixed {
+    position: fixed;
+    /* top: 0; */
+    /* left: 0; */
+    /* right: 0; */
+}
 .dimmed {
     position: fixed;
     top: 0;
