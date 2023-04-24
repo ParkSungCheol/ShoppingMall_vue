@@ -85,6 +85,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name:'MyPage',
   data () {
@@ -214,50 +216,45 @@ export default {
       let day = this.$refs.day.value < 10? "0"+this.$refs.day.value : this.$refs.day.value;
       let birth = this.$refs.year.value + this.$refs.month.value + day;
       let address = this.$refs.addressDetail.value? this.$refs.addressCode.value+"^"+this.$refs.addressMain.value+"^"+this.$refs.addressDetail.value+"^"+this.$refs.addressDetail2.value : this.$refs.addressCode.value+"^"+this.$refs.addressMain.value+"^"+this.$refs.addressDetail2.value;
-      console.log(address);
-      console.log(this.user);
       if(this.name == this.user.name && birth == this.user.birth && address == this.user.address) { alert("변경사항이 없습니다."); return; }
 
-    //   const baseURI = 'https://api.jurospring.o-r.kr';
-    //   try{
-    //     const axiosInstance = axios.create({
-    //       withCredentials: true,
-    //     });
-    //     const result = await axiosInstance.get(`${baseURI}/` + "signup",
-    //     {
-    //       params : {
-    //         id: this.$refs.id.value,
-    //         pwd: this.$refs.pwd.value,
-    //         name: this.$refs.name.value,
-    //         year: this.$refs.year.value,
-    //         month: this.$refs.month.value,
-    //         day: this.$refs.day.value,
-    //         addressNumber: this.$refs.addressNumber.value,
-    //         address: this.$refs.address.value,
-    //         addressDetail: this.$refs.addressDetail.value,
-    //         addressDetail2: this.$refs.addressDetail2.value,
-    //         email: this.$refs.sendEmail.value,
-    //         phone: this.$refs.sendMessage.value,
-    //       }
-    //     },
-    //     ).then(res => {
-    //       console.log(res);
-    //       return res;
-    //     });
+      const baseURI = 'https://api.jurospring.o-r.kr';
+      try{
+        const axiosInstance = axios.create({
+          withCredentials: true,
+        });
+        const result = await axiosInstance.get(`${baseURI}/` + "updateUser",
+        {
+          params : {
+            id: this.$refs.id.value,
+            name: this.$refs.name.value,
+            year: this.$refs.year.value,
+            month: this.$refs.month.value,
+            day: this.$refs.day.value,
+            addressNumber: this.$refs.addressCode.value,
+            address: this.$refs.addressMain.value,
+            addressDetail: this.$refs.addressDetail.value,
+            addressDetail2: this.$refs.addressDetail2.value,
+          }
+        },
+        ).then(res => {
+          console.log(res);
+          return res;
+        });
 
-    //     console.log(result);
-    //     if(result.status === 200){
-    //       alert("회원가입이 완료되었습니다.");
-    //       this.$router.push('/login');
-    //     }
-    //     else {
-    //       alert("회원가입에 실패하였습니다.");
-    //     }
+        console.log(result);
+        if(result.status === 200){
+          alert("정보수정이 완료되었습니다.");
+          this.$router.push('/login');
+        }
+        else {
+          alert("정보수정에 실패하였습니다.");
+        }
 
-    //   } catch(err){
-    //     console.log(err);
-    //     alert("회원가입에 실패하였습니다.");
-    //   }
+      } catch(err){
+        console.log(err);
+        alert("정보수정에 실패하였습니다.");
+      }
     }
   }
 }
