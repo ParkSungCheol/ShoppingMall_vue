@@ -6,14 +6,15 @@
         <!-- 1. 로고 -->
 
         <!-- 2. 필드 -->
-        <div class="field email-number">
+        <div class="field">
             <b>아이디</b>
             <input type="text" :value="user.id" disabled>
         </div>
-        <div class="field">
-            <b>비밀번호</b>
-            <input class="userpw" type="password" v-on:keyup="keyPress($event, 'pwd')" ref="pwd">
-            <b style="color:red" v-show="pwd">영문대소문자, 숫자, 특수문자 10자 이상 입력하세요</b>
+        <div class="field email-number">
+            <div>
+                <b>비밀번호</b>
+                <input type="button" value="비밀번호 변경" v-on:click="search()">
+            </div>
         </div>
         <div class="field">
             <b>비밀번호 재확인</b>
