@@ -385,6 +385,24 @@ export default {
 .contact_2step_popup .row_item+.contact_form, .contact_edit_popup .row_item+.contact_form {
     padding-top: 0;
 }
+.btn_duo_popup .btn_item.on {
+    background-color: #03d580;
+}
+.btn_duo_popup .btn_item:first-child {
+    width: 35%;
+    background-color: #959eae;
+    border-radius: 0 0 0 12px;
+}
+.btn_duo_popup .btn_item:last-child {
+    width: 65%;
+    border-radius: 0 0 12px 0;
+}
+.btn_duo_popup .btn_item {
+    float: left;
+    padding: 19px 0 18px;
+    vertical-align: middle;
+    background-color: #959eae;
+}
 #member {
     box-sizing: border-box; /*전체에 박스사이징*/
     outline: none; /*focus 했을때 테두리 나오게 */
