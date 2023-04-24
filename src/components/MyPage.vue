@@ -8,7 +8,7 @@
         <!-- 2. 필드 -->
         <div class="field">
             <b>아이디</b>
-            <input type="text" :value="user.id" disabled>
+            <input type="text" v-model="user.id" disabled>
         </div>
         <div class="field email-number">
             <div>
@@ -123,6 +123,7 @@ export default {
     this.year = this.user.birth.substr(0,4);
     this.month = this.user.birth.substr(4,6);
     this.day = this.user.birth.substr(6,8);
+    console.log(this.month);
   },
   methods: {
     keyPress($event, targetObject) {
