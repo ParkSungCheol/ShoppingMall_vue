@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <div ref="body">
       <div class="member">
         <form @submit.prevent="fnUpdate">
         <!-- 1. 로고 -->
@@ -111,14 +111,14 @@
                             <p id="e_phoneNo" class="popup_error"></p>
                         </div>
                         <div class="btn_duo_popup">
-                            <a href="javascript:;" class="btn_item" role="button" onclick="">
+                            <a href="javascript:;" class="btn_item" role="button" v-on:click="closePopUp">
                                 <span class="btn_text">취소</span>
                             </a>
                             <a href="javascript:;" class="btn_item on" role="button" onclick="">
                                 <span id="b_txt_phoneNo_reg" class="btn_text">변경</span>
                             </a>
                         </div>
-                        <button type="button" class="close_popup" onclick=""></button>
+                        <button type="button" class="close_popup" v-on:click="closePopUp"></button>
                     </div>
                 </div>
             </div>
@@ -175,10 +175,16 @@ export default {
     }
   },
   methods: {
+    closePopUp() {
+      this.$refs.dimmed.style.display = 'none';
+      this.$refs.layer.style.display = 'none';
+      this.$refs.body.style.overflow = 'hidden';
+    },
     popUp(target) {
       this.target = target;
       this.$refs.dimmed.style.display = 'block';
       this.$refs.layer.style.display = 'block';
+      this.$refs.body.style.overflow = 'visible';
     },
     keyPress($event, targetObject) {
       let idval = $event.target.value;
