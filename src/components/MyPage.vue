@@ -226,7 +226,7 @@ export default {
         const result = await axiosInstance.get(`${baseURI}/` + "updateUser",
         {
           params : {
-            id: this.$refs.id.value,
+            id: this.user.id,
             name: this.$refs.name.value,
             year: this.$refs.year.value,
             month: this.$refs.month.value,
