@@ -121,9 +121,8 @@ export default {
   mounted : function() {
     this.user = this.getUser();
     this.year = this.user.birth.substr(0,4);
-    this.month = this.user.birth.substr(4,6);
-    this.day = this.user.birth.substr(6,8);
-    console.log(this.month);
+    this.month = this.user.birth.substr(4,2);
+    this.day = this.user.birth.substr(6,2);
   },
   methods: {
     keyPress($event, targetObject) {
