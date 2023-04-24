@@ -52,50 +52,32 @@
         <div class="field email-number">
           <b>주소</b>
           <div>
-            <input type="text" id="postcode" placeholder="우편번호" disabled ref="addressNumber">
+            <input type="text" id="postcode" placeholder="우편번호" disabled ref="addressNumber" v-model="addressCode">
             <input type="button" value="우편번호 찾기" v-on:click="search()">
           </div>
           <!--onclick이 아니라 @click으로 바꿔야한다. -->
-          <input type="text" id="roadAddress" placeholder="도로명주소" disabled ref="address">
-          <input type="text" id="jibunAddress" placeholder="지번주소" disabled>
+          <input type="text" id="roadAddress" placeholder="도로명주소" disabled ref="address" v-model="addressMain">
           <span id="guide" style="color:#000;display:none"></span>
-          <input type="text" id="detailAddress" placeholder="상세주소" ref="addressDetail">
-          <input type="text" id="extraAddress" placeholder="참고항목" disabled ref="addressDetail2">
+          <input type="text" id="detailAddress" placeholder="상세주소" ref="addressDetail" v-model="addressDetail">
+          <input type="text" id="extraAddress" placeholder="참고항목" disabled ref="addressDetail2" v-model="addressDetail2">
           <b style="color:red" v-show="address">우편번호 찾기를 진행해주세요</b>
         </div>
 
         <!-- 5. 이메일_전화번호 -->
         <div class="field email-number">
-            <b>본인 확인 이메일</b>
             <div>
-              <input type="email" placeholder="이메일 입력" v-on:keyup="keyPress($event, 'email')" ref="sendEmail" :disabled="!checkEmail">
-              <input type="button" value="인증번호 받기" v-on:click="emailCheck('sendEmail')" :disabled="!checkEmail">
-            </div>
-            <b style="color:red" v-show="email">입력한 이메일을 확인하세요</b>
-            <div>
-              <input type="text" placeholder="인증번호를 입력하세요" ref="checkEmail" maxlength="30" :disabled="!checkEmail">
-              <input type="button" value="인증번호 확인" v-on:click="emailCheck('checkEmail')" :disabled="!checkEmail">
+                <input type="button" value="이메일 변경" v-on:click="search()">
             </div>
         </div>
         
         <div class="field tel-number">
-            <b>휴대전화</b>
-            <select :disabled="!checkMessage">
-                <option value="">대한민국 +82</option>
-            </select>
             <div>
-                <input type="tel" placeholder="전화번호 입력" v-on:keyup="keyPress($event, 'phone')" ref="sendMessage" :disabled="!checkMessage">
-                <input type="button" value="인증번호 받기" v-on:click="messageCheck('sendMessage')" :disabled="!checkMessage">
-            </div>
-            <b style="color:red" v-show="phone">입력한 핸드폰번호를 확인하세요</b>
-            <div>
-              <input type="text" placeholder="인증번호를 입력하세요" ref="checkMessage" maxlength="30" :disabled="!checkMessage">
-              <input type="button" value="인증번호 확인" v-on:click="messageCheck('checkMessage')" :disabled="!checkMessage">
+                <input type="button" value="휴대전화 변경" v-on:click="search()">
             </div>
         </div>
 
         <!-- 6. 가입하기 버튼 -->
-        <input type="submit" value="가입하기">
+        <input type="submit" value="수정하기">
         </form>
     </div>
     </div>
@@ -113,6 +95,11 @@ export default {
       month : null,
       day : null,
       birthday : false,
+      addressCode : null,
+      addressMain : null,
+      addressDetail : null,
+      addressDetail2 : null,
+      address : false,
     }
   },
   props : {
@@ -123,6 +110,16 @@ export default {
     this.year = this.user.birth.substr(0,4);
     this.month = this.user.birth.substr(4,2);
     this.day = this.user.birth.substr(6,2);
+    let str_arr = this.user.address.split('^');
+    this.addressCode = str_arr[0];
+    this.addressMain = str_arr[1];
+    if(str_arr.length == 3) {
+        this.addressDetail2 = str_arr[2];
+    }
+    else {
+        this.addressDetail = str_arr[2];
+        this.addressDetail2 = str_arr[3];
+    }
   },
   methods: {
     keyPress($event, targetObject) {
@@ -154,6 +151,57 @@ export default {
         this[targetObject] = false;
       }
       console.log(this[targetObject]);
+    },
+    search(){ //@click을 사용할 때 함수는 이렇게 작성해야 한다.
+        new window.daum.Postcode({
+        oncomplete: (data) => { //function이 아니라 => 로 바꿔야한다.
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+            // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var roadAddr = data.roadAddress; // 도로명 주소 변수
+            var extraRoadAddr = ''; // 참고 항목 변수
+
+            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                extraRoadAddr += data.bname;
+            }
+            // 건물명이 있고, 공동주택일 경우 추가한다.
+            if(data.buildingName !== '' && data.apartment === 'Y'){
+                extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+            }
+            // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+            if(extraRoadAddr !== ''){
+                extraRoadAddr = ' (' + extraRoadAddr + ')';
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById('postcode').value = data.zonecode;
+            document.getElementById("roadAddress").value = roadAddr;
+            
+            // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+            if(roadAddr !== ''){
+                document.getElementById("extraAddress").value = extraRoadAddr;
+            } else {
+                document.getElementById("extraAddress").value = '';
+            }
+
+            var guideTextBox = document.getElementById("guide");
+            // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+            if(data.autoRoadAddress) {
+                var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+                guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+                guideTextBox.style.display = 'block';
+
+            } else {
+                guideTextBox.innerHTML = '';
+                guideTextBox.style.display = 'none';
+            }
+            
+            this.address = false;
+        }
+    }).open();
     },
   }
 }
