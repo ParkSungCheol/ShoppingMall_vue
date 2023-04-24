@@ -406,18 +406,17 @@ export default {
 }
 .popup_row.rightgap .popup_input {
     padding: 9px 50px 9px 11px;
+    max-width: max-content;
 }
 .btn_contact {
   position: relative;
   min-width: 40px;
-  padding: 4px 5px 4px;
-  font-size: 13px;
-  line-height: 16px;
+  min-height: 40px;
+  margin-left: 3px;
   font-weight: 600;
-  letter-spacing: -.43px;
   text-align: center;
   color: #fff;
-  background-color: black;
+  background-color: #000;
 }
 
 #member {
