@@ -58,7 +58,7 @@
           <!--onclick이 아니라 @click으로 바꿔야한다. -->
           <input type="text" id="roadAddress" placeholder="도로명주소" disabled ref="addressMain" v-model="addressMain">
           <span id="guide" style="color:#000;display:none"></span>
-          <input type="text" id="detailAddress" placeholder="상세주소" ref="addressDetail" v-model="addressDetail" v-on:keyup="test()">
+          <input type="text" id="detailAddress" placeholder="상세주소" ref="addressDetail" v-model="addressDetail">
           <input type="text" id="extraAddress" placeholder="참고항목" disabled ref="addressDetail2" v-model="addressDetail2">
           <b style="color:red" v-show="address">우편번호 찾기를 진행해주세요</b>
         </div>
@@ -128,11 +128,6 @@ export default {
     }
   },
   methods: {
-    test() {
-        let address = this.$refs.addressDetail.value? this.$refs.addressCode.value+"^"+this.$refs.addressMain.value+"^"+this.$refs.addressDetail.value+"^"+this.$refs.addressDetail2.value : this.$refs.addressCode.value+"^"+this.$refs.addressMain.value+"^"+this.$refs.addressDetail2.value;
-        console.log(address);
-        console.log(this.user.address);
-    },
     keyPress($event, targetObject) {
       let idval = $event.target.value;
       let idvalcheck = null;
