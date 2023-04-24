@@ -12,7 +12,6 @@
         </div>
         <div class="field email-number">
             <div>
-                <b>비밀번호</b>
                 <input type="button" value="비밀번호 변경" v-on:click="search()">
             </div>
         </div>
@@ -27,7 +26,7 @@
             <b>생년월일</b>
             <div>
                 <input type="number" placeholder="년(4자)" ref="year" v-on:change="keyPress($event, 'birthday')" v-on:keyup="keyPress($event, 'birthday')" 
-                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="4">                
+                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="4" :value="user.birth.substr(0,4)">                
                 <select ref="month" v-on:change="keyPress($event, 'birthday')">
                     <option value="">월</option>
                     <option value="01">1월</option>
@@ -118,6 +117,38 @@ export default {
   mounted : function() {
     this.user = this.getUser();
   },
+  methods: {
+    keyPress($event, targetObject) {
+      let idval = $event.target.value;
+      let idvalcheck = null;
+      if(targetObject == 'id') idvalcheck = new RegExp(/^[a-zA-Z0-9]{6,20}$/);
+      else if(targetObject == 'pwd') idvalcheck = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{10,}$/);
+      else if(targetObject == 'pwdConfirm') {
+        let pwd = "^" + this.$refs.pwd.value + "$";
+        console.log(pwd);
+        idvalcheck = new RegExp(pwd);
+      }
+      else if(targetObject == 'name') idvalcheck = new RegExp(/^[ㄱ-ㅣ가-힣]{2,4}$/);
+      else if(targetObject == 'birthday') {
+        idvalcheck = new RegExp(/(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])/);
+        let year = this.$refs.year.value;
+        let month = this.$refs.month.value;
+        let day = this.$refs.day.value < 10? "0"+this.$refs.day.value : this.$refs.day.value;
+        idval = year + month + day;
+      }
+      else if(targetObject == 'email') idvalcheck = new RegExp(/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/);
+      else if(targetObject == 'phone') idvalcheck = new RegExp(/^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/);
+      console.log(idval);
+      console.log(idvalcheck.test(idval));
+      if (!idvalcheck.test(idval)){
+        this[targetObject] = true;
+      }
+      else {
+        this[targetObject] = false;
+      }
+      console.log(this[targetObject]);
+    },
+  }
 }
 </script>
 
