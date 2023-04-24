@@ -178,13 +178,13 @@ export default {
     closePopUp() {
       this.$refs.dimmed.style.display = 'none';
       this.$refs.layer.style.display = 'none';
-      document.querySelector("*").style.overflow = "visible !important";
+      document.querySelector("*").style.overflow = 'visible';
     },
     popUp(target) {
       this.target = target;
       this.$refs.dimmed.style.display = 'block';
       this.$refs.layer.style.display = 'block';
-      document.querySelector("*").style.overflow = "hidden !important";
+      document.querySelector("*").style.overflow = 'hidden';
     },
     keyPress($event, targetObject) {
       let idval = $event.target.value;
