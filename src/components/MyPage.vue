@@ -52,11 +52,11 @@
         <div class="field tel-number">
           <b>주소</b>
           <div>
-            <input type="text" id="postcode" placeholder="우편번호" disabled ref="addressNumber" v-model="addressCode">
+            <input type="text" id="postcode" placeholder="우편번호" disabled ref="addressCode" v-model="addressCode">
             <input type="button" value="우편번호 찾기" v-on:click="search()">
           </div>
           <!--onclick이 아니라 @click으로 바꿔야한다. -->
-          <input type="text" id="roadAddress" placeholder="도로명주소" disabled ref="address" v-model="addressMain">
+          <input type="text" id="roadAddress" placeholder="도로명주소" disabled ref="addressMain" v-model="addressMain">
           <span id="guide" style="color:#000;display:none"></span>
           <input type="text" id="detailAddress" placeholder="상세주소" ref="addressDetail" v-model="addressDetail">
           <input type="text" id="extraAddress" placeholder="참고항목" disabled ref="addressDetail2" v-model="addressDetail2">
