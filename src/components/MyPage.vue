@@ -115,11 +115,11 @@
                         </div>
                         <div class="contact_form">
                             <div class="popup_row rightgap">
-                                <input type="tel" id="phoneNo" placeholder="변경할 이메일 입력" name="phoneNo" maxlength="14" class="popup_input" onkeydown="check_num_ajax3('phoneNo', '2', 'e_phoneNo')">
-                                <button type="button" class="btn_contact" onclick="sendSmsForChangePhoneNo()">인증</button>                          
+                                <input type="email" placeholder="변경할 이메일 입력" v-on:keyup="keyPress($event, 'email')" ref="sendEmail" class="popup_input" :disabled="!sendEmail">
+                                <button type="button" class="btn_contact" onclick="emailCheck('sendEmail')" :disabled="!sendEmail">인증</button>                          
                             </div>
                             <div class="popup_row">
-                                <input type="tel" id="authNo" placeholder="인증번호 입력" class="popup_input" onkeydown="check_num_ajax3('authNo', '2', 'e_phoneNo')" oninput="changeVerifyToPopupInput('authNo')" disabled="">
+                                <input type="text" placeholder="인증번호를 입력하세요" ref="checkEmail" maxlength="30" class="popup_input" :disabled="!checkEmail">
                             </div>
                             <p id="e_phoneNo" class="popup_error"></p>
                         </div>
@@ -189,6 +189,8 @@ export default {
       beforePwd: true,
       afterPwd: true,
       afterPwdConfirm: true,
+      sendEmail : true,
+      checkEmail : false,
     }
   },
   props : {
@@ -228,6 +230,14 @@ export default {
             params.beforePwd = this.$refs.beforePwd.value;
             params.afterPwd = this.$refs.afterPwd.value;
             route = '/login';
+        }
+        if(this.popUpEmail) {
+            this.emailCheck('checkEmail');
+            if(this.checkEmail) { alert("인증번호를 확인해주세요."); return;}
+            else if(this.sendEmail) { alert("이메일 인증을 진행해주세요."); return;}
+
+            params.email = this.$refs.sendEmail.value;
+            route = '/mypage';
         }
 
         const baseURI = 'https://api.jurospring.o-r.kr';
@@ -273,6 +283,10 @@ export default {
       this.beforePwd = true;
       this.afterPwd = true;
       this.afterPwdConfirm = true;
+      this.$refs.sendEmail.value = "";
+      this.$refs.checkEmail.value = "";
+      this.sendEmail = true;
+      this.checkEmail = false;
     },
     popUp(target) {
       this[target] = true;
@@ -314,6 +328,97 @@ export default {
         this[targetObject] = false;
       }
       console.log(this[targetObject]);
+    },
+    async existCheck(targetObject) {
+      let successMessage = targetObject == "id"? "사용가능한 아이디입니다." : "";
+      let failureMessage = "이미 존재합니다.";
+      
+      const baseURI = 'https://api.jurospring.o-r.kr';
+      try{
+        const axiosInstance = axios.create({
+          withCredentials: true,
+        });
+        const result = await axiosInstance.get(`${baseURI}/` + "existCheck",
+        {
+          params : {
+            id: targetObject == "id"? this.$refs.id.value : undefined,
+            email: targetObject == "email"? this.$refs.sendEmail.value : undefined,
+            phone: targetObject == "phone"? this.$refs.sendMessage.value : undefined,
+          }
+        },
+        ).then(res => {
+          console.log(res);
+          return res;
+        });
+
+        console.log(result);
+        if(result.status === 200){
+          if(successMessage) {
+            alert(successMessage);
+            this.checkId = false;
+          }
+          return true;
+        }
+        else {
+          alert(failureMessage);
+          return false;
+        }
+
+      } catch(err){
+        console.log(err);
+        alert(failureMessage);
+        return false;
+      }
+    },
+    async emailCheck(targetObject) {
+      if(this.email) {
+        alert("이메일을 확인해주세요!");
+        return;
+      }
+
+      let isExist = await this.existCheck('email');
+      if(!isExist) {
+        return false;
+      }
+
+      let successMessage = targetObject == "sendEmail"? "이메일을 정상적으로 발송했습니다." : "이메일 인증되었습니다.";
+      let failureMessage = targetObject == "sendEmail"? "이메일발송에 실패하였습니다." : "인증코드를 확인해주세요.";
+      
+      const baseURI = 'https://api.jurospring.o-r.kr';
+      try{
+        const axiosInstance = axios.create({
+          withCredentials: true,
+        });
+        const result = await axiosInstance.get(`${baseURI}/` + targetObject,
+        {
+          params : {
+            email: this.$refs[targetObject].value
+          }
+        },
+        ).then(res => {
+          console.log(res);
+          return res;
+        });
+
+        console.log(result);
+        if(result.status === 200){
+          alert(successMessage);
+          if(targetObject == "sendEmail") {
+            this.checkEmail = true;
+          }
+          if(targetObject == "checkEmail") {
+            this.sendEmail = false;
+            this.checkEmail = false;
+          }
+        }
+        else {
+          alert(failureMessage);
+        }
+
+      } catch(err){
+        console.log(err);
+        alert(failureMessage);
+      }
     },
     search(){ //@click을 사용할 때 함수는 이렇게 작성해야 한다.
         new window.daum.Postcode({
