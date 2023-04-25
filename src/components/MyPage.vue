@@ -234,8 +234,10 @@ export default {
             route = '/login';
         }
         if(this.popUpEmail) {
-            this.emailCheck('checkEmail');
-            if(this.checkEmail) { alert("인증번호를 확인해주세요."); return;}
+            if(this.sendEmail && this.checkEmail) {
+                this.emailCheck('checkEmail');
+                if(this.sendEmail || this.checkEmail) return;
+            }
             else if(this.sendEmail) { alert("이메일 인증을 진행해주세요."); return;}
 
             params.email = this.$refs.sendEmail.value;
