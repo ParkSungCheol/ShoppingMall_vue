@@ -267,9 +267,9 @@ export default {
       this.popUpPwd = false;
       this.popUpEmail = false;
       this.popUpPhone = false;
-      this.refs.beforePwd.value = "";
-      this.refs.afterPwd.value = "";
-      this.refs.afterPwdConfirm.value = "";
+      this.$refs.beforePwd.value = "";
+      this.$refs.afterPwd.value = "";
+      this.$refs.afterPwdConfirm.value = "";
     },
     popUp(target) {
       this[target] = true;
