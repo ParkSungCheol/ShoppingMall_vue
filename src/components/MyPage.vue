@@ -12,7 +12,7 @@
         </div>
         <div class="field email-number">
             <div>
-                <input type="button" value="비밀번호 변경" v-on:click="popUp('비밀번호')">
+                <input type="button" value="비밀번호 변경" v-on:click="popUp('popUpPwd')">
             </div>
         </div>
         <div class="field">
@@ -66,13 +66,13 @@
         <!-- 5. 이메일_전화번호 -->
         <div class="field email-number">
             <div>
-                <input type="button" value="이메일 변경" v-on:click="popUp('이메일')">
+                <input type="button" value="이메일 변경" v-on:click="popUp('popUpEmail')">
             </div>
         </div>
         
         <div class="field email-number">
             <div>
-                <input type="button" value="휴대전화 변경" v-on:click="popUp('휴대전화')">
+                <input type="button" value="휴대전화 변경" v-on:click="popUp('popUpPhone')">
             </div>
         </div>
 
@@ -89,7 +89,7 @@
                     <div class="contact_edit_popup" style="width:329px;">
                         <h4 class="contact_edit_title">
                                 <strong class="bold">{{user.name}}님</strong>의 회원정보 중<br/>
-                                <em class="accent">{{ target }}</em>를 <span id="p_txt_phoneNo_changeYn">수정</span>하기 위해<br/>
+                                <em class="accent">{{ popUpPwd? '패스워드' : popUpEmail? '이메일' : '전화번호' }}</em>을/를 <span id="p_txt_phoneNo_changeYn">수정</span>하기 위해<br/>
                                 인증절차가 필요합니다.
                         </h4>
                         <div id="phoneNoForm" class="row_item phone" style="display: block;">
@@ -149,7 +149,9 @@ export default {
       addressDetail : null,
       addressDetail2 : null,
       address : false,
-      target : null,
+      popUpPwd : false,
+      popUpEmail : false,
+      popUpPhone : false,
     }
   },
   props : {
@@ -178,9 +180,12 @@ export default {
       this.$refs.dimmed.style.display = 'none';
       this.$refs.layer.style.display = 'none';
       document.querySelector("*").style.overflow = 'visible';
+      this.popUpPwd = false;
+      this.popUpEmail = false;
+      this.popUpPhone = false;
     },
     popUp(target) {
-      this.target = target;
+      this[target] = true;
       this.$refs.dimmed.style.display = 'block';
       this.$refs.layer.style.display = 'block';
       document.querySelector("*").style.overflow = 'hidden';
