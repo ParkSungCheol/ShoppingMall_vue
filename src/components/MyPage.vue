@@ -96,15 +96,15 @@
                         <div class="contact_form">
                             <div class="popup_row">
                                 <input class="popup_input" type="password" v-on:keyup="keyPress($event, 'beforePwd')" ref="beforePwd" placeholder="기존 비밀번호 입력">
-                                <b class="popup_input" style="color:red; font-size: 12px;" v-show="pwd">영문대소문자, 숫자, 특수문자 10자 이상 입력하세요</b>
+                                <b class="popup_input" style="color:red; font-size: 12px;" v-show="beforePwd">영문대소문자, 숫자, 특수문자 10자 이상 입력하세요</b>
                             </div>
                             <div class="popup_row">
                                 <input class="popup_input" type="password" v-on:keyup="keyPress($event, 'afterPwd')" ref="afterPwd" placeholder="변경할 비밀번호 입력">
-                                <b class="popup_input" style="color:red; font-size: 12px;" v-show="pwd">영문대소문자, 숫자, 특수문자 10자 이상 입력하세요</b>
+                                <b class="popup_input" style="color:red; font-size: 12px;" v-show="afterPwd">영문대소문자, 숫자, 특수문자 10자 이상 입력하세요</b>
                             </div>
                             <div class="popup_row">
                                 <input class="popup_input" type="password" v-on:keyup="keyPress($event, 'afterPwdConfirm')" ref="afterPwdConfirm" placeholder="변경할 비밀번호 재입력">
-                                <b style="color:red" v-show="pwdConfirm">비밀번호가 일치하지 않습니다</b>
+                                <b style="color:red" v-show="afterPwdConfirm">비밀번호가 일치하지 않습니다</b>
                             </div>
                             <p id="e_phoneNo" class="popup_error"></p>
                         </div>
