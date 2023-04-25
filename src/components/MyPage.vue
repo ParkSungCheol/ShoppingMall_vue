@@ -234,7 +234,6 @@ export default {
             route = '/login';
         }
         if(this.popUpEmail) {
-            if(this.email) { alert("이메일을 확인해주세요!"); return; }
             this.emailCheck('checkEmail');
             if(this.checkEmail) { alert("인증번호를 확인해주세요."); return;}
             else if(this.sendEmail) { alert("이메일 인증을 진행해주세요."); return;}
