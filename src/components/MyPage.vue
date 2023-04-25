@@ -256,10 +256,9 @@ export default {
 
         } catch(err){
             console.log(err);
-            console.log(err.response.status);
-            // else if(this.popUpPwd && result.status === 404) {
-            //     alert("현재 비밀번호가 일치하지 않습니다.");
-            // }
+            if(this.popUpPwd && err.response.status === 404) {
+                 alert("현재 비밀번호가 일치하지 않습니다.");
+            }
             alert("정보수정에 실패하였습니다.");
         }
     },
