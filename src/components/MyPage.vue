@@ -270,6 +270,9 @@ export default {
       this.$refs.beforePwd.value = "";
       this.$refs.afterPwd.value = "";
       this.$refs.afterPwdConfirm.value = "";
+      this.beforePwd = true;
+      this.afterPwd = true;
+      this.afterPwdConfirm = true;
     },
     popUp(target) {
       this[target] = true;
