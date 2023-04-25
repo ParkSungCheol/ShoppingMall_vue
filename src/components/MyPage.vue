@@ -214,45 +214,49 @@ export default {
   },
   methods: {
     async changePopUp() {
+        let params = {
+            id: this.user.id,
+        };
+        let route;
+
         if(this.popUpPwd) {
             if(this.beforePwd) { alert("기존 비밀번호를 확인해주세요."); return;}
             if(this.afterPwd) { alert("변경할 비밀번호를 확인해주세요."); return;}
             if(this.afterPwdConfirm) { alert("변경할 비밀번호 재입력을 확인해주세요."); return;}
             if(this.$refs.beforePwd.value == this.$refs.afterPwd.value) { alert("기존 비밀번호와 동일합니다."); return; }
+
+            params.beforePwd = this.$refs.beforePwd.value;
+            params.afterPwd = this.$refs.afterPwd.value;
+            route = '/login';
         }
 
-        // const baseURI = 'https://api.jurospring.o-r.kr';
-        // try{
-        //     const axiosInstance = axios.create({
-        //     withCredentials: true,
-        //     });
-        //     const result = await axiosInstance.get(`${baseURI}/` + "updateUser",
-        //     {
-        //     params : {
-        //         flag : this.popUpPwd? "changePwd" : undefined,
-        //         id: this.user.id,
-        //         beforePwd : this.$refs.beforePwd.value,
-        //         afterPwd : this.$refs.afterPwd.value,
-        //     }
-        //     },
-        //     ).then(res => {
-        //     console.log(res);
-        //     return res;
-        //     });
+        const baseURI = 'https://api.jurospring.o-r.kr';
+        try{
+            const axiosInstance = axios.create({
+            withCredentials: true,
+            });
+            const result = await axiosInstance.get(`${baseURI}/` + "updateUser",
+            {
+            params : params
+            },
+            ).then(res => {
+            console.log(res);
+            return res;
+            });
 
-        //     console.log(result);
-        //     if(result.status === 200){
-        //     alert("정보수정이 완료되었습니다.");
-        //     this.$router.push('/');
-        //     }
-        //     else {
-        //     alert("정보수정에 실패하였습니다.");
-        //     }
+            console.log(result);
+            if(result.status === 200){
+            alert("정보수정이 완료되었습니다.");
+            this.$router.push(route);
+            }
+            else {
+            alert("정보수정에 실패하였습니다.");
+            }
 
-        // } catch(err){
-        //     console.log(err);
-        //     alert("정보수정에 실패하였습니다.");
-        // }
+        } catch(err){
+            console.log(err);
+            alert("정보수정에 실패하였습니다.");
+        }
     },
     closePopUp() {
       this.$refs.dimmed.style.display = 'none';
