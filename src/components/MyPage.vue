@@ -148,7 +148,7 @@
                             <a href="javascript:;" class="btn_item" role="button" v-on:click="closePopUp">
                                 <span class="btn_text">취소</span>
                             </a>
-                            <a href="javascript:;" class="btn_item on" role="button" onclick="changePopUp">
+                            <a href="javascript:;" class="btn_item on" role="button" v-on:click="changePopUp">
                                 <span id="b_txt_phoneNo_reg" class="btn_text">변경</span>
                             </a>
                         </div>
