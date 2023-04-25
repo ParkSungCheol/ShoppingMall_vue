@@ -92,8 +92,9 @@
                                 <em class="accent">{{ popUpPwd? '패스워드' : popUpEmail? '이메일주소' : '전화번호' }}</em>를 <span id="p_txt_phoneNo_changeYn">수정</span>하기 위해<br/>
                                 인증절차가 필요합니다.
                         </h4>
+                        <div v-show="popUpEmail">
                         <div id="phoneNoForm" class="row_item phone" style="display: block;">
-                            <span id="p_txt_phoneNo" class="item_text">+82 10-7***-0***</span>
+                            <span id="p_txt_phoneNo" class="item_text">기존 이메일 : {{ user.email }}</span>
                         </div>
                         <div class="contact_form">
                             <div class="popup_row select">
@@ -117,6 +118,35 @@
                             <a href="javascript:;" class="btn_item on" role="button" onclick="">
                                 <span id="b_txt_phoneNo_reg" class="btn_text">변경</span>
                             </a>
+                        </div>
+                        </div>
+                        <div v-show="popUpPhone">
+                        <div id="phoneNoForm" class="row_item phone" style="display: block;">
+                            <span id="p_txt_phoneNo" class="item_text">기존 전화번호 : {{ user.phone }}</span>
+                        </div>
+                        <div class="contact_form">
+                            <div class="popup_row select">
+                                <select id="internationalCode" name="internationalCode" title="전화번호" class="popup_input">
+                                  <option value="82"> 대한민국 +82</option>
+                                </select>
+                            </div>
+                            <div class="popup_row rightgap">
+                                <input type="tel" id="phoneNo" placeholder="변경할 전화번호 입력" name="phoneNo" maxlength="14" class="popup_input" onkeydown="check_num_ajax3('phoneNo', '2', 'e_phoneNo')">
+                                <button type="button" class="btn_contact" onclick="sendSmsForChangePhoneNo()">인증</button>                          
+                            </div>
+                            <div class="popup_row">
+                                <input type="tel" id="authNo" placeholder="인증번호 입력" class="popup_input" onkeydown="check_num_ajax3('authNo', '2', 'e_phoneNo')" oninput="changeVerifyToPopupInput('authNo')" disabled="">
+                            </div>
+                            <p id="e_phoneNo" class="popup_error"></p>
+                        </div>
+                        <div class="btn_duo_popup">
+                            <a href="javascript:;" class="btn_item" role="button" v-on:click="closePopUp">
+                                <span class="btn_text">취소</span>
+                            </a>
+                            <a href="javascript:;" class="btn_item on" role="button" onclick="">
+                                <span id="b_txt_phoneNo_reg" class="btn_text">변경</span>
+                            </a>
+                        </div>
                         </div>
                     </div>
                 </div>
