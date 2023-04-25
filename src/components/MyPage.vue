@@ -241,7 +241,6 @@ export default {
             else if(this.sendEmail) { alert("이메일 인증을 진행해주세요."); return;}
 
             params.email = this.$refs.sendEmail.value;
-            route = '/mypage';
         }
 
         const baseURI = 'https://api.jurospring.o-r.kr';
@@ -260,7 +259,8 @@ export default {
 
             if(result.status === 200){
                 alert("정보수정이 완료되었습니다.");
-                this.$router.push(route);
+                if(!route) this.$router.go();
+                else this.$router.push(route);
             }
             else {
                 alert("정보수정에 실패하였습니다.");
