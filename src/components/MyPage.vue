@@ -246,11 +246,14 @@ export default {
 
             console.log(result);
             if(result.status === 200){
-            alert("정보수정이 완료되었습니다.");
-            this.$router.push(route);
+                alert("정보수정이 완료되었습니다.");
+                this.$router.push(route);
+            }
+            else if(this.popUpPwd && result.status === 404) {
+                alert("현재 비밀번호가 일치하지 않습니다.");
             }
             else {
-            alert("정보수정에 실패하였습니다.");
+                alert("정보수정에 실패하였습니다.");
             }
 
         } catch(err){
