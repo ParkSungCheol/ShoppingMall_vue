@@ -298,13 +298,13 @@ export default {
       console.log(idval);
       console.log(idvalcheck.test(idval));
       if (!idvalcheck.test(idval)){
+        if(targetObject == 'afterPwd') {
+            this.$refs.afterPwdConfirm.value = "";
+            this.afterPwdConfirm = true;
+        }
         this[targetObject] = true;
       }
       else {
-        if(targetObject == 'afterPwd') {
-            this.$refs.afterPwdConfirm.value = "";
-            this.afterPwdConfirm = false;
-        }
         this[targetObject] = false;
       }
       console.log(this[targetObject]);

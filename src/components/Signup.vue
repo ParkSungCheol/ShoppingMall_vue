@@ -156,13 +156,13 @@ export default {
       console.log(idval);
       console.log(idvalcheck.test(idval));
       if (!idvalcheck.test(idval)){
+        if(targetObject == 'pwd') {
+            this.$refs.pwdConfirm.value = "";
+            this.pwdConfirm = true;
+        }
         this[targetObject] = true;
       }
       else {
-        if(targetObject == 'pwd') {
-            this.$refs.pwdConfirm.value = "";
-            this.pwdConfirm = false;
-        }
         this[targetObject] = false;
       }
       console.log(this[targetObject]);
