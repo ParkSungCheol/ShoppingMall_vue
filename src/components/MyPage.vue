@@ -339,7 +339,7 @@ export default {
 .popup_layer {
     display: table;
     table-layout: fixed;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
