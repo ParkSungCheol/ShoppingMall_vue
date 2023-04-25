@@ -95,7 +95,7 @@
                         <div v-show="popUpPwd">
                         <div class="contact_form">
                             <div class="popup_row">
-                                <input class="popup_input" type="password" v-on:keyup="keyPress($event, 'pwd')" ref="pwd">
+                                <input class="popup_input" type="password" v-on:keyup="keyPress($event, 'pwd')" ref="pwd" placeholder="기존 비밀번호 입력">
                                 <b style="color:red; font-size: 15px;" v-show="pwd">영문대소문자, 숫자, 특수문자 10자 이상 입력하세요</b>
                             </div>
                             <div class="popup_row">
@@ -184,6 +184,7 @@ export default {
       popUpPwd : false,
       popUpEmail : false,
       popUpPhone : false,
+      pwd: true,
     }
   },
   props : {
