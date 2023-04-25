@@ -104,7 +104,7 @@
                             </div>
                             <div class="popup_row">
                                 <input class="popup_input" type="password" v-on:keyup="keyPress($event, 'afterPwdConfirm')" ref="afterPwdConfirm" placeholder="변경할 비밀번호 재입력">
-                                <b style="color:red" v-show="afterPwdConfirm">비밀번호가 일치하지 않습니다</b>
+                                <b style="color:red font-size: 12px;" v-show="afterPwdConfirm">비밀번호가 일치하지 않습니다</b>
                             </div>
                             <p id="e_phoneNo" class="popup_error"></p>
                         </div>
