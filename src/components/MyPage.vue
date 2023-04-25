@@ -89,7 +89,7 @@
                     <div class="contact_edit_popup" style="width:329px;">
                         <h4 class="contact_edit_title">
                                 <strong class="bold">{{user.name}}님</strong>의 회원정보 중<br/>
-                                <em class="accent">{{ popUpPwd? '패스워드' : popUpEmail? '이메일' : '전화번호' }}</em>을/를 <span id="p_txt_phoneNo_changeYn">수정</span>하기 위해<br/>
+                                <em class="accent">{{ popUpPwd? '패스워드' : popUpEmail? '이메일주소' : '전화번호' }}</em>를 <span id="p_txt_phoneNo_changeYn">수정</span>하기 위해<br/>
                                 인증절차가 필요합니다.
                         </h4>
                         <div id="phoneNoForm" class="row_item phone" style="display: block;">
