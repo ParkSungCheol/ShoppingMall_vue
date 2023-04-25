@@ -21,7 +21,7 @@
         </div>
         <div class="field">
             <b>비밀번호 재확인</b>
-            <input class="userpw-confirm" type="password" v-on:keyup="keyPress($event, 'pwdConfirm')">
+            <input class="userpw-confirm" type="password" v-on:keyup="keyPress($event, 'pwdConfirm')" ref="pwdConfirm">
             <b style="color:red" v-show="pwdConfirm">비밀번호가 일치하지 않습니다</b>
         </div>
         <div class="field">
