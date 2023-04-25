@@ -235,10 +235,7 @@ export default {
         }
         if(this.popUpEmail) {
             if(this.sendEmail && this.checkEmail) {
-                this.emailCheck('checkEmail');
-                console.log("-------check-----------");
-                console.log(this.sendEmail);
-                console.log(this.checkEmail);
+                await this.emailCheck('checkEmail');
                 if(this.sendEmail || this.checkEmail) return;
             }
             else if(this.sendEmail) { alert("이메일 인증을 진행해주세요."); return;}
