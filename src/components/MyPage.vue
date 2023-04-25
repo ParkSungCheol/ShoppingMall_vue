@@ -184,7 +184,7 @@ export default {
       this.$refs.dimmed.style.display = 'block';
       this.$refs.layer.style.display = 'block';
       document.querySelector("*").style.overflow = 'hidden';
-      window.scrollTo(0,0);
+      //window.scrollTo(0,0);
     },
     keyPress($event, targetObject) {
       let idval = $event.target.value;
@@ -350,7 +350,6 @@ export default {
 .popup_layer_inner {
     display: table-cell;
     vertical-align: middle;
-    background-color: rgba(0,0,0,.5);
 }
 .popup_content {
     margin: 45px 0;
