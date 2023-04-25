@@ -95,14 +95,16 @@
                         <div v-show="popUpPwd">
                         <div class="contact_form">
                             <div class="popup_row">
-                                <input class="popup_input" type="password" v-on:keyup="keyPress($event, 'pwd')" ref="pwd" placeholder="기존 비밀번호 입력">
-                                <b class="popup_input" style="color:red;" v-show="pwd">영문대소문자, 숫자, 특수문자 10자 이상 입력하세요</b>
+                                <input class="popup_input" type="password" v-on:keyup="keyPress($event, 'beforePwd')" ref="beforePwd" placeholder="기존 비밀번호 입력">
+                                <b class="popup_input" style="color:red; font-size: 12px;" v-show="pwd">영문대소문자, 숫자, 특수문자 10자 이상 입력하세요</b>
                             </div>
                             <div class="popup_row">
-                                <input type="tel" id="phoneNo" placeholder="변경할 비밀번호 입력" name="phoneNo" maxlength="14" class="popup_input" onkeydown="check_num_ajax3('phoneNo', '2', 'e_phoneNo')">                        
+                                <input class="popup_input" type="password" v-on:keyup="keyPress($event, 'afterPwd')" ref="afterPwd" placeholder="변경할 비밀번호 입력">
+                                <b class="popup_input" style="color:red; font-size: 12px;" v-show="pwd">영문대소문자, 숫자, 특수문자 10자 이상 입력하세요</b>
                             </div>
                             <div class="popup_row">
-                                <input type="tel" id="authNo" placeholder="변경할 비밀번호 재입력" class="popup_input" onkeydown="check_num_ajax3('authNo', '2', 'e_phoneNo')" oninput="changeVerifyToPopupInput('authNo')" disabled="">
+                                <input class="popup_input" type="password" v-on:keyup="keyPress($event, 'afterPwdConfirm')" ref="afterPwdConfirm" placeholder="변경할 비밀번호 재입력">
+                                <b style="color:red" v-show="pwdConfirm">비밀번호가 일치하지 않습니다</b>
                             </div>
                             <p id="e_phoneNo" class="popup_error"></p>
                         </div>
@@ -184,7 +186,9 @@ export default {
       popUpPwd : false,
       popUpEmail : false,
       popUpPhone : false,
-      pwd: true,
+      beforePwd: true,
+      afterPwd: true,
+      afterPwdConfirm: true,
     }
   },
   props : {
@@ -228,10 +232,10 @@ export default {
       let idval = $event.target.value;
       let idvalcheck = null;
       if(targetObject == 'id') idvalcheck = new RegExp(/^[a-zA-Z0-9]{6,20}$/);
-      else if(targetObject == 'pwd') idvalcheck = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{10,}$/);
-      else if(targetObject == 'pwdConfirm') {
-        let pwd = "^" + this.$refs.pwd.value + "$";
-        console.log(pwd);
+      else if(targetObject == 'beforePwd') idvalcheck = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{10,}$/);
+      else if(targetObject == 'afterPwd') idvalcheck = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{10,}$/);
+      else if(targetObject == 'afterPwdConfirm') {
+        let pwd = "^" + this.$refs.afterPwd.value + "$";
         idvalcheck = new RegExp(pwd);
       }
       else if(targetObject == 'nameCheck') idvalcheck = new RegExp(/^[ㄱ-ㅣ가-힣]{2,4}$/);
