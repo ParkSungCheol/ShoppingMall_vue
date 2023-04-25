@@ -159,6 +159,10 @@ export default {
         this[targetObject] = true;
       }
       else {
+        if(targetObject == 'pwd') {
+            this.$refs.pwdConfirm.value = "";
+            this.pwdConfirm = false;
+        }
         this[targetObject] = false;
       }
       console.log(this[targetObject]);

@@ -301,6 +301,10 @@ export default {
         this[targetObject] = true;
       }
       else {
+        if(targetObject == 'afterPwd') {
+            this.$refs.afterPwdConfirm.value = "";
+            this.afterPwdConfirm = false;
+        }
         this[targetObject] = false;
       }
       console.log(this[targetObject]);
