@@ -287,6 +287,7 @@ export default {
       this.afterPwdConfirm = true;
       this.$refs.sendEmail.value = "";
       this.$refs.checkEmail.value = "";
+      this.email = true;
       this.sendEmail = true;
       this.checkEmail = false;
     },
