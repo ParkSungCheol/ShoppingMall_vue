@@ -95,7 +95,8 @@
                         <div v-show="popUpPwd">
                         <div class="contact_form">
                             <div class="popup_row">
-                                <input type="tel" id="phoneNo" placeholder="현재 비밀번호 입력" name="phoneNo" maxlength="14" class="popup_input" onkeydown="check_num_ajax3('phoneNo', '2', 'e_phoneNo')">                        
+                                <input class="popup_input" type="password" v-on:keyup="keyPress($event, 'pwd')" ref="pwd">
+                                <b style="color:red; font-size: 15px;" v-show="pwd">영문대소문자, 숫자, 특수문자 10자 이상 입력하세요</b>
                             </div>
                             <div class="popup_row">
                                 <input type="tel" id="phoneNo" placeholder="변경할 비밀번호 입력" name="phoneNo" maxlength="14" class="popup_input" onkeydown="check_num_ajax3('phoneNo', '2', 'e_phoneNo')">                        
