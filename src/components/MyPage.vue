@@ -116,7 +116,8 @@
                         <div class="contact_form">
                             <div class="popup_row rightgap">
                                 <input type="email" placeholder="변경할 이메일 입력" v-on:keyup="keyPress($event, 'email')" ref="sendEmail" class="popup_input" :disabled="!sendEmail">
-                                <button type="button" class="btn_contact" onclick="emailCheck('sendEmail')" :disabled="!sendEmail">인증</button>                          
+                                <button type="button" class="btn_contact" onclick="emailCheck('sendEmail')" :disabled="!sendEmail">인증</button>
+                                <b style="color:red" v-show="email">입력한 이메일을 확인하세요</b>                          
                             </div>
                             <div class="popup_row">
                                 <input type="text" placeholder="인증번호를 입력하세요" ref="checkEmail" maxlength="30" class="popup_input" :disabled="!checkEmail">
@@ -189,6 +190,7 @@ export default {
       beforePwd: true,
       afterPwd: true,
       afterPwdConfirm: true,
+      email: true,
       sendEmail : true,
       checkEmail : false,
     }
@@ -232,6 +234,7 @@ export default {
             route = '/login';
         }
         if(this.popUpEmail) {
+            if(this.email) { alert("이메일을 확인해주세요!"); return; }
             this.emailCheck('checkEmail');
             if(this.checkEmail) { alert("인증번호를 확인해주세요."); return;}
             else if(this.sendEmail) { alert("이메일 인증을 진행해주세요."); return;}
