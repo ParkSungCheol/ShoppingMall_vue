@@ -94,7 +94,7 @@
                         </h4>
                         <div v-show="popUpEmail">
                         <div id="phoneNoForm" class="row_item phone" style="display: block;">
-                            <span id="p_txt_phoneNo" class="item_text">기존 이메일 : {{ user.email }}</span>
+                            <span id="p_txt_phoneNo" class="item_text">[ 기존 이메일 ] <br/>{{ user.email }}</span>
                         </div>
                         <div class="contact_form">
                             <div class="popup_row select">
@@ -114,7 +114,7 @@
                         </div>
                         <div v-show="popUpPhone">
                         <div id="phoneNoForm" class="row_item phone" style="display: block;">
-                            <span id="p_txt_phoneNo" class="item_text">기존 전화번호 : {{ user.phone }}</span>
+                            <span id="p_txt_phoneNo" class="item_text">[ 기존 전화번호 ] <br/>{{ user.phone }}</span>
                         </div>
                         <div class="contact_form">
                             <div class="popup_row select">
