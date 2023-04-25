@@ -94,11 +94,10 @@
                         </h4>
                         <div v-show="popUpPwd">
                         <div class="contact_form">
-                            <div class="popup_row rightgap">
-                                <input type="tel" id="phoneNo" placeholder="현재 비밀번호 입력" name="phoneNo" maxlength="14" class="popup_input" onkeydown="check_num_ajax3('phoneNo', '2', 'e_phoneNo')">
-                                <button type="button" class="btn_contact" onclick="sendSmsForChangePhoneNo()">인증</button>                          
+                            <div class="popup_row">
+                                <input type="tel" id="phoneNo" placeholder="현재 비밀번호 입력" name="phoneNo" maxlength="14" class="popup_input" onkeydown="check_num_ajax3('phoneNo', '2', 'e_phoneNo')">                        
                             </div>
-                            <div class="popup_row rightgap">
+                            <div class="popup_row">
                                 <input type="tel" id="phoneNo" placeholder="변경할 비밀번호 입력" name="phoneNo" maxlength="14" class="popup_input" onkeydown="check_num_ajax3('phoneNo', '2', 'e_phoneNo')">                        
                             </div>
                             <div class="popup_row">
