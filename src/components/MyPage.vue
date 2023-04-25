@@ -244,8 +244,6 @@ export default {
             return res;
             });
 
-            console.log(result);
-            console.log(result.status);
             if(result.status === 200){
                 alert("정보수정이 완료되었습니다.");
                 this.$router.push(route);
