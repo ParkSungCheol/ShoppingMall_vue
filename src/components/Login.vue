@@ -47,8 +47,8 @@ export default {
   },
   methods: {
     async fnLogin() {
-      if(!user_id) { alert("아이디를 입력해주세요!"); return; }
-      if(!user_pw) { alert("패스워드를 입력해주세요!"); return; }
+      if(!this.user_id) { alert("아이디를 입력해주세요!"); return; }
+      if(!this.user_pw) { alert("패스워드를 입력해주세요!"); return; }
      const baseURI = 'https://api.jurospring.o-r.kr';
       try{
         const axiosInstance = axios.create({
@@ -130,5 +130,28 @@ ul {
     line-height: 17px;
     text-decoration: none;
     color: #888;
+}
+.login_keep_wrap {
+    position: relative;
+    margin-top: 13px;
+    padding-right: 90px;
+}
+.keep_check {
+    position: relative;
+    padding-left: 23px;
+}
+.keep_check .input_keep {
+    position: absolute;
+    top: 2px;
+    left: 3px;
+    width: 15px;
+    height: 15px;
+}
+.keep_check .keep_text {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    color: #777;
 }
 </style>
