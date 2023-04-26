@@ -11,7 +11,7 @@
           </p>
           <div class="login_keep_wrap" id="login_keep_wrap">
               <div class="keep_check">
-                  <input type="checkbox" id="keep" name="nvlong" class="input_keep" value="off">
+                  <input type="checkbox" id="keep" name="nvlong" class="input_keep" v-model="selected">
                   <label for="keep" class="keep_text">로그인 상태 유지</label>
               </div>
           </div>
@@ -41,7 +41,8 @@ export default {
       user_id: '',
       user_pw: '',
       loginSuccess:false,
-      error:false
+      error:false,
+      selected: false,
     }
   },
   methods: {
@@ -57,7 +58,8 @@ export default {
         {
           params : {
             id:this.user_id,
-            pwd:this.user_pw
+            pwd:this.user_pw,
+            selected:this.selected? "1" : "0",
           }
         },
         ).then(res => {
