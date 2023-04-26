@@ -83,6 +83,7 @@ export default {
     margin-top: 38px;
 }
 .btn_login {
+    align-items: center;
     display: block;
     width: 30%;
     padding: 13px 0 13px;
