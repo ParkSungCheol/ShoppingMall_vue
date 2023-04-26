@@ -36,14 +36,10 @@
                     <!--팝업콘텐츠영역-->
                     <div class="contact_edit_popup" style="width:329px;">
                         <h4 class="contact_edit_title">
-                                <strong class="bold">{{user.name}}님</strong>의 회원정보 중<br/>
-                                <em class="accent">{{ popUpPwd? '패스워드' : popUpEmail? '이메일주소' : '전화번호' }}</em>를 <span id="p_txt_phoneNo_changeYn">수정</span>하기 위해<br/>
+                                <em class="accent">{{ popUpPhone? '아이디' : '패스워드' }}</em>를 <span id="p_txt_phoneNo_changeYn">찾기 위해</span><br/>
                                 인증절차가 필요합니다.
                         </h4>
                         <div v-show="popUpPhone">
-                        <div id="phoneNoForm" class="row_item phone" style="display: block;">
-                            <span id="p_txt_phoneNo" class="item_text">[ 기존 전화번호 ] <br/>{{ user.phone }}</span>
-                        </div>
                         <div class="contact_form">
                             <div class="popup_row select">
                                 <select id="internationalCode" name="internationalCode" title="전화번호" class="popup_input">
