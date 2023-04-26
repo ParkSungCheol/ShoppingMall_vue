@@ -4,7 +4,7 @@
       <div>
         <form @submit.prevent="fnLogin">
           <p>
-            <input class="w3-input inputText" name="uid" placeholder="Enter your ID" v-model="user_id"><br>
+            <input style="margin-top: 20px;" class="w3-input inputText" name="uid" placeholder="Enter your ID" v-model="user_id"><br>
           </p>
           <p>
             <input name="password" class="w3-input inputText" placeholder="Enter your password" v-model="user_pw" type="password">
