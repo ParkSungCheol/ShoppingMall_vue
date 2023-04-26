@@ -79,4 +79,22 @@ export default {
 #loginForm {
   text-align: center;
 }
+.btn_login_wrap {
+    margin-top: 38px;
+}
+.btn_login {
+    display: block;
+    width: 100%;
+    padding: 13px 0 13px;
+    border-radius: 6px;
+    border: solid 1px rgba(0,0,0,.15);
+    background-color: #03c75a;
+    box-sizing: border-box;
+}
+.btn_login .btn_text {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    color: #fff;
+}
 </style>
