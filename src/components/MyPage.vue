@@ -247,6 +247,7 @@ export default {
           console.log(result);
           if(result.status === 200){
             alert("회원탈퇴가 정상적으로 처리되었습니다.");
+            this.$router.push('/');
           }
           else {
             alert("회원탈퇴에 실패하였습니다.");
