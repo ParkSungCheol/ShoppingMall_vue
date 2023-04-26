@@ -78,6 +78,11 @@
 
         <!-- 6. 가입하기 버튼 -->
         <input type="submit" value="수정하기">
+        <div class="field email-number">
+            <div>
+                <input type="button" value="회원탈퇴" v-on:click="deleteUser">
+            </div>
+        </div>
         </form>
         <div class="dimmed" area-hidden="true" style="display:none;" ref="dimmed"></div>
         <form>
@@ -221,6 +226,38 @@ export default {
     }
   },
   methods: {
+    deleteUser() {
+      confirm('정말 회원탈퇴를 진행하시겠습니까?', async function(){
+        const baseURI = 'https://api.jurospring.o-r.kr';
+        try{
+          const axiosInstance = axios.create({
+            withCredentials: true,
+          });
+          const result = await axiosInstance.get(`${baseURI}/` + 'deleteUser',
+          {
+            params : {
+              id : this.user.id
+            }
+          },
+          ).then(res => {
+            console.log(res);
+            return res;
+          });
+
+          console.log(result);
+          if(result.status === 200){
+            alert("회원탈퇴가 정상적으로 처리되었습니다.");
+          }
+          else {
+            alert("회원탈퇴에 실패하였습니다.");
+          }
+
+        } catch(err){
+          console.log(err);
+          alert("회원탈퇴에 실패하였습니다.");
+        }
+        })
+    },
     async messageCheck(targetObject) {
       if(this.phone) {
         alert("핸드폰 번호를 확인해주세요!");
