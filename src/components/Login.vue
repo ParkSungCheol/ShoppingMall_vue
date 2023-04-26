@@ -141,11 +141,12 @@ ul {
     padding-left: 23px;
 }
 .keep_check .input_keep {
-    position: absolute;
+    position: relative;
     top: 2px;
     left: 3px;
     width: 15px;
     height: 15px;
+    margin-right: 10px;
 }
 .keep_check .keep_text {
     display: inline-block;
