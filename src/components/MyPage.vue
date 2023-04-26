@@ -226,38 +226,38 @@ export default {
     }
   },
   methods: {
-    deleteUser() {
-      confirm('정말 회원탈퇴를 진행하시겠습니까?', async function(){
-        const baseURI = 'https://api.jurospring.o-r.kr';
-        try{
-          const axiosInstance = axios.create({
-            withCredentials: true,
-          });
-          const result = await axiosInstance.get(`${baseURI}/` + 'deleteUser',
-          {
-            params : {
-              id : this.user.id
-            }
-          },
-          ).then(res => {
-            console.log(res);
-            return res;
-          });
-
-          console.log(result);
-          if(result.status === 200){
-            alert("회원탈퇴가 정상적으로 처리되었습니다.");
-            this.$router.push('/');
+    async deleteUser() {
+      let isConfirmed = confirm("정말 회원탈퇴를 진행하시겠습니까?");
+      if(!isConfirmed) return;
+      const baseURI = 'https://api.jurospring.o-r.kr';
+      try{
+        const axiosInstance = axios.create({
+          withCredentials: true,
+        });
+        const result = await axiosInstance.get(`${baseURI}/` + 'deleteUser',
+        {
+          params : {
+            id : this.user.id
           }
-          else {
-            alert("회원탈퇴에 실패하였습니다.");
-          }
+        },
+        ).then(res => {
+          console.log(res);
+          return res;
+        });
 
-        } catch(err){
-          console.log(err);
+        console.log(result);
+        if(result.status === 200){
+          alert("회원탈퇴가 정상적으로 처리되었습니다.");
+          this.$router.push('/');
+        }
+        else {
           alert("회원탈퇴에 실패하였습니다.");
         }
-        })
+
+      } catch(err){
+        console.log(err);
+        alert("회원탈퇴에 실패하였습니다.");
+      }
     },
     async messageCheck(targetObject) {
       if(this.phone) {
