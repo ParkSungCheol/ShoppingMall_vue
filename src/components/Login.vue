@@ -10,6 +10,12 @@
           <p>
             <input name="password" class="w3-input inputText" placeholder="Enter your password" v-model="user_pw" type="password">
           </p>
+          <div class="login_keep_wrap" id="login_keep_wrap">
+              <div class="keep_check">
+                  <input type="checkbox" id="keep" name="nvlong" class="input_keep" value="off">
+                  <label for="keep" class="keep_text">로그인 상태 유지</label>
+              </div>
+          </div>
           <p>
             <div class="btn_login_wrap">
             <button type="submit" class="btn_login"><span class="btn_text">로그인</span></button>
@@ -18,8 +24,8 @@
         </form>
       </div>
       <ul class="find_wrap">
-        <li><router-link class="find_text" to="/signup">회원가입</router-link></li>
-        <li><router-link class="find_text" to="/signup">회원가입</router-link></li>
+        <li><router-link class="find_text" to="/signup">아이디 찾기</router-link></li>
+        <li><router-link class="find_text" to="/signup">비밀번호 찾기</router-link></li>
         <li><router-link class="find_text" to="/signup">회원가입</router-link></li>
       </ul>
     </div>
