@@ -118,6 +118,7 @@ ul {
     display: inline-block;
 }
 .find_wrap .find_text {
+  margin-left: 10px;
     display: inline-block;
     font-size: 14px;
     line-height: 17px;
