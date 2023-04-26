@@ -11,11 +11,17 @@
             <input name="password" class="w3-input" placeholder="Enter your password" v-model="user_pw" type="password">
           </p>
           <p>
-            <button type="submit" class="btn btn-outline-dark">Login</button>
-            <router-link class="btn btn-outline-dark" to="/signup">회원가입</router-link>       
+            <div class="btn_login_wrap">
+            <button type="submit" class="btn_login"><span class="btn_text">로그인</span></button>
+            </div>
           </p>
         </form>
       </div>
+      <ul class="find_wrap">
+        <li><router-link class="find_text" to="/signup">회원가입</router-link></li>
+        <li><router-link class="find_text" to="/signup">회원가입</router-link></li>
+        <li><router-link class="find_text" to="/signup">회원가입</router-link></li>
+      </ul>
     </div>
   </div>
 </template>
