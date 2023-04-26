@@ -83,16 +83,19 @@ export default {
     margin-top: 38px;
 }
 .inputText {
-  width: 30% !important;
+  width: 20% !important;
+  min-width: 200px;
 }
 .btn_login {
     align-items: center;
-    display: block;
-    width: 30%;
+    display: inline-block;
+    width: 20%;
+    min-width: 200px;
     padding: 13px 0 13px;
     border-radius: 6px;
     border: solid 1px rgba(0,0,0,.15);
-    background-color: #03c75a;
+    color: white;
+    background-color: black;
     box-sizing: border-box;
 }
 .btn_login .btn_text {
