@@ -84,7 +84,7 @@ export default {
 }
 .btn_login {
     display: block;
-    width: 100%;
+    width: 30%;
     padding: 13px 0 13px;
     border-radius: 6px;
     border: solid 1px rgba(0,0,0,.15);
