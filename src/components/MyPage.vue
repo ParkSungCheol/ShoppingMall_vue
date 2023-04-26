@@ -136,11 +136,12 @@
                                 </select>
                             </div>
                             <div class="popup_row rightgap">
-                                <input type="tel" id="phoneNo" placeholder="변경할 전화번호 입력" name="phoneNo" maxlength="14" class="popup_input" onkeydown="check_num_ajax3('phoneNo', '2', 'e_phoneNo')">
-                                <button type="button" class="btn_contact" onclick="sendSmsForChangePhoneNo()">인증</button>                          
+                                <input type="tel" placeholder="변경할 전화번호 입력" v-on:keyup="keyPress($event, 'phone')" ref="sendMessage" class="popup_input" :disabled="!sendMessage">
+                                <button type="button" class="btn_contact" v-on:click="messageCheck('sendMessage')" :disabled="!sendMessage">인증</button>
+                                <b style="color:red" v-show="phone">입력한 전화번호를 확인하세요</b>                          
                             </div>
                             <div class="popup_row">
-                                <input type="tel" id="authNo" placeholder="인증번호 입력" class="popup_input" onkeydown="check_num_ajax3('authNo', '2', 'e_phoneNo')" oninput="changeVerifyToPopupInput('authNo')" disabled="">
+                                <input type="text" placeholder="인증번호를 입력하세요" ref="checkMessage" maxlength="30" class="popup_input" :disabled="!checkMessage">
                             </div>
                             <p id="e_phoneNo" class="popup_error"></p>
                         </div>
@@ -193,6 +194,9 @@ export default {
       email: true,
       sendEmail : true,
       checkEmail : false,
+      phone: true,
+      sendMessage : true,
+      checkMessage : false,
     }
   },
   props : {
@@ -217,6 +221,56 @@ export default {
     }
   },
   methods: {
+    async messageCheck(targetObject) {
+      if(this.phone) {
+        alert("핸드폰 번호를 확인해주세요!");
+        return;
+      }
+
+      let isExist = await this.existCheck('phone');
+      if(!isExist) {
+        return false;
+      }
+
+      let successMessage = targetObject == "sendMessage"? "인증번호를 정상적으로 발송했습니다." : "";
+      let failureMessage = targetObject == "sendMessage"? "인증번호 발송에 실패하였습니다." : "인증코드를 확인해주세요.";
+      
+      const baseURI = 'https://api.jurospring.o-r.kr';
+      try{
+        const axiosInstance = axios.create({
+          withCredentials: true,
+        });
+        const result = await axiosInstance.get(`${baseURI}/` + targetObject,
+        {
+          params : {
+            phone : this.$refs[targetObject].value.replace("-", "")
+          }
+        },
+        ).then(res => {
+          console.log(res);
+          return res;
+        });
+
+        console.log(result);
+        if(result.status === 200){
+          if(successMessage) alert(successMessage);
+          if(targetObject == "sendMessage") {
+            this.checkMessage = true;
+          }
+          if(targetObject == "checkMessage") {
+            this.sendMessage = false;
+            this.checkMessage = false;
+          }
+        }
+        else {
+          alert(failureMessage);
+        }
+
+      } catch(err){
+        console.log(err);
+        alert(failureMessage);
+      }
+    },
     async changePopUp() {
         let params = {
             id: this.user.id,
@@ -241,6 +295,15 @@ export default {
             else if(this.sendEmail) { alert("이메일 인증을 진행해주세요."); return;}
 
             params.email = this.$refs.sendEmail.value;
+        }
+        if(this.popUpPhone) {
+            if(this.sendMessage && this.checkMessage) {
+                await this.messageCheck('checkMessage');
+                if(this.sendMessage || this.checkMessage) return;
+            }
+            else if(this.sendMessage) { alert("전화번호 인증을 진행해주세요."); return;}
+
+            params.phone = this.$refs.sendMessage.value;
         }
 
         const baseURI = 'https://api.jurospring.o-r.kr';
