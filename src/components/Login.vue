@@ -5,10 +5,10 @@
       <div>
         <form @submit.prevent="fnLogin">
           <p>
-            <input class="w3-input" name="uid" placeholder="Enter your ID" v-model="user_id"><br>
+            <input class="w3-input inputText" name="uid" placeholder="Enter your ID" v-model="user_id"><br>
           </p>
           <p>
-            <input name="password" class="w3-input" placeholder="Enter your password" v-model="user_pw" type="password">
+            <input name="password" class="w3-input inputText" placeholder="Enter your password" v-model="user_pw" type="password">
           </p>
           <p>
             <div class="btn_login_wrap">
@@ -81,6 +81,9 @@ export default {
 }
 .btn_login_wrap {
     margin-top: 38px;
+}
+.inputText {
+  width: 30% !important;
 }
 .btn_login {
     align-items: center;
