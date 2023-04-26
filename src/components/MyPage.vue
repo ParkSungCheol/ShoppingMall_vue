@@ -355,6 +355,11 @@ export default {
       this.email = true;
       this.sendEmail = true;
       this.checkEmail = false;
+      this.$refs.sendMessage.value = "";
+      this.$refs.checkMessage.value = "";
+      this.phone = true;
+      this.sendMessage = true;
+      this.checkMessage = false;
     },
     popUp(target) {
       this[target] = true;
