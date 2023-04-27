@@ -23,8 +23,8 @@
         </form>
       </div>
       <ul class="find_wrap">
-        <li><a class="find_text" v-on:click.stop="popUp('popUpPhone')">아이디 찾기</a></li>
-        <li><router-link class="find_text" to="/signup">비밀번호 찾기</router-link></li>
+        <li><a class="find_text" v-on:click.stop="popUp('id')">아이디 찾기</a></li>
+        <li><a class="find_text" v-on:click.stop="popUp('pwd')">비밀번호 찾기</a></li>
         <li><router-link class="find_text" to="/signup">회원가입</router-link></li>
       </ul>
       <div class="dimmed" area-hidden="true" style="display:none;" ref="dimmed"></div>
@@ -36,10 +36,10 @@
                     <!--팝업콘텐츠영역-->
                     <div class="contact_edit_popup" style="width:329px;">
                         <h4 class="contact_edit_title">
-                                <em class="accent">{{ popUpPhone? '아이디' : '패스워드' }}</em>를 <span id="p_txt_phoneNo_changeYn">찾기 위해</span><br/>
+                                <em class="accent">{{ id? '아이디' : '패스워드' }}</em>를 <span id="p_txt_phoneNo_changeYn">찾기 위해</span><br/>
                                 인증절차가 필요합니다.
                         </h4>
-                        <div v-show="popUpPhone">
+                        <div v-show="id">
                         <div class="contact_form">
                             <div class="popup_row select">
                                 <select id="internationalCode" name="internationalCode" title="전화번호" class="popup_input">
@@ -87,9 +87,8 @@ export default {
       loginSuccess:false,
       error:false,
       selected: false,
-      phone: true,
-      sendMessage : true,
-      checkMessage : false,
+      id: false,
+      pwd: false,
     }
   },
   methods: {
@@ -97,11 +96,8 @@ export default {
       this.$refs.dimmed.style.display = 'none';
       this.$refs.layer.style.display = 'none';
       document.querySelector("*").style.overflow = 'visible';
-      this.$refs.sendMessage.value = "";
-      this.$refs.checkMessage.value = "";
-      this.phone = true;
-      this.sendMessage = true;
-      this.checkMessage = false;
+      this.id = false;
+      this.pwd = false;
     },
     popUp(target) {
       this[target] = true;
