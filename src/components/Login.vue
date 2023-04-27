@@ -41,9 +41,13 @@
                         </h4>
                         <div v-show="id">
                         <div class="contact_form">
+                            <div class="popup_row">
+                                회원가입 시 입력하신 이메일 또는 전화번호를 입력해주세요.
+                            </div>
                             <div class="popup_row select">
-                                <select id="internationalCode" name="internationalCode" title="전화번호" class="popup_input">
-                                  <option value="82"> 대한민국 +82</option>
+                                <select id="internationalCode" name="internationalCode" title="옵션" class="popup_input">
+                                  <option value="email">이메일 입력</option>
+                                  <option value="phone">전화번호 입력</option>
                                 </select>
                             </div>
                             <div class="popup_row rightgap">
