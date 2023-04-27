@@ -45,20 +45,20 @@
                                 가입시 입력하신 정보로 인증해주세요.
                             </div>
                             <div class="popup_row select">
-                                <select id="internationalCode" name="internationalCode" title="옵션" class="popup_input">
-                                  <option value="email">이메일 입력</option>
-                                  <option value="phone">전화번호 입력</option>
+                                <select id="internationalCode" name="internationalCode" title="옵션" class="popup_input" v-model="selectedOption">
+                                  <option :value="email">이메일 입력</option>
+                                  <option :value="phone">전화번호 입력</option>
                                 </select>
                             </div>
-                            <!-- <div class="popup_row rightgap">
+                            <div class="popup_row rightgap" v-show="selectedOption=='email'">
                                 <input type="tel" placeholder="변경할 전화번호 입력" v-on:keyup="keyPress($event, 'phone')" ref="sendMessage" class="popup_input" :disabled="!sendMessage">
                                 <button type="button" class="btn_contact" v-on:click="messageCheck('sendMessage')" :disabled="!sendMessage">인증</button>
                                 <b style="color:red" v-show="phone">입력한 전화번호를 확인하세요</b>                          
                             </div>
-                            <div class="popup_row">
+                            <div class="popup_row" v-show="selectedOption=='phone'">
                                 <input type="text" placeholder="인증번호를 입력하세요" ref="checkMessage" maxlength="30" class="popup_input" :disabled="!checkMessage">
                             </div>
-                            <p id="e_phoneNo" class="popup_error"></p> -->
+                            <p id="e_phoneNo" class="popup_error"></p>
                         </div>
                         </div>
                         <div class="btn_duo_popup">
@@ -91,6 +91,7 @@ export default {
       loginSuccess:false,
       error:false,
       selected: false,
+      selectedOption: '',
       id: false,
       pwd: false,
     }
