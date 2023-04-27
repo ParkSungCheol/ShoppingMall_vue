@@ -50,7 +50,7 @@
                                   <option value="phone">전화번호 입력</option>
                                 </select>
                             </div>
-                            <div class="popup_row rightgap">
+                            <!-- <div class="popup_row rightgap">
                                 <input type="tel" placeholder="변경할 전화번호 입력" v-on:keyup="keyPress($event, 'phone')" ref="sendMessage" class="popup_input" :disabled="!sendMessage">
                                 <button type="button" class="btn_contact" v-on:click="messageCheck('sendMessage')" :disabled="!sendMessage">인증</button>
                                 <b style="color:red" v-show="phone">입력한 전화번호를 확인하세요</b>                          
@@ -58,7 +58,7 @@
                             <div class="popup_row">
                                 <input type="text" placeholder="인증번호를 입력하세요" ref="checkMessage" maxlength="30" class="popup_input" :disabled="!checkMessage">
                             </div>
-                            <p id="e_phoneNo" class="popup_error"></p>
+                            <p id="e_phoneNo" class="popup_error"></p> -->
                         </div>
                         </div>
                         <div class="btn_duo_popup">
