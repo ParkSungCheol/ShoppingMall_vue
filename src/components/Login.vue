@@ -91,7 +91,7 @@ export default {
       loginSuccess:false,
       error:false,
       selected: false,
-      selectedOption: '',
+      selectedOption: 'email',
       id: false,
       pwd: false,
     }
