@@ -41,7 +41,7 @@
                         </h4>
                         <div v-show="id">
                         <div class="contact_form">
-                            <div class="popup_row">
+                            <div class="popup_row" style="margin-bottom: 10px;">
                                 가입시 입력하신 정보로 인증해주세요.
                             </div>
                             <div class="popup_row select">
