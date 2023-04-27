@@ -46,8 +46,8 @@
                             </div>
                             <div class="popup_row select">
                                 <select id="internationalCode" name="internationalCode" title="옵션" class="popup_input" v-model="selectedOption">
-                                  <option :value="email">이메일 입력</option>
-                                  <option :value="phone">전화번호 입력</option>
+                                  <option value="email">이메일 입력</option>
+                                  <option value="phone">전화번호 입력</option>
                                 </select>
                                 {{ selectedOption }}
                             </div>
