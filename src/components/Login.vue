@@ -49,7 +49,6 @@
                                   <option value="email">이메일 입력</option>
                                   <option value="phone">전화번호 입력</option>
                                 </select>
-                                {{ selectedOption }}
                             </div>
                             <div class="popup_row rightgap" v-show="selectedOption=='email'">
                                 <input type="tel" placeholder="변경할 전화번호 입력" v-on:keyup="keyPress($event, 'phone')" ref="sendMessage" class="popup_input" :disabled="!sendMessage">
