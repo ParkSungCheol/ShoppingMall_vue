@@ -23,7 +23,7 @@
         </form>
       </div>
       <ul class="find_wrap">
-        <li><input type="text" class="find_text" value="아이디 찾기" v-on:click="popUp('popUpPhone')"></li>
+        <li><input type="button" class="find_text" value="아이디 찾기" v-on:click="popUp('popUpPhone')"></li>
         <li><router-link class="find_text" to="/signup">비밀번호 찾기</router-link></li>
         <li><router-link class="find_text" to="/signup">회원가입</router-link></li>
       </ul>

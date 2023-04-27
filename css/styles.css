@@ -11287,3 +11287,102 @@ textarea.form-control-lg {
   }
   
 }
+.dimmed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0,0,0,.5);
+  z-index: 200;
+}
+.popup_layer {
+  display: table;
+  table-layout: fixed;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  z-index: 210;
+}
+.popup_layer_inner {
+  display: table-cell;
+  vertical-align: middle;
+}
+.popup_content {
+  margin: 45px 0;
+  vertical-align: top;
+  z-index: 220;
+}
+.contact_2step_popup, .contact_edit_popup {
+  position: relative;
+  margin: 0 auto;
+  padding: 30px 24px 58px;
+  border-radius: 12px;
+  box-shadow: 0 2px 2px 0 rgba(64,117,161,.1);
+  background-color: #fff;
+  box-sizing: border-box;
+  text-align: left;
+}
+.contact_edit_title {
+  margin-bottom: 20px;
+  padding: 30px 0 14px;
+  border-bottom: 1px solid #303038;
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 28px;
+  letter-spacing: -.8px;
+  color: #1e1e23;
+  word-break: break-all;
+}
+.contact_2step_popup .row_item, .contact_edit_popup .row_item {
+  padding: 0 0 20px 30px;
+}
+.contact_2step_popup .row_item+.contact_form, .contact_edit_popup .row_item+.contact_form {
+  padding-top: 0;
+}
+.btn_duo_popup .btn_item.on {
+  background-color: #000;
+  color: #fff;
+}
+.btn_duo_popup .btn_item:first-child {
+  width: 35%;
+  background-color: #959eae;
+  border-radius: 0 0 0 12px;
+}
+.btn_duo_popup .btn_item:last-child {
+  width: 65%;
+  border-radius: 0 0 12px 0;
+}
+.btn_duo_popup .btn_item {
+  float: left;
+  padding: 19px 0 18px;
+  vertical-align: middle;
+  background-color: #959eae;
+}
+
+.btn_duo_popup {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: block;
+  text-align: center;
+}
+
+.popup_row.rightgap .popup_input {
+  padding: 9px 20px 9px 11px;
+  max-width: max-content;
+}
+.btn_contact {
+position: relative;
+min-width: 40px;
+min-height: 40px;
+margin-left: 3px;
+font-weight: 600;
+text-align: center;
+color: #fff;
+background-color: #000;
+}
