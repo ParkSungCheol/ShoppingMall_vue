@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="loginForm">
+    <div id="loginForm" class="member">
       <div>
         <form @submit.prevent="fnLogin">
           <p>
@@ -42,7 +42,7 @@
                         <div v-show="id">
                         <div class="contact_form">
                             <div class="popup_row">
-                                회원가입 시 입력하신 이메일 또는 전화번호를 입력해주세요.
+                                가입하신 이메일 또는 전화번호를 입력해주세요.
                             </div>
                             <div class="popup_row select">
                                 <select id="internationalCode" name="internationalCode" title="옵션" class="popup_input">
@@ -149,6 +149,12 @@ export default {
 </script>
 
 <style scoped>
+.member input:not(input[type=radio]),.member select{
+    border: 1px solid #dadada;
+    padding: 15px;
+    width: 100%;
+    margin-bottom: 5px;
+}
 #loginForm {
   text-align: center;
 }
