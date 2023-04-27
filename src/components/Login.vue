@@ -23,7 +23,7 @@
         </form>
       </div>
       <ul class="find_wrap">
-        <li><input type="button" class="find_text" value="아이디 찾기" v-on:click="popUp('popUpPhone')"></li>
+        <li><a class="find_text" v-on:click="popUp(event, 'popUpPhone')">아이디 찾기</a></li>
         <li><router-link class="find_text" to="/signup">비밀번호 찾기</router-link></li>
         <li><router-link class="find_text" to="/signup">회원가입</router-link></li>
       </ul>
@@ -103,7 +103,8 @@ export default {
       this.sendMessage = true;
       this.checkMessage = false;
     },
-    popUp(target) {
+    popUp(event, target) {
+      event.preventDefault();
       this[target] = true;
       this.$refs.dimmed.style.display = 'block';
       this.$refs.layer.style.display = 'block';

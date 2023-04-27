@@ -11386,3 +11386,8 @@ text-align: center;
 color: #fff;
 background-color: #000;
 }
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
