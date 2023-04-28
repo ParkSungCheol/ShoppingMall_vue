@@ -351,9 +351,9 @@ export default {
       if(targetObject == 'id') idvalcheck = new RegExp(/^[a-zA-Z0-9]{6,20}$/);
       else if(targetObject == 'checkId') idvalcheck = new RegExp(/^[a-zA-Z0-9]{6,20}$/);
       else if(targetObject == 'pwd') idvalcheck = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{10,}$/);
-      else if(targetObject == 'pwdConfirm') {
-        let pwd = "^" + this.$refs.pwd.value + "$";
-        console.log(pwd);
+      else if(targetObject == 'afterPwd') idvalcheck = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{10,}$/);
+      else if(targetObject == 'afterPwdConfirm') {
+        let pwd = "^" + this.$refs.afterPwd.value + "$";
         idvalcheck = new RegExp(pwd);
       }
       else if(targetObject == 'name') idvalcheck = new RegExp(/^[ㄱ-ㅣ가-힣]{2,4}$/);
