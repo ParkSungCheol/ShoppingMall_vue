@@ -83,7 +83,7 @@
                             <div class="popup_row rightgap" v-show="selectedOption=='email'">
                               <div>
                                 <input type="email" placeholder="이메일 입력" v-on:keyup="keyPress($event, 'email')" ref="sendEmail" :disabled="!sendEmail">
-                                <input type="button" value="인증번호 받기" v-on:click="emailCheck('sendEmail')" :disabled="!sendEmail">
+                                <button type="button" class="btn_contact" v-on:click="emailCheck('sendEmail')" :disabled="!sendEmail">인증</button>
                               </div>
                               <b style="color:red" v-show="email">입력한 이메일을 확인하세요</b>
                               <div>
