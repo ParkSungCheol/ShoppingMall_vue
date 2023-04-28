@@ -109,11 +109,7 @@ export default {
     },
     async changePopUp() {
       if(this.id) {
-        console.log("test");
-        console.log(this.selectedOption);
-        console.log(this[this.selectedOption]);
-        console.log(!this[this.selectedOption]);
-        if(!this[this.selectedOption]) { alert("입력하신 정보를 확인해주세요."); return; }
+        if(this[this.selectedOption]) { alert("입력하신 정보를 확인해주세요."); return; }
         let user;
         const baseURI = 'https://api.jurospring.o-r.kr';
         try{
