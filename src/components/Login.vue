@@ -284,6 +284,7 @@ export default {
       let idval = $event.target.value;
       let idvalcheck = null;
       if(targetObject == 'id') idvalcheck = new RegExp(/^[a-zA-Z0-9]{6,20}$/);
+      else if(targetObject == 'checkId') idvalcheck = new RegExp(/^[a-zA-Z0-9]{6,20}$/);
       else if(targetObject == 'pwd') idvalcheck = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{10,}$/);
       else if(targetObject == 'pwdConfirm') {
         let pwd = "^" + this.$refs.pwd.value + "$";
