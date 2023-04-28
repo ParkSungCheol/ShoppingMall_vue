@@ -263,6 +263,7 @@ export default {
       if(this.id) {
         if(this[this.selectedOption]) { alert("입력하신 정보를 확인해주세요."); return; }
         let user;
+        console.log(this.$refs.sendEmail.value);
         const baseURI = 'https://api.jurospring.o-r.kr';
         try{
           const axiosInstance = axios.create({
