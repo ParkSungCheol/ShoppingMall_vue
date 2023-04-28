@@ -51,9 +51,8 @@
                                 </select>
                             </div>
                             <div class="popup_row rightgap" v-show="selectedOption=='email'">
-                                <input type="tel" placeholder="변경할 전화번호 입력" v-on:keyup="keyPress($event, 'phone')" ref="sendMessage" class="popup_input" :disabled="!sendMessage">
-                                <button type="button" class="btn_contact" v-on:click="messageCheck('sendMessage')" :disabled="!sendMessage">인증</button>
-                                <b style="color:red" v-show="phone">입력한 전화번호를 확인하세요</b>                          
+                                <input type="email" placeholder="이메일 입력" v-on:keyup="keyPress($event, 'email')" ref="sendEmail">
+                                <b style="color:red" v-show="email">입력한 이메일을 확인하세요</b>
                             </div>
                             <div class="popup_row" v-show="selectedOption=='phone'">
                                 <input type="text" placeholder="인증번호를 입력하세요" ref="checkMessage" maxlength="30" class="popup_input" :disabled="!checkMessage">
@@ -94,9 +93,44 @@ export default {
       selectedOption: 'email',
       id: false,
       pwd: false,
+      email: true,
     }
   },
   methods: {
+    keyPress($event, targetObject) {
+      let idval = $event.target.value;
+      let idvalcheck = null;
+      if(targetObject == 'id') idvalcheck = new RegExp(/^[a-zA-Z0-9]{6,20}$/);
+      else if(targetObject == 'pwd') idvalcheck = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{10,}$/);
+      else if(targetObject == 'pwdConfirm') {
+        let pwd = "^" + this.$refs.pwd.value + "$";
+        console.log(pwd);
+        idvalcheck = new RegExp(pwd);
+      }
+      else if(targetObject == 'name') idvalcheck = new RegExp(/^[ㄱ-ㅣ가-힣]{2,4}$/);
+      else if(targetObject == 'birthday') {
+        idvalcheck = new RegExp(/(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])/);
+        let year = this.$refs.year.value;
+        let month = this.$refs.month.value;
+        let day = this.$refs.day.value.length < 2 ? "0"+this.$refs.day.value : this.$refs.day.value;
+        idval = year + month + day;
+      }
+      else if(targetObject == 'email') idvalcheck = new RegExp(/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/);
+      else if(targetObject == 'phone') idvalcheck = new RegExp(/^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/);
+      console.log(idval);
+      console.log(idvalcheck.test(idval));
+      if (!idvalcheck.test(idval)){
+        if(targetObject == 'pwd') {
+            this.$refs.pwdConfirm.value = "";
+            this.pwdConfirm = true;
+        }
+        this[targetObject] = true;
+      }
+      else {
+        this[targetObject] = false;
+      }
+      console.log(this[targetObject]);
+    },
     closePopUp() {
       this.$refs.dimmed.style.display = 'none';
       this.$refs.layer.style.display = 'none';
