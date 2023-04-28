@@ -134,7 +134,7 @@ export default {
           {
             params : {
               email:this.selectedOption == "email"? this.$refs.sendEmail.value : undefined,
-              phone:this.selectedOption == "phone"? this.$refs.sendMessage.value : undefined,
+              phone:this.selectedOption == "phone"? this.$refs.sendMessage.value.replace("-", "") : undefined,
             }
           },
           ).then(res => {

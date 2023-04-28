@@ -454,7 +454,7 @@ export default {
           params : {
             id: targetObject == "id"? this.$refs.id.value : undefined,
             email: targetObject == "email"? this.$refs.sendEmail.value : undefined,
-            phone: targetObject == "phone"? this.$refs.sendMessage.value : undefined,
+            phone: targetObject == "phone"? this.$refs.sendMessage.value.replace("-", "") : undefined,
           }
         },
         ).then(res => {
