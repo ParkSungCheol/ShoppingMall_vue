@@ -463,7 +463,7 @@ export default {
         });
 
         console.log(result);
-        if(result.status === 200){
+        if(result.status === 202){
           if(successMessage) {
             alert(successMessage);
             this.checkId = false;
