@@ -39,7 +39,7 @@
                                 <em class="accent">{{ id? '아이디' : '패스워드' }}</em>를 <span id="p_txt_phoneNo_changeYn">찾기 위해</span><br/>
                                 인증절차가 필요합니다.
                         </h4>
-                        <div v-show="id">
+                        <div v-show="id && !checkedUser">
                         <div class="contact_form">
                             <div class="popup_row" style="margin-bottom: 10px;">
                                 가입시 입력하신 정보로 인증해주세요.
@@ -59,6 +59,13 @@
                               <b style="color:red" v-show="phone">입력한 핸드폰번호를 확인하세요</b>
                             </div>
                             <p id="e_phoneNo" class="popup_error"></p>
+                        </div>
+                        </div>
+                        <div v-show="checkedUser">
+                        <div class="contact_form">
+                            <div class="popup_row" style="margin-bottom: 10px;">
+                                회원님의 아이디는 {{ checkedUser.id }} 입니다.
+                            </div>
                         </div>
                         </div>
                         <div class="btn_duo_popup">
@@ -88,14 +95,13 @@ export default {
     return {
       user_id: '',
       user_pw: '',
-      loginSuccess:false,
-      error:false,
       selected: false,
       selectedOption: 'email',
       id: false,
       pwd: false,
       email: true,
       phone: true,
+      checkedUser: null,
     }
   },
   methods: {
@@ -125,6 +131,7 @@ export default {
           },
           ).then(res => {
             console.log(res);
+            this.checkedUser = res.data;
             return res;
           });
 
@@ -209,7 +216,6 @@ export default {
         });
 
         if(result.status === 200){
-          this.loginSuccess = true;
           this.$router.push('/');
         } else {
           alert("로그인에 실패하였습니다.");
