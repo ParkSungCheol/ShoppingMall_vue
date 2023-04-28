@@ -117,7 +117,7 @@
                             </div>
                         </div>
                         </div>
-                        <div class="btn_duo_popup" style="margin-top: 20px">
+                        <div class="btn_duo_popup">
                             <div v-if="!checkedUser || selectedOption=='phone'">
                             <a href="javascript:;" class="btn_item" role="button" v-on:click="closePopUp">
                                 <span class="btn_text">취소</span>
