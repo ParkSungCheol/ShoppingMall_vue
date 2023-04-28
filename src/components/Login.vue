@@ -82,9 +82,9 @@
                             </div>
                             <div class="contact_form" v-show="selectedOption=='email'">
                               <div class="popup_row rightgap">
-                                <input v-on:keyup="keyPress($event, 'id')" type="text" ref="id" :disabled="!checkId">
+                                <input placeholder="아이디 입력" v-on:keyup="keyPress($event, 'checkId')" type="text" ref="checkId">
                               </div>
-                              <b style="color:red" v-show="id">영문대소문자, 숫자 6-20자 입력하세요</b>
+                              <b style="color:red" v-show="checkId">영문대소문자, 숫자 6-20자 입력하세요</b>
                               <div class="popup_row rightgap">
                                   <input type="email" placeholder="이메일 입력" v-on:keyup="keyPress($event, 'email')" ref="sendEmail" class="popup_input" :disabled="!sendEmail">
                                   <button type="button" class="btn_contact" v-on:click="emailCheck('sendEmail')" :disabled="!sendEmail">인증</button>
@@ -139,6 +139,7 @@ export default {
       selected: false,
       selectedOption: 'email',
       id: false,
+      checkId: true,
       pwd: false,
       email: true,
       sendEmail : true,
