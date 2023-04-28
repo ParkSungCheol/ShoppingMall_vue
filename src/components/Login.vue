@@ -61,12 +61,40 @@
                             <p id="e_phoneNo" class="popup_error"></p>
                         </div>
                         </div>
-                        <div v-show="checkedUser">
+                        <div v-show="id && checkedUser">
                         <div class="contact_form">
                             <div class="popup_row" style="margin-bottom: 20px;">
                                 회원님의 아이디는 <br/>
                                 <em class="accent">{{ checkedUser? checkedUser.id : "" }}</em> 입니다.
                             </div>
+                        </div>
+                        </div>
+                        <div v-show="pwd && !checkedUser">
+                        <div class="contact_form">
+                            <div class="popup_row" style="margin-bottom: 10px;">
+                                가입시 입력하신 정보로 인증해주세요.
+                            </div>
+                            <div class="popup_row select">
+                                <select id="internationalCode" name="internationalCode" title="옵션" class="popup_input" v-model="selectedOption" v-on:change="changeSelected">
+                                  <option value="email">이메일 입력</option>
+                                  <option value="phone">전화번호 입력</option>
+                                </select>
+                            </div>
+                            <div class="popup_row rightgap" v-show="selectedOption=='email'">
+                              <div>
+                                <input type="email" placeholder="이메일 입력" v-on:keyup="keyPress($event, 'email')" ref="sendEmail" :disabled="!sendEmail">
+                                <input type="button" value="인증번호 받기" v-on:click="emailCheck('sendEmail')" :disabled="!sendEmail">
+                              </div>
+                              <b style="color:red" v-show="email">입력한 이메일을 확인하세요</b>
+                              <div>
+                                <input type="text" placeholder="인증번호를 입력하세요" ref="checkEmail" maxlength="30" :disabled="!checkEmail">
+                              </div>
+                            </div>
+                            <div class="popup_row" v-show="selectedOption=='phone'">
+                              <input type="tel" placeholder="전화번호 입력" v-on:keyup="keyPress($event, 'phone')" ref="sendMessage">
+                              <b style="color:red" v-show="phone">입력한 핸드폰번호를 확인하세요</b>
+                            </div>
+                            <p id="e_phoneNo" class="popup_error"></p>
                         </div>
                         </div>
                         <div class="btn_duo_popup">
@@ -108,11 +136,97 @@ export default {
       id: false,
       pwd: false,
       email: true,
+      sendEmail : true,
+      checkEmail : false,
       phone: true,
       checkedUser: null,
     }
   },
   methods: {
+    async existCheck(targetObject) {
+      let failureMessage = "존재하지 않는 정보입니다.";
+      const baseURI = 'https://api.jurospring.o-r.kr';
+      try{
+        const axiosInstance = axios.create({
+          withCredentials: true,
+        });
+        const result = await axiosInstance.get(`${baseURI}/` + "existCheck",
+        {
+          params : {
+            email: targetObject == "email"? this.$refs.sendEmail.value : undefined,
+            phone: targetObject == "phone"? this.$refs.sendMessage.value.replaceAll("-", "") : undefined,
+          }
+        },
+        ).then(res => {
+          console.log(res);
+          return res;
+        });
+
+        console.log(result);
+        if(result.status === 200){
+          return true;
+        }
+        else {
+          alert(failureMessage);
+          return false;
+        }
+
+      } catch(err){
+        console.log(err);
+        alert(failureMessage);
+        return false;
+      }
+    },
+    async emailCheck(targetObject) {
+      if(this.email) {
+        alert("이메일을 확인해주세요!");
+        return;
+      }
+
+      let isExist = await this.existCheck('email');
+      if(!isExist) {
+        return false;
+      }
+
+      let successMessage = targetObject == "sendEmail"? "이메일을 정상적으로 발송했습니다." : "이메일 인증되었습니다.";
+      let failureMessage = targetObject == "sendEmail"? "이메일발송에 실패하였습니다." : "인증코드를 확인해주세요.";
+      
+      const baseURI = 'https://api.jurospring.o-r.kr';
+      try{
+        const axiosInstance = axios.create({
+          withCredentials: true,
+        });
+        const result = await axiosInstance.get(`${baseURI}/` + targetObject,
+        {
+          params : {
+            email: this.$refs[targetObject].value
+          }
+        },
+        ).then(res => {
+          console.log(res);
+          return res;
+        });
+
+        console.log(result);
+        if(result.status === 200){
+          alert(successMessage);
+          if(targetObject == "sendEmail") {
+            this.checkEmail = true;
+          }
+          if(targetObject == "checkEmail") {
+            this.sendEmail = false;
+            this.checkEmail = false;
+          }
+        }
+        else {
+          alert(failureMessage);
+        }
+
+      } catch(err){
+        console.log(err);
+        alert(failureMessage);
+      }
+    },
     changeSelected() {
       if(this.id) {
         this.email = true;
