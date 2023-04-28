@@ -64,7 +64,7 @@
                         <div v-show="checkedUser">
                         <div class="contact_form">
                             <div class="popup_row" style="margin-bottom: 10px;">
-                                회원님의 아이디는 {{ checkedUser.id }} 입니다.
+                                회원님의 아이디는 {{ checkedUser? checkedUser.id : "" }} 입니다.
                             </div>
                         </div>
                         </div>
