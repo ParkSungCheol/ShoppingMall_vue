@@ -75,7 +75,7 @@
                                 가입시 입력하신 정보로 인증해주세요.
                             </div>
                             <div class="popup_row rightgap">
-                                <input placeholder="아이디 입력" v-on:keyup="keyPress($event, 'checkId')" type="text" ref="checkId">
+                                <input placeholder="아이디 입력" v-on:keyup="keyPress($event, 'checkId')" type="text" ref="checkId" :disabled="!sendEmail">
                               </div>
                             <b style="color:red" v-show="checkId">영문대소문자, 숫자 6-20자 입력하세요</b>
                             <div class="popup_row select">
