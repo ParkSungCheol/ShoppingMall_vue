@@ -75,7 +75,7 @@
                                 가입시 입력하신 정보로 인증해주세요.
                             </div>
                             <div class="popup_row rightgap">
-                                <input placeholder="아이디 입력" v-on:keyup="keyPress($event, 'checkId')" type="text" ref="checkId" :disabled="!sendEmail">
+                                <input placeholder="아이디 입력" v-on:keyup="keyPress($event, 'checkId')" type="text" ref="checkId" :disabled="!checkEmail">
                               </div>
                             <b style="color:red" v-show="checkId">영문대소문자, 숫자 6-20자 입력하세요</b>
                             <div class="popup_row select">
@@ -86,8 +86,8 @@
                             </div>
                             <div class="contact_form" v-show="selectedOption=='email'">
                               <div class="popup_row rightgap">
-                                  <input type="email" placeholder="이메일 입력" v-on:keyup="keyPress($event, 'email')" ref="sendEmail" class="popup_input" :disabled="!sendEmail">
-                                  <button type="button" class="btn_contact" v-on:click="emailCheck('sendEmail')" :disabled="!sendEmail">인증</button>
+                                  <input type="email" placeholder="이메일 입력" v-on:keyup="keyPress($event, 'email')" ref="sendEmail" class="popup_input" :disabled="!checkEmail">
+                                  <button type="button" class="btn_contact" v-on:click="emailCheck('sendEmail')" :disabled="!checkEmail">인증</button>
                                   <b style="color:red" v-show="email">입력한 이메일을 확인하세요</b>                          
                               </div>
                               <div class="popup_row">
