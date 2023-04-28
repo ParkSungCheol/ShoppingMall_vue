@@ -80,15 +80,16 @@
                                   <option value="phone">전화번호 입력</option>
                                 </select>
                             </div>
-                            <div class="popup_row rightgap" v-show="selectedOption=='email'">
-                              <div>
-                                <input type="email" placeholder="이메일 입력" v-on:keyup="keyPress($event, 'email')" ref="sendEmail" :disabled="!sendEmail">
-                                <button type="button" class="btn_contact" v-on:click="emailCheck('sendEmail')" :disabled="!sendEmail">인증</button>
+                            <div class="contact_form" v-show="selectedOption=='email'">
+                              <div class="popup_row rightgap">
+                                  <input type="email" placeholder="이메일 입력" v-on:keyup="keyPress($event, 'email')" ref="sendEmail" class="popup_input" :disabled="!sendEmail">
+                                  <button type="button" class="btn_contact" v-on:click="emailCheck('sendEmail')" :disabled="!sendEmail">인증</button>
+                                  <b style="color:red" v-show="email">입력한 이메일을 확인하세요</b>                          
                               </div>
-                              <b style="color:red" v-show="email">입력한 이메일을 확인하세요</b>
-                              <div>
-                                <input type="text" placeholder="인증번호를 입력하세요" ref="checkEmail" maxlength="30" :disabled="!checkEmail">
+                              <div class="popup_row">
+                                  <input type="text" placeholder="인증번호를 입력하세요" ref="checkEmail" maxlength="30" class="popup_input" :disabled="!checkEmail">
                               </div>
+                              <p id="e_phoneNo" class="popup_error"></p>
                             </div>
                             <div class="popup_row" v-show="selectedOption=='phone'">
                               <input type="tel" placeholder="전화번호 입력" v-on:keyup="keyPress($event, 'phone')" ref="sendMessage">
