@@ -45,7 +45,7 @@
                                 가입시 입력하신 정보로 인증해주세요.
                             </div>
                             <div class="popup_row select">
-                                <select id="internationalCode" name="internationalCode" title="옵션" class="popup_input" v-model="selectedOption">
+                                <select id="internationalCode" name="internationalCode" title="옵션" class="popup_input" v-model="selectedOption" v-on:change="changeSelected">
                                   <option value="email">이메일 입력</option>
                                   <option value="phone">전화번호 입력</option>
                                 </select>
@@ -55,7 +55,8 @@
                                 <b style="color:red" v-show="email">입력한 이메일을 확인하세요</b>
                             </div>
                             <div class="popup_row" v-show="selectedOption=='phone'">
-                                <input type="text" placeholder="인증번호를 입력하세요" ref="checkMessage" maxlength="30" class="popup_input" :disabled="!checkMessage">
+                              <input type="tel" placeholder="전화번호 입력" v-on:keyup="keyPress($event, 'phone')" ref="sendMessage">
+                              <b style="color:red" v-show="phone">입력한 핸드폰번호를 확인하세요</b>
                             </div>
                             <p id="e_phoneNo" class="popup_error"></p>
                         </div>
@@ -94,9 +95,50 @@ export default {
       id: false,
       pwd: false,
       email: true,
+      phone: true,
     }
   },
   methods: {
+    changeSelected() {
+      if(this.id) {
+        this.email = true;
+        this.phone = true;
+        this.$refs.sendEmail.value = "";
+        this.$refs.sendMessage.value = "";
+      }
+    },
+    async changePopUp() {
+      if(this.id) {
+        if(!this[this.selectedOption]) { alert("입력하신 정보를 확인해주세요."); return; }
+        let user;
+        const baseURI = 'https://api.jurospring.o-r.kr';
+        try{
+          const axiosInstance = axios.create({
+            withCredentials: true,
+          });
+          const result = await axiosInstance.get(`${baseURI}/existCheck`,
+          {
+            params : {
+              email:this.selectedOption == "email"? this.$refs.sendEmail.value : undefined,
+              phone:this.selectedOption == "phone"? this.$refs.sendMessage.value : undefined,
+            }
+          },
+          ).then(res => {
+            console.log(res);
+            return res;
+          });
+
+          if(result.status === 200){
+          } else {
+            alert("일치하는 정보가 없습니다.");
+          }
+
+        } catch(err){
+          console.log(err);
+          alert("일치하는 정보가 없습니다.");
+        }
+      }
+    },
     keyPress($event, targetObject) {
       let idval = $event.target.value;
       let idvalcheck = null;
