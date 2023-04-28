@@ -260,6 +260,9 @@ export default {
       }
     },
     async changePopUp() {
+      console.log("------------changePopUp---------------");
+      console.log(this.pwd);
+      console.log(this.checkedUser);
       if(this.id) {
         if(this[this.selectedOption]) { alert("입력하신 정보를 확인해주세요."); return; }
         let user;
