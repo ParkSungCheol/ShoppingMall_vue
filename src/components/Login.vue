@@ -275,7 +275,8 @@ export default {
         }
       }
       if(this.pwd) {
-
+        if(this.id) { alert("입력하신 아이디를 확인해주세요."); return; }
+        if(this[this.selectedOption]) { alert("입력하신 정보를 확인해주세요."); return; }
       }
     },
     keyPress($event, targetObject) {
