@@ -118,7 +118,7 @@
                         </div>
                         </div>
                         <div class="btn_duo_popup">
-                            <div v-if="!checkedUser || selectedOption=='phone'">
+                            <div v-if="!checkedUser || pwd">
                             <a href="javascript:;" class="btn_item" role="button" v-on:click="closePopUp">
                                 <span class="btn_text">취소</span>
                             </a>
@@ -126,7 +126,7 @@
                                 <span id="b_txt_phoneNo_reg" class="btn_text">확인</span>
                             </a>
                             </div>
-                            <div v-if="checkedUser && selectedOption=='email'">
+                            <div v-if="checkedUser && id">
                               <a href="javascript:;" class="btn_item" role="button" v-on:click="closePopUp" style="width:100%">
                                 <span class="btn_text">확인</span>
                             </a>
@@ -260,9 +260,6 @@ export default {
       }
     },
     async changePopUp() {
-      console.log("------------changePopUp---------------");
-      console.log(this.pwd);
-      console.log(this.checkedUser);
       if(this.id) {
         if(this[this.selectedOption]) { alert("입력하신 정보를 확인해주세요."); return; }
         let user;
