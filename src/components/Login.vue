@@ -82,6 +82,10 @@
                             </div>
                             <div class="contact_form" v-show="selectedOption=='email'">
                               <div class="popup_row rightgap">
+                                <input v-on:keyup="keyPress($event, 'id')" type="text" ref="id" :disabled="!checkId">
+                              </div>
+                              <b style="color:red" v-show="id">영문대소문자, 숫자 6-20자 입력하세요</b>
+                              <div class="popup_row rightgap">
                                   <input type="email" placeholder="이메일 입력" v-on:keyup="keyPress($event, 'email')" ref="sendEmail" class="popup_input" :disabled="!sendEmail">
                                   <button type="button" class="btn_contact" v-on:click="emailCheck('sendEmail')" :disabled="!sendEmail">인증</button>
                                   <b style="color:red" v-show="email">입력한 이메일을 확인하세요</b>                          
@@ -104,7 +108,7 @@
                                 <span class="btn_text">취소</span>
                             </a>
                             <a href="javascript:;" class="btn_item on" role="button" v-on:click="changePopUp">
-                                <span id="b_txt_phoneNo_reg" class="btn_text">변경</span>
+                                <span id="b_txt_phoneNo_reg" class="btn_text">확인</span>
                             </a>
                             </div>
                             <div v-show="checkedUser">
@@ -269,6 +273,9 @@ export default {
           console.log(err);
           alert("일치하는 정보가 없습니다.");
         }
+      }
+      if(this.pwd) {
+
       }
     },
     keyPress($event, targetObject) {
