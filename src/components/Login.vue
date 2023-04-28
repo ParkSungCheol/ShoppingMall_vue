@@ -385,13 +385,16 @@ export default {
       this.$refs.layer.style.display = 'none';
       document.querySelector("*").style.overflow = 'visible';
       this.id = false;
+      this.checkId = true;
       this.pwd = false;
       this.checkedUser = null;
       this.selectedOption = 'email';
       this.email = true;
       this.phone = true;
-      this.$refs.sendEmail.value = "";
-      this.$refs.sendMessage.value = "";
+      this.sendEmail = true;
+      this.checkEmail = false;
+      this.afterPwd = true;
+      this.afterPwdConfirm = true;
     },
     popUp(target) {
       this[target] = true;
