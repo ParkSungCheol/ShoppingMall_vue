@@ -11363,7 +11363,6 @@ textarea.form-control-lg {
   background-color: #959eae;
   color: black;
 }
-
 .btn_duo_popup {
   position: absolute;
   left: 0;
@@ -11372,7 +11371,6 @@ textarea.form-control-lg {
   display: block;
   text-align: center;
 }
-
 .popup_row.rightgap .popup_input {
   padding: 9px 20px 9px 11px;
   max-width: max-content;
@@ -11387,12 +11385,7 @@ text-align: center;
 color: #fff;
 background-color: #000;
 }
-
 a {
   text-decoration: none;
   cursor: pointer;
-}
-
-.contact_form b {
-  margin-bottom: 10px;
 }

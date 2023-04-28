@@ -374,7 +374,7 @@ export default {
 <style scoped>
 .member input:not(input[type=radio], input[type=checkbox]),.member select{
     border: 1px solid #dadada;
-    padding: 15px;
+    padding: 10px;
     width: 100%;
     margin-bottom: 5px;
 }
