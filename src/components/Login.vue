@@ -102,8 +102,23 @@
                             <p id="e_phoneNo" class="popup_error"></p>
                         </div>
                         </div>
+                        <div v-show="pwd && checkedUser">
+                        <div class="contact_form">
+                            <div class="popup_row" style="margin-bottom: 10px;">
+                                변경하실 패스워드를 입력해주세요.
+                            </div>
+                            <div class="popup_row">
+                                <input class="popup_input" type="password" v-on:keyup="keyPress($event, 'afterPwd')" ref="afterPwd" placeholder="변경할 비밀번호 입력">
+                                <b class="popup_input" style="color:red; font-size: 12px;" v-show="afterPwd">영문대소문자, 숫자, 특수문자 10자 이상 입력하세요</b>
+                            </div>
+                            <div class="popup_row">
+                                <input class="popup_input" type="password" v-on:keyup="keyPress($event, 'afterPwdConfirm')" ref="afterPwdConfirm" placeholder="변경할 비밀번호 재입력">
+                                <b style="color:red; font-size: 12px;" v-show="afterPwdConfirm">비밀번호가 일치하지 않습니다</b>
+                            </div>
+                        </div>
+                        </div>
                         <div class="btn_duo_popup">
-                            <div v-show="!checkedUser">
+                            <div v-show="!checkedUser || selectedOption=='phone'">
                             <a href="javascript:;" class="btn_item" role="button" v-on:click="closePopUp">
                                 <span class="btn_text">취소</span>
                             </a>
@@ -111,7 +126,7 @@
                                 <span id="b_txt_phoneNo_reg" class="btn_text">확인</span>
                             </a>
                             </div>
-                            <div v-show="checkedUser">
+                            <div v-show="checkedUser && selectedOption=='email'">
                               <a href="javascript:;" class="btn_item" role="button" v-on:click="closePopUp" style="width:100%">
                                 <span class="btn_text">확인</span>
                             </a>
@@ -146,6 +161,8 @@ export default {
       checkEmail : false,
       phone: true,
       checkedUser: null,
+      afterPwd: true,
+      afterPwdConfirm: true,
     }
   },
   methods: {
@@ -275,9 +292,56 @@ export default {
           alert("일치하는 정보가 없습니다.");
         }
       }
-      if(this.pwd) {
+      else if(this.pwd && !this.checkedUser) {
         if(this.checkId) { alert("입력하신 아이디를 확인해주세요."); return; }
         if(this[this.selectedOption]) { alert("입력하신 정보를 확인해주세요."); return; }
+
+        if(this.selectedOption == 'email') {
+            if(this.sendEmail && this.checkEmail) {
+                await this.emailCheck('checkEmail');
+                if(this.sendEmail || this.checkEmail) return;
+            }
+            else if(this.sendEmail) { alert("이메일 인증을 진행해주세요."); return;}
+
+            this.checkedUser = true;
+        }
+      }
+      else if(this.pwd && this.checkedUser) {
+        let params = {
+            id: this.$refs.checkId.value,
+            pwd: this.$refs.afterPwd.value
+        };
+
+        const baseURI = 'https://api.jurospring.o-r.kr';
+        try{
+            const axiosInstance = axios.create({
+            withCredentials: true,
+            });
+            const result = await axiosInstance.get(`${baseURI}/` + "updateUser",
+            {
+            params : params
+            },
+            ).then(res => {
+            console.log(res);
+            return res;
+            });
+
+            if(result.status === 200){
+                alert("정보수정이 완료되었습니다.");
+                if(!route) this.$router.go();
+                else this.$router.push(route);
+            }
+            else {
+                alert("정보수정에 실패하였습니다.");
+            }
+
+        } catch(err){
+            console.log(err);
+            if(this.popUpPwd && err.response.status === 404) {
+                 alert("현재 비밀번호가 일치하지 않습니다.");
+            }
+            else alert("정보수정에 실패하였습니다.");
+        }
       }
     },
     keyPress($event, targetObject) {
