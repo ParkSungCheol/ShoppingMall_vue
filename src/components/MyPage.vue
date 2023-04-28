@@ -281,7 +281,7 @@ export default {
         const result = await axiosInstance.get(`${baseURI}/` + targetObject,
         {
           params : {
-            phone : this.$refs[targetObject].value.replace("-", "")
+            phone : this.$refs[targetObject].value.replaceAll("-", "")
           }
         },
         ).then(res => {
@@ -454,7 +454,7 @@ export default {
           params : {
             id: targetObject == "id"? this.$refs.id.value : undefined,
             email: targetObject == "email"? this.$refs.sendEmail.value : undefined,
-            phone: targetObject == "phone"? this.$refs.sendMessage.value.replace("-", "") : undefined,
+            phone: targetObject == "phone"? this.$refs.sendMessage.value.replaceAll("-", "") : undefined,
           }
         },
         ).then(res => {
