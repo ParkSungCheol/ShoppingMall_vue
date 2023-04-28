@@ -79,7 +79,7 @@
                             </a>
                             </div>
                             <div v-show="checkedUser">
-                              <a href="javascript:;" class="btn_item" role="button" v-on:click="closePopUp">
+                              <a href="javascript:;" class="btn_item" role="button" v-on:click="closePopUp" style="width:100%">
                                 <span class="btn_text">확인</span>
                             </a>
                             </div>
@@ -196,6 +196,7 @@ export default {
       document.querySelector("*").style.overflow = 'visible';
       this.id = false;
       this.pwd = false;
+      this.checkedUser = null;
     },
     popUp(target) {
       this[target] = true;
