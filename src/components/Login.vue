@@ -63,7 +63,7 @@
                         </div>
                         <div v-if="id && checkedUser">
                         <div class="contact_form">
-                            <div class="popup_row" style="margin-bottom: 20px;">
+                            <div class="popup_row">
                                 회원님의 아이디는 <br/>
                                 <em class="accent">{{ checkedUser? checkedUser.id : "" }}</em> 입니다.
                             </div>
