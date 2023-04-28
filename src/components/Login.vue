@@ -176,6 +176,7 @@ export default {
         const result = await axiosInstance.get(`${baseURI}/` + "existCheck",
         {
           params : {
+            id: this.$refs.checkId,value,
             email: targetObject == "email"? this.$refs.sendEmail.value : undefined,
             phone: targetObject == "phone"? this.$refs.sendMessage.value.replaceAll("-", "") : undefined,
           }
