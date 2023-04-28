@@ -64,17 +64,25 @@
                         <div v-show="checkedUser">
                         <div class="contact_form">
                             <div class="popup_row" style="margin-bottom: 10px;">
-                                회원님의 아이디는 {{ checkedUser? checkedUser.id : "" }} 입니다.
+                                회원님의 아이디는 <br/>
+                                <em class="accent">{{ checkedUser? checkedUser.id : "" }}</em> 입니다.
                             </div>
                         </div>
                         </div>
                         <div class="btn_duo_popup">
+                            <div v-show="!checkedUser">
                             <a href="javascript:;" class="btn_item" role="button" v-on:click="closePopUp">
                                 <span class="btn_text">취소</span>
                             </a>
                             <a href="javascript:;" class="btn_item on" role="button" v-on:click="changePopUp">
                                 <span id="b_txt_phoneNo_reg" class="btn_text">변경</span>
                             </a>
+                            </div>
+                            <div v-show="checkedUser">
+                              <a href="javascript:;" class="btn_item" role="button" v-on:click="closePopUp">
+                                <span class="btn_text">확인</span>
+                            </a>
+                            </div>
                         </div>
                     </div>
                 </div>
