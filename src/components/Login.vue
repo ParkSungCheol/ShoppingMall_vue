@@ -197,6 +197,11 @@ export default {
       this.id = false;
       this.pwd = false;
       this.checkedUser = null;
+      this.selectedOption = 'email';
+      this.email = true;
+      this.phone = true;
+      this.$refs.sendEmail.value = "";
+      this.$refs.sendMessage.value = "";
     },
     popUp(target) {
       this[target] = true;
