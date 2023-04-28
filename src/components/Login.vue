@@ -39,7 +39,7 @@
                                 <em class="accent">{{ id? '아이디' : '패스워드' }}</em>를 <span id="p_txt_phoneNo_changeYn">찾기 위해</span><br/>
                                 인증절차가 필요합니다.
                         </h4>
-                        <div v-show="id && !checkedUser">
+                        <div v-if="id && !checkedUser">
                         <div class="contact_form">
                             <div class="popup_row" style="margin-bottom: 10px;">
                                 가입시 입력하신 정보로 인증해주세요.
@@ -50,18 +50,18 @@
                                   <option value="phone">전화번호 입력</option>
                                 </select>
                             </div>
-                            <div class="popup_row rightgap" v-show="selectedOption=='email'">
+                            <div class="popup_row rightgap" v-if="selectedOption=='email'">
                                 <input type="email" placeholder="이메일 입력" v-on:keyup="keyPress($event, 'email')" ref="sendEmail">
-                                <b style="color:red" v-show="email">입력한 이메일을 확인하세요</b>
+                                <b style="color:red" v-if="email">입력한 이메일을 확인하세요</b>
                             </div>
-                            <div class="popup_row" v-show="selectedOption=='phone'">
+                            <div class="popup_row" v-if="selectedOption=='phone'">
                               <input type="tel" placeholder="전화번호 입력" v-on:keyup="keyPress($event, 'phone')" ref="sendMessage">
-                              <b style="color:red" v-show="phone">입력한 핸드폰번호를 확인하세요</b>
+                              <b style="color:red" v-if="phone">입력한 핸드폰번호를 확인하세요</b>
                             </div>
                             <p id="e_phoneNo" class="popup_error"></p>
                         </div>
                         </div>
-                        <div v-show="id && checkedUser">
+                        <div v-if="id && checkedUser">
                         <div class="contact_form">
                             <div class="popup_row" style="margin-bottom: 20px;">
                                 회원님의 아이디는 <br/>
@@ -69,7 +69,7 @@
                             </div>
                         </div>
                         </div>
-                        <div v-show="pwd && !checkedUser">
+                        <div v-if="pwd && !checkedUser">
                         <div class="contact_form">
                             <div class="popup_row" style="margin-bottom: 10px;">
                                 가입시 입력하신 정보로 인증해주세요.
@@ -77,48 +77,48 @@
                             <div class="popup_row rightgap">
                                 <input placeholder="아이디 입력" v-on:keyup="keyPress($event, 'checkId')" type="text" ref="checkId" :disabled="checkEmail">
                               </div>
-                            <b style="color:red" v-show="checkId">영문대소문자, 숫자 6-20자 입력하세요</b>
+                            <b style="color:red" v-if="checkId">영문대소문자, 숫자 6-20자 입력하세요</b>
                             <div class="popup_row select">
                                 <select id="internationalCode" name="internationalCode" title="옵션" class="popup_input" v-model="selectedOption" v-on:change="changeSelected" :disabled="checkEmail">
                                   <option value="email">이메일 입력</option>
                                   <option value="phone">전화번호 입력</option>
                                 </select>
                             </div>
-                            <div class="contact_form" v-show="selectedOption=='email'">
+                            <div class="contact_form" v-if="selectedOption=='email'">
                               <div class="popup_row rightgap">
                                   <input type="email" placeholder="이메일 입력" v-on:keyup="keyPress($event, 'email')" ref="sendEmail" class="popup_input" :disabled="checkEmail">
                                   <button type="button" class="btn_contact" v-on:click="emailCheck('sendEmail')" :disabled="checkEmail">인증</button>
-                                  <b style="color:red" v-show="email">입력한 이메일을 확인하세요</b>                          
+                                  <b style="color:red" v-if="email">입력한 이메일을 확인하세요</b>                          
                               </div>
                               <div class="popup_row">
                                   <input type="text" placeholder="인증번호를 입력하세요" ref="checkEmail" maxlength="30" class="popup_input" :disabled="!checkEmail">
                               </div>
                               <p id="e_phoneNo" class="popup_error"></p>
                             </div>
-                            <div class="popup_row" v-show="selectedOption=='phone'">
+                            <div class="popup_row" v-if="selectedOption=='phone'">
                               <input type="tel" placeholder="전화번호 입력" v-on:keyup="keyPress($event, 'phone')" ref="sendMessage">
-                              <b style="color:red" v-show="phone">입력한 핸드폰번호를 확인하세요</b>
+                              <b style="color:red" v-if="phone">입력한 핸드폰번호를 확인하세요</b>
                             </div>
                             <p id="e_phoneNo" class="popup_error"></p>
                         </div>
                         </div>
-                        <div v-show="pwd && checkedUser">
+                        <div v-if="pwd && checkedUser">
                         <div class="contact_form">
                             <div class="popup_row" style="margin-bottom: 10px;">
                                 변경하실 패스워드를 입력해주세요.
                             </div>
                             <div class="popup_row">
                                 <input class="popup_input" type="password" v-on:keyup="keyPress($event, 'afterPwd')" ref="afterPwd" placeholder="변경할 비밀번호 입력">
-                                <b class="popup_input" style="color:red; font-size: 12px;" v-show="afterPwd">영문대소문자, 숫자, 특수문자 10자 이상 입력하세요</b>
+                                <b class="popup_input" style="color:red; font-size: 12px;" v-if="afterPwd">영문대소문자, 숫자, 특수문자 10자 이상 입력하세요</b>
                             </div>
                             <div class="popup_row">
                                 <input class="popup_input" type="password" v-on:keyup="keyPress($event, 'afterPwdConfirm')" ref="afterPwdConfirm" placeholder="변경할 비밀번호 재입력">
-                                <b style="color:red; font-size: 12px;" v-show="afterPwdConfirm">비밀번호가 일치하지 않습니다</b>
+                                <b style="color:red; font-size: 12px;" v-if="afterPwdConfirm">비밀번호가 일치하지 않습니다</b>
                             </div>
                         </div>
                         </div>
                         <div class="btn_duo_popup">
-                            <div v-show="!checkedUser || selectedOption=='phone'">
+                            <div v-if="!checkedUser || selectedOption=='phone'">
                             <a href="javascript:;" class="btn_item" role="button" v-on:click="closePopUp">
                                 <span class="btn_text">취소</span>
                             </a>
@@ -126,7 +126,7 @@
                                 <span id="b_txt_phoneNo_reg" class="btn_text">확인</span>
                             </a>
                             </div>
-                            <div v-show="checkedUser && selectedOption=='email'">
+                            <div v-if="checkedUser && selectedOption=='email'">
                               <a href="javascript:;" class="btn_item" role="button" v-on:click="closePopUp" style="width:100%">
                                 <span class="btn_text">확인</span>
                             </a>
@@ -263,7 +263,6 @@ export default {
       if(this.id) {
         if(this[this.selectedOption]) { alert("입력하신 정보를 확인해주세요."); return; }
         let user;
-        console.log(this.$refs.sendEmail.value);
         const baseURI = 'https://api.jurospring.o-r.kr';
         try{
           const axiosInstance = axios.create({
