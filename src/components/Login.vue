@@ -131,11 +131,13 @@ export default {
           },
           ).then(res => {
             console.log(res);
-            this.checkedUser = res.data;
+            user = res.data;
             return res;
           });
 
           if(result.status === 200){
+            this.checkedUser = user;
+            console.log(this.checkedUser);
           } else {
             alert("일치하는 정보가 없습니다.");
           }
