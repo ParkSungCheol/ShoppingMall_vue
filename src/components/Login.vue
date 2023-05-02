@@ -308,6 +308,7 @@ export default {
             else if(this.sendEmail) { alert("이메일 인증을 진행해주세요."); return;}
         }
 
+        console.log("--------------check-------------");
         console.log(this.checkedUser);
       }
       else if(this.pwd && this.checkedUser) {
