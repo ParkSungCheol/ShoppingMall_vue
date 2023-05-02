@@ -283,6 +283,7 @@ export default {
 
           if(result.status === 200){
             this.checkedUser = user;
+            console.log("-----------result---------------")
             console.log(this.checkedUser);
           } else {
             alert("일치하는 정보가 없습니다.");
