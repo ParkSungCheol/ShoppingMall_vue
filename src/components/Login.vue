@@ -390,6 +390,7 @@ export default {
       document.querySelector("*").style.overflow = 'visible';
       this.id = false;
       this.checkId = true;
+      this.beforeId = '';
       this.pwd = false;
       this.checkedUser = null;
       this.selectedOption = 'email';
