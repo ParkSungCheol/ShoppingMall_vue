@@ -75,11 +75,11 @@
                                 가입시 입력하신 정보로 인증해주세요.
                             </div>
                             <div class="popup_row rightgap">
-                                <input placeholder="아이디 입력" v-on:keyup="keyPress($event, 'checkId')" type="text" ref="checkId" v-model="beforeId" :disabled="checkEmail">
+                                <input placeholder="아이디 입력" v-on:keyup="keyPress($event, 'checkId')" type="text" ref="checkId" v-model="beforeId" :disabled="checkEmail || checkMessage">
                             </div>
                             <b style="color:red" v-if="checkId">영문대소문자, 숫자 6-20자 입력하세요</b>
                             <div class="popup_row select">
-                                <select id="internationalCode" name="internationalCode" title="옵션" class="popup_input" v-model="selectedOption" v-on:change="changeSelected" :disabled="checkEmail">
+                                <select id="internationalCode" name="internationalCode" title="옵션" class="popup_input" v-model="selectedOption" v-on:change="changeSelected" :disabled="checkEmail || checkMessage">
                                   <option value="email">이메일 입력</option>
                                   <option value="phone">전화번호 입력</option>
                                 </select>
