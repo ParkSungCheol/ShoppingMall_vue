@@ -105,7 +105,7 @@
                         <div v-if="pwd && checkedUser">
                         <div class="contact_form">
                             <div class="popup_row rightgap">
-                                <input placeholder="아이디 입력" type="text" ref="checkId" :disabled='true' :value="checkedUser.id">
+                                <input placeholder="아이디 입력" type="text" ref="checkId" v-model="checkedUser.id" disabled>
                             </div>
                             <div class="popup_row" style="margin-bottom: 10px;">
                                 변경하실 패스워드를 입력해주세요.
