@@ -265,8 +265,6 @@ export default {
       if(this.id) {
         this.email = true;
         this.phone = true;
-        this.$refs.sendEmail.value = "";
-        this.$refs.sendMessage.value = "";
       }
       else if(this.pwd) {
         this.email = true;
@@ -275,10 +273,6 @@ export default {
         this.phone = true;
         this.sendMessage = true;
         this.checkMessage = false;
-        this.$refs.sendEmail.value = "";
-        this.$refs.checkEmail.value = "";
-        this.$refs.sendMessage.value = "";
-        this.$refs.checkMessage.value = "";
       }
     },
     async messageCheck(targetObject) {
