@@ -462,6 +462,8 @@ export default {
       this.selectedOption = 'email';
       this.email = true;
       this.phone = true;
+      this.sendMessage = true;
+      this.checkMessage = false;
       this.sendEmail = true;
       this.checkEmail = false;
       this.afterPwd = true;
