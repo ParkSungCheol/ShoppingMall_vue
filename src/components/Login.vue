@@ -312,6 +312,9 @@ export default {
         }
       }
       else if(this.pwd && this.checkedUser) {
+        if(this.afterPwd) { alert("입력하신 비밀번호를 확인해주세요."); return; }
+        if(this.afterPwdConfirm) { alert("입력하신 비밀번호 재입력을 확인해주세요."); return; }
+        
         let params = {
             id: this.$refs.checkId.value,
             pwd: this.$refs.afterPwd.value
