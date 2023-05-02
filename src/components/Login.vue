@@ -75,7 +75,7 @@
                                 가입시 입력하신 정보로 인증해주세요.
                             </div>
                             <div class="popup_row rightgap">
-                                <input placeholder="아이디 입력" v-on:keyup="keyPress($event, 'checkId')" type="text" ref="checkId" :disabled="checkEmail">
+                                <input placeholder="아이디 입력" v-on:keyup="keyPress($event, 'checkId')" type="text" ref="checkId" v-model="beforeId" :disabled="checkEmail">
                             </div>
                             <b style="color:red" v-if="checkId">영문대소문자, 숫자 6-20자 입력하세요</b>
                             <div class="popup_row select">
@@ -104,6 +104,9 @@
                         </div>
                         <div v-if="pwd && checkedUser">
                         <div class="contact_form">
+                            <div class="popup_row rightgap">
+                                <input placeholder="아이디 입력" type="text" ref="checkId" v-model="beforeId" disabled>
+                            </div>
                             <div class="popup_row" style="margin-bottom: 10px;">
                                 변경하실 패스워드를 입력해주세요.
                             </div>
@@ -155,6 +158,7 @@ export default {
       selectedOption: 'email',
       id: false,
       checkId: true,
+      beforeId: '',
       pwd: false,
       email: true,
       sendEmail : true,
@@ -214,7 +218,6 @@ export default {
 
       let successMessage = targetObject == "sendEmail"? "이메일을 정상적으로 발송했습니다." : "";
       let failureMessage = targetObject == "sendEmail"? "이메일발송에 실패하였습니다." : "인증코드를 확인해주세요.";
-      let user;
       
       const baseURI = 'https://api.jurospring.o-r.kr';
       try{
@@ -229,7 +232,6 @@ export default {
         },
         ).then(res => {
           console.log(res);
-          user = res.data;
           return res;
         });
 
@@ -242,7 +244,6 @@ export default {
           if(targetObject == "checkEmail") {
             this.sendEmail = false;
             this.checkEmail = false;
-            this.checkedUser = user;
           }
         }
         else {
@@ -306,14 +307,13 @@ export default {
                 if(this.sendEmail || this.checkEmail) return;
             }
             else if(this.sendEmail) { alert("이메일 인증을 진행해주세요."); return;}
-        }
 
-        console.log("--------------check-------------");
-        console.log(this.checkedUser);
+            this.checkedUser = true;
+        }
       }
       else if(this.pwd && this.checkedUser) {
         let params = {
-            id: this.checkedUser.id,
+            id: this.$refs.checkId.value,
             pwd: this.$refs.afterPwd.value
         };
 
