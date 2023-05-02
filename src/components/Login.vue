@@ -316,6 +316,7 @@ export default {
             id: this.$refs.checkId.value,
             pwd: this.$refs.afterPwd.value
         };
+        let route = null;
 
         const baseURI = 'https://api.jurospring.o-r.kr';
         try{
