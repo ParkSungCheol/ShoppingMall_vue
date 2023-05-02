@@ -104,9 +104,6 @@
                         </div>
                         <div v-if="pwd && checkedUser">
                         <div class="contact_form">
-                            <div class="popup_row rightgap">
-                                <input placeholder="아이디 입력" type="text" ref="checkId" v-model="checkedUser.id" disabled>
-                            </div>
                             <div class="popup_row" style="margin-bottom: 10px;">
                                 변경하실 패스워드를 입력해주세요.
                             </div>
@@ -306,13 +303,13 @@ export default {
                 if(this.sendEmail || this.checkEmail) return;
             }
             else if(this.sendEmail) { alert("이메일 인증을 진행해주세요."); return;}
-
-            this.checkedUser = true;
         }
+
+        console.log(this.checkedUser);
       }
       else if(this.pwd && this.checkedUser) {
         let params = {
-            id: this.$refs.checkId.value,
+            id: this.checkedUser.id,
             pwd: this.$refs.afterPwd.value
         };
 
