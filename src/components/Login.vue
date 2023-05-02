@@ -214,6 +214,7 @@ export default {
 
       let successMessage = targetObject == "sendEmail"? "이메일을 정상적으로 발송했습니다." : "";
       let failureMessage = targetObject == "sendEmail"? "이메일발송에 실패하였습니다." : "인증코드를 확인해주세요.";
+      let user;
       
       const baseURI = 'https://api.jurospring.o-r.kr';
       try{
@@ -228,6 +229,7 @@ export default {
         },
         ).then(res => {
           console.log(res);
+          user = res.data;
           return res;
         });
 
@@ -240,6 +242,7 @@ export default {
           if(targetObject == "checkEmail") {
             this.sendEmail = false;
             this.checkEmail = false;
+            this.checkedUser = user;
           }
         }
         else {
@@ -283,7 +286,6 @@ export default {
 
           if(result.status === 200){
             this.checkedUser = user;
-            console.log("-----------result---------------")
             console.log(this.checkedUser);
           } else {
             alert("일치하는 정보가 없습니다.");
