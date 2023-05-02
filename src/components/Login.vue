@@ -93,13 +93,17 @@
                               <div class="popup_row">
                                   <input type="text" placeholder="인증번호를 입력하세요" ref="checkEmail" maxlength="30" class="popup_input" :disabled="!checkEmail">
                               </div>
-                              <p id="e_phoneNo" class="popup_error"></p>
                             </div>
                             <div class="popup_row" v-if="selectedOption=='phone'">
-                              <input type="tel" placeholder="전화번호 입력" v-on:keyup="keyPress($event, 'phone')" ref="sendMessage">
-                              <b style="color:red" v-if="phone">입력한 핸드폰번호를 확인하세요</b>
+                              <div class="popup_row rightgap">
+                                  <input type="tel" placeholder="전화번호 입력" v-on:keyup="keyPress($event, 'phone')" ref="sendMessage" class="popup_input" :disabled="checkMessage">
+                                  <button type="button" class="btn_contact" v-on:click="emailCheck('sendMessage')" :disabled="checkMessage">인증</button>
+                                  <b style="color:red" v-if="phone">입력한 전화번호를 확인하세요</b>                          
+                              </div>
+                              <div class="popup_row">
+                                  <input type="text" placeholder="인증번호를 입력하세요" ref="checkMessage" maxlength="30" class="popup_input" :disabled="!checkMessage">
+                              </div>
                             </div>
-                            <p id="e_phoneNo" class="popup_error"></p>
                         </div>
                         </div>
                         <div v-if="pwd && checkedUser">
@@ -164,6 +168,8 @@ export default {
       sendEmail : true,
       checkEmail : false,
       phone: true,
+      sendMessage : true,
+      checkMessage : false,
       checkedUser: null,
       afterPwd: true,
       afterPwdConfirm: true,
@@ -263,6 +269,56 @@ export default {
         this.$refs.sendMessage.value = "";
       }
     },
+    async messageCheck(targetObject) {
+      if(this.phone) {
+        alert("핸드폰 번호를 확인해주세요!");
+        return;
+      }
+
+      let isExist = await this.existCheck('phone');
+      if(!isExist) {
+        return false;
+      }
+
+      let successMessage = targetObject == "sendMessage"? "인증번호를 정상적으로 발송했습니다." : "";
+      let failureMessage = targetObject == "sendMessage"? "인증번호 발송에 실패하였습니다." : "인증코드를 확인해주세요.";
+      
+      const baseURI = 'https://api.jurospring.o-r.kr';
+      try{
+        const axiosInstance = axios.create({
+          withCredentials: true,
+        });
+        const result = await axiosInstance.get(`${baseURI}/` + targetObject,
+        {
+          params : {
+            phone : this.$refs[targetObject].value.replaceAll("-", "")
+          }
+        },
+        ).then(res => {
+          console.log(res);
+          return res;
+        });
+
+        console.log(result);
+        if(result.status === 200){
+          if(successMessage) alert(successMessage);
+          if(targetObject == "sendMessage") {
+            this.checkMessage = true;
+          }
+          if(targetObject == "checkMessage") {
+            this.sendMessage = false;
+            this.checkMessage = false;
+          }
+        }
+        else {
+          alert(failureMessage);
+        }
+
+      } catch(err){
+        console.log(err);
+        alert(failureMessage);
+      }
+    },
     async changePopUp() {
       if(this.id) {
         if(this[this.selectedOption]) { alert("입력하신 정보를 확인해주세요."); return; }
@@ -307,14 +363,20 @@ export default {
                 if(this.sendEmail || this.checkEmail) return;
             }
             else if(this.sendEmail) { alert("이메일 인증을 진행해주세요."); return;}
-
-            this.checkedUser = true;
         }
+        else if(this.selectedOption == 'phone') {
+          if(this.sendMessage && this.checkMessage) {
+                await this.messageCheck('checkMessage');
+                if(this.sendMessage || this.checkMessage) return;
+            }
+            else if(this.sendMessage) { alert("전화번호 인증을 진행해주세요."); return;}
+        }
+        this.checkedUser = true;
       }
       else if(this.pwd && this.checkedUser) {
         if(this.afterPwd) { alert("입력하신 비밀번호를 확인해주세요."); return; }
         if(this.afterPwdConfirm) { alert("입력하신 비밀번호 재입력을 확인해주세요."); return; }
-        
+
         let params = {
             id: this.$refs.checkId.value,
             pwd: this.$refs.afterPwd.value
