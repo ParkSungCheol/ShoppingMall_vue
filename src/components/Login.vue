@@ -445,9 +445,9 @@ export default {
       console.log(idval);
       console.log(idvalcheck.test(idval));
       if (!idvalcheck.test(idval)){
-        if(targetObject == 'pwd') {
-            this.$refs.pwdConfirm.value = "";
-            this.pwdConfirm = true;
+        if(targetObject == 'afterPwd') {
+            this.$refs.afterPwdConfirm.value = "";
+            this.afterPwdConfirm = true;
         }
         this[targetObject] = true;
       }
