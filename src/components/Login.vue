@@ -323,7 +323,7 @@ export default {
             const axiosInstance = axios.create({
             withCredentials: true,
             });
-            const result = await axiosInstance.get(`${baseURI}/` + "updateUser",
+            const result = await axiosInstance.get(`${baseURI}/` + "updatePwd",
             {
             params : params
             },
