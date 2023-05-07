@@ -23,7 +23,7 @@
                                 <!-- Product name-->
                                 <h5 class="fw-bolder">{{ item.name }}</h5>
                                 <!-- Product price-->
-                                {{ formatPrice(item.price) }}
+                                {{ item.price | formatPrice }}
                             </div>
                         </div>
                         <!-- Product actions-->
