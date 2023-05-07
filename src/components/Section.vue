@@ -38,7 +38,7 @@
                         <!-- Product actions-->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                             <span>{{ item.sellid }}</span>
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" :href= "item.detail" onclick="window.open(this.href, '_blank'); return false;">상세페이지</a></div>
+                            <div class="text-center page-button"><a class="btn btn-outline-dark mt-auto" :href= "item.detail" onclick="window.open(this.href, '_blank'); return false;">상세페이지</a></div>
                         </div>
                     </div>
                 </div>
@@ -152,7 +152,7 @@ option {
     border: red solid 1px;
 }
 
-.text-center {
+.page-button {
   display: inline-block;
   border-left: 1px solid #ebecee;
   margin-left: 10px;
