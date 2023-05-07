@@ -23,7 +23,8 @@
                                 <!-- Product name-->
                                 <h5 class="fw-bolder">{{ item.name }}</h5>
                                 <!-- Product price-->
-                                <h5 class="fw-bolder" style="color:red"></h5>{{ numberWithCommas(item.price) + "원" }}</h5>
+                                <h5 class="fw-bolder" style="color:red">{{ numberWithCommas(item.price) + "원" }}</h5>
+                                <svg width="15" height="12" fill="none" xmlns="http://www.w3.org/2000/svg" class="price_svg_delivery__kOiSU"></svg>
                             </div>
                         </div>
                         <!-- Product actions-->
