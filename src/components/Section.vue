@@ -72,7 +72,7 @@ export default {
   }
   ,methods: {
     numberWithCommas(x) {
-      if(isNaN(x)) {
+      if(x == '' || x == null || x == undefined || isNaN(x)) {
         return "별도확인필요";
       }
       else if(x == 0) {
