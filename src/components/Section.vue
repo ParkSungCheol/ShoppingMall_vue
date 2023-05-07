@@ -23,7 +23,7 @@
                                 <!-- Product name-->
                                 <h5 class="fw-bolder">{{ item.name }}</h5>
                                 <!-- Product price-->
-                                {{ item.price | formatPrice }}
+                                {{ numberWithCommas(item.price) }}
                             </div>
                         </div>
                         <!-- Product actions-->
@@ -52,12 +52,6 @@ export default {
       sorts : ['Name', 'Price'],
     }
   },
-  filters: {
-    formatPrice(value) {
-        let val = (value/1)
-        return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-    },
-    },
   props: {
     showMenu: {
       type: Boolean,
@@ -68,6 +62,9 @@ export default {
     this.getGoods();
   }
   ,methods: {
+    numberWithCommas(x) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
     getGoods() {
       const baseURI = 'https://api.jurospring.o-r.kr';
       axios.get(`${baseURI}/goods`)
