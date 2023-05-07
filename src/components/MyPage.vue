@@ -78,6 +78,11 @@
 
         <!-- 6. 가입하기 버튼 -->
         <input type="submit" value="수정하기">
+        <div class="field email-number">
+            <div>
+                <input type="button" value="회원탈퇴" v-on:click="deleteUser">
+            </div>
+        </div>
         </form>
         <div class="dimmed" area-hidden="true" style="display:none;" ref="dimmed"></div>
         <form>
@@ -136,11 +141,12 @@
                                 </select>
                             </div>
                             <div class="popup_row rightgap">
-                                <input type="tel" id="phoneNo" placeholder="변경할 전화번호 입력" name="phoneNo" maxlength="14" class="popup_input" onkeydown="check_num_ajax3('phoneNo', '2', 'e_phoneNo')">
-                                <button type="button" class="btn_contact" onclick="sendSmsForChangePhoneNo()">인증</button>                          
+                                <input type="tel" placeholder="변경할 전화번호 입력" v-on:keyup="keyPress($event, 'phone')" ref="sendMessage" class="popup_input" :disabled="!sendMessage">
+                                <button type="button" class="btn_contact" v-on:click="messageCheck('sendMessage')" :disabled="!sendMessage">인증</button>
+                                <b style="color:red" v-show="phone">입력한 전화번호를 확인하세요</b>                          
                             </div>
                             <div class="popup_row">
-                                <input type="tel" id="authNo" placeholder="인증번호 입력" class="popup_input" onkeydown="check_num_ajax3('authNo', '2', 'e_phoneNo')" oninput="changeVerifyToPopupInput('authNo')" disabled="">
+                                <input type="text" placeholder="인증번호를 입력하세요" ref="checkMessage" maxlength="30" class="popup_input" :disabled="!checkMessage">
                             </div>
                             <p id="e_phoneNo" class="popup_error"></p>
                         </div>
@@ -193,6 +199,9 @@ export default {
       email: true,
       sendEmail : true,
       checkEmail : false,
+      phone: true,
+      sendMessage : true,
+      checkMessage : false,
     }
   },
   props : {
@@ -217,6 +226,89 @@ export default {
     }
   },
   methods: {
+    async deleteUser() {
+      let isConfirmed = confirm("정말 회원탈퇴를 진행하시겠습니까?");
+      if(!isConfirmed) return;
+      const baseURI = 'https://api.jurospring.o-r.kr';
+      try{
+        const axiosInstance = axios.create({
+          withCredentials: true,
+        });
+        const result = await axiosInstance.get(`${baseURI}/` + 'deleteUser',
+        {
+          params : {
+            id : this.user.id
+          }
+        },
+        ).then(res => {
+          console.log(res);
+          return res;
+        });
+
+        console.log(result);
+        if(result.status === 200){
+          alert("회원탈퇴가 정상적으로 처리되었습니다.");
+          this.$router.push('/');
+        }
+        else {
+          alert("회원탈퇴에 실패하였습니다.");
+        }
+
+      } catch(err){
+        console.log(err);
+        alert("회원탈퇴에 실패하였습니다.");
+      }
+    },
+    async messageCheck(targetObject) {
+      if(this.phone) {
+        alert("핸드폰 번호를 확인해주세요!");
+        return;
+      }
+
+      let isExist = await this.existCheck('phone');
+      if(!isExist) {
+        return false;
+      }
+
+      let successMessage = targetObject == "sendMessage"? "인증번호를 정상적으로 발송했습니다." : "";
+      let failureMessage = targetObject == "sendMessage"? "인증번호 발송에 실패하였습니다." : "인증코드를 확인해주세요.";
+      
+      const baseURI = 'https://api.jurospring.o-r.kr';
+      try{
+        const axiosInstance = axios.create({
+          withCredentials: true,
+        });
+        const result = await axiosInstance.get(`${baseURI}/` + targetObject,
+        {
+          params : {
+            phone : this.$refs[targetObject].value.replaceAll("-", "")
+          }
+        },
+        ).then(res => {
+          console.log(res);
+          return res;
+        });
+
+        console.log(result);
+        if(result.status === 200){
+          if(successMessage) alert(successMessage);
+          if(targetObject == "sendMessage") {
+            this.checkMessage = true;
+          }
+          if(targetObject == "checkMessage") {
+            this.sendMessage = false;
+            this.checkMessage = false;
+          }
+        }
+        else {
+          alert(failureMessage);
+        }
+
+      } catch(err){
+        console.log(err);
+        alert(failureMessage);
+      }
+    },
     async changePopUp() {
         let params = {
             id: this.user.id,
@@ -241,6 +333,15 @@ export default {
             else if(this.sendEmail) { alert("이메일 인증을 진행해주세요."); return;}
 
             params.email = this.$refs.sendEmail.value;
+        }
+        if(this.popUpPhone) {
+            if(this.sendMessage && this.checkMessage) {
+                await this.messageCheck('checkMessage');
+                if(this.sendMessage || this.checkMessage) return;
+            }
+            else if(this.sendMessage) { alert("전화번호 인증을 진행해주세요."); return;}
+
+            params.phone = this.$refs.sendMessage.value;
         }
 
         const baseURI = 'https://api.jurospring.o-r.kr';
@@ -292,6 +393,11 @@ export default {
       this.email = true;
       this.sendEmail = true;
       this.checkEmail = false;
+      this.$refs.sendMessage.value = "";
+      this.$refs.checkMessage.value = "";
+      this.phone = true;
+      this.sendMessage = true;
+      this.checkMessage = false;
     },
     popUp(target) {
       this[target] = true;
@@ -348,7 +454,7 @@ export default {
           params : {
             id: targetObject == "id"? this.$refs.id.value : undefined,
             email: targetObject == "email"? this.$refs.sendEmail.value : undefined,
-            phone: targetObject == "phone"? this.$refs.sendMessage.value : undefined,
+            phone: targetObject == "phone"? this.$refs.sendMessage.value.replaceAll("-", "") : undefined,
           }
         },
         ).then(res => {
@@ -357,7 +463,7 @@ export default {
         });
 
         console.log(result);
-        if(result.status === 200){
+        if(result.status === 202){
           if(successMessage) {
             alert(successMessage);
             this.checkId = false;
@@ -536,106 +642,6 @@ export default {
 </script>
 
 <style scoped>
-.dimmed {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background-color: rgba(0,0,0,.5);
-    z-index: 200;
-}
-.popup_layer {
-    display: table;
-    table-layout: fixed;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    z-index: 210;
-}
-.popup_layer_inner {
-    display: table-cell;
-    vertical-align: middle;
-}
-.popup_content {
-    margin: 45px 0;
-    vertical-align: top;
-    z-index: 220;
-}
-.contact_2step_popup, .contact_edit_popup {
-    position: relative;
-    margin: 0 auto;
-    padding: 30px 24px 58px;
-    border-radius: 12px;
-    box-shadow: 0 2px 2px 0 rgba(64,117,161,.1);
-    background-color: #fff;
-    box-sizing: border-box;
-    text-align: left;
-}
-.contact_edit_title {
-    margin-bottom: 20px;
-    padding: 30px 0 14px;
-    border-bottom: 1px solid #303038;
-    font-size: 20px;
-    font-weight: 300;
-    line-height: 28px;
-    letter-spacing: -.8px;
-    color: #1e1e23;
-    word-break: break-all;
-}
-.contact_2step_popup .row_item, .contact_edit_popup .row_item {
-    padding: 0 0 20px 30px;
-}
-.contact_2step_popup .row_item+.contact_form, .contact_edit_popup .row_item+.contact_form {
-    padding-top: 0;
-}
-.btn_duo_popup .btn_item.on {
-    background-color: #000;
-    color: #fff;
-}
-.btn_duo_popup .btn_item:first-child {
-    width: 35%;
-    background-color: #959eae;
-    border-radius: 0 0 0 12px;
-}
-.btn_duo_popup .btn_item:last-child {
-    width: 65%;
-    border-radius: 0 0 12px 0;
-}
-.btn_duo_popup .btn_item {
-    float: left;
-    padding: 19px 0 18px;
-    vertical-align: middle;
-    background-color: #959eae;
-}
-
-.btn_duo_popup {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: block;
-    text-align: center;
-}
-
-.popup_row.rightgap .popup_input {
-    padding: 9px 20px 9px 11px;
-    max-width: max-content;
-}
-.btn_contact {
-  position: relative;
-  min-width: 40px;
-  min-height: 40px;
-  margin-left: 3px;
-  font-weight: 600;
-  text-align: center;
-  color: #fff;
-  background-color: #000;
-}
-
 #member {
     box-sizing: border-box; /*전체에 박스사이징*/
     outline: none; /*focus 했을때 테두리 나오게 */
