@@ -72,11 +72,11 @@ export default {
   }
   ,methods: {
     numberWithCommas(x) {
-      if(x == '' || x == null || x == undefined || isNaN(x)) {
-        return "별도확인필요";
-      }
-      else if(x == 0) {
+      if(x == 0) {
         return "무료"
+      }
+      else if(!x || isNaN(x)) {
+        return "별도확인필요";
       }
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
     },
