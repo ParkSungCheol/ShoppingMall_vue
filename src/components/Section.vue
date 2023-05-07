@@ -151,4 +151,11 @@ option {
     background-color: #f5f5f5;
     border: red solid 1px;
 }
+
+.text-center {
+  display: inline-block;
+  border-left: 1px solid #ebecee;
+  margin-left: 10px;
+  padding-left: 10px;
+}
 </style>
