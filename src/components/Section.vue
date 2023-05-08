@@ -141,7 +141,7 @@ export default {
         this.searchDto = result.data.searchDto;
         window.scrollTo({
           top: 0, 
-          behavior: auto
+          behavior: 'auto'
         });
       });
     },
