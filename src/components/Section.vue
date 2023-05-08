@@ -233,7 +233,9 @@ option {
   content: "";
 }
 .form-control {
-  height: 40px;
+  border-radius: none !important;
+  height: 35px;
+  margin-top:3px;
   padding-right: 0px !important;
   margin-right: 0px !important;
 }
