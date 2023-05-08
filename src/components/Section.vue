@@ -11,7 +11,7 @@
             </ul>
             </div>
           </form>
-          <h3 v-if="filteredList.length != 0">검색 결과가 존재하지 않습니다.</h3>
+          <h3 v-if="filteredList.length == 0">검색 결과가 존재하지 않습니다.</h3>
           <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             <ul v-for="item in filteredList">
                 <div class="col mb-5">
@@ -43,6 +43,13 @@
                     </div>
                 </div>
             </ul>
+            <a v-if="pagination.existPrevPage" href="javascript:void(0);" onclick="movePage(1)" class="page_bt first">첫 페이지</a>
+            <a v-if="pagination.existPrevPage" href="javascript:void(0);" onclick="movePage(${pagination.startPage - 1})" class="page_bt prev">이전 페이지</a>
+            <p>
+              <a v-for="i in pagination.endPage - pagination.startPage + 1" v-if="i >= pagination.startPage && i <= pagination.endPage" href="javascript:void(0);" onclick="movePage(${i});">{{ i }}</a>
+            </p>
+            <a v-if="pagination.existNextPage" href="javascript:void(0);" onclick="movePage(${pagination.endPage + 1});" class="page_bt next">다음 페이지</a>
+            <a v-if="pagination.existNextPage" href="javascript:void(0);" onclick="movePage(${pagination.totalPageCount});" class="page_bt last">마지막 페이지</a>
           </div>
       </div>
   </section>
@@ -57,6 +64,7 @@ export default {
     return {
       search: '',
       goods : [],
+      pagination: null,
       sortDir : '',
       sortMsg : 'Sort',
       sorts : ['Name', 'Price'],
@@ -87,6 +95,7 @@ export default {
       .then((result) => {
         console.log(result);
         this.goods = result.data.list;
+        this.pagination = result.data.pagination;
       });
     },
     sorting(event) {
