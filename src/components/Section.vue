@@ -1,7 +1,7 @@
 <template>
   <section class="py-5">
       <div class="container px-4 px-lg-5 mt-5">
-          <form class="d-flex" style="margin-bottom:50px">
+          <form class="d-flex" style="margin-bottom:50px" id="target-section">
             <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" v-model="search"/>
             <button type="button">
               <svg width="50" height="34" viewBox="0 0 50 34" fill="none">
@@ -59,32 +59,32 @@
             </ul>
           </div>
           <div class="pagination justify-content-center">
-            <a class="pagination_next" v-if="pagination && pagination.existPrevPage" href=".container" v-on:click="movePage(1, 'back')">
+            <a class="pagination_next" v-if="pagination && pagination.existPrevPage" href="#target-section" v-on:click="movePage(1, 'back')">
               처음
               <svg class="after" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <path transform="scale(-1, 1) translate(-100, 0)" d="M80 50L20 10V90Z" />
                 <path transform="scale(-1, 1) translate(-150, 0)" d="M80 50L20 10V90Z" />
               </svg>
             </a>
-            <a class="pagination_next" v-if="pagination && pagination.existPrevPage" href=".container" v-on:click="movePage(pagination.startPage - 1, 'back')">
+            <a class="pagination_next" v-if="pagination && pagination.existPrevPage" href="#target-section" v-on:click="movePage(pagination.startPage - 1, 'back')">
               이전
               <svg class="after" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <path transform="scale(-1, 1) translate(-100, 0)" d="M80 50L20 10V90Z" />
               </svg>
             </a>
             <div class="pagination_num">
-              <a class="pagination_btn_page" v-for="i in filteredNum" href=".container" v-on:click="movePage(i, 'current')" v-bind:style="{ 
+              <a class="pagination_btn_page" v-for="i in filteredNum" href="#target-section" v-on:click="movePage(i, 'current')" v-bind:style="{ 
                 color: !searchDto && i == 1? 'red' : searchDto && searchDto.page == i ? 'red' : 'black',
                 cursor: !searchDto && i == 1? 'default' : searchDto && searchDto.page == i ? 'default' : 'pointer'
                 }">{{ i }}</a>
             </div>
-            <a class="pagination_next" v-if="pagination && pagination.existNextPage" href=".container" v-on:click="movePage(pagination.endPage + 1, 'forward')">
+            <a class="pagination_next" v-if="pagination && pagination.existNextPage" href="#target-section" v-on:click="movePage(pagination.endPage + 1, 'forward')">
               다음
               <svg class="after" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <path d="M80 50L20 90V10Z" />
               </svg>
             </a>
-            <a class="pagination_next" v-if="pagination && pagination.existNextPage" href=".container" v-on:click="movePage(pagination.totalPageCount, 'forward')">
+            <a class="pagination_next" v-if="pagination && pagination.existNextPage" href="#target-section" v-on:click="movePage(pagination.totalPageCount, 'forward')">
               마지막
               <svg class="after" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <path d="M80 50L20 90V10Z" />
