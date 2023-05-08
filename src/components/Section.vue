@@ -58,7 +58,7 @@
               </svg>
             </a>
             <div class="pagination_num">
-              <a class="pagination_btn_page" v-for="i in filteredNum" href="javascript:void(0);" v-on:click="movePage(i)" v-bind:style="{ color: !searchDto && i == 1? 'red' : searchDto && searchDto.page == i ? 'red' : 'black' }">{{ i }}</a>
+              <a class="pagination_btn_page" v-for="i in filteredNum" href="javascript:void(0);" v-on:click="if(!searchDto && i == 1) return; else if(searchDto && searchDto.page == i) return; else movePage(i)" v-bind:style="{ color: !searchDto && i == 1? 'red' : searchDto && searchDto.page == i ? 'red' : 'black' }">{{ i }}</a>
             </div>
             <a class="pagination_next" v-if="pagination && pagination.existNextPage" href="javascript:void(0);" v-on:click="movePage(pagination.endPage + 1)">
               다음
