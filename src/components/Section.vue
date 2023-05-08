@@ -142,7 +142,6 @@ export default {
         const scrollTarget = this.$refs.scrollTarget;
         window.scrollTo({
           top: scrollTarget.offsetTop,
-          behavior: 'smooth'
         });
       });
     },
