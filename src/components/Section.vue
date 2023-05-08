@@ -24,12 +24,13 @@
               </defs>
             </svg>
             </button>
-            <div>
-              <a href="#" role="button">낮은 가격순</a>
-              <a href="#" role="button">높은 가격순</a>
-              <a href="#" role="button">등록일순</a>
-            </div>
           </form>
+          <div><div>가격</div><div><span>직접입력</span><span><input type="text" title="최소가격 입력" placeholder="1,000" value="">원</span><span>~</span><span><input type="text" placeholder="1,000,000" value="" title="최대가격 입력">원</span><a href="#" role="button">가격대 검색</a></div></div></div>
+          <div>
+            <a href="#" role="button">낮은 가격순</a>
+            <a href="#" role="button">높은 가격순</a>
+            <a href="#" role="button">등록일순</a>
+          </div>
           <h3 v-if="goods.length == 0">검색 결과가 존재하지 않습니다.</h3>
           <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             <ul v-for="item in goods">
