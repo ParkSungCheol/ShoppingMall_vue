@@ -58,7 +58,7 @@
               </svg>
             </a>
             <div class="pagination_num">
-              <a class="pagination_btn_page" v-for="i in filteredNum" href="javascript:void(0);" v-on:click="movePage(i)">{{ i }}</a>
+              <a class="pagination_btn_page" v-for="i in filteredNum" href="javascript:void(0);" v-on:click="movePage(i)" v-bind:style="{ color: searchDto && searchDto.page == i ? 'red' : 'black' }">{{ i }}</a>
             </div>
             <a class="pagination_next" v-if="pagination && pagination.existNextPage" href="javascript:void(0);" v-on:click="movePage(pagination.endPage + 1)">
               다음
@@ -89,9 +89,10 @@ export default {
       search: '',
       goods : [],
       pagination: null,
+      searchDto: null,
       sortDir : '',
       sortMsg : 'Sort',
-      sorts : ['Name', 'Price'],
+      sorts : ['Name', 'Price']
     }
   },
   props: {
@@ -119,6 +120,7 @@ export default {
       console.log(result);
       this.goods = result.data.list;
       this.pagination = result.data.pagination;
+      this.searchDto = result.data.searchDto;
       });
     },
     numberWithCommas(x) {
