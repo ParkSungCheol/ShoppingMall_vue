@@ -44,29 +44,29 @@
                 </div>
             </ul>
             <div class="pagination">
-            <a class="pagination_next" v-if="pagination && pagination.existPrevPage" href="javascript:void(0);" onclick="movePage(1);">
+            <a class="pagination_next" v-if="pagination && pagination.existPrevPage" href="javascript:void(0);" v-on:click="movePage(1)">
               처음
               <svg class="after" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <path d="M80 50L20 10V90Z" />
                 <path d="M80 50L20 10V90Z" transform="translate(-50,0)"/>
               </svg>
             </a>
-            <a class="pagination_next" v-if="pagination && pagination.existPrevPage" href="javascript:void(0);" onclick="movePage(${pagination.startPage - 1});">
+            <a class="pagination_next" v-if="pagination && pagination.existPrevPage" href="javascript:void(0);" v-on:click="movePage(pagination.startPage - 1)">
               이전
               <svg class="after" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <path d="M80 50L20 10V90Z" />
               </svg>
             </a>
             <div class="pagination_num">
-              <a class="pagination_btn_page" v-for="i in filteredNum" href="javascript:void(0);" onclick="movePage(${i});">{{ i }}</a>
+              <a class="pagination_btn_page" v-for="i in filteredNum" href="javascript:void(0);" v-on:click="movePage(i)">{{ i }}</a>
             </div>
-            <a class="pagination_next" v-if="pagination && pagination.existNextPage" href="javascript:void(0);" onclick="movePage(${pagination.endPage + 1});">
+            <a class="pagination_next" v-if="pagination && pagination.existNextPage" href="javascript:void(0);" v-on:click="movePage(pagination.endPage + 1)">
               다음
               <svg class="after" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <path d="M80 50L20 90V10Z" />
               </svg>
             </a>
-            <a class="pagination_next" v-if="pagination && pagination.existNextPage" href="javascript:void(0);" onclick="movePage(${pagination.totalPageCount});">
+            <a class="pagination_next" v-if="pagination && pagination.existNextPage" href="javascript:void(0);" v-on:click="movePage(pagination.totalPageCount)">
               마지막
               <svg class="after" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <path d="M80 50L20 90V10Z" />
@@ -104,6 +104,23 @@ export default {
     this.getGoods();
   }
   ,methods: {
+    movePage(page) {
+      const queryParams = {
+        page: (page) ? page : 1,
+        recordSize: 8,
+        pageSize: 10
+      }
+      const baseURI = 'https://api.jurospring.o-r.kr';
+      axios.get(`${baseURI}/goods`,
+      {
+        params : queryParams
+      },
+      ).then(res => {
+        console.log(result);
+      this.goods = result.data.list;
+      this.pagination = result.data.pagination;
+      });
+    },
     numberWithCommas(x) {
       if(x == 0) {
         return "무료"
