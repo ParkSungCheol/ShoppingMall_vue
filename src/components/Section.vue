@@ -146,9 +146,11 @@ export default {
       })
     },
     filteredNum() {
-    const start = this.pagination.startPage;
-    const end = this.pagination.endPage;
-    return Array.from({ length: end - start + 1 }, (_, index) => start + index);
+      if(this.pagination) {
+        const start = this.pagination.startPage;
+        const end = this.pagination.endPage;
+        return Array.from({ length: end - start + 1 }, (_, index) => start + index);
+      }
   }
   }
 }
