@@ -60,7 +60,7 @@
             <div class="pagination_num">
               <a class="pagination_btn_page" v-for="i in filteredNum" href="javascript:void(0);" v-on:click="movePage(i, 'current')" v-bind:style="{ 
                 color: !searchDto && i == 1? 'red' : searchDto && searchDto.page == i ? 'red' : 'black',
-                pointer: !searchDto && i == 1? none : searchDto && searchDto.page == i ? none : 'black'
+                cursor: !searchDto && i == 1? 'default' : searchDto && searchDto.page == i ? 'default' : 'pointer'
                 }">{{ i }}</a>
             </div>
             <a class="pagination_next" v-if="pagination && pagination.existNextPage" href="javascript:void(0);" v-on:click="movePage(pagination.endPage + 1, 'forward')">
