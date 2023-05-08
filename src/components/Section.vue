@@ -3,9 +3,9 @@
       <div class="container px-4 px-lg-5 mt-5">
           <form class="d-flex" style="margin-bottom:50px" ref="scrollTarget">
             <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" v-model="search"/>
-            <button type="button">
-              <svg width="50" height="34" viewBox="0 0 50 34" fill="none">
-              <path fill="#000000" stroke="#00A030" d="M.5.5h49v33H.5z"></path>
+            <button type="button" class="searchButton">
+              <svg width="50" height="40" viewBox="0 0 50 34" fill="none">
+              <path fill="#000000" stroke="#000000" d="M.5.5h49v33H.5z"></path>
               <g filter="url(#iconMagnifierBox_50x34_green_svg__filter0_d_4_5922)" stroke="#fff" stroke-width="2">
                 <path d="M28 20l6 5"></path>
                 <circle cx="23.5" cy="15.5" r="6.5"></circle>
@@ -231,5 +231,16 @@ option {
   margin: 10px 0 0 4px;
   vertical-align: top;
   content: "";
+}
+.form-control {
+  height: 40px;
+  padding-right: 0px !important;
+  margin-right: 0px !important;
+}
+.searchButton {
+  border: none;
+  background: none;
+  margin-left: 0px !important;
+  padding-left: 0px !important;
 }
 </style>
