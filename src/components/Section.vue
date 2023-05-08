@@ -1,5 +1,5 @@
 <template>
-  <section class="py-5">
+  <section>
       <div class="container px-4 px-lg-5 mt-5">
           <form class="d-flex" ref="scrollTarget">
             <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" v-model="search"/>
