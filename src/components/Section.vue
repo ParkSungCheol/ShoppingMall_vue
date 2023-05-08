@@ -210,9 +210,6 @@ option {
   color: #333;
 }
 .after {
-  background-image: url(https://ssl.pstatic.net/shoppingsearch/static/pc/pc-230504-122416/img/sprite/png/spSearch.png);
-  background-size: 263px 240px;
-  background-position: -256px -71px;
   width: 5px;
   height: 7px;
   display: inline-block;
