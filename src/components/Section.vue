@@ -139,7 +139,7 @@ export default {
         this.goods = result.data.list;
         this.pagination = result.data.pagination;
         this.searchDto = result.data.searchDto;
-        const scrollTarget = this.$refs.scrollTarget
+        const scrollTarget = this.$refs.scrollTarget;
         window.scrollTo({
           top: scrollTarget.offsetTop,
           behavior: 'smooth'
