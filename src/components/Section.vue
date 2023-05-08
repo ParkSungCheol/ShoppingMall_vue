@@ -43,13 +43,15 @@
                     </div>
                 </div>
             </ul>
+            <div class="pagination">
             <a v-if="pagination && pagination.existPrevPage" href="javascript:void(0);" onclick="movePage(1)" class="page_bt first">첫 페이지</a>
             <a v-if="pagination && pagination.existPrevPage" href="javascript:void(0);" onclick="movePage(${pagination.startPage - 1})" class="page_bt prev">이전 페이지</a>
-            <p>
-              <a v-for="i in filteredNum" href="javascript:void(0);" onclick="movePage(${i});">{{ i }}</a>
-            </p>
-            <a v-if="pagination && pagination.existNextPage" href="javascript:void(0);" onclick="movePage(${pagination.endPage + 1});" class="page_bt next">다음 페이지</a>
-            <a v-if="pagination && pagination.existNextPage" href="javascript:void(0);" onclick="movePage(${pagination.totalPageCount});" class="page_bt last">마지막 페이지</a>
+            <div class="pagination_num">
+              <a class="pagination_btn_page" v-for="i in filteredNum" href="javascript:void(0);" onclick="movePage(${i});">{{ i }}</a>
+            </div>
+            <a class="pagination_next" v-if="pagination && pagination.existNextPage" href="javascript:void(0);" onclick="movePage(${pagination.endPage + 1});" class="page_bt next">다음 페이지</a>
+            <a class="pagination_next" v-if="pagination && pagination.existNextPage" href="javascript:void(0);" onclick="movePage(${pagination.totalPageCount});" class="page_bt last">마지막 페이지</a>
+            </div>
           </div>
       </div>
   </section>
@@ -169,5 +171,30 @@ option {
   text-decoration: none;
   color: black;
   cursor: pointer;
+}
+.pagination {
+  padding: 20px 0 35px;
+  text-align: center;
+}
+.pagination .pagination_num {
+  display: inline-block;
+  margin: 0 2px;
+  vertical-align: top;
+}
+
+.pagination .pagination_next {
+  display: inline-block;
+  margin: 0 2px;
+  vertical-align: top;
+}
+.pagination .pagination_btn_page {
+  display: inline-block;
+  width: 26px;
+  border: 1px solid transparent;
+  font-family: tahoma,sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 26px;
+  color: #333;
 }
 </style>
