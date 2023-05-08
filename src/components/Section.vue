@@ -115,8 +115,8 @@ export default {
       {
         params : queryParams
       },
-      ).then(res => {
-        console.log(result);
+      ).then(result => {
+      console.log(result);
       this.goods = result.data.list;
       this.pagination = result.data.pagination;
       });
