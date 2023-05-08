@@ -139,7 +139,10 @@ export default {
         this.goods = result.data.list;
         this.pagination = result.data.pagination;
         this.searchDto = result.data.searchDto;
-        this.$router.push('/');
+        window.scrollTo({
+          top: 0, 
+          behavior: auto
+        });
       });
     },
     numberWithCommas(x) {
