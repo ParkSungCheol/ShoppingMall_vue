@@ -25,7 +25,7 @@
             </svg>
             </button>
           </form>
-          <div>
+          <!-- <div>
             <div>가격</div>
             <div>
               <span>직접입력</span>
@@ -38,11 +38,11 @@
               </span>
               <a href="#" role="button">가격대 검색</a>
             </div>
-          </div>
-          <div style="margin-bottom:50px">
-            <a href="#" role="button">낮은 가격순</a>
-            <a href="#" role="button">높은 가격순</a>
-            <a href="#" role="button">등록일순</a>
+          </div> -->
+          <div class="sortArea">
+            <a class="sortElement" href="#" role="button">낮은 가격순</a>
+            <a class="sortElement" href="#" role="button">높은 가격순</a>
+            <a class="sortElement" href="#" role="button">등록일순</a>
           </div>
           <h3 v-if="goods.length == 0">검색 결과가 존재하지 않습니다.</h3>
           <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
@@ -263,5 +263,21 @@ option {
   background: none;
   margin-left: 0px !important;
   padding-left: 0px !important;
+}
+.sortArea {
+  margin-bottom: 50px;
+  position: relative;
+  z-index: 20;
+  height: 42px;
+  border-bottom: 1px solid #ebebeb;
+}
+.sortArea .sortElement {
+  display: inline-block;
+  margin-left: 10px;
+  font-family: gulim,sans-serif;
+  line-height: 42px;
+  color: #959595;
+  vertical-align: top;
+  letter-spacing: -.5px;
 }
 </style>
