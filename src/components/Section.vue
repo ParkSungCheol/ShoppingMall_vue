@@ -265,6 +265,8 @@ option {
   padding-left: 0px !important;
 }
 .sortArea {
+  text-align: -webkit-left;
+  font-size: small;
   margin-bottom: 50px;
   position: relative;
   z-index: 20;
