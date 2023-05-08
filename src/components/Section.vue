@@ -24,6 +24,11 @@
               </defs>
             </svg>
             </button>
+            <div>
+              <a href="#" role="button">낮은 가격순</a>
+              <a href="#" role="button">높은 가격순</a>
+              <a href="#" role="button">등록일순</a>
+            </div>
           </form>
           <h3 v-if="goods.length == 0">검색 결과가 존재하지 않습니다.</h3>
           <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
@@ -233,7 +238,7 @@ option {
   content: "";
 }
 .form-control {
-  border-radius: none !important;
+  border-radius: 0px !important;
   height: 35px;
   margin-top:3px;
   padding-right: 0px !important;
