@@ -85,7 +85,7 @@ export default {
       axios.get(`${baseURI}/goods`)
       .then((result) => {
         console.log(result);
-        this.goods = result.data;
+        this.goods = result.data.list;
       });
     },
     sorting(event) {
