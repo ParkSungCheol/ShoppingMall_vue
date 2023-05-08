@@ -44,29 +44,29 @@
                 </div>
             </ul>
             <div class="pagination">
-            <a class="pagination_next" v-if="pagination && pagination.existPrevPage" href="javascript:void(0);" v-on:click="movePage(1)">
+            <a class="pagination_next" v-if="pagination && pagination.existPrevPage" href="javascript:void(0);" v-on:click="movePage(1, 'back')">
               처음
               <svg class="after" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <path transform="scale(-1, 1) translate(-100, 0)" d="M80 50L20 10V90Z" />
                 <path transform="scale(-1, 1) translate(-150, 0)" d="M80 50L20 10V90Z" />
               </svg>
             </a>
-            <a class="pagination_next" v-if="pagination && pagination.existPrevPage" href="javascript:void(0);" v-on:click="movePage(pagination.startPage - 1)">
+            <a class="pagination_next" v-if="pagination && pagination.existPrevPage" href="javascript:void(0);" v-on:click="movePage(pagination.startPage - 1, 'back')">
               이전
               <svg class="after" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <path transform="scale(-1, 1) translate(-100, 0)" d="M80 50L20 10V90Z" />
               </svg>
             </a>
             <div class="pagination_num">
-              <a class="pagination_btn_page" v-for="i in filteredNum" href="javascript:void(0);" v-on:click="if(!searchDto && i == 1) return; else if(searchDto && searchDto.page == i) return; else movePage(i)" v-bind:style="{ color: !searchDto && i == 1? 'red' : searchDto && searchDto.page == i ? 'red' : 'black' }">{{ i }}</a>
+              <a class="pagination_btn_page" v-for="i in filteredNum" href="javascript:void(0);" v-on:click="movePage(i, 'current')" v-bind:style="{ color: !searchDto && i == 1? 'red' : searchDto && searchDto.page == i ? 'red' : 'black' }">{{ i }}</a>
             </div>
-            <a class="pagination_next" v-if="pagination && pagination.existNextPage" href="javascript:void(0);" v-on:click="movePage(pagination.endPage + 1)">
+            <a class="pagination_next" v-if="pagination && pagination.existNextPage" href="javascript:void(0);" v-on:click="movePage(pagination.endPage + 1, 'forward')">
               다음
               <svg class="after" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <path d="M80 50L20 90V10Z" />
               </svg>
             </a>
-            <a class="pagination_next" v-if="pagination && pagination.existNextPage" href="javascript:void(0);" v-on:click="movePage(pagination.totalPageCount)">
+            <a class="pagination_next" v-if="pagination && pagination.existNextPage" href="javascript:void(0);" v-on:click="movePage(pagination.totalPageCount, 'forward')">
               마지막
               <svg class="after" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <path d="M80 50L20 90V10Z" />
@@ -105,7 +105,11 @@ export default {
     this.getGoods();
   }
   ,methods: {
-    movePage(page) {
+    movePage(page, position) {
+      if(position == "current") {
+        if(!this.searchDto && page == 1) return;
+        else if(this.searchDto && this.searchDto.page == page) return;
+      }
       const queryParams = {
         page: (page) ? page : 1,
         recordSize: 8,
