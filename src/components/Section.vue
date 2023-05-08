@@ -3,17 +3,10 @@
       <div class="container px-4 px-lg-5 mt-5">
           <form class="d-flex" style="margin-bottom:50px">
             <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" v-model="search"/>
-            <div class="btn-group sort-btn">
-            <button v-on:click='toggleShow' class="btn btn-primary" style="width:80px">{{ sortMsg }}</button>
-            <button class="btn btn-primary" data-sort="none" v-on:click="sorting"><i class="fa fa-sort" ref="toggle"></i></button><!-- .dropdown-toggle adds rounded borders and reduces padding. It does not trigger dropdowns. -->
-            <ul v-if="showMenu" class='dropdown-menu' style="margin-top:40px; display: inline-block;" ref="menu">
-              <option v-for='sort in sorts' href="#" tabindex="-1" data-type="alpha" v-on:click="selectSort" :value="sort">{{ sort }}</option>
-            </ul>
-            </div>
           </form>
-          <h3 v-if="filteredList.length == 0">검색 결과가 존재하지 않습니다.</h3>
+          <h3 v-if="goods.length == 0">검색 결과가 존재하지 않습니다.</h3>
           <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            <ul v-for="item in filteredList">
+            <ul v-for="item in goods">
                 <div class="col mb-5">
                     <div class="card h-100">
                         <!-- Product image-->
@@ -93,9 +86,6 @@ export default {
       goods : [],
       pagination: null,
       searchDto: null,
-      sortDir : '',
-      sortMsg : 'Sort',
-      sorts : ['Name', 'Price']
     }
   },
   props: {
@@ -147,59 +137,16 @@ export default {
         this.goods = result.data.list;
         this.pagination = result.data.pagination;
       });
-    },
-    sorting(event) {
-      event.stopPropagation();
-      event.preventDefault();
-
-      if(this.sortDir !== 'asc') {
-        this.sortDir = 'asc';
-      }
-      else {
-        this.sortDir = 'desc';
-      }
-
-      this.$refs['toggle'].classList = ['fa fa-sort-' + this.sortDir];
-
-      if(this.sortMsg == "Name" && this.sortDir != '') {
-        this.goods = this.goods.sort((a, b) => {
-          if(this.sortDir == "asc") 
-            return a.name.localeCompare(b.name)
-          return b.name.localeCompare(a.name)
-        });
-      }
-      else if(this.sortMsg == "Price" && this.sortDir != '') {
-        this.goods = this.goods.sort((a, b) => {
-          if(this.sortDir == "asc") 
-            return a.price - b.price
-          return b.price - a.price
-        });
-      }
-    },
-    toggleShow(event) {
-      event.stopPropagation();
-      event.preventDefault();
-      this.$emit("toggleMenu");
-    },
-    selectSort(e) {
-      this.sortMsg = e.target.value;
-      this.sortDir = '';
-      this.$refs['toggle'].classList = ['fa fa-sort'];
     }
-  }
-  ,computed: {
-    filteredList() {
-      return this.goods.filter(good => {
-        return good.name.toLowerCase().includes(this.search.toLowerCase())
-      })
-    },
+  },
+  computed: {
     filteredNum() {
       if(this.pagination) {
         const start = this.pagination.startPage;
         const end = this.pagination.endPage;
         return Array.from({ length: end - start + 1 }, (_, index) => start + index);
       }
-  }
+    }
   }
 }
 </script>
