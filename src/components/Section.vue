@@ -44,7 +44,7 @@
                 </div>
             </ul>
           </div>
-          <div class="pagination">
+          <div class="pagination justify-content-center">
             <a class="pagination_next" v-if="pagination && pagination.existPrevPage" href="javascript:void(0);" v-on:click="movePage(1, 'back')">
               처음
               <svg class="after" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -253,7 +253,7 @@ option {
   color: #333;
 }
 .after {
-  width: 5px;
+  width: 1em;
   height: 7px;
   display: inline-block;
   margin: 10px 0 0 4px;
