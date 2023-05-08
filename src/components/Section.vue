@@ -1,7 +1,7 @@
 <template>
   <section class="py-5">
       <div class="container px-4 px-lg-5 mt-5">
-          <form class="d-flex" style="margin-bottom:50px" ref="scrollTarget">
+          <form class="d-flex" ref="scrollTarget">
             <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" v-model="search"/>
             <button type="button" class="searchButton">
               <svg width="50" height="40" viewBox="0 0 50 34" fill="none">
@@ -39,7 +39,7 @@
               <a href="#" role="button">가격대 검색</a>
             </div>
           </div>
-          <div>
+          <div style="margin-bottom:50px">
             <a href="#" role="button">낮은 가격순</a>
             <a href="#" role="button">높은 가격순</a>
             <a href="#" role="button">등록일순</a>
