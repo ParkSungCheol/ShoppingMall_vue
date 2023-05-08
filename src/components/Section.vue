@@ -58,8 +58,8 @@
             <a class="pagination_next" v-if="pagination && pagination.existNextPage" href="javascript:void(0);" onclick="movePage(${pagination.totalPageCount});">
               마지막
               <svg class="after" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <path d="M20 50L50 75L80 50" />
-                <path d="M20 50L50 25L80 50" />
+                <path d="M80 50L20 90V10Z" />
+                <path d="M80 50L20 90V10Z" transform="translate(10,0)" />
               </svg>
             </a>
             </div>
