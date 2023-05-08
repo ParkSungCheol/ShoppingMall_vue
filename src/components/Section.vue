@@ -186,7 +186,11 @@ option {
 
 .pagination .pagination_next {
   display: inline-block;
-  margin: 0 2px;
+  margin: 0 4px;
+  font-family: gulim,sans-serif;
+  font-size: 12px;
+  line-height: 28px;
+  color: #959595;
   vertical-align: top;
 }
 .pagination .pagination_btn_page {
