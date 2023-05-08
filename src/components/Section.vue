@@ -46,7 +46,7 @@
             <a v-if="pagination && pagination.existPrevPage" href="javascript:void(0);" onclick="movePage(1)" class="page_bt first">첫 페이지</a>
             <a v-if="pagination && pagination.existPrevPage" href="javascript:void(0);" onclick="movePage(${pagination.startPage - 1})" class="page_bt prev">이전 페이지</a>
             <p>
-              <a v-for="i in pagination.endPage - pagination.startPage + 1" v-if="pagination && i >= pagination.startPage && i <= pagination.endPage" href="javascript:void(0);" onclick="movePage(${i});">{{ i }}</a>
+              <a v-for="i in filteredNum" href="javascript:void(0);" onclick="movePage(${i});">{{ i }}</a>
             </p>
             <a v-if="pagination && pagination.existNextPage" href="javascript:void(0);" onclick="movePage(${pagination.endPage + 1});" class="page_bt next">다음 페이지</a>
             <a v-if="pagination && pagination.existNextPage" href="javascript:void(0);" onclick="movePage(${pagination.totalPageCount});" class="page_bt last">마지막 페이지</a>
@@ -142,7 +142,12 @@ export default {
       return this.goods.filter(good => {
         return good.name.toLowerCase().includes(this.search.toLowerCase())
       })
-    }
+    },
+    filteredNum() {
+    const start = this.pagination.startPage;
+    const end = this.pagination.endPage;
+    return Array.from({ length: end - start + 1 }, (_, index) => start + index);
+  }
   }
 }
 </script>
