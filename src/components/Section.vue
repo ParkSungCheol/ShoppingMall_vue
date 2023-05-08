@@ -44,8 +44,19 @@
                 </div>
             </ul>
             <div class="pagination">
-            <a v-if="pagination && pagination.existPrevPage" href="javascript:void(0);" onclick="movePage(1)">첫 페이지</a>
-            <a v-if="pagination && pagination.existPrevPage" href="javascript:void(0);" onclick="movePage(${pagination.startPage - 1})">이전 페이지</a>
+            <a class="pagination_next" v-if="pagination && pagination.existPrevPage" href="javascript:void(0);" onclick="movePage(1);">
+              처음
+              <svg class="after" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M80 50L20 10V90Z" />
+                <path d="M80 50L20 10V90Z" transform="translate(-50,0)"/>
+              </svg>
+            </a>
+            <a class="pagination_next" v-if="pagination && pagination.existPrevPage" href="javascript:void(0);" onclick="movePage(${pagination.startPage - 1});">
+              이전
+              <svg class="after" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M80 50L20 10V90Z" />
+              </svg>
+            </a>
             <div class="pagination_num">
               <a class="pagination_btn_page" v-for="i in filteredNum" href="javascript:void(0);" onclick="movePage(${i});">{{ i }}</a>
             </div>
@@ -59,7 +70,7 @@
               마지막
               <svg class="after" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <path d="M80 50L20 90V10Z" />
-                <path d="M80 50L20 90V10Z" transform="translate(10,0)" />
+                <path d="M80 50L20 90V10Z" transform="translate(50,0)" />
               </svg>
             </a>
             </div>
