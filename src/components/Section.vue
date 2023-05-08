@@ -153,8 +153,8 @@ option {
 }
 
 .page-button {
-  display: inline-block;
-  border-left: 1px solid #ebecee;
+  display: block;
+  border-top: 1px solid #ebecee;
   margin-left: 10px;
   padding-left: 10px;
 }
