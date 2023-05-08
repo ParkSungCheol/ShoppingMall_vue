@@ -12,6 +12,7 @@
             </div>
           </form>
           <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <h3 v-if="filteredList.length != 0">검색 결과가 존재하지 않습니다.</h3>
             <ul v-for="item in filteredList">
                 <div class="col mb-5">
                     <div class="card h-100">
