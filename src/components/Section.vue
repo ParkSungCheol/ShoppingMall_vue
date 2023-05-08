@@ -3,6 +3,7 @@
       <div class="container px-4 px-lg-5 mt-5">
           <form class="d-flex" style="margin-bottom:50px">
             <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" v-model="search"/>
+            <button type="button" class="_searchInput_button_search_1n1aw"><svg width="50" height="34" viewBox="0 0 50 34" fill="none" class="_searchInput_icon_DaIWa"><path fill="#00C73C" stroke="#00A030" d="M.5.5h49v33H.5z"></path><g filter="url(#iconMagnifierBox_50x34_green_svg__filter0_d_4_5922)" stroke="#fff" stroke-width="2"><path d="M28 20l6 5"></path><circle cx="23.5" cy="15.5" r="6.5"></circle></g><defs><filter id="iconMagnifierBox_50x34_green_svg__filter0_d_4_5922" x="14" y="6" width="22.64" height="21.768" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix><feOffset></feOffset><feGaussianBlur stdDeviation="1"></feGaussianBlur><feComposite in2="hardAlpha" operator="out"></feComposite><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.35 0"></feColorMatrix><feBlend in2="BackgroundImageFix" result="effect1_dropShadow_4_5922"></feBlend><feBlend in="SourceGraphic" in2="effect1_dropShadow_4_5922" result="shape"></feBlend></filter></defs></svg><span class="blind ">네이버쇼핑 검색</span></button>
           </form>
           <h3 v-if="goods.length == 0">검색 결과가 존재하지 않습니다.</h3>
           <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
@@ -114,10 +115,15 @@ export default {
         params : queryParams
       },
       ).then(result => {
-      console.log(result);
-      this.goods = result.data.list;
-      this.pagination = result.data.pagination;
-      this.searchDto = result.data.searchDto;
+        console.log(result);
+        this.goods = result.data.list;
+        this.pagination = result.data.pagination;
+        this.searchDto = result.data.searchDto;
+        window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth' // 스크롤 애니메이션 효과를 부여
+    });
       });
     },
     numberWithCommas(x) {
