@@ -43,7 +43,8 @@
                     </div>
                 </div>
             </ul>
-            <div class="pagination">
+          </div>
+          <div class="pagination">
             <a class="pagination_next" v-if="pagination && pagination.existPrevPage" href="javascript:void(0);" v-on:click="movePage(1, 'back')">
               처음
               <svg class="after" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -76,7 +77,6 @@
                 <path d="M80 50L20 90V10Z" transform="translate(50,0)" />
               </svg>
             </a>
-            </div>
           </div>
       </div>
   </section>
