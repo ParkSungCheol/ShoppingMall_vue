@@ -25,7 +25,20 @@
             </svg>
             </button>
           </form>
-          <div><div>가격</div><div><span>직접입력</span><span><input type="text" title="최소가격 입력" placeholder="1,000" value="">원</span><span>~</span><span><input type="text" placeholder="1,000,000" value="" title="최대가격 입력">원</span><a href="#" role="button">가격대 검색</a></div></div></div>
+          <div>
+            <div>가격</div>
+            <div>
+              <span>직접입력</span>
+              <span>
+                <input type="text" title="최소가격 입력" placeholder="1,000" value="" />원
+              </span>
+              <span>~</span>
+              <span>
+                <input type="text" placeholder="1,000,000" value="" title="최대가격 입력" />원
+              </span>
+              <a href="#" role="button">가격대 검색</a>
+            </div>
+          </div>
           <div>
             <a href="#" role="button">낮은 가격순</a>
             <a href="#" role="button">높은 가격순</a>
