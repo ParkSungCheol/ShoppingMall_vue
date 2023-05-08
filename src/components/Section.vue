@@ -49,7 +49,12 @@
             <div class="pagination_num">
               <a class="pagination_btn_page" v-for="i in filteredNum" href="javascript:void(0);" onclick="movePage(${i});">{{ i }}</a>
             </div>
-            <a class="pagination_next" v-if="pagination && pagination.existNextPage" href="javascript:void(0);" onclick="movePage(${pagination.endPage + 1});">다음<img class="after"></a>
+            <a class="pagination_next" v-if="pagination && pagination.existNextPage" href="javascript:void(0);" onclick="movePage(${pagination.endPage + 1});">
+              다음
+              <svg class = "after" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 50L80 90V10Z" />
+              </svg>
+            </a>
             <a class="pagination_next" v-if="pagination && pagination.existNextPage" href="javascript:void(0);" onclick="movePage(${pagination.totalPageCount});">마지막 페이지</a>
             </div>
           </div>
@@ -175,6 +180,7 @@ option {
   cursor: pointer;
 }
 .pagination {
+  width: auto;
   padding: 20px 0 35px;
   text-align: center;
 }
