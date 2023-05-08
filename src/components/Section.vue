@@ -49,7 +49,7 @@
             <div class="pagination_num">
               <a class="pagination_btn_page" v-for="i in filteredNum" href="javascript:void(0);" onclick="movePage(${i});">{{ i }}</a>
             </div>
-            <a class="pagination_next" v-if="pagination && pagination.existNextPage" href="javascript:void(0);" onclick="movePage(${pagination.endPage + 1});">다음 페이지</a>
+            <a class="pagination_next" v-if="pagination && pagination.existNextPage" href="javascript:void(0);" onclick="movePage(${pagination.endPage + 1});">다음<img class="after"></a>
             <a class="pagination_next" v-if="pagination && pagination.existNextPage" href="javascript:void(0);" onclick="movePage(${pagination.totalPageCount});">마지막 페이지</a>
             </div>
           </div>
@@ -202,5 +202,16 @@ option {
   font-weight: 700;
   line-height: 26px;
   color: #333;
+}
+.after {
+  background-image: url(https://ssl.pstatic.net/shoppingsearch/static/pc/pc-230504-122416/img/sprite/png/spSearch.png);
+  background-size: 263px 240px;
+  background-position: -256px -71px;
+  width: 5px;
+  height: 7px;
+  display: inline-block;
+  margin: 10px 0 0 4px;
+  vertical-align: top;
+  content: "";
 }
 </style>
