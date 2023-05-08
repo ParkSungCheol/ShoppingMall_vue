@@ -21,7 +21,7 @@
                         <div class="card-body p-4">
                             <div class="text-center">
                                 <!-- Product name-->
-                                <h5 class="fw-bolder">{{ item.name }}</h5>
+                                <h5 class="fw-bolder"><a :href= "item.detail">{{ item.name }}</a></h5>
                                 <!-- Product price-->
                                 <h5 class="fw-bolder" style="color:red">{{ numberWithCommas(item.price) }}</h5>
                                 <svg width="15" height="12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -38,7 +38,6 @@
                         <!-- Product actions-->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                             <span>{{ item.sellid }}</span>
-                            <div class="text-center page-button"><a class="btn btn-outline-dark mt-auto" :href= "item.detail" onclick="window.open(this.href, '_blank'); return false;">상세페이지</a></div>
                         </div>
                     </div>
                 </div>
@@ -150,12 +149,5 @@ option {
     text-decoration: none;
     background-color: #f5f5f5;
     border: red solid 1px;
-}
-
-.page-button {
-  display: block;
-  border-top: 1px solid #ebecee;
-  margin-left: 10px;
-  padding-left: 10px;
 }
 </style>
