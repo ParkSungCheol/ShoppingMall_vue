@@ -47,14 +47,14 @@
             <a class="pagination_next" v-if="pagination && pagination.existPrevPage" href="javascript:void(0);" v-on:click="movePage(1)">
               처음
               <svg class="after" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <path d="M80 50L20 10V90Z" />
-                <path d="M80 50L20 10V90Z" transform="translate(-50,0)"/>
+                <path d="M80 50L20 10V90Z" transform="scaleX(-1)"/>
+                <path d="M80 50L20 10V90Z" transform="scaleX(-1); translate(-50,0)"/>
               </svg>
             </a>
             <a class="pagination_next" v-if="pagination && pagination.existPrevPage" href="javascript:void(0);" v-on:click="movePage(pagination.startPage - 1)">
               이전
               <svg class="after" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <path d="M80 50L20 10V90Z" />
+                <path d="M80 50L20 10V90Z" transform="scaleX(-1)"/>
               </svg>
             </a>
             <div class="pagination_num">
