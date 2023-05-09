@@ -21,7 +21,8 @@
           <div class="sortArea">
             <a class="sortElement" href="javascript:void(0);" role="button" v-on:click="movePage(1, 'order_priceASC')">낮은 가격순</a>
             <a class="sortElement" href="javascript:void(0);" role="button" v-on:click="movePage(1, 'order_priceDESC')">높은 가격순</a>
-            <a class="sortElement" href="javascript:void(0);" role="button" v-on:click="movePage(1, 'order_dateDESC')">등록일순</a>
+            <a class="sortElement" href="javascript:void(0);" role="button" v-on:click="movePage(1, 'order_dateDESC')">최신순</a>
+            <a class="sortElement" href="javascript:void(0);" role="button" v-on:click="movePage(1, 'order_dateASC')">오래된순</a>
           </div>
           <h3 v-if="goods.length == 0">검색 결과가 존재하지 않습니다.</h3>
           <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
