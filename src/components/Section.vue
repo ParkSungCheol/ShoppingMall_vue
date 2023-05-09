@@ -5,16 +5,16 @@
             <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" v-model="search"/>
             <button type="submit" class="searchButton"><i class="fa fa-search"></i></button>
           </form>
-          <div>
-            <div>가격</div>
-            <div>
+          <div class="detailSearch">
+            <div class="searchType">가격</div>
+            <div class="searchType2">
               <span>직접입력</span>
               <span>
-                <input type="text" title="최소가격 입력" placeholder="1,000" value="" />원
+                <input class="searchInput1" type="text" title="최소가격 입력" placeholder="1,000" value="" />원
               </span>
               <span>~</span>
               <span>
-                <input type="text" placeholder="1,000,000" value="" title="최대가격 입력" />원
+                <input class="searchInput2" type="text" placeholder="1,000,000" value="" title="최대가격 입력" />원
               </span>
               <button type="submit" class="searchButton"><i class="fa fa-search"></i></button>
             </div>
@@ -259,5 +259,42 @@ option {
   color: #959595;
   vertical-align: top;
   letter-spacing: -.5px;
+}
+.detailSearch {
+  margin-left: 0px !important;
+  padding-left: 0px !important;
+  text-align: left;
+}
+.detailSearch .searchType {
+  text-align: center;
+  display: inline-block;
+  position: relative;
+  top: -1px;
+  bottom: -1px;
+  left: 0px;
+  width: 20%;
+  background-color: black;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 41px;
+  color: #fff;
+  box-sizing: border-box;
+}
+.detailSearch .searchType2 {
+  display: inline-block;
+  max-width: 78%;
+  max-height: 41px;
+  vertical-align: top;
+  background: none;
+  border: 0;
+  margin-left: 2%;
+  height: 41px;
+  vertical-align: sub;
+}
+.detailSearch .searchInput1 {
+  width: 28%;
+}
+.detailSearch .searchInput2 {
+  width: 40%;
 }
 </style>
