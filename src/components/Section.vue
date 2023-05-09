@@ -19,10 +19,22 @@
             </div>
           </div>
           <div class="sortArea">
-            <a class="sortElement" href="javascript:void(0);" role="button" v-on:click="movePage(1, 'order_dateDESC')" v-bind:style="{ color: searchSort == 'dateDESC'? 'red' : 'black' }">최신순</a>
-            <a class="sortElement" href="javascript:void(0);" role="button" v-on:click="movePage(1, 'order_dateASC')" v-bind:style="{ color: searchSort == 'dateASC'? 'red' : 'black' }">오래된순</a>
-            <a class="sortElement" href="javascript:void(0);" role="button" v-on:click="movePage(1, 'order_priceASC')" v-bind:style="{ color: searchSort == 'priceASC'? 'red' : 'black' }">낮은 가격순</a>
-            <a class="sortElement" href="javascript:void(0);" role="button" v-on:click="movePage(1, 'order_priceDESC')" v-bind:style="{ color: searchSort == 'priceDESC'? 'red' : 'black' }">높은 가격순</a>
+            <a class="sortElement" href="javascript:void(0);" role="button" v-on:click="movePage(1, 'order_dateDESC')" v-bind:style="{ 
+              color: searchSort == 'dateDESC'? 'red' : 'black',
+              cursor: searchSort == 'dateDESC'? 'default' : 'pointer'
+              }">최신순</a>
+            <a class="sortElement" href="javascript:void(0);" role="button" v-on:click="movePage(1, 'order_dateASC')" v-bind:style="{ 
+              color: searchSort == 'dateASC'? 'red' : 'black',
+              cursor: searchSort == 'dateASC'? 'default' : 'pointer' 
+              }">오래된순</a>
+            <a class="sortElement" href="javascript:void(0);" role="button" v-on:click="movePage(1, 'order_priceASC')" v-bind:style="{ 
+              color: searchSort == 'priceASC'? 'red' : 'black',
+              cursor: searchSort == 'priceASC'? 'default' : 'pointer'
+              }">낮은 가격순</a>
+            <a class="sortElement" href="javascript:void(0);" role="button" v-on:click="movePage(1, 'order_priceDESC')" v-bind:style="{ 
+              color: searchSort == 'priceDESC'? 'red' : 'black',
+              cursor: searchSort == 'priceDESC'? 'default' : 'pointer' 
+              }">높은 가격순</a>
           </div>
           <h3 v-if="goods.length == 0">검색 결과가 존재하지 않습니다.</h3>
           <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
