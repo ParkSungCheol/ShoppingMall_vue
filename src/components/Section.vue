@@ -3,7 +3,7 @@
       <div class="container px-4 px-lg-5 mt-5">
           <form class="d-flex" ref="scrollTarget">
             <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" v-model="search"/>
-            <button type="submit"><i class="fa fa-search"></i></button>
+            <button type="submit" class="searchButton"><i class="fa fa-search"></i></button>
           </form>
           <!-- <div>
             <div>가격</div>
@@ -240,8 +240,6 @@ option {
 .searchButton {
   border: none;
   background: none;
-  margin-left: 0px !important;
-  padding-left: 0px !important;
 }
 .sortArea {
   text-align: -webkit-left;
