@@ -296,6 +296,7 @@ option {
   margin-left: 0px !important;
   padding-left: 0px !important;
   text-align: left;
+  margin-top: 20px;
 }
 .detailSearch .searchType {
   text-align: center;
