@@ -4,7 +4,7 @@
           <form class="d-flex" ref="scrollTarget" v-on:submit.prevent="onSubmit">
             <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" v-model="searchValue"/>
             <button type="button" class="searchButton" v-on:click="movePage(1, 'search')"><i class="fa fa-search"></i></button>
-          </form>
+          
           <div class="detailSearch">
             <div class="searchType">가격검색</div>
             <div class="searchType2">
@@ -18,6 +18,7 @@
               <button type="button" class="searchButton" style="padding-left: 0.2em !important;" v-on:click="movePage(1, 'search')"><i class="fa fa-search"></i></button>
             </div>
           </div>
+          </form>
           <div class="sortArea">
             <a class="sortElement" href="javascript:void(0);" role="button" v-on:click="movePage(1, 'order_dateDESC')" v-bind:style="{ 
               color: searchSort == 'dateDESC'? 'red' : 'black',
