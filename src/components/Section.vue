@@ -134,7 +134,7 @@ export default {
         searchMaxPrice: this.searchMaxPrice,
       }
       if(position.includes("order")) {
-        queryParams.orderBy = position.substring(str.indexOf("_") + 1);
+        queryParams.orderBy = position.substring(position.indexOf("_") + 1);
       }
       const baseURI = 'https://api.jurospring.o-r.kr';
       axios.get(`${baseURI}/goods`,
