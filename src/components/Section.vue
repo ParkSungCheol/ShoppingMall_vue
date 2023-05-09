@@ -120,6 +120,11 @@ export default {
     this.getGoods();
   }
   ,methods: {
+    onSubmit() {
+      // 제출을 막는 코드
+      this.movePage(1, 'search');
+      return false;
+    },
     movePage(page, position) {
       if(position == "current") {
         if(!this.searchDto && page == 1) return;
