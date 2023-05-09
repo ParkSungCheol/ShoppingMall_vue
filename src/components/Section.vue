@@ -3,27 +3,7 @@
       <div class="container px-4 px-lg-5 mt-5">
           <form class="d-flex" ref="scrollTarget">
             <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" v-model="search"/>
-            <button type="button" class="searchButton">
-              <svg width="50" height="40" viewBox="0 0 50 34" fill="none">
-              <path fill="#000000" stroke="#000000" d="M.5.5h49v33H.5z"></path>
-              <g filter="url(#iconMagnifierBox_50x34_green_svg__filter0_d_4_5922)" stroke="#fff" stroke-width="2">
-                <path d="M28 20l6 5"></path>
-                <circle cx="23.5" cy="15.5" r="6.5"></circle>
-              </g>
-              <defs>
-                <filter x="14" y="6" width="22.64" height="21.768" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                  <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
-                  <feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix>
-                  <feOffset></feOffset>
-                  <feGaussianBlur stdDeviation="1"></feGaussianBlur>
-                  <feComposite in2="hardAlpha" operator="out"></feComposite>
-                  <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.35 0"></feColorMatrix>
-                  <feBlend in2="BackgroundImageFix" result="effect1_dropShadow_4_5922"></feBlend>
-                  <feBlend in="SourceGraphic" in2="effect1_dropShadow_4_5922" result="shape"></feBlend>
-                </filter>
-              </defs>
-            </svg>
-            </button>
+            <button type="submit"><i class="fa fa-search"></i></button>
           </form>
           <!-- <div>
             <div>가격</div>
