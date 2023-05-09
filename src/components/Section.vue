@@ -240,6 +240,7 @@ option {
 .searchButton {
   border: none;
   background: none;
+  padding-left: 1em !important;
 }
 .sortArea {
   text-align: -webkit-left;
