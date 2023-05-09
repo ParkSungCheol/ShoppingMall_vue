@@ -19,10 +19,10 @@
             </div>
           </div>
           <div class="sortArea">
-            <a class="sortElement" href="javascript:void(0);" role="button" v-on:click="movePage(1, 'order_priceASC')">낮은 가격순</a>
-            <a class="sortElement" href="javascript:void(0);" role="button" v-on:click="movePage(1, 'order_priceDESC')">높은 가격순</a>
-            <a class="sortElement" href="javascript:void(0);" role="button" v-on:click="movePage(1, 'order_dateDESC')">최신순</a>
-            <a class="sortElement" href="javascript:void(0);" role="button" v-on:click="movePage(1, 'order_dateASC')">오래된순</a>
+            <a class="sortElement" href="javascript:void(0);" role="button" v-on:click="movePage(1, 'order_dateDESC')" v-bind:style="{ color: searchSort == 'dateDESC'? 'red' : 'black' }">최신순</a>
+            <a class="sortElement" href="javascript:void(0);" role="button" v-on:click="movePage(1, 'order_dateASC')" v-bind:style="{ color: searchSort == 'dateASC'? 'red' : 'black' }">오래된순</a>
+            <a class="sortElement" href="javascript:void(0);" role="button" v-on:click="movePage(1, 'order_priceASC')" v-bind:style="{ color: searchSort == 'priceASC'? 'red' : 'black' }">낮은 가격순</a>
+            <a class="sortElement" href="javascript:void(0);" role="button" v-on:click="movePage(1, 'order_priceDESC')" v-bind:style="{ color: searchSort == 'priceDESC'? 'red' : 'black' }">높은 가격순</a>
           </div>
           <h3 v-if="goods.length == 0">검색 결과가 존재하지 않습니다.</h3>
           <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
@@ -105,6 +105,7 @@ export default {
       searchValue: '',
       searchMinPrice: '',
       searchMaxPrice: '',
+      searchSort: 'dateDESC',
       goods : [],
       pagination: null,
       searchDto: null,
@@ -130,6 +131,10 @@ export default {
         if(!this.searchDto && page == 1) return;
         else if(this.searchDto && this.searchDto.page == page) return;
       }
+      if(position.includes("order")) {
+        if(this.searchSort == position.substring(position.indexOf("_") + 1)) return;
+        this.searchSort = position.substring(position.indexOf("_") + 1);
+      }
       let queryParams = {
         page: (page) ? page : 1,
         recordSize: 8,
@@ -137,9 +142,7 @@ export default {
         searchValue: this.searchValue,
         searchMinPrice: this.searchMinPrice,
         searchMaxPrice: this.searchMaxPrice,
-      }
-      if(position.includes("order")) {
-        queryParams.orderBy = position.substring(position.indexOf("_") + 1);
+        orderBy: this.searchSort
       }
       const baseURI = 'https://api.jurospring.o-r.kr';
       axios.get(`${baseURI}/goods`,
