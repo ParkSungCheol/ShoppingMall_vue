@@ -6,9 +6,8 @@
             <button type="submit" class="searchButton"><i class="fa fa-search"></i></button>
           </form>
           <div class="detailSearch">
-            <div class="searchType">가격</div>
+            <div class="searchType">가격검색</div>
             <div class="searchType2">
-              <span>직접입력</span>
               <span>
                 <input class="searchInput1" type="text" title="최소가격 입력" placeholder="1,000" value="" />원
               </span>
@@ -284,7 +283,6 @@ option {
   display: inline-block;
   max-width: 78%;
   max-height: 41px;
-  vertical-align: top;
   background: none;
   border: 0;
   margin-left: 2%;
