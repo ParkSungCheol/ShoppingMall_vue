@@ -15,7 +15,7 @@
               <span>
                 <input class="searchInput2" type="text" placeholder="1,000,000" value="" title="최대가격 입력" />원
               </span>
-              <button type="submit" class="searchButton" style="padding-left: 0.3em !important;"><i class="fa fa-search"></i></button>
+              <button type="submit" class="searchButton" style="padding-left: 0.2em !important;"><i class="fa fa-search"></i></button>
             </div>
           </div>
           <div class="sortArea">
@@ -293,7 +293,7 @@ option {
   width: 28%;
 }
 .detailSearch .searchInput2 {
-  margin-left: 2%;
+  margin-left: 1%;
   width: 40%;
 }
 </style>
