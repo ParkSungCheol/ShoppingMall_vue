@@ -293,6 +293,7 @@ option {
   width: 28%;
 }
 .detailSearch .searchInput2 {
+  margin-left: 2%;
   width: 40%;
 }
 </style>
