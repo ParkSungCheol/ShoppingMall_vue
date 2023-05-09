@@ -5,7 +5,7 @@
             <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" v-model="search"/>
             <button type="submit" class="searchButton"><i class="fa fa-search"></i></button>
           </form>
-          <!-- <div>
+          <div>
             <div>가격</div>
             <div>
               <span>직접입력</span>
@@ -18,7 +18,7 @@
               </span>
               <a href="#" role="button">가격대 검색</a>
             </div>
-          </div> -->
+          </div>
           <div class="sortArea">
             <a class="sortElement" href="#" role="button">낮은 가격순</a>
             <a class="sortElement" href="#" role="button">높은 가격순</a>
