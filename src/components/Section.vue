@@ -2,26 +2,26 @@
   <section>
       <div class="container px-4 px-lg-5 mt-5">
           <form class="d-flex" ref="scrollTarget">
-            <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" v-model="search"/>
-            <button type="submit" class="searchButton"><i class="fa fa-search"></i></button>
+            <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" v-model="searchValue"/>
+            <button type="button" class="searchButton" v-on:click="movePage(1, 'search')"><i class="fa fa-search"></i></button>
           </form>
           <div class="detailSearch">
             <div class="searchType">가격검색</div>
             <div class="searchType2">
               <span>
-                <input class="searchInput1" type="text" title="최소가격 입력" placeholder="1,000" value="" />원
+                <input class="searchInput1" type="number" placeholder="최소가격" v-model="searchMinPrice"/>원
               </span>
               <span>~</span>
               <span>
-                <input class="searchInput2" type="text" placeholder="1,000,000" value="" title="최대가격 입력" />원
+                <input class="searchInput2" type="number" placeholder="최대가격" v-model="searchMaxPrice"/>원
               </span>
-              <button type="submit" class="searchButton" style="padding-left: 0.2em !important;"><i class="fa fa-search"></i></button>
+              <button type="button" class="searchButton" style="padding-left: 0.2em !important;" v-on:click="movePage(1, 'search')"><i class="fa fa-search"></i></button>
             </div>
           </div>
           <div class="sortArea">
-            <a class="sortElement" href="#" role="button">낮은 가격순</a>
-            <a class="sortElement" href="#" role="button">높은 가격순</a>
-            <a class="sortElement" href="#" role="button">등록일순</a>
+            <a class="sortElement" href="javascript:void(0);" role="button" v-on:click="movePage(1, 'order_priceASC')">낮은 가격순</a>
+            <a class="sortElement" href="javascript:void(0);" role="button" v-on:click="movePage(1, 'order_priceDESC')">높은 가격순</a>
+            <a class="sortElement" href="javascript:void(0);" role="button" v-on:click="movePage(1, 'order_dateDESC')">등록일순</a>
           </div>
           <h3 v-if="goods.length == 0">검색 결과가 존재하지 않습니다.</h3>
           <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
@@ -101,7 +101,9 @@ export default {
   name: 'Section',
   data () {
     return {
-      search: '',
+      searchValue: '',
+      searchMinPrice: '',
+      searchMaxPrice: '',
       goods : [],
       pagination: null,
       searchDto: null,
@@ -122,10 +124,16 @@ export default {
         if(!this.searchDto && page == 1) return;
         else if(this.searchDto && this.searchDto.page == page) return;
       }
-      const queryParams = {
+      let queryParams = {
         page: (page) ? page : 1,
         recordSize: 8,
-        pageSize: 5
+        pageSize: 5,
+        searchValue: this.searchValue,
+        searchMinPrice: this.searchMinPrice,
+        searchMaxPrice: this.searchMaxPrice,
+      }
+      if(position.includes("order")) {
+        queryParams.orderBy = str.substring(str.indexOf("_") + 1);
       }
       const baseURI = 'https://api.jurospring.o-r.kr';
       axios.get(`${baseURI}/goods`,
