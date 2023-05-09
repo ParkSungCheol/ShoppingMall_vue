@@ -1,7 +1,7 @@
 <template>
   <section>
       <div class="container px-4 px-lg-5 mt-5">
-          <form class="d-flex" ref="scrollTarget">
+          <form class="d-flex" ref="scrollTarget" v-on:submit.prevent="onSubmit">
             <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" v-model="searchValue"/>
             <button type="button" class="searchButton" v-on:click="movePage(1, 'search')"><i class="fa fa-search"></i></button>
           </form>
