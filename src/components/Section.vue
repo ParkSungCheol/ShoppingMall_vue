@@ -146,7 +146,7 @@ export default {
       const queryParams = {
         page: (page) ? page : 1,
         recordSize: 8,
-        pageSize: 10
+        pageSize: 5
       }
       const baseURI = 'https://api.jurospring.o-r.kr';
       axios.get(`${baseURI}/goods`,
@@ -223,7 +223,6 @@ option {
   margin: 0 2px;
   vertical-align: top;
 }
-
 .pagination .pagination_next {
   display: inline-block;
   margin: 0 4px;
