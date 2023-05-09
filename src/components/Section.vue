@@ -16,7 +16,7 @@
               <span>
                 <input type="text" placeholder="1,000,000" value="" title="최대가격 입력" />원
               </span>
-              <a href="#" role="button">가격대 검색</a>
+              <button type="submit" class="searchButton"><i class="fa fa-search"></i></button>
             </div>
           </div>
           <div class="sortArea">
