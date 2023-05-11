@@ -79,9 +79,13 @@ export default {
 </script>
 
 <style scoped>
+nav {
+  padding: 0px !important;
+}
 .right_menu {
   width: 75%;
   display: flex;
+  justify-content: flex-end;
 }
 .right_menu .menubar {
   margin-left: 2%;
