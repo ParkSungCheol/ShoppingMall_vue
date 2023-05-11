@@ -690,7 +690,7 @@ a{
 /*input 중 radio 는 width 가 100%면 안되니까 */
 .member input:not(input[type=radio]),.member select{
     border: 1px solid #dadada;
-    padding: 15px;
+    padding: 10px;
     width: 100%;
     margin-bottom: 5px;
     min-height: 45px;
