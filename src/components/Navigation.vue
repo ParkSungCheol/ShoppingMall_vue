@@ -17,13 +17,13 @@
                   </li>
               </ul>
           </div>
-          <button class="btn btn-outline-dark" type="submit" v-if="user">
+          <button class="btn btn-outline-dark menubar" type="submit" v-if="user">
               <i class="bi-cart-fill me-1"></i>
               Cart                  
           </button>
-          <router-link class="btn btn-outline-dark" v-if="!user" to="/login">로그인</router-link>       
-          <button class="btn btn-outline-dark" v-if="user" v-on:click="logout">로그아웃</button>  
-          <router-link class="btn btn-outline-dark" v-if="user" to="/mypage">마이페이지</router-link>
+          <router-link class="btn btn-outline-dark menubar" v-if="!user" to="/login">LogIn</router-link>       
+          <button class="btn btn-outline-dark menubar" v-if="user" v-on:click="logout">LogOut</button>  
+          <router-link class="btn btn-outline-dark menubar" v-if="user" to="/mypage">MyPage</router-link>
       </div>
   </nav>
 </template>
@@ -75,3 +75,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.menubar {
+  width: 25%
+}
+</style>
