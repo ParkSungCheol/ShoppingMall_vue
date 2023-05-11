@@ -80,7 +80,7 @@ export default {
 
 <style scoped>
 nav {
-  padding: 0px !important;
+  padding: 5px 0px !important;
 }
 .right_menu {
   width: 75%;
