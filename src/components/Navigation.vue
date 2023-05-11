@@ -17,14 +17,11 @@
                   </li>
               </ul>
           </div>
-          <form class="d-flex">
-              <button class="btn btn-outline-dark" type="submit">
-                  <i class="bi-cart-fill me-1"></i>
-                  Cart
-                  <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>                   
-              </button>
-              <router-link class="btn btn-outline-dark" v-if="!user" to="/login">로그인</router-link>       
-          </form>
+          <button class="btn btn-outline-dark" type="submit" v-if="user">
+              <i class="bi-cart-fill me-1"></i>
+              Cart                  
+          </button>
+          <router-link class="btn btn-outline-dark" v-if="!user" to="/login">로그인</router-link>       
           <button class="btn btn-outline-dark" v-if="user" v-on:click="logout">로그아웃</button>  
           <router-link class="btn btn-outline-dark" v-if="user" to="/mypage">마이페이지</router-link>
       </div>
