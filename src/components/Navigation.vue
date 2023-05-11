@@ -17,7 +17,7 @@
                   </li>
               </ul>
           </div>
-          <div>
+          <div class="right_menu">
             <button class="btn btn-outline-dark menubar" type="submit" v-if="user">
                 <i class="bi-cart-fill me-1"></i>
                 Cart                  
@@ -79,8 +79,11 @@ export default {
 </script>
 
 <style scoped>
-.menubar {
-  width: 25%;
-  max-width: 70px;
+.right_menu {
+  width: 75%;
+  display: flex;
+}
+.right_menu .menubar {
+  margin-left: 2%;
 }
 </style>
