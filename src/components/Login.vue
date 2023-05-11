@@ -525,6 +525,7 @@ export default {
     padding: 10px;
     width: 100%;
     margin-bottom: 5px;
+    max-height: 40px;
 }
 #loginForm {
   text-align: center;

@@ -693,6 +693,7 @@ a{
     padding: 15px;
     width: 100%;
     margin-bottom: 5px;
+    max-height: 40px;
 }
 
 .member input[type=button],
