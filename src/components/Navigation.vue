@@ -17,13 +17,15 @@
                   </li>
               </ul>
           </div>
-          <button class="btn btn-outline-dark menubar" type="submit" v-if="user">
-              <i class="bi-cart-fill me-1"></i>
-              Cart                  
-          </button>
-          <router-link class="btn btn-outline-dark menubar" v-if="!user" to="/login">LogIn</router-link>       
-          <button class="btn btn-outline-dark menubar" v-if="user" v-on:click="logout">LogOut</button>  
-          <router-link class="btn btn-outline-dark menubar" v-if="user" to="/mypage">MyPage</router-link>
+          <div>
+            <button class="btn btn-outline-dark menubar" type="submit" v-if="user">
+                <i class="bi-cart-fill me-1"></i>
+                Cart                  
+            </button>
+            <router-link class="btn btn-outline-dark menubar" v-if="!user" to="/login">LogIn</router-link>       
+            <button class="btn btn-outline-dark menubar" v-if="user" v-on:click="logout">LogOut</button>  
+            <router-link class="btn btn-outline-dark menubar" v-if="user" to="/mypage">MyPage</router-link>
+          </div>
       </div>
   </nav>
 </template>
@@ -78,6 +80,7 @@ export default {
 
 <style scoped>
 .menubar {
-  width: 25%
+  width: 25%;
+  max-width: 70px;
 }
 </style>
