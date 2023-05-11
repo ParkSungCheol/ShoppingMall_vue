@@ -20,7 +20,8 @@
           <div class="right_menu">
             <button class="btn btn-outline-dark menubar" type="submit" v-if="user">
                 <i class="bi-cart-fill me-1"></i>
-                Cart                  
+                Cart
+                <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
             </button>
             <router-link class="btn btn-outline-dark menubar" v-if="!user" to="/login">LogIn</router-link>       
             <button class="btn btn-outline-dark menubar" v-if="user" v-on:click="logout">LogOut</button>  
