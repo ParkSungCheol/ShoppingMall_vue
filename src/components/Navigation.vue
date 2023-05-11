@@ -82,9 +82,11 @@ export default {
 <style scoped>
 nav {
   padding: 5px 0px !important;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
 }
 .right_menu {
-  width: 75%;
+  width: 82%;
   display: flex;
   justify-content: flex-end;
 }
