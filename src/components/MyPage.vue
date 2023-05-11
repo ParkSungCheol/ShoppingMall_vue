@@ -120,7 +120,7 @@
                         </div>
                         <div class="contact_form">
                             <div class="popup_row rightgap">
-                                <input type="email" placeholder="변경할 이메일 입력" v-on:keyup="keyPress($event, 'email')" ref="sendEmail" class="popup_input" :disabled="!sendEmail" style="width: 80%">
+                                <input type="email" placeholder="변경할 이메일 입력" v-on:keyup="keyPress($event, 'email')" ref="sendEmail" class="popup_input" :disabled="!sendEmail" style="width: 75%">
                                 <button type="button" class="btn_contact" v-on:click="emailCheck('sendEmail')" :disabled="!sendEmail" style="width: 20%">인증</button>
                                 <b style="color:red" v-show="email">입력한 이메일을 확인하세요</b>                          
                             </div>
@@ -141,7 +141,7 @@
                                 </select>
                             </div>
                             <div class="popup_row rightgap">
-                                <input type="tel" placeholder="변경할 전화번호 입력" v-on:keyup="keyPress($event, 'phone')" ref="sendMessage" class="popup_input" :disabled="!sendMessage" style="width: 80%">
+                                <input type="tel" placeholder="변경할 전화번호 입력" v-on:keyup="keyPress($event, 'phone')" ref="sendMessage" class="popup_input" :disabled="!sendMessage" style="width: 75%">
                                 <button type="button" class="btn_contact" v-on:click="messageCheck('sendMessage')" :disabled="!sendMessage" style="width: 20%">인증</button>
                                 <b style="color:red" v-show="phone">입력한 전화번호를 확인하세요</b>                          
                             </div>
