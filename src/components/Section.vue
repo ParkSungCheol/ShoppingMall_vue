@@ -255,6 +255,7 @@ option {
   font-weight: 700;
   line-height: 26px;
   color: #333;
+  margin: 0em 1em;
 }
 .after {
   width: 1em;
