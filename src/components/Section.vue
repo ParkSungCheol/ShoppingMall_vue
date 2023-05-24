@@ -278,7 +278,7 @@ option {
   padding-left: 1em !important;
 }
 .sortArea {
-  text-align: -webkit-left;
+  text-align: left;
   font-size: small;
   margin-bottom: 50px;
   position: relative;
