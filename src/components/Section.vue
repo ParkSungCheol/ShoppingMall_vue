@@ -21,6 +21,11 @@
             </div>
           </form>
           <div class="sortArea">
+            <a class="sortElement" href="javascript:void(0);" role="button" v-on:click="movePage(1, 'order_scoreDESC')" v-bind:style="{ 
+              color: searchSort == ''? 'red' : 'black',
+              cursor: searchSort == ''? 'default' : 'pointer',
+              'font-weight': searchSort == ''? 'bold' : 'normal',
+              }">연관도순</a>
             <a class="sortElement" href="javascript:void(0);" role="button" v-on:click="movePage(1, 'order_dateDESC')" v-bind:style="{ 
               color: searchSort == 'dateDESC'? 'red' : 'black',
               cursor: searchSort == 'dateDESC'? 'default' : 'pointer',
@@ -123,7 +128,7 @@ export default {
       searchValue: '',
       searchMinPrice: '',
       searchMaxPrice: '',
-      searchSort: 'dateDESC',
+      searchSort: '',
       goods : [],
       pagination: null,
       searchDto: null,
