@@ -26,16 +26,16 @@
               cursor: searchSort == ''? 'default' : 'pointer',
               'font-weight': searchSort == ''? 'bold' : 'normal',
               }">연관도순</a>
-            <a class="sortElement" href="javascript:void(0);" role="button" v-on:click="movePage(1, 'order_dateDESC')" v-bind:style="{ 
+            <!--<a class="sortElement" href="javascript:void(0);" role="button" v-on:click="movePage(1, 'order_dateDESC')" v-bind:style="{ 
               color: searchSort == 'dateDESC'? 'red' : 'black',
               cursor: searchSort == 'dateDESC'? 'default' : 'pointer',
               'font-weight': searchSort == 'dateDESC'? 'bold' : 'normal',
-              }">최신순</a>
-            <a class="sortElement" href="javascript:void(0);" role="button" v-on:click="movePage(1, 'order_dateASC')" v-bind:style="{ 
+              }">최신순</a>-->
+            <!--<a class="sortElement" href="javascript:void(0);" role="button" v-on:click="movePage(1, 'order_dateASC')" v-bind:style="{ 
               color: searchSort == 'dateASC'? 'red' : 'black',
               cursor: searchSort == 'dateASC'? 'default' : 'pointer',
               'font-weight': searchSort == 'dateASC'? 'bold' : 'normal',
-              }">오래된순</a>
+              }">오래된순</a>-->
             <a class="sortElement" href="javascript:void(0);" role="button" v-on:click="movePage(1, 'order_priceASC')" v-bind:style="{ 
               color: searchSort == 'priceASC'? 'red' : 'black',
               cursor: searchSort == 'priceASC'? 'default' : 'pointer',
