@@ -161,6 +161,7 @@ export default {
     },
     movePage(page, position) {
       this.showLoadingOverlay();
+      this.sleep(3000);
 
       try {
         if(position == "current") {
@@ -212,7 +213,8 @@ export default {
     },
     getGoods() {
       this.showLoadingOverlay();
-
+      this.sleep(3000);
+      
       try {
         const baseURI = 'https://api.jurospring.o-r.kr';
         axios.get(`${baseURI}/goods`)
