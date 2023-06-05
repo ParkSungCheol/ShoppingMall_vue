@@ -47,6 +47,7 @@
               'font-weight': searchSort == 'priceDESC'? 'bold' : 'normal',
               }">높은 가격순</a>
           </div>
+          <loading-overlay :active="isLoading" :can-cancel="false" :loader="loaderOptions"></loading-overlay>
           <h3 v-if="goods.length == 0">검색 결과가 존재하지 않습니다.</h3>
           <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             <ul v-for="item in goods">
@@ -132,6 +133,15 @@ export default {
       goods : [],
       pagination: null,
       searchDto: null,
+      isLoading: false,
+      loaderOptions: {
+        size: 50,
+        maxSize: 50,
+        minSize: 20,
+        imageAnimation: '1400ms rotate_right',
+        background: 'rgba(255,255,255,0.2)',
+        fade: false
+      }
     }
   },
   props: {
@@ -145,14 +155,10 @@ export default {
   }
   ,methods: {
     showLoadingOverlay() {
-      this.loader = this.$loading.show({
-        // Optional parameters
-        container: null,
-        width: 100,
-        height: 100,
-        loader: "bars",
-        canCancel: false,
-      });
+      this.isLoading = true
+    },
+    hideLoadingOverlay() {
+      this.isLoading = false
     },
     onSubmit() {
       // 제출을 막는 코드
@@ -199,7 +205,7 @@ export default {
       } catch(e) {
         console.log(e);
       } finally {
-        this.loader.hide();
+        this.hideLoadingOverlay();
       }
     },
     numberWithCommas(x) {
@@ -226,7 +232,7 @@ export default {
       } catch(e) {
         console.log(e);
       } finally {
-        this.loader.hide();
+        this.hideLoadingOverlay();
       }
     }
   },
