@@ -144,44 +144,62 @@ export default {
     this.getGoods();
   }
   ,methods: {
+    showLoadingOverlay() {
+      this.loader = this.$loading.show({
+        // Optional parameters
+        container: null,
+        width: 100,
+        height: 100,
+        loader: "bars",
+        canCancel: false,
+      });
+    },
     onSubmit() {
       // 제출을 막는 코드
       this.movePage(1, 'search');
       return false;
     },
     movePage(page, position) {
-      if(position == "current") {
-        if(!this.searchDto && page == 1) return;
-        else if(this.searchDto && this.searchDto.page == page) return;
-      }
-      if(position.includes("order")) {
-        if(this.searchSort == position.substring(position.indexOf("_") + 1)) return;
-        this.searchSort = position.substring(position.indexOf("_") + 1);
-      }
-      let queryParams = {
-        page: (page) ? page : 1,
-        recordSize: 8,
-        pageSize: 5,
-        searchValue: this.searchValue,
-        searchMinPrice: this.searchMinPrice,
-        searchMaxPrice: this.searchMaxPrice,
-        orderBy: this.searchSort
-      }
-      const baseURI = 'https://api.jurospring.o-r.kr';
-      axios.get(`${baseURI}/goods`,
-      {
-        params : queryParams
-      },
-      ).then(result => {
-        console.log(result);
-        this.goods = result.data.list;
-        this.pagination = result.data.pagination;
-        this.searchDto = result.data.searchDto;
-        const scrollTarget = this.$refs.scrollTarget;
-        window.scrollTo({
-          top: scrollTarget.offsetTop,
+      this.showLoadingOverlay();
+
+      try {
+        if(position == "current") {
+          if(!this.searchDto && page == 1) return;
+          else if(this.searchDto && this.searchDto.page == page) return;
+        }
+        if(position.includes("order")) {
+          if(this.searchSort == position.substring(position.indexOf("_") + 1)) return;
+          this.searchSort = position.substring(position.indexOf("_") + 1);
+        }
+        let queryParams = {
+          page: (page) ? page : 1,
+          recordSize: 8,
+          pageSize: 5,
+          searchValue: this.searchValue,
+          searchMinPrice: this.searchMinPrice,
+          searchMaxPrice: this.searchMaxPrice,
+          orderBy: this.searchSort
+        }
+        const baseURI = 'https://api.jurospring.o-r.kr';
+        axios.get(`${baseURI}/goods`,
+        {
+          params : queryParams
+        },
+        ).then(result => {
+          console.log(result);
+          this.goods = result.data.list;
+          this.pagination = result.data.pagination;
+          this.searchDto = result.data.searchDto;
+          const scrollTarget = this.$refs.scrollTarget;
+          window.scrollTo({
+            top: scrollTarget.offsetTop,
+          });
         });
-      });
+      } catch(e) {
+        console.log(e);
+      } finally {
+        this.loader.hide();
+      }
     },
     numberWithCommas(x) {
       if(x == 0) {
@@ -193,13 +211,21 @@ export default {
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
     },
     getGoods() {
-      const baseURI = 'https://api.jurospring.o-r.kr';
-      axios.get(`${baseURI}/goods`)
-      .then((result) => {
-        console.log(result);
-        this.goods = result.data.list;
-        this.pagination = result.data.pagination;
-      });
+      this.showLoadingOverlay();
+
+      try {
+        const baseURI = 'https://api.jurospring.o-r.kr';
+        axios.get(`${baseURI}/goods`)
+        .then((result) => {
+          console.log(result);
+          this.goods = result.data.list;
+          this.pagination = result.data.pagination;
+        });
+      } catch(e) {
+        console.log(e);
+      } finally {
+        this.loader.hide();
+      }
     }
   },
   computed: {
