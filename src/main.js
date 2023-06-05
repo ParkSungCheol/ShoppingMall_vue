@@ -3,5 +3,4 @@ import App from './App.vue'
 import router from './router'
 import { LoadingPlugin } from 'vue-loading-overlay'
 
-Vue.use(LoadingPlugin)
-createApp(App).use(router).mount('#app')
+createApp(App).use(router).use(LoadingPlugin).mount('#app')
