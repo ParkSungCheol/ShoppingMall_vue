@@ -43,6 +43,7 @@ export default {
   },
   data() {
     return {
+      user: null,
       items: [
       ],
       newItem: {
@@ -52,6 +53,12 @@ export default {
         useYn: 1
       }
     }
+  },
+  props : {
+    getUser : Function,
+  },
+  mounted : function() {
+    this.user = this.getUser();
   },
   methods: {
     deleteItem(item) {
