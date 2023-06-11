@@ -1,16 +1,15 @@
 <template>
-  <Header></Header>
-  <Navigation v-bind:getUser="getUser"></Navigation>
-  <table>
+  <div>
+    <Header></Header>
+    <Navigation v-bind:getUser="getUser"></Navigation>
+    <table class="item-table">
       <thead>
         <tr>
           <th>검색어</th>
           <th>가격</th>
           <th>조건</th>
           <th>사용여부</th>
-          <th>
-            <button @click="createItem(item)">Create</button>
-          </th>
+          <th>작업</th>
         </tr>
       </thead>
       <tbody>
@@ -20,12 +19,13 @@
           <td>{{ item.condition }}</td>
           <td>{{ item.useYn }}</td>
           <td>
-            <button @click="deleteItem(item)">Delete</button>
+            <button @click="deleteItem(item)" class="delete-button">Delete</button>
           </td>
         </tr>
       </tbody>
     </table>
-  <Footer></Footer>
+    <Footer></Footer>
+  </div>
 </template>
 
 <script>
