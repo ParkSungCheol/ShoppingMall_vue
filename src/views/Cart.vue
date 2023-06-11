@@ -1,6 +1,6 @@
 <template>
   <Header></Header>
-  <Navigation></Navigation>
+  <Navigation v-bind:getUser="getUser"></Navigation>
   <table>
       <thead>
         <tr>
