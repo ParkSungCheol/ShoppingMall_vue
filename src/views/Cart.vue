@@ -19,7 +19,7 @@
         <tr v-for="item in items" :key="item.id">
           <td><input type="text" v-model="item.searchValue" class="input-field"></td>
           <td>
-            <input type="text" v-model="item.price" class="input-field" v-on:keyup="validatePrice(item)">
+            <input type="text" v-model="item.price" class="input-field" @input="validatePrice(item)">
             <div v-if="!item.isPriceValid" class="error-feedback">숫자만 입력해주세요!</div>
           </td>
           <td>
