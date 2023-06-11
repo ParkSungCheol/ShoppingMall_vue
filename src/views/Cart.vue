@@ -10,16 +10,16 @@
           <th>조건</th>
           <th>사용여부</th>
           <th>
-            <button @click="createItem(item)" class="delete-button">Create</button>
+            <button @click="createItem(item)" class="create-button">Create</button>
           </th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="item in items" :key="item.id">
-          <td>{{ item.searchValue }}</td>
-          <td>{{ item.price }}</td>
-          <td>{{ item.condition }}</td>
-          <td>{{ item.useYn }}</td>
+          <td><input type="text" v-model="item.searchValue"></td>
+          <td><input type="text" v-model="item.price"></td>
+          <td><input type="text" v-model="item.condition"></td>
+          <td><input type="text" v-model="item.useYn"></td>
           <td>
             <button @click="deleteItem(item)" class="delete-button">Delete</button>
           </td>
@@ -96,6 +96,8 @@ export default {
   width: 100%;
   border-collapse: collapse;
   text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .item-table th,
@@ -121,7 +123,20 @@ export default {
   cursor: pointer;
 }
 
+.create-button {
+  background-color: rgb(73, 94, 209);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 .delete-button:hover {
   background-color: #d32f2f;
+}
+
+.create-button:hover {
+  background-color: rgb(28, 25, 202) 94, 209);
 }
 </style>
