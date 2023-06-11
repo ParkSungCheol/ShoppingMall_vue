@@ -89,3 +89,37 @@ export default {
   }
 }
 </script>
+<style scoped>
+.item-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.item-table th,
+.item-table td {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.item-table th {
+  background-color: #f2f2f2;
+}
+
+.item-table tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+.delete-button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #d32f2f;
+}
+</style>
