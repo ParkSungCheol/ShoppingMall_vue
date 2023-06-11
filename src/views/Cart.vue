@@ -16,10 +16,10 @@
       </thead>
       <tbody>
         <tr v-for="item in items" :key="item.id">
-          <td><input type="text" v-model="item.searchValue"></td>
-          <td><input type="text" v-model="item.price"></td>
-          <td><input type="text" v-model="item.condition"></td>
-          <td><input type="text" v-model="item.useYn"></td>
+          <td><input type="text" v-model="item.searchValue" class="input-field"></td>
+          <td><input type="text" v-model="item.price" class="input-field"></td>
+          <td><input type="text" v-model="item.condition" class="input-field"></td>
+          <td><input type="text" v-model="item.useYn" class="input-field"></td>
           <td>
             <button @click="deleteItem(item)" class="delete-button">Delete</button>
           </td>
@@ -137,6 +137,20 @@ export default {
 }
 
 .create-button:hover {
-  background-color: rgb(28, 25, 202) 94, 209);
+  background-color: rgb(28, 25, 202);
+}
+
+.input-field {
+  width: 100%;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: rgb(73, 94, 209);
 }
 </style>
