@@ -18,11 +18,11 @@
               </ul>
           </div>
           <div class="right_menu">
-            <button class="btn btn-outline-dark menubar" type="submit" v-if="user">
+            <router-link class="btn btn-outline-dark menubar" v-if="user" to="/cart">
                 <i class="bi-cart-fill me-1"></i>
                 Cart
                 <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-            </button>
+            </router-link>
             <router-link class="btn btn-outline-dark menubar" v-if="!user" to="/login">LogIn</router-link>       
             <button class="btn btn-outline-dark menubar" v-if="user" v-on:click="logout">LogOut</button>  
             <router-link class="btn btn-outline-dark menubar" v-if="user" to="/mypage">MyPage</router-link>
