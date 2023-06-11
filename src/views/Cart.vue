@@ -5,10 +5,10 @@
     <table class="item-table">
       <thead>
         <tr>
-          <th width="30em">검색어</th>
-          <th width="20em">가격</th>
-          <th width="20em">조건</th>
-          <th width="20em">사용여부</th>
+          <th style="width:30em">검색어</th>
+          <th style="width:20em">가격</th>
+          <th style="width:20em">조건</th>
+          <th style="width:20em">사용여부</th>
           <th>
             <button @click="createItem(item)" class="create-button">Create</button>
           </th>
