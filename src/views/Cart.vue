@@ -73,7 +73,7 @@ export default {
         condition: 'under',
         useYn: 1,
         isPriceValid: true,
-        isSearchValueValid: true
+        isSearchValueValid: false
       }
     }
   },
@@ -116,8 +116,7 @@ export default {
       item.isPriceValid = regex.test(item.price);
     },
     validateSearchValue(item) {
-      const searchValuePattern = /\S+/;
-      item.isSearchValueValid = searchValuePattern.test(item.searchValue);
+      item.isSearchValueValid = item.searchValue.trim() !== '';
     },
     saveItems() {
       const isSearchValueValid = this.items.every(item => item.isSearchValueValid);
