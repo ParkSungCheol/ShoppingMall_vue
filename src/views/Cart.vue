@@ -17,7 +17,10 @@
       <tbody>
         <tr v-for="item in items" :key="item.id">
           <td><input type="text" v-model="item.searchValue" class="input-field"></td>
-          <td><input type="text" v-model="item.price" class="input-field"></td>
+          <td>
+            <input type="text" v-model="item.price" class="input-field" @input="validatePrice(item)">
+            <div v-if="!item.isPriceValid" class="error-feedback">숫자만 입력해주세요!</div>
+          </td>
           <td>
             <select v-model="item.condition" class="select-field">
               <option value="under">미만</option>
@@ -64,7 +67,8 @@ export default {
         searchValue: '',
         price: 0,
         condition: 'under',
-        useYn: 1
+        useYn: 1,
+        isPriceValid: true
       }
     }
   },
@@ -96,9 +100,14 @@ export default {
         searchValue: this.newItem.searchValue,
         price: this.newItem.price,
         condition: this.newItem.condition,
-        useYn: this.newItem.useYn
+        useYn: this.newItem.useYn,
+        isPriceValid: this.newItem.isPriceValid
       };
       this.items.push(newItem);
+    },
+    validatePrice(item) {
+      const regex = /^\d+$/;
+      item.isPriceValid = regex.test(item.price);
     }
   }
 }
@@ -172,5 +181,11 @@ export default {
   border-radius: 4px;
   box-sizing: border-box;
   transition: border-color 0.3s ease-in-out;
+}
+
+.error-feedback {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
 }
 </style>
