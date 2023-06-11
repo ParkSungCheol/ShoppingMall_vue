@@ -18,8 +18,20 @@
         <tr v-for="item in items" :key="item.id">
           <td><input type="text" v-model="item.searchValue" class="input-field"></td>
           <td><input type="text" v-model="item.price" class="input-field"></td>
-          <td><input type="text" v-model="item.condition" class="input-field"></td>
-          <td><input type="text" v-model="item.useYn" class="input-field"></td>
+          <td>
+            <select v-model="item.condition" class="select-field">
+              <option value="under">미만</option>
+              <option value="below">이하</option>
+              <option value="more">이상</option>
+              <option value="over">초과</option>
+            </select>
+          </td>
+          <td>
+            <select v-model="item.useYn" class="select-field">
+              <option value="1">사용</option>
+              <option value="0">사용안함</option>
+            </select>
+          </td>
           <td>
             <button @click="deleteItem(item)" class="delete-button">Delete</button>
           </td>
@@ -50,8 +62,8 @@ export default {
       ],
       newItem: {
         searchValue: '',
-        price: null,
-        condition: null,
+        price: 0,
+        condition: 'under',
         useYn: 1
       }
     }
@@ -151,5 +163,14 @@ export default {
 
 .input-field:focus {
   outline: none;
+}
+
+.select-field {
+  width: 100%;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease-in-out;
 }
 </style>
