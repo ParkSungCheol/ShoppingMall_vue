@@ -9,7 +9,9 @@
           <th>가격</th>
           <th>조건</th>
           <th>사용여부</th>
-          <th>작업</th>
+          <th>
+            <button @click="createItem(item)" class="delete-button">Create</button>
+          </th>
         </tr>
       </thead>
       <tbody>
