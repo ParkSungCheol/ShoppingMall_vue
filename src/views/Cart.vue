@@ -5,10 +5,10 @@
     <table class="item-table">
       <thead>
         <tr>
-          <th>검색어</th>
-          <th>가격</th>
-          <th>조건</th>
-          <th>사용여부</th>
+          <th width="30em">검색어</th>
+          <th width="20em">가격</th>
+          <th width="20em">조건</th>
+          <th width="20em">사용여부</th>
           <th>
             <button @click="createItem(item)" class="create-button">Create</button>
           </th>
@@ -143,7 +143,7 @@ export default {
 .input-field {
   width: 100%;
   padding: 6px 12px;
-  border: 1px solid #ccc;
+  border: none;
   border-radius: 4px;
   box-sizing: border-box;
   transition: border-color 0.3s ease-in-out;
@@ -151,6 +151,5 @@ export default {
 
 .input-field:focus {
   outline: none;
-  border-color: rgb(73, 94, 209);
 }
 </style>
