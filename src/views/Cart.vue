@@ -17,7 +17,10 @@
       </thead>
       <tbody>
         <tr v-for="item in items" :key="item.id">
-          <td><input type="text" v-model="item.searchValue" class="input-field"></td>
+          <td>
+            <input type="text" v-model="item.searchValue" class="input-field" @input="validateSearchValue(item)">
+            <div v-if="!item.isSearchValueValid" class="error-feedback">검색어를 입력해주세요!</div>
+          </td>
           <td>
             <input type="text" v-model="item.price" class="input-field" @input="validatePrice(item)">
             <div v-if="!item.isPriceValid" class="error-feedback">숫자만 입력해주세요!</div>
@@ -69,7 +72,8 @@ export default {
         price: 0,
         condition: 'under',
         useYn: 1,
-        isPriceValid: true
+        isPriceValid: true,
+        isSearchValueValid: true
       }
     }
   },
@@ -102,7 +106,8 @@ export default {
         price: this.newItem.price,
         condition: this.newItem.condition,
         useYn: this.newItem.useYn,
-        isPriceValid: this.newItem.isPriceValid
+        isPriceValid: this.newItem.isPriceValid,
+        isSearchValueValid: this.newItem.isSearchValueValid
       };
       this.items.push(newItem);
     },
@@ -110,9 +115,18 @@ export default {
       const regex = /^\d+$/;
       item.isPriceValid = regex.test(item.price);
     },
+    validateSearchValue(item) {
+      const searchValuePattern = /\S+/;
+      item.isSearchValueValid = searchValuePattern.test(item.searchValue);
+    },
     saveItems() {
-      const isAllValid = this.items.every(item => item.isPriceValid);
-      if (!isAllValid) {
+      const isSearchValueValid = this.items.every(item => item.isSearchValueValid);
+      if (!isSearchValueValid) {
+        alert('검색어가 입력되지 않은 항목이 있습니다!');
+        return;
+      }
+      const isPriceValid = this.items.every(item => item.isPriceValid);
+      if (!isPriceValid) {
         alert('가격이 올바르게 입력되지 않은 항목이 있습니다!');
         return;
       }
@@ -202,7 +216,7 @@ export default {
 
 .button-container {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
 }
 
 .save-button {
