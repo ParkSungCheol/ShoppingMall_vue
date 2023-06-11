@@ -9,8 +9,9 @@
           <th style="width:20em">가격</th>
           <th style="width:20em">조건</th>
           <th style="width:20em">사용여부</th>
-          <th>
+          <th class="button-container">
             <button @click="createItem(item)" class="create-button">Create</button>
+            <button @click="saveItems" class="save-button">Save</button>
           </th>
         </tr>
       </thead>
@@ -18,7 +19,7 @@
         <tr v-for="item in items" :key="item.id">
           <td><input type="text" v-model="item.searchValue" class="input-field"></td>
           <td>
-            <input type="text" v-model="item.price" class="input-field" @input="validatePrice(item)">
+            <input type="text" v-model="item.price" class="input-field" v-on:keyup="validatePrice(item)">
             <div v-if="!item.isPriceValid" class="error-feedback">숫자만 입력해주세요!</div>
           </td>
           <td>
@@ -108,6 +109,16 @@ export default {
     validatePrice(item) {
       const regex = /^\d+$/;
       item.isPriceValid = regex.test(item.price);
+    },
+    saveItems() {
+      const isAllValid = this.items.every(item => item.isPriceValid);
+      if (!isAllValid) {
+        alert('가격이 올바르게 입력되지 않은 항목이 있습니다!');
+        return;
+      }
+
+      // Save items logic
+      // 정상적인 처리 로직을 추가하세요
     }
   }
 }
@@ -187,5 +198,24 @@ export default {
   color: red;
   font-size: 12px;
   margin-top: 4px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.save-button {
+  background-color: rgb(36, 123, 160);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.save-button:hover {
+  background-color: rgb(26, 103, 135);
 }
 </style>
