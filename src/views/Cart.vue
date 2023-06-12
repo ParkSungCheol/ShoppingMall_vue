@@ -174,7 +174,11 @@ export default {
           {
             params : {
               userId : this.user.id,
-              searchList : JSON.stringify(this.items)
+              searchList : JSON.stringify(this.items.map(e => {
+                e.isPriceValid = undefined;
+                e.isSearchValueValid = undefined;
+                return e;
+              }))
             }
           },
           ).then(res => {
