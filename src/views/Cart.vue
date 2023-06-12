@@ -96,13 +96,21 @@ export default {
         canCancel: false,
       });
     },
-    getSearch() {
+    async getSearch() {
       this.showLoadingOverlay();
       
       try {
         const baseURI = 'https://api.jurospring.o-r.kr';
-        axios.get(`${baseURI}/selectSearch`)
-        .then((result) => {
+        const axiosInstance = axios.create({
+          withCredentials: true,
+        });
+        const result = await axiosInstance.get(`${baseURI}/` + "selectSearch",
+        {
+          params : {
+            userId : this.user.id
+          }
+        },
+        ).then((result) => {
           console.log(result);
           this.items = result.data;
         });
