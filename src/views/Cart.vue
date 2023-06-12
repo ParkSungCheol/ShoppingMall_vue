@@ -170,15 +170,15 @@ export default {
           const axiosInstance = axios.create({
             withCredentials: true,
           });
-          const result = await axiosInstance.get(`${baseURI}/` + "updateSearch",
+          const result = await axiosInstance.post(`${baseURI}/` + "updateSearch",
           {
             params : {
               userId : this.user.id,
-              searchList : JSON.stringify(this.items.map(e => {
+              searchList : this.items.map(e => {
                 e.isPriceValid = undefined;
                 e.isSearchValueValid = undefined;
                 return e;
-              }))
+              })
             }
           },
           ).then(res => {
