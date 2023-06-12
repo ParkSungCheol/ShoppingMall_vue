@@ -26,11 +26,11 @@
             <div v-if="!item.isPriceValid" class="error-feedback">숫자만 입력해주세요!</div>
           </td>
           <td>
-            <select v-model="item.condition" class="select-field">
-              <option value="under">미만</option>
-              <option value="below">이하</option>
-              <option value="more">이상</option>
-              <option value="over">초과</option>
+            <select v-model="item.term" class="select-field">
+              <option value="1">미만</option>
+              <option value="2">이하</option>
+              <option value="3">이상</option>
+              <option value="4">초과</option>
             </select>
           </td>
           <td>
@@ -70,7 +70,7 @@ export default {
       newItem: {
         searchValue: '',
         price: 0,
-        condition: 'under',
+        term: '1',
         useYn: 1,
         isPriceValid: true,
         isSearchValueValid: false
@@ -82,8 +82,35 @@ export default {
   },
   mounted : function() {
     this.user = this.getUser();
+    this.getSearch();
   },
   methods: {
+    showLoadingOverlay() {
+      this.loader = this.$loading.show({
+        // Optional parameters
+        container: null,
+        width: 100,
+        height: 100,
+        loader: "bars",
+        canCancel: false,
+      });
+    },
+    getSearch() {
+      this.showLoadingOverlay();
+      
+      try {
+        const baseURI = 'https://api.jurospring.o-r.kr';
+        axios.get(`${baseURI}/selectSearch`)
+        .then((result) => {
+          console.log(result);
+          this.items = result.data;
+        });
+      } catch(e) {
+        console.log(e);
+      } finally {
+        this.loader.hide();
+      }
+    },
     deleteItem(item) {
       // Delete item logic
       const index = this.items.indexOf(item); // 아이템의 인덱스를 찾습니다.
@@ -104,7 +131,7 @@ export default {
         id: maxId,
         searchValue: this.newItem.searchValue,
         price: this.newItem.price,
-        condition: this.newItem.condition,
+        term: this.newItem.term,
         useYn: this.newItem.useYn,
         isPriceValid: this.newItem.isPriceValid,
         isSearchValueValid: this.newItem.isSearchValueValid
@@ -118,7 +145,7 @@ export default {
     validateSearchValue(item) {
       item.isSearchValueValid = item.searchValue.trim() !== '';
     },
-    saveItems() {
+    async saveItems() {
       const isSearchValueValid = this.items.every(item => item.isSearchValueValid);
       if (!isSearchValueValid) {
         alert('검색어가 입력되지 않은 항목이 있습니다!');
@@ -132,6 +159,36 @@ export default {
 
       // Save items logic
       // 정상적인 처리 로직을 추가하세요
+      const baseURI = 'https://api.jurospring.o-r.kr';
+      try{
+        const axiosInstance = axios.create({
+          withCredentials: true,
+        });
+        const result = await axiosInstance.get(`${baseURI}/` + "updateSearch",
+        {
+          params : {
+            userId : this.user.id,
+            searchList : this.items
+          }
+        },
+        ).then(res => {
+          console.log(res);
+          return res;
+        });
+
+        console.log(result);
+        if(result.status === 200){
+          alert("저장이 완료되었습니다.");
+          this.$router.push('/cart');
+        }
+        else {
+          alert("저장에 실패하였습니다.");
+        }
+
+      } catch(err){
+        console.log(err);
+        alert("저장에 실패하였습니다.");
+      }
     }
   }
 }
