@@ -165,39 +165,36 @@ export default {
         alert('가격이 올바르게 입력되지 않은 항목이 있습니다!');
         return;
       }
-
-      // Save items logic
-      // 정상적인 처리 로직을 추가하세요
       const baseURI = 'https://api.jurospring.o-r.kr';
       try{
-        const axiosInstance = axios.create({
-          withCredentials: true,
-        });
-        const result = await axiosInstance.get(`${baseURI}/` + "updateSearch",
-        {
-          params : {
-            userId : this.user.id,
-            searchList : this.items
+          const axiosInstance = axios.create({
+            withCredentials: true,
+          });
+          const result = await axiosInstance.get(`${baseURI}/` + "updateSearch",
+          {
+            params : {
+              userId : this.user.id,
+              searchList : this.items
+            }
+          },
+          ).then(res => {
+            console.log(res);
+            return res;
+          });
+
+          console.log(result);
+          if(result.status === 200){
+            alert("정보수정이 완료되었습니다.");
+            this.$router.push('/');
           }
-        },
-        ).then(res => {
-          console.log(res);
-          return res;
-        });
+          else {
+            alert("정보수정에 실패하였습니다.");
+          }
 
-        console.log(result);
-        if(result.status === 200){
-          alert("저장이 완료되었습니다.");
-          this.$router.push('/cart');
+        } catch(err){
+          console.log(err);
+          alert("정보수정에 실패하였습니다.");
         }
-        else {
-          alert("저장에 실패하였습니다.");
-        }
-
-      } catch(err){
-        console.log(err);
-        alert("저장에 실패하였습니다.");
-      }
     }
   }
 }
