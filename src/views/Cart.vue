@@ -195,7 +195,7 @@ export default {
           console.log(result);
           if(result.status === 200){
             alert("정보수정이 완료되었습니다.");
-            this.$router.push('/cart');
+            this.$router.go();
           }
           else {
             alert("정보수정에 실패하였습니다.");
