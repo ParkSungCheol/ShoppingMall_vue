@@ -21,7 +21,7 @@
             <router-link class="btn btn-outline-dark menubar" v-if="user" to="/cart">
                 <i class="bi-cart-fill me-1"></i>
                 Cart
-                <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                <span class="badge bg-dark text-white ms-1 rounded-pill">{{ cartCount }}</span>
             </router-link>
             <router-link class="btn btn-outline-dark menubar" v-if="!user" to="/login">LogIn</router-link>       
             <button class="btn btn-outline-dark menubar" v-if="user" v-on:click="logout">LogOut</button>  
@@ -39,6 +39,7 @@ export default {
   data () {
     return {
       user : null,
+      cartCount : 0,
     }
   },
   props : {
@@ -46,8 +47,30 @@ export default {
   },
   mounted : function() {
     this.user = this.getUser();
+    this.getSearch();
   },
   methods: {
+    async getSearch() {
+      try {
+        const baseURI = 'https://api.jurospring.o-r.kr';
+        const axiosInstance = axios.create({
+          withCredentials: true,
+        });
+        const result = await axiosInstance.get(`${baseURI}/` + "selectSearch",
+        {
+          params : {
+            userId : this.user.id
+          }
+        },
+        ).then((result) => {
+          console.log(result);
+          cartCount = result.data.length;
+        });
+      } catch(e) {
+        console.log(e);
+      } finally {
+      }
+    },
     logout: async function(event) {
       event.stopPropagation();
       event.preventDefault();
