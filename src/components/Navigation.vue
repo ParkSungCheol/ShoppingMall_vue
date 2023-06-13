@@ -64,7 +64,7 @@ export default {
         },
         ).then((result) => {
           console.log(result);
-          cartCount = result.data.length;
+          this.cartCount = result.data.length;
         });
       } catch(e) {
         console.log(e);
