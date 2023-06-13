@@ -116,7 +116,7 @@ export default {
             e.isPriceValid = true;
             e.isSearchValueValid = true;
           });
-          console.log(data);
+          console.log(this.items);
         });
       } catch(e) {
         console.log(e);
