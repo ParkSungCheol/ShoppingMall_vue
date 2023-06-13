@@ -175,11 +175,7 @@ export default {
           const axiosInstance = axios.create({
             withCredentials: true,
           });
-          const encodedSearchList = encodeURIComponent(JSON.stringify(this.items.map(e => {
-                e.isPriceValid = undefined;
-                e.isSearchValueValid = undefined;
-                return e;
-              })));
+          const encodedSearchList = encodeURIComponent(JSON.stringify(this.items));
           const result = await axiosInstance.get(`${baseURI}/` + "updateSearch",
           {
             params : {
