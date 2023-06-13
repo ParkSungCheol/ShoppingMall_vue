@@ -172,6 +172,9 @@ export default {
       }
       const baseURI = 'https://api.jurospring.o-r.kr';
       try{
+        axios.defaults.xsrfCookieName = 'csrftoken'
+        axios.defaults.xsrfHeaderName = "X-CSRFToken"
+        axios.defaults.withCredentials = true;
           const axiosInstance = axios.create({
             withCredentials: true,
           });
