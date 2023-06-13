@@ -175,11 +175,13 @@ export default {
           const encodedSearchList = encodeURIComponent(JSON.stringify(this.items));
           const result = await axios.post(`${baseURI}/` + "updateSearch",
           {
-            userId : this.user.id,
-            searchList : encodedSearchList
-          },
-          {
-            withCredentials: true,
+            param: {  
+                      userId : this.user.id,
+                      searchList : encodedSearchList
+                    } 
+          }, 
+          { 
+            withCredentials: true 
           }
           ).then(res => {
             console.log(res);
