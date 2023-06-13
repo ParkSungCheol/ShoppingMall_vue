@@ -112,7 +112,10 @@ export default {
         },
         ).then((result) => {
           console.log(result);
-          this.items = result.data;
+          this.items = result.data.forEach(e => {
+            e.isPriceValid = true;
+            e.isSearchValueValid = true;
+          });
         });
       } catch(e) {
         console.log(e);
