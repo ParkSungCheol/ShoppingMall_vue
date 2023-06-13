@@ -172,17 +172,15 @@ export default {
       }
       const baseURI = 'https://api.jurospring.o-r.kr';
       try{
-          const axiosInstance = axios.create({
-            withCredentials: true,
-          });
           const encodedSearchList = encodeURIComponent(JSON.stringify(this.items));
-          const result = await axiosInstance.post(`${baseURI}/` + "updateSearch",
+          const result = await axios.post(`${baseURI}/` + "updateSearch",
           {
-            params : {
-              userId : this.user.id,
-              searchList : encodedSearchList
-            }
+            userId : this.user.id,
+            searchList : encodedSearchList
           },
+          {
+            withCredentials: true,
+          }
           ).then(res => {
             console.log(res);
             return res;
