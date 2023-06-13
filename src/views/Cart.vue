@@ -171,36 +171,27 @@ export default {
         return;
       }
       const baseURI = 'https://api.jurospring.o-r.kr';
-      try{
-          const axiosInstance = axios.create({
-            withCredentials: true,
-          });
-          const encodedSearchList = encodeURIComponent(JSON.stringify(this.items));
-          const result = await axiosInstance.get(`${baseURI}/` + "updateSearch",
-          {
-            params : {
-              userId : this.user.id,
-              searchList : encodedSearchList
-            }
-          },
-          ).then(res => {
-            console.log(res);
-            return res;
-          });
-
-          console.log(result);
-          if(result.status === 200){
-            alert("정보수정이 완료되었습니다.");
-            this.$router.go();
-          }
-          else {
-            alert("정보수정에 실패하였습니다.");
-          }
-
-        } catch(err){
-          console.log(err);
+      try {
+        const axiosInstance = axios.create({
+          withCredentials: true,
+        });
+        const encodedSearchList = encodeURIComponent(JSON.stringify(this.items));
+        const result = await axiosInstance.post(`${baseURI}/updateSearch`, {
+          userId: this.user.id,
+          searchList: encodedSearchList,
+        });
+        
+        console.log(result);
+        if (result.status === 200) {
+          alert("정보수정이 완료되었습니다.");
+          this.$router.go();
+        } else {
           alert("정보수정에 실패하였습니다.");
         }
+      } catch (err) {
+        console.log(err);
+        alert("정보수정에 실패하였습니다.");
+      }
     }
   }
 }
