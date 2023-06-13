@@ -70,9 +70,9 @@ export default {
       ],
       newItem: {
         searchValue: '',
-        price: 0,
-        term: '1',
-        useYn: 1,
+        price: "0",
+        term: "1",
+        useYn: "1",
         isPriceValid: true,
         isSearchValueValid: false
       }
