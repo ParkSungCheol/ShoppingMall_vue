@@ -170,16 +170,14 @@ export default {
         alert('가격이 올바르게 입력되지 않은 항목이 있습니다!');
         return;
       }
+      axios.defaults.withCredentials = true;
       const baseURI = 'https://api.jurospring.o-r.kr';
       try{
           const encodedSearchList = encodeURIComponent(JSON.stringify(this.items));
           const result = await axios.post(`${baseURI}/` + "updateSearch",
           {
-            param: {  
-                      userId : this.user.id,
-                      searchList : encodedSearchList
-                    } 
-            ,withCredentials: true
+            userId : this.user.id,
+            searchList : encodedSearchList
           }
           ).then(res => {
             console.log(res);
