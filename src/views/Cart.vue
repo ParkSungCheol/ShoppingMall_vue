@@ -179,9 +179,7 @@ export default {
                       userId : this.user.id,
                       searchList : encodedSearchList
                     } 
-          }, 
-          { 
-            withCredentials: true 
+            ,withCredentials: true
           }
           ).then(res => {
             console.log(res);
