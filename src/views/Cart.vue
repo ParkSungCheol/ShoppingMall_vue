@@ -172,22 +172,16 @@ export default {
       }
       const baseURI = 'https://api.jurospring.o-r.kr';
       try{
-        axios.defaults.xsrfCookieName = 'csrftoken'
-        axios.defaults.xsrfHeaderName = "X-CSRFToken"
-        axios.defaults.withCredentials = true;
-          const axiosInstance = axios.create({
-            withCredentials: true,
-          });
+          axios.defaults.xsrfCookieName = 'csrftoken'
+          axios.defaults.xsrfHeaderName = "X-CSRFToken"
+          axios.defaults.withCredentials = true;
+          
           const encodedSearchList = encodeURIComponent(JSON.stringify(this.items));
-          const result = await axiosInstance.post(`${baseURI}/` + "updateSearch",
+          const result = await axios.post(`${baseURI}/` + "updateSearch",
           {
             userId : this.user.id,
             searchList : encodedSearchList
-          },
-          {
-            withCredentials: true,
-          }
-          ).then(res => {
+          }).then(res => {
             console.log(res);
             return res;
           });
