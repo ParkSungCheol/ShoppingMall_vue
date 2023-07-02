@@ -39,13 +39,12 @@ export default {
       let volumes = this.data.map(item => item.volume);
 
       if (this.chart){
-        this.chart.clear();
         this.data.forEach(e => e.price += 5);
         prices = this.data.map(item => item.price);
-        this.chart.data.labels = labels;
         this.chart.data.datasets[0].data = prices;
         this.chart.update();
       }
+      else {
       this.chart = shallowRef(new Chart(this.$refs.chart, {
       type: 'line',
       data: {
@@ -79,7 +78,9 @@ export default {
           }
         }
       }
-      }));
+      }
+      ));
+      }
     }
   }
 };
