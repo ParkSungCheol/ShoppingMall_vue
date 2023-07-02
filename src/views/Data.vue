@@ -41,10 +41,6 @@ export default {
       const prices = data.map(item => item.price);
       const volumes = data.map(item => item.volume);
 
-      if (this.chart){
-        this.chart.destroy();
-      }
-
       this.chart = new Chart(this.$refs.chart, {
         type: 'line',
         data: {
