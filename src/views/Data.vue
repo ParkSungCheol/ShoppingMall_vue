@@ -63,7 +63,7 @@ export default {
     },
     search() {
       // 검색 버튼을 클릭할 때 실행되는 메소드
-      // 검색어(this.searchQuery)를 사용하여 데이터를 가져오고 그래프를 업데이트합니다.
+      // 검색어(this.searchQuery)를 사용하여 데이터를 가져오고 그래프를 준비합니다.
 
       // 예시 데이터 (임의로 생성한 데이터)
       const data = [
@@ -74,17 +74,26 @@ export default {
         // ...
       ];
 
-      // 검색어를 사용하여 데이터 필터링
-      // const filteredData = data.filter(item => item.name === this.searchQuery);
-
-      // 그래프 업데이트
+      // 그래프 준비
       const labels = data.map(item => item.date);
       const prices = data.map(item => item.price);
-      // const volumes = data.map(item => item.volume);
+      const volumes = data.map(item => item.volume);
 
       this.chart.data.labels = labels;
       this.chart.data.datasets[0].data = prices;
-      // this.chart.update();
+      // 거래량도 추가하려면 데이터셋 추가하고 volumes로 데이터 설정
+      this.chart.data.datasets[1].data = volumes;
+
+      // 그래프 업데이트하지 않고 그래프 데이터만 준비한 상태로 리턴
+      return {
+        labels,
+        prices,
+        volumes,
+      };
+    },
+    updateChart() {
+      // search() 함수에서 준비한 그래프 데이터를 사용하여 그래프를 업데이트합니다.
+      this.chart.update();
     }
   }
 };
