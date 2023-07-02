@@ -48,8 +48,7 @@ export default {
       const volumes = data.map(item => item.volume);
 
       if (this.chart){
-        data.forEach(e => e.price = e.price + 5);
-        console.log(data);
+        prices.forEach(e => e += 5);
         this.chart.data.labels = labels;
         this.chart.data.datasets[0].data = prices;
         this.chart.update();
