@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     initializeChart() {
-      const data = [
+      let data = [
         { date: '2023-07-01', price: 10, volume: 50 },
         { date: '2023-07-02', price: 20, volume: 70 },
         { date: '2023-07-03', price: 15, volume: 40 },
@@ -40,7 +40,8 @@ export default {
       let volumes = data.map(item => item.volume);
 
       if (this.chart){
-        prices.forEach(e => 5);
+        data.forEach(e => e.price += 5);
+        prices = data.map(item => item.price);
         this.chart.destroy();
       }
       this.chart = new Chart(this.$refs.chart, {
