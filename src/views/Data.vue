@@ -26,6 +26,11 @@ export default {
       this.initializeChart();
     })
   },
+  beforeUnmount() {
+   if(this.chart) {
+        this.chart.destroy();
+    } 
+  },
   methods: {
     initializeChart() {
       Chart.register(...registerables);
@@ -44,6 +49,7 @@ export default {
 
       if (this.chart){
         data.forEach(e => e.price = e.price + 5);
+        console.log(data);
         this.chart.data.labels = labels;
         this.chart.data.datasets[0].data = prices;
         this.chart.update();
