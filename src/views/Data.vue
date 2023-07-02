@@ -15,9 +15,9 @@ import { Chart, registerables } from 'chart.js/auto';
 
 export default {
   data() {
+    this.chart = null  // this line changed
     return {
-      searchQuery: '',
-      chart: null
+      searchQuery: ''
     };
   },
   async mounted() {
