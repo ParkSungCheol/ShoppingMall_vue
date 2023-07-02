@@ -40,7 +40,7 @@ export default {
       let volumes = data.map(item => item.volume);
 
       if (this.chart){
-        prices.forEach(e => e = 5);
+        prices.forEach(e => 5);
         this.chart.destroy();
       }
       this.chart = new Chart(this.$refs.chart, {
