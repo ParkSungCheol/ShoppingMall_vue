@@ -82,13 +82,13 @@ export default {
       this.chart.data.labels = labels;
       this.chart.data.datasets[0].data = prices;
       // 거래량도 추가하려면 데이터셋 추가하고 volumes로 데이터 설정
-      this.chart.data.datasets[1].data = volumes;
+      // this.chart.data.datasets[1].data = volumes;
 
       // 그래프 업데이트하지 않고 그래프 데이터만 준비한 상태로 리턴
       return {
         labels,
         prices,
-        volumes,
+        // volumes,
       };
     },
     updateChart() {
