@@ -45,7 +45,7 @@ export default {
         data.forEach(e => e.price = e.price + 5);
         this.chart.data.labels = labels;
         this.chart.data.datasets[0].data = prices;
-        this.chart.render();
+        this.chart.update();
       }
       else {
         this.chart = new Chart(this.$refs.chart, {
