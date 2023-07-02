@@ -140,6 +140,9 @@ export default {
       default: false
     }
   },
+  beforeCreate() {
+    this.showLoadingOverlay();
+  },
   mounted() {
     this.getGoods();
   }
