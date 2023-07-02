@@ -1,5 +1,7 @@
 <template>
   <div>
+    <Header></Header>
+    <Navigation v-bind:getUser="getUser"></Navigation>
     <div class="search-bar">
       <input v-model="searchQuery" type="text" placeholder="검색어를 입력하세요">
       <button @click="initializeChart">검색</button>
@@ -7,15 +9,29 @@
     <div class="chart-container">
       <canvas ref="chart"></canvas>
     </div>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
 import { Chart, registerables } from 'chart.js/auto';
 import { shallowRef } from 'vue';
+// @ is an alias to /src
+import Header from '@/components/Header.vue'
+import Footer from '@/components/Footer.vue'
+import Navigation from '@/components/Navigation.vue'
+import axios from 'axios'
+
 export default {
+  name: 'Cart',
+  components: {
+    Header,
+    Footer,
+    Navigation
+  },
   data() {
     return {
+      user: null,
       searchQuery: '',
       chart: null,
       data : [
@@ -27,7 +43,11 @@ export default {
       ]
     };
   },
-  async mounted() {
+  props : {
+    getUser : Function,
+  },
+  mounted : function() {
+    this.user = this.getUser();
     Chart.register(...registerables);
     this.initializeChart();
   },
@@ -45,41 +65,41 @@ export default {
         this.chart.update();
       }
       else {
-      this.chart = shallowRef(new Chart(this.$refs.chart, {
-      type: 'line',
-      data: {
-        labels: labels,
-        datasets: [
-          {
-            label: '가격평균',
-            data: prices,
-            borderColor: 'blue',
-            backgroundColor: 'rgba(0, 0, 255, 0.1)',
-            borderWidth: 1
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        scales: {
-          x: {
-            display: true,
-            title: {
-              display: true,
-              text: '일자'
+        this.chart = shallowRef(new Chart(this.$refs.chart, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: '가격평균',
+              data: prices,
+              borderColor: 'blue',
+              backgroundColor: 'rgba(0, 0, 255, 0.1)',
+              borderWidth: 1
             }
-          },
-          y: {
-            display: true,
-            title: {
+          ]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            x: {
               display: true,
-              text: '가격'
+              title: {
+                display: true,
+                text: '일자'
+              }
+            },
+            y: {
+              display: true,
+              title: {
+                display: true,
+                text: '가격'
+              }
             }
           }
         }
-      }
-      }
-      ));
+        }
+        ));
       }
     }
   }
