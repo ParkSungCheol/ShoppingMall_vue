@@ -12,12 +12,13 @@
 
 <script>
 import { Chart, registerables } from 'chart.js/auto';
+import { shallowRef } from 'vue';
 
 export default {
   data() {
-    this.chart = null  // this line changed
     return {
-      searchQuery: ''
+      searchQuery: '',
+      chart: null
     };
   },
   async mounted() {
@@ -48,7 +49,7 @@ export default {
         this.chart.update();
       }
       else {
-        this.chart = new Chart(this.$refs.chart, {
+        this.chart = shallowRef(new Chart(this.$refs.chart, {
         type: 'line',
         data: {
           labels: labels,
@@ -81,7 +82,7 @@ export default {
             }
           }
         }
-        });
+        }));
       }
     }
   }
