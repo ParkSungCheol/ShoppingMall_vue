@@ -12,12 +12,19 @@
 
 <script>
 import { Chart, registerables } from 'chart.js/auto';
-
+import { shallowRef } from 'vue';
 export default {
   data() {
     return {
       searchQuery: '',
-      chart: null
+      chart: null,
+      data : [
+        { date: '2023-07-01', price: 10, volume: 50 },
+        { date: '2023-07-02', price: 20, volume: 70 },
+        { date: '2023-07-03', price: 15, volume: 40 },
+        { date: '2023-07-04', price: 25, volume: 60 },
+        // ...
+      ]
     };
   },
   async mounted() {
@@ -26,25 +33,18 @@ export default {
   },
   methods: {
     initializeChart() {
-      let data = [
-        { date: '2023-07-01', price: 10, volume: 50 },
-        { date: '2023-07-02', price: 20, volume: 70 },
-        { date: '2023-07-03', price: 15, volume: 40 },
-        { date: '2023-07-04', price: 25, volume: 60 },
-        // ...
-      ];
-
       // 그래프 준비
-      let labels = data.map(item => item.date);
-      let prices = data.map(item => item.price);
-      let volumes = data.map(item => item.volume);
+      let labels = this.data.map(item => item.date);
+      let prices = this.data.map(item => item.price);
+      let volumes = this.data.map(item => item.volume);
 
       if (this.chart){
-        data.forEach(e => e.price += 5);
-        prices = data.map(item => item.price);
-        this.chart.destroy();
+        this.data.forEach(e => e.price += 5);
+        prices = this.data.map(item => item.price);
+        this.chart.data.datasets[0].data = prices;
+        this.chart.update();
       }
-      this.chart = new Chart(this.$refs.chart, {
+      this.chart = shallowRef(new Chart(this.$refs.chart, {
       type: 'line',
       data: {
         labels: labels,
@@ -77,7 +77,7 @@ export default {
           }
         }
       }
-      });
+      }));
     }
   }
 };
