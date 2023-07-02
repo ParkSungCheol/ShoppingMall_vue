@@ -43,12 +43,12 @@ export default {
       ];
 
       // 그래프 준비
-      const labels = data.map(item => item.date);
-      const prices = data.map(item => item.price);
-      const volumes = data.map(item => item.volume);
+      let labels = data.map(item => item.date);
+      let prices = data.map(item => item.price);
+      let volumes = data.map(item => item.volume);
 
       if (this.chart){
-        prices.forEach(e => e += 5);
+        prices.forEach(e => e = 5);
         this.chart.data.labels = labels;
         this.chart.data.datasets[0].data = prices;
         this.chart.update();
