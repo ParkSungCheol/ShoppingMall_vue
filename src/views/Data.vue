@@ -2,11 +2,11 @@
   <div>
     <Header></Header>
     <Navigation v-bind:getUser="getUser"></Navigation>
-    <div class="search-bar">
-      <input type="text" v-model="searchTerm" placeholder="검색어 입력" />
+    <div>
+      <input type="text" v-model="searchKeyword" placeholder="검색어를 입력하세요">
       <button @click="search">검색</button>
     </div>
-    <div class="chart-container">
+    <div>
       <canvas ref="chart"></canvas>
     </div>
     <Footer></Footer>
@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import Chart from 'chart.js';
-// @ is an alias to /src
+import { ref, onMounted } from 'vue';
+import { Chart, registerables } from 'chart.js';
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
 import Navigation from '@/components/Navigation.vue'
@@ -30,10 +30,8 @@ export default {
   },
   data() {
     return {
-      user: null,
-      searchTerm: '',
-      chartData: null
-    };
+      user: null
+    }
   },
   props : {
     getUser : Function,
@@ -42,49 +40,57 @@ export default {
     this.user = this.getUser();
     //this.getSearch();
   },
-  methods: {
-    search() {
-      // 검색 요청을 수행하고 데이터를 가져오는 로직을 구현합니다.
-      // 예시로 임시로 가상의 데이터를 생성하여 그래프를 그립니다.
-      const mockData = {
-        labels: ['2023-06-01', '2023-06-02', '2023-06-03'], // 일자 데이터
-        prices: [10.5, 11.2, 9.8], // 가격 데이터
-        volumes: [100, 150, 80] // 거래량 데이터
+  setup() {
+    const searchKeyword = ref('');
+    const chartRef = ref(null);
+
+    onMounted(() => {
+      Chart.register(...registerables);
+    });
+
+    const search = () => {
+      // 검색 요청을 수행하고 데이터를 받아오는 로직을 구현
+
+      // 가상의 데이터로 예시를 보여주는 코드
+      const data = {
+        labels: ['2023-07-01', '2023-07-02', '2023-07-03', '2023-07-04'],
+        prices: [10, 15, 12, 8],
+        volumes: [100, 150, 120, 80]
       };
 
-      // 가격 평균 데이터 생성
-      const averagePrices = mockData.prices.map(price => {
-        return parseFloat((price / mockData.prices.length).toFixed(2));
-      });
+      // 그래프를 그리는 함수 호출
+      drawChart(data.labels, data.prices, data.volumes);
+    };
 
-      // 차트 데이터 설정
-      this.chartData = {
-        labels: mockData.labels,
-        datasets: [
-          {
-            label: '가격 평균',
-            data: averagePrices,
-            backgroundColor: 'rgba(75, 192, 192, 0.5)'
-          },
-          {
-            label: '거래량',
-            data: mockData.volumes,
-            backgroundColor: 'rgba(255, 99, 132, 0.5)'
-          }
-        ]
-      };
+    const drawChart = (labels, prices, volumes) => {
+      if (chartRef.value) {
+        chartRef.value.destroy();
+      }
 
-      // 그래프 그리기
-      this.drawChart();
-    },
-    drawChart() {
-      const ctx = this.$refs.chart.getContext('2d');
+      const ctx = chartRef.value.getContext('2d');
 
-      new Chart(ctx, {
+      chartRef.value = new Chart(ctx, {
         type: 'bar',
-        data: this.chartData,
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: '가격 평균',
+              data: prices,
+              backgroundColor: 'rgba(54, 162, 235, 0.5)',
+              borderColor: 'rgba(54, 162, 235, 1)',
+              borderWidth: 1
+            },
+            {
+              label: '거래량',
+              data: volumes,
+              backgroundColor: 'rgba(255, 99, 132, 0.5)',
+              borderColor: 'rgba(255, 99, 132, 1)',
+              borderWidth: 1
+            }
+          ]
+        },
         options: {
-          responsive: true,
           scales: {
             y: {
               beginAtZero: true
@@ -92,7 +98,13 @@ export default {
           }
         }
       });
-    }
+    };
+
+    return {
+      searchKeyword,
+      chartRef,
+      search
+    };
   }
 };
 </script>
