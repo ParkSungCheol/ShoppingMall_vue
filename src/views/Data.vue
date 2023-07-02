@@ -41,7 +41,13 @@ export default {
       const prices = data.map(item => item.price);
       const volumes = data.map(item => item.volume);
 
-      this.chart = new Chart(this.$refs.chart, {
+      if (this.chart){
+        this.chart.data.labels = labels;
+        this.chart.data.datasets[0].data = prices;
+        this.chart.update();
+      }
+      else {
+        this.chart = new Chart(this.$refs.chart, {
         type: 'line',
         data: {
           labels: labels,
@@ -74,7 +80,8 @@ export default {
             }
           }
         }
-      });
+        });
+      }
     }
   }
 };
