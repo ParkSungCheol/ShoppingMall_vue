@@ -42,11 +42,10 @@ export default {
   },
   setup() {
     const searchKeyword = ref('');
-    const chartRef = ref(null);
+    const chartRef = this.$refs.chart;
 
     onMounted(() => {
       Chart.register(...registerables);
-      chartRef.value = this.$refs.chart;
     });
 
     const search = () => {
