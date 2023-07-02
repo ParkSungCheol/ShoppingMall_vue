@@ -74,17 +74,16 @@ export default {
         // ...
       ];
 
-      console.log(data);
       // 검색어를 사용하여 데이터 필터링
       // const filteredData = data.filter(item => item.name === this.searchQuery);
 
       // 그래프 업데이트
-      // const labels = data.map(item => item.date);
-      // const prices = data.map(item => item.price);
+      const labels = data.map(item => item.date);
+      const prices = data.map(item => item.price);
       // const volumes = data.map(item => item.volume);
 
-      // this.chart.data.labels = labels;
-      // this.chart.data.datasets[0].data = prices;
+      this.chart.data.labels = labels;
+      this.chart.data.datasets[0].data = prices;
       // this.chart.update();
     }
   }
