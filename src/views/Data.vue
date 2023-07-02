@@ -12,7 +12,6 @@
 
 <script>
 import { Chart, registerables } from 'chart.js/auto';
-import { shallowRef } from 'vue';
 
 export default {
   data() {
@@ -22,18 +21,11 @@ export default {
     };
   },
   async mounted() {
-    this.$nextTick(function () {
-      this.initializeChart();
-    })
-  },
-  beforeUnmount() {
-   if(this.chart) {
-        this.chart.destroy();
-    } 
+    Chart.register(...registerables);
+    this.initializeChart();
   },
   methods: {
     initializeChart() {
-      Chart.register(...registerables);
       const data = [
         { date: '2023-07-01', price: 10, volume: 50 },
         { date: '2023-07-02', price: 20, volume: 70 },
@@ -54,7 +46,7 @@ export default {
         this.chart.update();
       }
       else {
-        this.chart = shallowRef(new Chart(this.$refs.chart, {
+        this.chart = new Chart(this.$refs.chart, {
         type: 'line',
         data: {
           labels: labels,
@@ -87,7 +79,7 @@ export default {
             }
           }
         }
-        }));
+        });
       }
     }
   }
