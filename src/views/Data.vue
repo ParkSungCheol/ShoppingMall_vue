@@ -46,6 +46,7 @@ export default {
 
     onMounted(() => {
       Chart.register(...registerables);
+      chartRef.value = this.$refs.chart;
     });
 
     const search = () => {
