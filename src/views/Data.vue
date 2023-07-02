@@ -2,7 +2,7 @@
   <div>
     <div class="search-bar">
       <input v-model="searchQuery" type="text" placeholder="검색어를 입력하세요">
-      <button @click="search">검색</button>
+      <button @click="initializeChart">검색</button>
     </div>
     <div class="chart-container">
       <canvas ref="chart"></canvas>
@@ -28,17 +28,31 @@ export default {
   methods: {
     initializeChart() {
       Chart.register(...registerables);
+      const data = [
+        { date: '2023-07-01', price: 10, volume: 50 },
+        { date: '2023-07-02', price: 20, volume: 70 },
+        { date: '2023-07-03', price: 15, volume: 40 },
+        { date: '2023-07-04', price: 25, volume: 60 },
+        // ...
+      ];
+
+      // 그래프 준비
+      const labels = data.map(item => item.date);
+      const prices = data.map(item => item.price);
+      const volumes = data.map(item => item.volume);
+
       if (this.chart){
         this.chart.destroy();
       }
+
       this.chart = new Chart(this.$refs.chart, {
         type: 'line',
         data: {
-          labels: [],
+          labels: labels,
           datasets: [
             {
               label: '가격평균',
-              data: [],
+              data: prices,
               borderColor: 'blue',
               backgroundColor: 'rgba(0, 0, 255, 0.1)',
               borderWidth: 1
@@ -65,31 +79,6 @@ export default {
           }
         }
       });
-    },
-    search() {
-      // 검색 버튼을 클릭할 때 실행되는 메소드
-      // 검색어(this.searchQuery)를 사용하여 데이터를 가져오고 그래프를 준비합니다.
-
-      // 예시 데이터 (임의로 생성한 데이터)
-      const data = [
-        { date: '2023-07-01', price: 10, volume: 50 },
-        { date: '2023-07-02', price: 20, volume: 70 },
-        { date: '2023-07-03', price: 15, volume: 40 },
-        { date: '2023-07-04', price: 25, volume: 60 },
-        // ...
-      ];
-
-      // 그래프 준비
-      const labels = data.map(item => item.date);
-      const prices = data.map(item => item.price);
-      const volumes = data.map(item => item.volume);
-
-      this.chart.data.labels = labels;
-      this.chart.data.datasets[0].data = prices;
-      // 거래량도 추가하려면 데이터셋 추가하고 volumes로 데이터 설정
-      // this.chart.data.datasets[1].data = volumes;
-
-      this.chart.update();
     }
   }
 };
