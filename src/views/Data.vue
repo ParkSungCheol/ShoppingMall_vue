@@ -28,7 +28,7 @@ export default {
   methods: {
     initializeChart() {
       Chart.register(...registerables);
-      if (!this.chart){
+      if (this.chart){
         this.chart.destroy();
       }
       this.chart = new Chart(this.$refs.chart, {
