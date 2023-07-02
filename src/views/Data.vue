@@ -41,46 +41,42 @@ export default {
 
       if (this.chart){
         prices.forEach(e => e = 5);
-        this.chart.data.labels = labels;
-        this.chart.data.datasets[0].data = prices;
-        this.chart.update();
+        this.chart.destroy();
       }
-      else {
-        this.chart = new Chart(this.$refs.chart, {
-        type: 'line',
-        data: {
-          labels: labels,
-          datasets: [
-            {
-              label: '가격평균',
-              data: prices,
-              borderColor: 'blue',
-              backgroundColor: 'rgba(0, 0, 255, 0.1)',
-              borderWidth: 1
+      this.chart = new Chart(this.$refs.chart, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: '가격평균',
+            data: prices,
+            borderColor: 'blue',
+            backgroundColor: 'rgba(0, 0, 255, 0.1)',
+            borderWidth: 1
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          x: {
+            display: true,
+            title: {
+              display: true,
+              text: '일자'
             }
-          ]
-        },
-        options: {
-          responsive: true,
-          scales: {
-            x: {
+          },
+          y: {
+            display: true,
+            title: {
               display: true,
-              title: {
-                display: true,
-                text: '일자'
-              }
-            },
-            y: {
-              display: true,
-              title: {
-                display: true,
-                text: '가격'
-              }
+              text: '가격'
             }
           }
         }
-        });
       }
+      });
     }
   }
 };
