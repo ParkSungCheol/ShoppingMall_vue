@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import Chart from 'chart.js/auto';
+import { Chart, registerables } from 'chart.js/auto';
 
 export default {
   data() {
@@ -20,13 +20,18 @@ export default {
       chart: null
     };
   },
-  mounted() {
-    this.initializeChart();
+  async mounted() {
+    this.$nextTick(function () {
+      this.initializeChart();
+    })
   },
   methods: {
     initializeChart() {
-      const ctx = this.$refs.chart.getContext('2d');
-      this.chart = new Chart(ctx, {
+      Chart.register(...registerables);
+      if (!this.chart){
+        this.chart.destroy();
+      }
+      this.chart = new Chart(this.$refs.chart, {
         type: 'line',
         data: {
           labels: [],
@@ -84,15 +89,6 @@ export default {
       // 거래량도 추가하려면 데이터셋 추가하고 volumes로 데이터 설정
       // this.chart.data.datasets[1].data = volumes;
 
-      // 그래프 업데이트하지 않고 그래프 데이터만 준비한 상태로 리턴
-      return {
-        labels,
-        prices,
-        // volumes,
-      };
-    },
-    updateChart() {
-      // search() 함수에서 준비한 그래프 데이터를 사용하여 그래프를 업데이트합니다.
       this.chart.update();
     }
   }
