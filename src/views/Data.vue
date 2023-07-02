@@ -44,7 +44,7 @@ export default {
       if (this.chart){
         this.chart.data.labels = labels;
         this.chart.data.datasets[0].data = prices;
-        this.chart.update();
+        this.chart.render();
       }
       else {
         this.chart = new Chart(this.$refs.chart, {
