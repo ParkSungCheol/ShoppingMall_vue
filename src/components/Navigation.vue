@@ -54,8 +54,9 @@ export default {
           this.cartCount = result.data.length;
         });
       } catch(e) {
-        console.log(e);
+
       } finally {
+        
       }
     },
     logout: async function(event) {

@@ -108,7 +108,6 @@ router.beforeEach(async (to, from, next) => {
         }
       });
 
-      console.log(result);
       if(result.status === 200){
         user = result.data;
         if(to.meta.notRequireLogin) {
