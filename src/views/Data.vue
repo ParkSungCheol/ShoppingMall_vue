@@ -76,7 +76,7 @@ export default {
         const result = await axiosInstance.get(`${baseURI}/` + "statistic",
         {
           params : {
-            searchValue : searchQuery
+            searchValue : this.searchQuery
           }
         },
         ).then((result) => {
