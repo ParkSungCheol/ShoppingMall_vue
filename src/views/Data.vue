@@ -2,10 +2,10 @@
   <div>
     <Header></Header>
     <Navigation v-bind:getUser="getUser"></Navigation>
-    <div class="search-bar">
-      <input v-model="searchQuery" type="text" placeholder="검색어를 입력하세요">
-      <button @click="initializeChart">검색</button>
-    </div>
+    <form class="d-flex" ref="scrollTarget" v-on:submit.prevent="onSubmit">
+      <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" v-model="searchQuery"/>
+      <button type="button" class="searchButton" v-on:click="initializeChart"><i class="fa fa-search"></i></button>
+    </form>
     <div class="chart-container">
       <canvas ref="chart"></canvas>
     </div>
@@ -115,6 +115,7 @@ export default {
 }
 
 .chart-container {
+  display: inline-block;
   height: 400px;
 }
 </style>
