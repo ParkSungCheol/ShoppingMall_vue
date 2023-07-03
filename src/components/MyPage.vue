@@ -93,7 +93,7 @@
                     <!--팝업콘텐츠영역-->
                     <div class="contact_edit_popup" style="width:329px;">
                         <h4 class="contact_edit_title">
-                                <strong class="bold">{{ name }}님</strong>의 회원정보 중<br/>
+                                <strong class="bold">{{ userName }}님</strong>의 회원정보 중<br/>
                                 <em class="accent">{{ popUpPwd? '패스워드' : popUpEmail? '이메일주소' : '전화번호' }}</em>를 <span id="p_txt_phoneNo_changeYn">수정</span>하기 위해<br/>
                                 인증절차가 필요합니다.
                         </h4>
@@ -116,7 +116,7 @@
                         </div>
                         <div v-show="popUpEmail">
                         <div id="phoneNoForm" class="row_item phone" style="display: block;">
-                            <span id="p_txt_phoneNo" class="item_text">[ 기존 이메일 ] <br/>{{ user.email }}</span>
+                            <span id="p_txt_phoneNo" class="item_text">[ 기존 이메일 ] <br/>{{ userEmail }}</span>
                         </div>
                         <div class="contact_form">
                             <div class="popup_row rightgap">
@@ -132,7 +132,7 @@
                         </div>
                         <div v-show="popUpPhone">
                         <div id="phoneNoForm" class="row_item phone" style="display: block;">
-                            <span id="p_txt_phoneNo" class="item_text">[ 기존 전화번호 ] <br/>{{ user.phone }}</span>
+                            <span id="p_txt_phoneNo" class="item_text">[ 기존 전화번호 ] <br/>{{ userPhone }}</span>
                         </div>
                         <div class="contact_form">
                             <div class="popup_row select">
@@ -202,6 +202,9 @@ export default {
       phone: true,
       sendMessage : true,
       checkMessage : false,
+      userName : '',
+      userEmail : '',
+      userPhone : '',
     }
   },
   props : {
@@ -211,6 +214,9 @@ export default {
     this.user = this.getUser();
     this.id = this.user.id;
     this.name = this.user.name;
+    this.userName = this.user.name;
+    this.userEmail = this.user.email;
+    this.userPhone = this.user.phone;
     this.year = this.user.birth.substr(0,4);
     this.month = this.user.birth.substr(4,2);
     this.day = this.user.birth.substr(6,2);
