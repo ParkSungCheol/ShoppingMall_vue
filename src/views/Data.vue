@@ -2,12 +2,14 @@
   <div>
     <Header></Header>
     <Navigation v-bind:getUser="getUser"></Navigation>
-    <form class="d-flex" ref="scrollTarget" v-on:submit.prevent="onSubmit">
-      <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" v-model="searchQuery"/>
-      <button type="button" class="searchButton" v-on:click="initializeChart"><i class="fa fa-search"></i></button>
-    </form>
-    <div class="chart-container">
-      <canvas ref="chart"></canvas>
+    <div class="container px-4 px-lg-5 mt-5">
+      <form class="d-flex" ref="scrollTarget" v-on:submit.prevent="onSubmit">
+        <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" v-model="searchQuery"/>
+        <button type="button" class="searchButton" v-on:click="initializeChart"><i class="fa fa-search"></i></button>
+      </form>
+      <div class="chart-container">
+        <canvas ref="chart"></canvas>
+      </div>
     </div>
     <Footer></Footer>
   </div>
