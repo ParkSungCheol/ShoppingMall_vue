@@ -95,12 +95,12 @@ nav {
   padding: 5px 0px !important;
 }
 .left_menu {
-  width: 82%;
+  width: 0%;
   display: flex;
   justify-content: flex-start;
 }
 .right_menu {
-  width: 82%;
+  width: 100%;
   display: flex;
   justify-content: flex-end;
 }
