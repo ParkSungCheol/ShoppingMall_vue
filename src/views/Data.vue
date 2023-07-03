@@ -8,7 +8,7 @@
         <button type="button" class="searchButton" v-on:click="initializeChart"><i class="fa fa-search"></i></button>
       </form>
       <div class="chart-container">
-        <canvas ref="chart"></canvas>
+        <canvas ref="chart" class="chart"></canvas>
       </div>
     </div>
     <Footer></Footer>
@@ -109,15 +109,17 @@ export default {
 </script>
 
 <style scoped>
-.search-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+.searchButton {
+  border: none;
+  background: none;
+  padding-left: 1em !important;
 }
-
 .chart-container {
   display: inline-block;
-  height: 400px;
+  width: 100%;
+  height: 100%;
+}
+.chart {
+  margin-bottom: 0.5em;
 }
 </style>
