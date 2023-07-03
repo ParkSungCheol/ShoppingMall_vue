@@ -1,20 +1,9 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container px-lg-5">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                  <li class="nav-item"><router-link class="nav-link" to="/" v-bind:style="{ 
-                  color: link == 'Home'? 'red' : 'black',
-                  cursor: link == 'Home'? 'default' : 'pointer',
-                  'font-weight': link == 'Home'? 'bold' : 'normal',
-                  }" @click="change('Home')">Home</router-link></li>
-                  <li class="nav-item"><router-link class="nav-link" to="/data" v-bind:style="{ 
-                  color: link == 'Data'? 'red' : 'black',
-                  cursor: link == 'Data'? 'default' : 'pointer',
-                  'font-weight': link == 'Data'? 'bold' : 'normal',
-                  }" @click="change('Data')">Data</router-link></li>
-              </ul>
+          <div class="left_menu">
+            <router-link class="btn btn-outline-dark menubar" to="/">Home</router-link>
+            <router-link class="btn btn-outline-dark menubar" to="/">Data</router-link>
           </div>
           <div class="right_menu">
             <router-link class="btn btn-outline-dark menubar" v-if="user" to="/cart">
@@ -38,8 +27,7 @@ export default {
   data () {
     return {
       user : null,
-      cartCount : 0,
-      link : 'Home'
+      cartCount : 0
     }
   },
   props : {
@@ -50,9 +38,6 @@ export default {
     this.getSearch();
   },
   methods: {
-    change(msg) {
-      this.link = msg;
-    },
     async getSearch() {
       try {
         const baseURI = 'https://api.jurospring.o-r.kr';
@@ -108,6 +93,11 @@ export default {
 <style scoped>
 nav {
   padding: 5px 0px !important;
+}
+.left_menu {
+  width: 82%;
+  display: flex;
+  justify-content: flex-start;
 }
 .right_menu {
   width: 82%;
