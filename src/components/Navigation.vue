@@ -2,8 +2,8 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container px-lg-5">
           <div class="left_menu">
-            <router-link class="btn btn-outline-dark menubar" to="/">Home</router-link>
-            <router-link class="btn btn-outline-dark menubar" to="/">Data</router-link>
+            <router-link class="btn menubar" to="/">Home</router-link>
+            <router-link class="btn menubar" to="/data">Data</router-link>
           </div>
           <div class="right_menu">
             <router-link class="btn btn-outline-dark menubar" v-if="user" to="/cart">
@@ -104,7 +104,7 @@ nav {
   display: flex;
   justify-content: flex-end;
 }
-.right_menu .menubar {
+.menubar {
   margin-left: 2%;
 }
 </style>
