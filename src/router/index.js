@@ -100,7 +100,7 @@ router.beforeEach(async (to, from, next) => {
         console.log(res);
         return res;
       }).catch(error => {
-        if (error.response && error.response.status === 500) {
+        if (error.response && error.response.status === 303) {
           console.log("세션 없음. 로그인이 필요합니다.");
           // 추가적인 작업 수행 가능
         } else {
