@@ -51,7 +51,6 @@ export default {
           }
         },
         ).then((result) => {
-          console.log(result);
           this.cartCount = result.data.length;
         });
       } catch(e) {
