@@ -123,7 +123,6 @@ router.beforeEach(async (to, from, next) => {
         }
       }
     } catch(err){
-      console.log(err);
       user = null;
       if(to.meta.requireLogin) {
         alert("로그인이 필요합니다.");
