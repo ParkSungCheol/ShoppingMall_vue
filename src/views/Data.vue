@@ -54,7 +54,46 @@ export default {
     this.initializeChart();
   },
   methods: {
-    initializeChart() {
+    showLoadingOverlay() {
+      this.loader = this.$loading.show({
+        // Optional parameters
+        container: null,
+        width: 100,
+        height: 100,
+        loader: "bars",
+        canCancel: false,
+      });
+    },
+    async initializeChart() {
+
+      this.showLoadingOverlay();
+      
+      try {
+        const baseURI = 'https://api.jurospring.o-r.kr';
+        const axiosInstance = axios.create({
+          withCredentials: true,
+        });
+        const result = await axiosInstance.get(`${baseURI}/` + "statistic",
+        {
+          params : {
+            searchValue : searchQuery
+          }
+        },
+        ).then((result) => {
+          console.log(result);
+          // result.data.forEach(e => {
+          //   e.isPriceValid = true;
+          //   e.isSearchValueValid = true;
+          //   this.items.push(e);
+          // });
+          // console.log(this.items);
+        });
+      } catch(e) {
+        console.log(e);
+      } finally {
+        this.loader.hide();
+      }
+
       // 그래프 준비
       let labels = this.data.map(item => item.date);
       let prices = this.data.map(item => item.price);
@@ -103,6 +142,10 @@ export default {
         }
         ));
       }
+      const scrollTarget = this.$refs.scrollTarget;
+      window.scrollTo({
+        top: scrollTarget.offsetTop,
+      });
     }
   }
 };
@@ -120,6 +163,7 @@ export default {
   height: 100%;
 }
 .chart {
-  margin-bottom: 0.5em;
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 </style>
