@@ -58,6 +58,11 @@ export default {
         canCancel: false,
       });
     },
+    onSubmit() {
+      // 제출을 막는 코드
+      this.initializeChart();
+      return false;
+    },
     async initializeChart() {
 
       this.showLoadingOverlay();
@@ -96,6 +101,7 @@ export default {
       if (this.chart){
         this.chart.data.labels = labels;
         this.chart.data.datasets[0].data = prices;
+        this.chart.data.datasets[1].data = volumes;
         this.chart.update();
       }
       else {
@@ -109,6 +115,13 @@ export default {
               data: prices,
               borderColor: 'blue',
               backgroundColor: 'rgba(0, 0, 255, 0.1)',
+              borderWidth: 1
+            },
+            {
+              label: '등록건수',
+              data: volumes,
+              borderColor: 'green',
+              backgroundColor: 'rgba(0, 255, 0, 0.1)',
               borderWidth: 1
             }
           ]
