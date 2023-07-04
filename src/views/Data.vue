@@ -79,6 +79,15 @@ export default {
           }
         },
         ).then((result) => {
+          result.data.sort(function(a, b) {
+            if (a.keyAsString < b.keyAsString) {
+              return -1; // a가 b보다 앞에 올 때 음수 반환
+            }
+            if (a.keyAsString > b.keyAsString) {
+              return 1; // a가 b보다 뒤에 올 때 양수 반환
+            }
+            return 0; // a와 b가 동일할 때 0 반환
+          });
           this.data = result.data;
           // result.data.forEach(e => {
           //   e.isPriceValid = true;
@@ -111,7 +120,7 @@ export default {
           labels: labels,
           datasets: [
             {
-              label: '가격평균(원)',
+              label: '가격평균(L)',
               data: prices,
               borderColor: 'blue',
               type: 'line',
@@ -120,7 +129,7 @@ export default {
               yAxisID: 'y' // 왼쪽 축 사용
             },
             {
-              label: '등록건수(건)',
+              label: '등록건수(R)',
               data: volumes,
               borderColor: 'green',
               type: 'bar',
@@ -136,7 +145,7 @@ export default {
             x: {
               display: true,
               title: {
-                display: true,
+                display: false,
                 text: '일자'
               }
             },
