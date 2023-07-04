@@ -105,7 +105,7 @@ export default {
         this.chart1.data.datasets[0].data = prices;
 
         this.chart2.data.labels = labels;
-        this.chart2.data.datasets[1].data = volumes;
+        this.chart2.data.datasets[0].data = volumes;
 
         this.chart1.update();
         this.chart2.update();
@@ -139,7 +139,7 @@ export default {
               display: true,
               title: {
                 display: true,
-                text: '가격'
+                text: '가격평균'
               }
             }
           }
