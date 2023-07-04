@@ -203,5 +203,7 @@ export default {
   height: 100%;
 }
 .chart {
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 </style>
