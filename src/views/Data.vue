@@ -8,7 +8,8 @@
         <button type="button" class="searchButton" v-on:click="initializeChart"><i class="fa fa-search"></i></button>
       </form>
       <div class="chart-container">
-        <canvas ref="chart" class="chart"></canvas>
+        <canvas ref="chart1" class="chart"></canvas>
+        <canvas ref="chart2" class="chart"></canvas>
       </div>
     </div>
     <Footer></Footer>
@@ -35,7 +36,8 @@ export default {
     return {
       user: null,
       searchQuery: '',
-      chart: null,
+      chart1: null,
+      chart2: null,
       data : []
     };
   },
@@ -98,14 +100,18 @@ export default {
       let prices = this.data.map(item => item.averagePrice);
       let volumes = this.data.map(item => item.docCount);
 
-      if (this.chart){
-        this.chart.data.labels = labels;
-        this.chart.data.datasets[0].data = prices;
-        this.chart.data.datasets[1].data = volumes;
-        this.chart.update();
+      if (this.chart1){
+        this.chart1.data.labels = labels;
+        this.chart1.data.datasets[0].data = prices;
+
+        this.chart2.data.labels = labels;
+        this.chart2.data.datasets[1].data = volumes;
+
+        this.chart1.update();
+        this.chart2.update();
       }
       else {
-        this.chart = shallowRef(new Chart(this.$refs.chart, {
+        this.chart1 = shallowRef(new Chart(this.$refs.chart1, {
         type: 'line',
         data: {
           labels: labels,
@@ -116,7 +122,36 @@ export default {
               borderColor: 'blue',
               backgroundColor: 'rgba(0, 0, 255, 0.1)',
               borderWidth: 1
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            x: {
+              display: true,
+              title: {
+                display: true,
+                text: '일자'
+              }
             },
+            y: {
+              display: true,
+              title: {
+                display: true,
+                text: '가격'
+              }
+            }
+          }
+        }
+        }
+        ));
+
+        this.chart2 = shallowRef(new Chart(this.$refs.chart2, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [
             {
               label: '등록건수',
               data: volumes,
@@ -140,7 +175,7 @@ export default {
               display: true,
               title: {
                 display: true,
-                text: '가격'
+                text: '등록건수'
               }
             }
           }
