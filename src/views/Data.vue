@@ -36,13 +36,7 @@ export default {
       user: null,
       searchQuery: '',
       chart: null,
-      data : [
-        { date: '2023-07-01', price: 10, volume: 50 },
-        { date: '2023-07-02', price: 20, volume: 70 },
-        { date: '2023-07-03', price: 15, volume: 40 },
-        { date: '2023-07-04', price: 25, volume: 60 },
-        // ...
-      ]
+      data : []
     };
   },
   props : {
@@ -80,7 +74,7 @@ export default {
           }
         },
         ).then((result) => {
-          console.log(result);
+          data = result.data;
           // result.data.forEach(e => {
           //   e.isPriceValid = true;
           //   e.isSearchValueValid = true;
@@ -95,13 +89,12 @@ export default {
       }
 
       // 그래프 준비
-      let labels = this.data.map(item => item.date);
-      let prices = this.data.map(item => item.price);
-      let volumes = this.data.map(item => item.volume);
+      let labels = this.data.map(item => item.keyAsString);
+      let prices = this.data.map(item => item.averagePrice);
+      let volumes = this.data.map(item => item.docCount);
 
       if (this.chart){
-        this.data.forEach(e => e.price += 5);
-        prices = this.data.map(item => item.price);
+        this.chart.data.labels = labels;
         this.chart.data.datasets[0].data = prices;
         this.chart.update();
       }
