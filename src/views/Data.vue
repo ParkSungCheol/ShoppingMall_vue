@@ -97,8 +97,8 @@ export default {
 
       // 그래프 준비
       let labels = this.data.map(item => item.keyAsString);
-      let prices = this.data.map(item => item.averagePrice + "원");
-      let volumes = this.data.map(item => item.docCount + "건");
+      let prices = this.data.map(item => item.averagePrice);
+      let volumes = this.data.map(item => item.docCount);
 
       if (this.chart1){
         this.chart1.data.labels = labels;
@@ -136,6 +136,13 @@ export default {
               title: {
                 display: false,
                 text: '가격평균'
+              },
+              beginAtZero: true,
+              position: 'left',
+              ticks: {
+                callback: function(value, index, values) {
+                  return value + '원';
+                }
               }
             }
           }
@@ -172,6 +179,13 @@ export default {
               title: {
                 display: false,
                 text: '등록건수'
+              },
+              beginAtZero: true,
+              position: 'left',
+              ticks: {
+                callback: function(value, index, values) {
+                  return value + '건';
+                }
               }
             }
           }
