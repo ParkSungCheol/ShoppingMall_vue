@@ -9,7 +9,6 @@
       </form>
       <div class="chart-container">
         <canvas ref="chart1" class="chart"></canvas>
-        <canvas ref="chart2" class="chart"></canvas>
       </div>
     </div>
     <Footer></Footer>
@@ -37,7 +36,6 @@ export default {
       user: null,
       searchQuery: '',
       chart1: null,
-      chart2: null,
       data : []
     };
   },
@@ -103,12 +101,8 @@ export default {
       if (this.chart1){
         this.chart1.data.labels = labels;
         this.chart1.data.datasets[0].data = prices;
-
-        this.chart2.data.labels = labels;
-        this.chart2.data.datasets[0].data = volumes;
-
+        this.chart1.data.datasets[1].data = volumes;
         this.chart1.update();
-        this.chart2.update();
       }
       else {
         this.chart1 = shallowRef(new Chart(this.$refs.chart1, {
@@ -120,47 +114,19 @@ export default {
               label: '가격평균(원)',
               data: prices,
               borderColor: 'blue',
+              type: 'line',
               backgroundColor: 'rgba(0, 0, 255, 0.1)',
-              borderWidth: 1
-            }
-          ]
-        },
-        options: {
-          responsive: true,
-          scales: {
-            x: {
-              display: false,
+              borderWidth: 1,
+              yAxisID: 'y' // 왼쪽 축 사용
             },
-            y: {
-              display: true,
-              title: {
-                display: false,
-                text: '가격평균'
-              },
-              beginAtZero: true,
-              position: 'left',
-              ticks: {
-                callback: function(value, index, values) {
-                  return value + '원';
-                }
-              }
-            }
-          }
-        }
-        }
-        ));
-
-        this.chart2 = shallowRef(new Chart(this.$refs.chart2, {
-        type: 'bar',
-        data: {
-          labels: labels,
-          datasets: [
             {
               label: '등록건수(건)',
               data: volumes,
               borderColor: 'green',
+              type: 'bar',
               backgroundColor: 'rgba(0, 255, 0, 0.1)',
-              borderWidth: 1
+              borderWidth: 1,
+              yAxisID: 'y1' // 왼쪽 축 사용
             }
           ]
         },
@@ -178,10 +144,24 @@ export default {
               display: true,
               title: {
                 display: false,
-                text: '등록건수'
+                text: '가격평균'
               },
               beginAtZero: true,
               position: 'left',
+              ticks: {
+                callback: function(value, index, values) {
+                  return value + '원';
+                }
+              }
+            },
+            y1: {
+              display: true,
+              title: {
+                display: false,
+                text: '등록건수'
+              },
+              beginAtZero: true,
+              position: 'right',
               ticks: {
                 callback: function(value, index, values) {
                   return value + '건';
