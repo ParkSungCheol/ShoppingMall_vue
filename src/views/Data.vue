@@ -97,8 +97,8 @@ export default {
 
       // 그래프 준비
       let labels = this.data.map(item => item.keyAsString);
-      let prices = this.data.map(item => item.averagePrice);
-      let volumes = this.data.map(item => item.docCount);
+      let prices = this.data.map(item => item.averagePrice + "원");
+      let volumes = this.data.map(item => item.docCount + "건");
 
       if (this.chart1){
         this.chart1.data.labels = labels;
@@ -117,7 +117,7 @@ export default {
           labels: labels,
           datasets: [
             {
-              label: '가격평균',
+              label: '가격평균(원)',
               data: prices,
               borderColor: 'blue',
               backgroundColor: 'rgba(0, 0, 255, 0.1)',
@@ -134,7 +134,7 @@ export default {
             y: {
               display: true,
               title: {
-                display: true,
+                display: false,
                 text: '가격평균'
               }
             }
@@ -149,7 +149,7 @@ export default {
           labels: labels,
           datasets: [
             {
-              label: '등록건수',
+              label: '등록건수(건)',
               data: volumes,
               borderColor: 'green',
               backgroundColor: 'rgba(0, 255, 0, 0.1)',
@@ -170,7 +170,7 @@ export default {
             y: {
               display: true,
               title: {
-                display: true,
+                display: false,
                 text: '등록건수'
               }
             }
@@ -200,6 +200,5 @@ export default {
   height: 100%;
 }
 .chart {
-  margin-top: 1em;
 }
 </style>
