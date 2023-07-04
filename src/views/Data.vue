@@ -136,11 +136,7 @@ export default {
               }
             },
             y: {
-              display: true,
-              title: {
-                display: true,
-                text: '가격평균'
-              }
+              display: false
             }
           }
         }
@@ -205,6 +201,5 @@ export default {
 }
 .chart {
   margin-top: 1em;
-  margin-bottom: 1em;
 }
 </style>
