@@ -74,7 +74,7 @@ export default {
           }
         },
         ).then((result) => {
-          data = result.data;
+          this.data = result.data;
           // result.data.forEach(e => {
           //   e.isPriceValid = true;
           //   e.isSearchValueValid = true;
