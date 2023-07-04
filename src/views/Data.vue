@@ -129,14 +129,14 @@ export default {
           responsive: true,
           scales: {
             x: {
+              display: false,
+            },
+            y: {
               display: true,
               title: {
                 display: true,
-                text: '일자'
+                text: '가격평균'
               }
-            },
-            y: {
-              display: false
             }
           }
         }
