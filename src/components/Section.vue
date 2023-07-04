@@ -47,7 +47,7 @@
               'font-weight': searchSort == 'priceDESC'? 'bold' : 'normal',
               }">높은 가격순</a>
           </div>
-          <h3 v-if="goods.length == 0">검색 결과가 존재하지 않습니다.</h3>
+          <h3 v-if="goods.length == 0">{{searchValue? '검색 결과가 존재하지 않습니다.' : '검색어를 입력해주세요.'}}</h3>
           <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             <ul v-for="item in goods">
                 <div class="col mb-5">
