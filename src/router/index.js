@@ -99,9 +99,15 @@ router.beforeEach(async (to, from, next) => {
       ).then(res => {
         console.log(res);
         return res;
+      }).catch(error => {
+        if (error.response && error.response.status === 303) {
+          console.log("세션 없음. 로그인이 필요합니다.");
+          // 추가적인 작업 수행 가능
+        } else {
+          console.error(error);
+        }
       });
 
-      console.log(result);
       if(result.status === 200){
         user = result.data;
         if(to.meta.notRequireLogin) {
@@ -123,7 +129,6 @@ router.beforeEach(async (to, from, next) => {
         }
       }
     } catch(err){
-      console.log(err);
       user = null;
       if(to.meta.requireLogin) {
         alert("로그인이 필요합니다.");

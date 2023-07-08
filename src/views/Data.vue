@@ -2,12 +2,14 @@
   <div>
     <Header></Header>
     <Navigation v-bind:getUser="getUser"></Navigation>
-    <div class="search-bar">
-      <input v-model="searchQuery" type="text" placeholder="검색어를 입력하세요">
-      <button @click="initializeChart">검색</button>
-    </div>
-    <div class="chart-container">
-      <canvas ref="chart"></canvas>
+    <div class="container px-4 px-lg-5 mt-5">
+      <form class="d-flex" ref="scrollTarget" v-on:submit.prevent="onSubmit">
+        <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" v-model="searchQuery"/>
+        <button type="button" class="searchButton" v-on:click="initializeChart"><i class="fa fa-search"></i></button>
+      </form>
+      <div class="chart-container">
+        <canvas ref="chart1" class="chart"></canvas>
+      </div>
     </div>
     <Footer></Footer>
   </div>
@@ -33,14 +35,8 @@ export default {
     return {
       user: null,
       searchQuery: '',
-      chart: null,
-      data : [
-        { date: '2023-07-01', price: 10, volume: 50 },
-        { date: '2023-07-02', price: 20, volume: 70 },
-        { date: '2023-07-03', price: 15, volume: 40 },
-        { date: '2023-07-04', price: 25, volume: 60 },
-        // ...
-      ]
+      chart1: null,
+      data : []
     };
   },
   props : {
@@ -52,30 +48,94 @@ export default {
     this.initializeChart();
   },
   methods: {
-    initializeChart() {
-      // 그래프 준비
-      let labels = this.data.map(item => item.date);
-      let prices = this.data.map(item => item.price);
-      let volumes = this.data.map(item => item.volume);
+    showLoadingOverlay() {
+      this.loader = this.$loading.show({
+        // Optional parameters
+        container: null,
+        width: 100,
+        height: 100,
+        loader: "bars",
+        canCancel: false,
+      });
+    },
+    onSubmit() {
+      // 제출을 막는 코드
+      this.initializeChart();
+      return false;
+    },
+    async initializeChart() {
 
-      if (this.chart){
-        this.data.forEach(e => e.price += 5);
-        prices = this.data.map(item => item.price);
-        this.chart.data.datasets[0].data = prices;
-        this.chart.update();
+      this.showLoadingOverlay();
+      
+      try {
+        const baseURI = 'https://api.jurospring.o-r.kr';
+        const axiosInstance = axios.create({
+          withCredentials: true,
+        });
+        const result = await axiosInstance.get(`${baseURI}/` + "statistic",
+        {
+          params : {
+            searchValue : this.searchQuery
+          }
+        },
+        ).then((result) => {
+          result.data.sort(function(a, b) {
+            if (a.keyAsString < b.keyAsString) {
+              return -1; // a가 b보다 앞에 올 때 음수 반환
+            }
+            if (a.keyAsString > b.keyAsString) {
+              return 1; // a가 b보다 뒤에 올 때 양수 반환
+            }
+            return 0; // a와 b가 동일할 때 0 반환
+          });
+          this.data = result.data;
+          // result.data.forEach(e => {
+          //   e.isPriceValid = true;
+          //   e.isSearchValueValid = true;
+          //   this.items.push(e);
+          // });
+          // console.log(this.items);
+        });
+      } catch(e) {
+        console.log(e);
+      } finally {
+        this.loader.hide();
+      }
+
+      // 그래프 준비
+      let labels = this.data.map(item => item.keyAsString);
+      let prices = this.data.map(item => item.averagePrice);
+      let volumes = this.data.map(item => item.docCount);
+
+      if (this.chart1){
+        this.chart1.data.labels = labels;
+        this.chart1.data.datasets[0].data = prices;
+        this.chart1.data.datasets[1].data = volumes;
+        this.chart1.update();
       }
       else {
-        this.chart = shallowRef(new Chart(this.$refs.chart, {
+        this.chart1 = shallowRef(new Chart(this.$refs.chart1, {
         type: 'line',
         data: {
           labels: labels,
           datasets: [
             {
-              label: '가격평균',
+              label: '가격평균(L)',
               data: prices,
               borderColor: 'blue',
+              type: 'line',
               backgroundColor: 'rgba(0, 0, 255, 0.1)',
-              borderWidth: 1
+              borderWidth: 1,
+              yAxisID: 'y' // 왼쪽 축 사용
+            },
+            {
+              label: '등록건수(R)',
+              data: volumes,
+              borderColor: 'green',
+              type: 'bar',
+              backgroundColor: 'rgba(0, 255, 0, 0.1)',
+              borderWidth: 1,
+              yAxisID: 'y1' // 왼쪽 축 사용
             }
           ]
         },
@@ -85,15 +145,36 @@ export default {
             x: {
               display: true,
               title: {
-                display: true,
+                display: false,
                 text: '일자'
               }
             },
             y: {
               display: true,
               title: {
-                display: true,
-                text: '가격'
+                display: false,
+                text: '가격평균'
+              },
+              beginAtZero: true,
+              position: 'left',
+              ticks: {
+                callback: function(value, index, values) {
+                  return value + '원';
+                }
+              }
+            },
+            y1: {
+              display: true,
+              title: {
+                display: false,
+                text: '등록건수'
+              },
+              beginAtZero: true,
+              position: 'right',
+              ticks: {
+                callback: function(value, index, values) {
+                  return value + '건';
+                }
               }
             }
           }
@@ -101,20 +182,28 @@ export default {
         }
         ));
       }
+      const scrollTarget = this.$refs.scrollTarget;
+      window.scrollTo({
+        top: scrollTarget.offsetTop,
+      });
     }
   }
 };
 </script>
 
 <style scoped>
-.search-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+.searchButton {
+  border: none;
+  background: none;
+  padding-left: 1em !important;
 }
-
 .chart-container {
-  height: 400px;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+.chart {
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 </style>
