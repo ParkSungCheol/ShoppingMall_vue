@@ -1,6 +1,6 @@
 <template>
   <section>
-      <div class="container px-4 px-lg-5 mt-5">
+      <div class="container px-4 px-lg-5 mt-5 section">
           <form class="d-flex" ref="scrollTarget" v-on:submit.prevent="onSubmit">
             <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" v-model="searchValue"/>
             <button type="button" class="searchButton" v-on:click="movePage(1, 'search')"><i class="fa fa-search"></i></button>
@@ -243,6 +243,9 @@ export default {
 </script>
 
 <style scoped>
+.section {
+  min-height: 60em;
+}
 option {
   text-decoration: none !important;
   display: block !important;
