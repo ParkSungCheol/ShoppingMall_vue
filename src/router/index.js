@@ -88,6 +88,7 @@ function getUser() {
 }
 
 router.beforeEach(async (to, from, next) => {
+  window.scrollTo(0,0);
 	console.log(to);
   const baseURI = 'https://api.jurospring.o-r.kr';
     try{
