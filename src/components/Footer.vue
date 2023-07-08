@@ -25,7 +25,7 @@ export default {
   padding-top: 1rem !important;
   padding-bottom: 1rem !important;
 }
-.container {
+.px-4 {
   padding-bottom: 4rem !important;
 }
 </style>
