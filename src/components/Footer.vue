@@ -1,5 +1,6 @@
 <template>
     <footer class="py-5 bg-dark footer">
+        <div class="buffer"></div>
         <div class="container"><p class="m-0 text-center text-white">Copyright &copy; JuroSpring Market</p></div>
     </footer>
 </template>
@@ -25,7 +26,7 @@ export default {
   padding-top: 1rem !important;
   padding-bottom: 1rem !important;
 }
-.px-4 {
-  padding-bottom: 4rem !important;
+.buffer {
+  height: 4rem !important;
 }
 </style>
