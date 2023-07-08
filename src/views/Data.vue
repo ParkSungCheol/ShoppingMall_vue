@@ -182,10 +182,12 @@ export default {
         }
         ));
       }
-      const scrollTarget = this.$refs.scrollTarget;
-      window.scrollTo({
-        top: scrollTarget.offsetTop,
-      });
+      if(this.searchQuery != '') {
+        const scrollTarget = this.$refs.scrollTarget;
+        window.scrollTo({
+          top: scrollTarget.offsetTop,
+        });
+      }
     }
   }
 };
