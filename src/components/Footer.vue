@@ -15,10 +15,17 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .footer {
   position: fixed;
   bottom: 0;
   width: 100%;
+}
+.py-5 {
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+.container {
+  padding-bottom: 4rem !important;
 }
 </style>
