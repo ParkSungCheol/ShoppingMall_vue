@@ -192,14 +192,14 @@ export default {
           this.goods = result.data.list;
           this.pagination = result.data.pagination;
           this.searchDto = result.data.searchDto;
-          const scrollTarget = this.$refs.scrollTarget;
-          window.scrollTo({
-            top: scrollTarget.offsetTop,
-          });
         });
       } catch(e) {
         console.log(e);
       } finally {
+        const scrollTarget = this.$refs.scrollTarget;
+        window.scrollTo({
+          top: scrollTarget.offsetTop,
+        });
         this.loader.hide();
       }
     },
