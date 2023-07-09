@@ -71,7 +71,6 @@
       getUser : Function,
     },
     mounted : function() {
-      debugger;
       this.user = this.getUser();
       this.getSearch();
     },

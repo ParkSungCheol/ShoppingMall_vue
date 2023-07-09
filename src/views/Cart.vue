@@ -1,7 +1,7 @@
 <template>
   <Header></Header>
   <Navigation v-bind:getUser="getUser"></Navigation>
-  <Cart v-bind:getUser="getUser"></Cart>
+  <CartForm v-bind:getUser="getUser"></CartForm>
   <Footer></Footer>
 </template>
 
@@ -10,7 +10,7 @@
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
 import Navigation from '@/components/Navigation.vue'
-import Cart from '@/components/Cart.vue'
+import CartForm from '@/components/Cart.vue'
 
 export default {
   name: 'Cart',
@@ -22,7 +22,7 @@ export default {
     Header,
     Footer,
     Navigation,
-    Cart
+    CartForm
   },
 }
 </script>
