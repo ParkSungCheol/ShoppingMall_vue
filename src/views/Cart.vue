@@ -14,15 +14,15 @@ import Cart from '@/components/Cart.vue'
 
 export default {
   name: 'Cart',
+  //router 의 getUser function
+  props : {
+    getUser : Function,
+  },
   components: {
     Header,
     Footer,
     Navigation,
     Cart
-  },
-  //router 의 getUser function
-  props : {
-    getUser : Function,
   },
 }
 </script>

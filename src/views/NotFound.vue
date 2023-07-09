@@ -16,15 +16,15 @@
   
   export default {
     name: 'NotFound',
+    //router 의 getUser function
+    props : {
+    getUser : Function,
+    },
     components: {
       Header,
       Footer,
       NotFound,
       Navigation
-    },
-    //router 의 getUser function
-    props : {
-      getUser : Function,
     },
   }
   </script>

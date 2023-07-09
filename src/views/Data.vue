@@ -14,15 +14,15 @@ import Data from '@/components/Data.vue'
 
 export default {
   name: 'Data',
+  //router 의 getUser function
+  props : {
+    getUser : Function,
+  },
   components: {
     Header,
     Footer,
     Navigation,
     Data
-  },
-  //router 의 getUser function
-  props : {
-    getUser : Function,
   },
 };
 </script>
