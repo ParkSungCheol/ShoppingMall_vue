@@ -77,7 +77,7 @@ export default {
 
         if(result.status === 200){
           alert("로그아웃 하셨습니다.");
-          this.$router.push('/');
+          this.$router.replace('/');
         } else {
           alert("로그아웃에 실패하였습니다.");
         }
