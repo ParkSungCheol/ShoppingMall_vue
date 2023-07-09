@@ -38,6 +38,8 @@ export default {
     this.getSearch();
   },
   methods: {
+
+    // Cart Count 동기화
     async getSearch() {
       try {
         const baseURI = 'https://api.jurospring.o-r.kr';
@@ -54,11 +56,11 @@ export default {
           this.cartCount = result.data.length;
         });
       } catch(e) {
-
-      } finally {
-        
+        console.log(e);
       }
     },
+
+    // 로그아웃
     logout: async function(event) {
       event.stopPropagation();
       event.preventDefault();
@@ -70,7 +72,6 @@ export default {
         });
         const result = await axiosInstance.get(`${baseURI}/logout`,
         ).then(res => {
-          console.log(res);
           return res;
         });
 
@@ -82,7 +83,6 @@ export default {
         }
 
       } catch(err){
-        console.log(err);
         alert("로그아웃에 실패하였습니다.");
       }
     }

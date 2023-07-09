@@ -14,22 +14,15 @@ import Navigation from '@/components/Navigation.vue'
 
 export default {
   name: 'MyPage',
+  //router 의 getUser function
   props : {
     getUser : Function,
-  },
-  mounted : function() {
-    this.user = this.getUser();
   },
   components: {
     Navigation,
     Header,
     Footer,
     MyPageForm
-  },
-  data() {
-    return {
-      user: null,
-    }
   },
 }
 </script>

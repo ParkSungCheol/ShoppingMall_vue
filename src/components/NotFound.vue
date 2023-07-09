@@ -1,16 +1,17 @@
 <template>
-    <div>
-      Not Found
+    <div class="NotFound">
+      This Page is Not Found
     </div>
 </template>
 
 <script>
 export default {
   name: 'NotFound',
-  data () {
-    return {}
-  },
-  methods: {
-  }
 }
 </script>
+
+<style scoped>
+.NotFound {
+  padding-top: 2em;
+}
+</style>

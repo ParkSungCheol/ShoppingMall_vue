@@ -134,17 +134,10 @@ export default {
       pagination: null,
       searchDto: null,
     }
-  },
-  props: {
-    showMenu: {
-      type: Boolean,
-      default: false
-    }
-  },
-  mounted() {
-    this.getGoods();
   }
   ,methods: {
+
+    // 로딩바 표시
     showLoadingOverlay() {
       this.loader = this.$loading.show({
         // Optional parameters
@@ -155,21 +148,30 @@ export default {
         canCancel: false,
       });
     },
+
+    // Submit의 제출은 막고 상품리스트 조회
     onSubmit() {
-      // 제출을 막는 코드
       this.movePage(1, 'search');
       return false;
     },
+
+    // 각 페이지별 상품리스트 조회
     movePage(page, position) {
       this.showLoadingOverlay();
       this.searchMessage = this.searchValue? '검색결과가 존재하지 않습니다.' : '검색어를 입력해주세요.';
 
       try {
+        // 페이지 번호 클릭시
         if(position == "current") {
+          // searchDto가 존재하지 않는 경우
           if(!this.searchDto && page == 1) return;
+
+          // 현재 페이지와 동일한 경우
           else if(this.searchDto && this.searchDto.page == page) return;
         }
+        // 정렬버튼 클릭시
         if(position.includes("order")) {
+          // 기존 정렬방식과 동일한 경우
           if(this.searchSort == position.substring(position.indexOf("_") + 1)) return;
           this.searchSort = position.substring(position.indexOf("_") + 1);
         }
@@ -188,7 +190,6 @@ export default {
           params : queryParams
         },
         ).then(result => {
-          console.log(result);
           this.goods = result.data.list;
           this.pagination = result.data.pagination;
           this.searchDto = result.data.searchDto;
@@ -196,13 +197,17 @@ export default {
       } catch(e) {
         console.log(e);
       } finally {
+        // 검색 시 스크롤링 위치를 inputBox로 이동
         const scrollTarget = this.$refs.scrollTarget;
         window.scrollTo({
           top: scrollTarget.offsetTop,
         });
+        // 로딩바 숨김
         this.loader.hide();
       }
     },
+
+    // 배송비 및 가격 format
     numberWithCommas(x) {
       if(x == 0) {
         return "무료"
@@ -212,25 +217,9 @@ export default {
       }
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
     },
-    getGoods() {
-      this.showLoadingOverlay();
-      
-      try {
-        const baseURI = 'https://api.jurospring.o-r.kr';
-        axios.get(`${baseURI}/goods`)
-        .then((result) => {
-          console.log(result);
-          this.goods = result.data.list;
-          this.pagination = result.data.pagination;
-        });
-      } catch(e) {
-        console.log(e);
-      } finally {
-        this.loader.hide();
-      }
-    }
   },
   computed: {
+    // 하단에 표시할 페이지 번호 계산
     filteredNum() {
       if(this.pagination) {
         const start = this.pagination.startPage;

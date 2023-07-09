@@ -232,6 +232,8 @@ export default {
     }
   },
   methods: {
+
+    // 회원탈퇴
     async deleteUser() {
       let isConfirmed = confirm("정말 회원탈퇴를 진행하시겠습니까?");
       if(!isConfirmed) return;
@@ -247,7 +249,6 @@ export default {
           }
         },
         ).then(res => {
-          console.log(res);
           return res;
         });
 
@@ -261,10 +262,52 @@ export default {
         }
 
       } catch(err){
-        console.log(err);
         alert("회원탈퇴에 실패하였습니다.");
       }
     },
+
+    // 이미 존재하는 데이터인지 체크
+    async existCheck(targetObject) {
+      let successMessage = targetObject == "id"? "사용가능한 아이디입니다." : "";
+      let failureMessage = "이미 존재합니다.";
+      
+      const baseURI = 'https://api.jurospring.o-r.kr';
+      try{
+        const axiosInstance = axios.create({
+          withCredentials: true,
+        });
+        const result = await axiosInstance.get(`${baseURI}/` + "existCheck",
+        {
+          params : {
+            id: targetObject == "id"? this.$refs.id.value : undefined,
+            email: targetObject == "email"? this.$refs.sendEmail.value : undefined,
+            phone: targetObject == "phone"? this.$refs.sendMessage.value.replaceAll("-", "") : undefined,
+          }
+        },
+        ).then(res => {
+          return res;
+        });
+
+        if(result.status === 202){
+          if(successMessage) {
+            alert(successMessage);
+            this.checkId = false;
+          }
+          return true;
+        }
+        else {
+          alert(failureMessage);
+          return false;
+        }
+
+      } catch(err){
+        alert(failureMessage);
+        return false;
+      }
+    },
+
+    // 핸드폰 검증
+    /* 변수 cycle : 1. 초기화 send : true, check : false -> 이메일 발송 시 check : true -> 인증코드 입력 및 검증완료 시 send : false, check : false */
     async messageCheck(targetObject) {
       if(this.phone) {
         alert("핸드폰 번호를 확인해주세요!");
@@ -291,11 +334,9 @@ export default {
           }
         },
         ).then(res => {
-          console.log(res);
           return res;
         });
 
-        console.log(result);
         if(result.status === 200){
           if(successMessage) alert(successMessage);
           if(targetObject == "sendMessage") {
@@ -311,182 +352,12 @@ export default {
         }
 
       } catch(err){
-        console.log(err);
         alert(failureMessage);
       }
     },
-    async changePopUp() {
-        let params = {
-            id: this.user.id,
-        };
-        let route;
 
-        if(this.popUpPwd) {
-            if(this.beforePwd) { alert("기존 비밀번호를 확인해주세요."); return;}
-            if(this.afterPwd) { alert("변경할 비밀번호를 확인해주세요."); return;}
-            if(this.afterPwdConfirm) { alert("변경할 비밀번호 재입력을 확인해주세요."); return;}
-            if(this.$refs.beforePwd.value == this.$refs.afterPwd.value) { alert("기존 비밀번호와 동일합니다."); return; }
-
-            params.beforePwd = this.$refs.beforePwd.value;
-            params.afterPwd = this.$refs.afterPwd.value;
-            route = '/login';
-        }
-        if(this.popUpEmail) {
-            if(this.sendEmail && this.checkEmail) {
-                await this.emailCheck('checkEmail');
-                if(this.sendEmail || this.checkEmail) return;
-            }
-            else if(this.sendEmail) { alert("이메일 인증을 진행해주세요."); return;}
-
-            params.email = this.$refs.sendEmail.value;
-        }
-        if(this.popUpPhone) {
-            if(this.sendMessage && this.checkMessage) {
-                await this.messageCheck('checkMessage');
-                if(this.sendMessage || this.checkMessage) return;
-            }
-            else if(this.sendMessage) { alert("전화번호 인증을 진행해주세요."); return;}
-
-            params.phone = this.$refs.sendMessage.value;
-        }
-
-        const baseURI = 'https://api.jurospring.o-r.kr';
-        try{
-            const axiosInstance = axios.create({
-            withCredentials: true,
-            });
-            const result = await axiosInstance.get(`${baseURI}/` + "updateUser",
-            {
-            params : params
-            },
-            ).then(res => {
-            console.log(res);
-            return res;
-            });
-
-            if(result.status === 200){
-                alert("정보수정이 완료되었습니다.");
-                if(!route) this.$router.go();
-                else this.$router.push(route);
-            }
-            else {
-                alert("정보수정에 실패하였습니다.");
-            }
-
-        } catch(err){
-            console.log(err);
-            if(this.popUpPwd && err.response.status === 404) {
-                 alert("현재 비밀번호가 일치하지 않습니다.");
-            }
-            else alert("정보수정에 실패하였습니다.");
-        }
-    },
-    closePopUp() {
-      this.$refs.dimmed.style.display = 'none';
-      this.$refs.layer.style.display = 'none';
-      document.querySelector("*").style.overflow = 'visible';
-      this.popUpPwd = false;
-      this.popUpEmail = false;
-      this.popUpPhone = false;
-      this.$refs.beforePwd.value = "";
-      this.$refs.afterPwd.value = "";
-      this.$refs.afterPwdConfirm.value = "";
-      this.beforePwd = true;
-      this.afterPwd = true;
-      this.afterPwdConfirm = true;
-      this.$refs.sendEmail.value = "";
-      this.$refs.checkEmail.value = "";
-      this.email = true;
-      this.sendEmail = true;
-      this.checkEmail = false;
-      this.$refs.sendMessage.value = "";
-      this.$refs.checkMessage.value = "";
-      this.phone = true;
-      this.sendMessage = true;
-      this.checkMessage = false;
-    },
-    popUp(target) {
-      this[target] = true;
-      this.$refs.dimmed.style.display = 'block';
-      this.$refs.layer.style.display = 'block';
-      document.querySelector("*").style.overflow = 'hidden';
-      //window.scrollTo(0,0);
-    },
-    keyPress($event, targetObject) {
-      let idval = $event.target.value;
-      let idvalcheck = null;
-      if(targetObject == 'id') idvalcheck = new RegExp(/^[a-zA-Z0-9]{6,20}$/);
-      else if(targetObject == 'beforePwd') idvalcheck = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{10,}$/);
-      else if(targetObject == 'afterPwd') idvalcheck = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{10,}$/);
-      else if(targetObject == 'afterPwdConfirm') {
-        let pwd = "^" + this.$refs.afterPwd.value + "$";
-        idvalcheck = new RegExp(pwd);
-      }
-      else if(targetObject == 'nameCheck') idvalcheck = new RegExp(/^[ㄱ-ㅣ가-힣]{2,4}$/);
-      else if(targetObject == 'birthday') {
-        idvalcheck = new RegExp(/(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])/);
-        let year = this.$refs.year.value;
-        let month = this.$refs.month.value;
-        let day = this.$refs.day.value.length < 2? "0"+this.$refs.day.value : this.$refs.day.value;
-        idval = year + month + day;
-      }
-      else if(targetObject == 'email') idvalcheck = new RegExp(/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/);
-      else if(targetObject == 'phone') idvalcheck = new RegExp(/^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/);
-      console.log(idval);
-      console.log(idvalcheck.test(idval));
-      if (!idvalcheck.test(idval)){
-        if(targetObject == 'afterPwd') {
-            this.$refs.afterPwdConfirm.value = "";
-            this.afterPwdConfirm = true;
-        }
-        this[targetObject] = true;
-      }
-      else {
-        this[targetObject] = false;
-      }
-      console.log(this[targetObject]);
-    },
-    async existCheck(targetObject) {
-      let successMessage = targetObject == "id"? "사용가능한 아이디입니다." : "";
-      let failureMessage = "이미 존재합니다.";
-      
-      const baseURI = 'https://api.jurospring.o-r.kr';
-      try{
-        const axiosInstance = axios.create({
-          withCredentials: true,
-        });
-        const result = await axiosInstance.get(`${baseURI}/` + "existCheck",
-        {
-          params : {
-            id: targetObject == "id"? this.$refs.id.value : undefined,
-            email: targetObject == "email"? this.$refs.sendEmail.value : undefined,
-            phone: targetObject == "phone"? this.$refs.sendMessage.value.replaceAll("-", "") : undefined,
-          }
-        },
-        ).then(res => {
-          console.log(res);
-          return res;
-        });
-
-        console.log(result);
-        if(result.status === 202){
-          if(successMessage) {
-            alert(successMessage);
-            this.checkId = false;
-          }
-          return true;
-        }
-        else {
-          alert(failureMessage);
-          return false;
-        }
-
-      } catch(err){
-        console.log(err);
-        alert(failureMessage);
-        return false;
-      }
-    },
+    // 이메일 검증
+    /* 변수 cycle : 1. 초기화 send : true, check : false -> 이메일 발송 시 check : true -> 인증코드 입력 및 검증완료 시 send : false, check : false */
     async emailCheck(targetObject) {
       if(this.email) {
         alert("이메일을 확인해주세요!");
@@ -513,11 +384,9 @@ export default {
           }
         },
         ).then(res => {
-          console.log(res);
           return res;
         });
 
-        console.log(result);
         if(result.status === 200){
           if(successMessage) alert(successMessage);
           if(targetObject == "sendEmail") {
@@ -533,10 +402,148 @@ export default {
         }
 
       } catch(err){
-        console.log(err);
         alert(failureMessage);
       }
     },
+
+    // 팝업에서 진행 시
+    async changePopUp() {
+        let params = {
+            id: this.user.id,
+        };
+        let route;
+
+        // 비밀번호 변경 팝업
+        if(this.popUpPwd) {
+            if(this.beforePwd) { alert("기존 비밀번호를 확인해주세요."); return;}
+            if(this.afterPwd) { alert("변경할 비밀번호를 확인해주세요."); return;}
+            if(this.afterPwdConfirm) { alert("변경할 비밀번호 재입력을 확인해주세요."); return;}
+            if(this.$refs.beforePwd.value == this.$refs.afterPwd.value) { alert("기존 비밀번호와 동일합니다."); return; }
+
+            params.beforePwd = this.$refs.beforePwd.value;
+            params.afterPwd = this.$refs.afterPwd.value;
+            route = '/login';
+        }
+        // 이메일 변경 팝업
+        if(this.popUpEmail) {
+            if(this.sendEmail && this.checkEmail) {
+                await this.emailCheck('checkEmail');
+                if(this.sendEmail || this.checkEmail) return;
+            }
+            else if(this.sendEmail) { alert("이메일 인증을 진행해주세요."); return;}
+
+            params.email = this.$refs.sendEmail.value;
+        }
+        // 핸드폰번호 변경 팝업
+        if(this.popUpPhone) {
+            if(this.sendMessage && this.checkMessage) {
+                await this.messageCheck('checkMessage');
+                if(this.sendMessage || this.checkMessage) return;
+            }
+            else if(this.sendMessage) { alert("전화번호 인증을 진행해주세요."); return;}
+
+            params.phone = this.$refs.sendMessage.value;
+        }
+
+        const baseURI = 'https://api.jurospring.o-r.kr';
+        try{
+            const axiosInstance = axios.create({
+            withCredentials: true,
+            });
+            const result = await axiosInstance.get(`${baseURI}/` + "updateUser",
+            {
+            params : params
+            },
+            ).then(res => {
+            return res;
+            });
+
+            if(result.status === 200){
+                alert("정보수정이 완료되었습니다.");
+                if(!route) this.$router.go();
+                else this.$router.push(route);
+            }
+            else {
+                alert("정보수정에 실패하였습니다.");
+            }
+
+        } catch(err){
+            if(this.popUpPwd && err.response.status === 404) {
+                 alert("현재 비밀번호가 일치하지 않습니다.");
+            }
+            else alert("정보수정에 실패하였습니다.");
+        }
+    },
+
+    // 팝업 닫기
+    closePopUp() {
+      this.$refs.dimmed.style.display = 'none';
+      this.$refs.layer.style.display = 'none';
+      document.querySelector("*").style.overflow = 'visible';
+      this.popUpPwd = false;
+      this.popUpEmail = false;
+      this.popUpPhone = false;
+      this.$refs.beforePwd.value = "";
+      this.$refs.afterPwd.value = "";
+      this.$refs.afterPwdConfirm.value = "";
+      this.beforePwd = true;
+      this.afterPwd = true;
+      this.afterPwdConfirm = true;
+      this.$refs.sendEmail.value = "";
+      this.$refs.checkEmail.value = "";
+      this.email = true;
+      this.sendEmail = true;
+      this.checkEmail = false;
+      this.$refs.sendMessage.value = "";
+      this.$refs.checkMessage.value = "";
+      this.phone = true;
+      this.sendMessage = true;
+      this.checkMessage = false;
+    },
+
+    // 팝업 열기
+    popUp(target) {
+      this[target] = true;
+      this.$refs.dimmed.style.display = 'block';
+      this.$refs.layer.style.display = 'block';
+      document.querySelector("*").style.overflow = 'hidden';
+      //window.scrollTo(0,0);
+    },
+
+    // 데이터 입력 시 형식 검증
+    keyPress($event, targetObject) {
+      let idval = $event.target.value;
+      let idvalcheck = null;
+      if(targetObject == 'id') idvalcheck = new RegExp(/^[a-zA-Z0-9]{6,20}$/);
+      else if(targetObject == 'beforePwd') idvalcheck = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{10,}$/);
+      else if(targetObject == 'afterPwd') idvalcheck = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{10,}$/);
+      else if(targetObject == 'afterPwdConfirm') {
+        let pwd = "^" + this.$refs.afterPwd.value + "$";
+        idvalcheck = new RegExp(pwd);
+      }
+      else if(targetObject == 'nameCheck') idvalcheck = new RegExp(/^[ㄱ-ㅣ가-힣]{2,4}$/);
+      else if(targetObject == 'birthday') {
+        idvalcheck = new RegExp(/(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])/);
+        let year = this.$refs.year.value;
+        let month = this.$refs.month.value;
+        let day = this.$refs.day.value.length < 2? "0"+this.$refs.day.value : this.$refs.day.value;
+        idval = year + month + day;
+      }
+      else if(targetObject == 'email') idvalcheck = new RegExp(/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/);
+      else if(targetObject == 'phone') idvalcheck = new RegExp(/^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/);
+      if (!idvalcheck.test(idval)){
+        if(targetObject == 'afterPwd') {
+            this.$refs.afterPwdConfirm.value = "";
+            this.afterPwdConfirm = true;
+        }
+        this[targetObject] = true;
+      }
+      else {
+        this[targetObject] = false;
+      }
+    },
+
+    // 카카오(다음) 주소찾기 API
     search(){ //@click을 사용할 때 함수는 이렇게 작성해야 한다.
         new window.daum.Postcode({
         oncomplete: (data) => { //function이 아니라 => 로 바꿔야한다.
@@ -592,6 +599,8 @@ export default {
         }
     }).open();
     },
+
+    // 정보수정 버튼 클릭시
     async fnUpdate() {
       if(this.nameCheck) { alert("이름을 확인해주세요."); return;}
       if(this.birthday) { alert("생년월일을 확인해주세요."); return;}
@@ -600,9 +609,6 @@ export default {
       let birth = this.$refs.year.value + this.$refs.month.value + day;
       let address = this.$refs.addressDetail.value? this.$refs.addressCode.value+"^"+this.$refs.addressMain.value+"^"+this.$refs.addressDetail.value+"^"+this.$refs.addressDetail2.value : this.$refs.addressCode.value+"^"+this.$refs.addressMain.value+"^"+this.$refs.addressDetail2.value;
       if(this.name == this.user.name && birth == this.user.birth && address == this.user.address) { alert("변경사항이 없습니다."); return; }
-      console.log("일치여부");
-      console.log(birth);
-      console.log(this.user.birth);
       let isConfirmed = confirm("개인정보를 수정하시겠습니까?");
       if(!isConfirmed) return;
       const baseURI = 'https://api.jurospring.o-r.kr';
@@ -625,11 +631,9 @@ export default {
           }
         },
         ).then(res => {
-          console.log(res);
           return res;
         });
 
-        console.log(result);
         if(result.status === 200){
           alert("정보수정이 완료되었습니다.");
           this.$router.push('/');
@@ -639,7 +643,6 @@ export default {
         }
 
       } catch(err){
-        console.log(err);
         alert("정보수정에 실패하였습니다.");
       }
     }

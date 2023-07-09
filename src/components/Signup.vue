@@ -133,6 +133,8 @@ export default {
     }
   },
   methods: {
+
+    // 데이터 입력 시 형식 검증
     keyPress($event, targetObject) {
       let idval = $event.target.value;
       let idvalcheck = null;
@@ -140,7 +142,6 @@ export default {
       else if(targetObject == 'pwd') idvalcheck = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{10,}$/);
       else if(targetObject == 'pwdConfirm') {
         let pwd = "^" + this.$refs.pwd.value + "$";
-        console.log(pwd);
         idvalcheck = new RegExp(pwd);
       }
       else if(targetObject == 'name') idvalcheck = new RegExp(/^[ㄱ-ㅣ가-힣]{2,4}$/);
@@ -153,8 +154,6 @@ export default {
       }
       else if(targetObject == 'email') idvalcheck = new RegExp(/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/);
       else if(targetObject == 'phone') idvalcheck = new RegExp(/^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/);
-      console.log(idval);
-      console.log(idvalcheck.test(idval));
       if (!idvalcheck.test(idval)){
         if(targetObject == 'pwd') {
             this.$refs.pwdConfirm.value = "";
@@ -165,8 +164,9 @@ export default {
       else {
         this[targetObject] = false;
       }
-      console.log(this[targetObject]);
     },
+
+    // 이미 존재하는 데이터인지 체크
     async existCheck(targetObject) {
       if(targetObject == "id" && this[targetObject]) {
         alert("아이디를 확인해주세요!");
@@ -190,11 +190,9 @@ export default {
           }
         },
         ).then(res => {
-          console.log(res);
           return res;
         });
 
-        console.log(result);
         if(result.status === 202){
           if(successMessage) {
             alert(successMessage);
@@ -208,11 +206,13 @@ export default {
         }
 
       } catch(err){
-        console.log(err);
         alert(failureMessage);
         return false;
       }
     },
+
+    // 이메일 검증
+    /* 변수 cycle : 1. 초기화 send : true, check : false -> 이메일 발송 시 check : true -> 인증코드 입력 및 검증완료 시 send : false, check : false */
     async emailCheck(targetObject) {
       if(this.email) {
         alert("이메일을 확인해주세요!");
@@ -239,11 +239,9 @@ export default {
           }
         },
         ).then(res => {
-          console.log(res);
           return res;
         });
 
-        console.log(result);
         if(result.status === 200){
           alert(successMessage);
           if(targetObject == "sendEmail") {
@@ -259,10 +257,12 @@ export default {
         }
 
       } catch(err){
-        console.log(err);
         alert(failureMessage);
       }
     },
+    
+    // 핸드폰 검증
+    /* 변수 cycle : 1. 초기화 send : true, check : false -> 이메일 발송 시 check : true -> 인증코드 입력 및 검증완료 시 send : false, check : false */
     async messageCheck(targetObject) {
       if(this.phone) {
         alert("핸드폰 번호를 확인해주세요!");
@@ -289,11 +289,9 @@ export default {
           }
         },
         ).then(res => {
-          console.log(res);
           return res;
         });
 
-        console.log(result);
         if(result.status === 200){
           alert(successMessage);
           if(targetObject == "sendMessage") {
@@ -309,10 +307,11 @@ export default {
         }
 
       } catch(err){
-        console.log(err);
         alert(failureMessage);
       }
     },
+    
+    // 카카오(다음) 주소찾기 API
     search(){ //@click을 사용할 때 함수는 이렇게 작성해야 한다.
         new window.daum.Postcode({
         oncomplete: (data) => { //function이 아니라 => 로 바꿔야한다.
@@ -364,6 +363,8 @@ export default {
         }
     }).open();
     },
+
+    // 회원가입 버튼 클릭시
     async fnSignUp() {
       if(this.id) { alert("아이디를 확인해주세요."); return;}
       if(this.pwd) { alert("비밀번호를 확인해주세요."); return;}
@@ -397,11 +398,9 @@ export default {
           }
         },
         ).then(res => {
-          console.log(res);
           return res;
         });
 
-        console.log(result);
         if(result.status === 200){
           alert("회원가입이 완료되었습니다.");
           this.$router.push('/login');
@@ -411,7 +410,6 @@ export default {
         }
 
       } catch(err){
-        console.log(err);
         alert("회원가입에 실패하였습니다.");
       }
     }

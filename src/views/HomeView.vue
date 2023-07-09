@@ -1,8 +1,8 @@
 <template>
-  <Header v-on:click="clickOutside"></Header>
-  <Navigation v-on:click="clickOutside" v-bind:getUser="getUser"></Navigation>
-  <Section v-on:click="clickOutside" v-bind:showMenu="showMenu" @toggleMenu="toggleMenu"></Section>
-  <Footer v-on:click="clickOutside"></Footer>
+  <Header></Header>
+  <Navigation v-bind:getUser="getUser"></Navigation>
+  <Section></Section>
+  <Footer></Footer>
 </template>
 
 <script>
@@ -14,25 +14,15 @@ import Section from '@/components/Section.vue'
 
 export default {
   name: 'HomeView',
-  data () {
-    return {
-      showMenu: false,
-    }
+  //router 의 getUser function
+  props : {
+    getUser : Function,
   },
-  props: ['getUser'],
   components: {
     Header,
     Footer,
     Navigation,
     Section
-  }
-  ,methods: {
-    clickOutside(e) {
-      if(e.target.parentNode !== this.$refs.menu) this.showMenu = false;
-    },
-    toggleMenu() {
-      this.showMenu = !this.showMenu;
-    }
   }
 }
 </script>

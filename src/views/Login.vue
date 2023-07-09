@@ -14,22 +14,15 @@ import Navigation from '@/components/Navigation.vue'
 
 export default {
   name: 'Login',
+  //router 의 getUser function
   props : {
     getUser : Function,
-  },
-  mounted : function() {
-    this.user = this.getUser();
   },
   components: {
     Navigation,
     Header,
     Footer,
     LoginForm
-  },
-  data() {
-    return {
-      user: null,
-    }
   },
 }
 </script>

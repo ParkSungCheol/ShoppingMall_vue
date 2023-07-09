@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import NotFoundComponent from '../components/NotFound.vue'
+import NotFoundComponent from '../views/NotFound.vue'
 import axios from 'axios'
 
 const routes = [
@@ -14,50 +14,36 @@ const routes = [
   {
     path: '/cart',
     name: 'cart',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Cart.vue'),
+    // lazy-loading
+    component: () => import('../views/Cart.vue'),
     meta: { requireLogin: true, notRequireLogin: false, },
     props: { getUser : getUser }
   },
   {
     path: '/data',
     name: 'data',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Data.vue'),
+    component: () => import('../views/Data.vue'),
     meta: { requireLogin: true, notRequireLogin: false, },
     props: { getUser : getUser }
   },
   {
     path: '/login',
     name: 'login',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue'),
+    component: () => import('../views/Login.vue'),
     meta: { requireLogin: false, notRequireLogin: true, },
     props: { getUser : getUser }
   },
   {
     path: '/signup',
     name: 'signup',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Signup.vue'),
+    component: () => import('../views/Signup.vue'),
     meta: { requireLogin: false, notRequireLogin: true, },
     props: { getUser : getUser }
   },
   {
     path: '/mypage',
     name: 'mypage',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/MyPage.vue'),
+    component: () => import('../views/MyPage.vue'),
     meta: { requireLogin: true, notRequireLogin: false, },
     props: { getUser : getUser }
   },
@@ -89,7 +75,8 @@ function getUser() {
 
 router.beforeEach(async (to, from, next) => {
   window.scrollTo(0,0);
-	console.log(to);
+
+  // 세션 검증을 통한 로그인 검증절차 requireLogin : 로그인이 필요한 화면 / notRequireLogin : 로그인 되어있으면 접근불가능한 화면
   const baseURI = 'https://api.jurospring.o-r.kr';
     try{
       const axiosInstance = axios.create({
@@ -103,7 +90,6 @@ router.beforeEach(async (to, from, next) => {
       }).catch(error => {
         if (error.response && error.response.status === 303) {
           console.log("세션 없음. 로그인이 필요합니다.");
-          // 추가적인 작업 수행 가능
         } else {
           console.error(error);
         }
