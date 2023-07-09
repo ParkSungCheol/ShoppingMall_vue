@@ -1,10 +1,8 @@
 <template>
-  <div>
-    <Header></Header>
-    <Navigation v-bind:getUser="getUser"></Navigation>
-    <Cart v-bind:getUser="getUser"></Cart>
-    <Footer></Footer>
-  </div>
+  <Header></Header>
+  <Navigation v-bind:getUser="getUser"></Navigation>
+  <Cart v-bind:getUser="getUser"></Cart>
+  <Footer></Footer>
 </template>
 
 <script>

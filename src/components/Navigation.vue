@@ -35,7 +35,7 @@ export default {
   },
   mounted : function() {
     this.user = this.getUser();
-    this.getSearch();
+    if(this.user) this.getSearch();
   },
   methods: {
 

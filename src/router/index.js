@@ -85,11 +85,10 @@ router.beforeEach(async (to, from, next) => {
       const result = await axiosInstance.get(`${baseURI}/getSession`,
       {},
       ).then(res => {
-        console.log(res);
         return res;
       }).catch(error => {
         if (error.response && error.response.status === 303) {
-          console.log("세션 없음. 로그인이 필요합니다.");
+          console.log("로그인이 필요합니다.");
         } else {
           console.error(error);
         }

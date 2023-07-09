@@ -1,10 +1,8 @@
 <template>
-  <div>
-    <Header></Header>
-    <Navigation v-bind:getUser="getUser"></Navigation>
-    <Data></Data>
-    <Footer></Footer>
-  </div>
+  <Header></Header>
+  <Navigation v-bind:getUser="getUser"></Navigation>
+  <Data></Data>
+  <Footer></Footer>
 </template>
 
 <script>
