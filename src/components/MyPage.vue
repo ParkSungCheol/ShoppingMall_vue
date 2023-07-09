@@ -211,6 +211,7 @@ export default {
     getUser : Function,
   },
   mounted : function() {
+    debugger;
     this.user = this.getUser();
     this.id = this.user.id;
     this.name = this.user.name;

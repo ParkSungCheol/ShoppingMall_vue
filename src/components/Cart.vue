@@ -68,9 +68,10 @@
     },
     //router 의 getUser function
     props : {
-        getUser : Function,
+      getUser : Function,
     },
     mounted : function() {
+      debugger;
       this.user = this.getUser();
       this.getSearch();
     },
