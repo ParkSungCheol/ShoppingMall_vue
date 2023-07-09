@@ -252,7 +252,6 @@ export default {
           return res;
         });
 
-        console.log(result);
         if(result.status === 200){
           alert("회원탈퇴가 정상적으로 처리되었습니다.");
           this.$router.push('/');

@@ -101,13 +101,11 @@
             }
           },
           ).then((result) => {
-            console.log(result);
             result.data.forEach(e => {
               e.isPriceValid = true;
               e.isSearchValueValid = true;
               this.items.push(e);
             });
-            console.log(this.items);
           });
         } catch(e) {
           console.log(e);
