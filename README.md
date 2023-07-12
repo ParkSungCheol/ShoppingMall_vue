@@ -7,8 +7,8 @@
 ------------
 ### 어떤 기술을 사용하였나요?
 > **[ 크롤링 및 API ]**
-> > [ Selenium ]**<br/>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;브라우저를 통해 직접 해당 페이지로 접근하는 방식으로 가장 인간의 활동과 유사<br/>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;AWS 프리티어 메모리로는 급격한 성능저하 발생으로 사용불가<br/>
-> > 데이터의 일관성 및 무결성 보장, 정형화된 관계파악에 용이한 장점을 가져가기 위해 **[ RDB 활용 ]**<br/>
+> > [ Selenium ]<br/>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;브라우저를 통해 직접 해당 페이지로 접근하는 방식으로 가장 인간의 활동과 유사<br/>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;AWS 프리티어 메모리로는 급격한 성능저하 발생으로 사용불가<br/>
+> > [ Jsoup ]<br/>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;적은 메모리로도 사용가능<br/>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;이미지 로딩 불가 & 지속적인 호출 시 IP차단되거나 500번 503번 서버에러 발생 등으로 데이터 적재 로직의 안정성 저하 우려<br/>
 > > 데이터베이스간의 동기화를 위해 **[ Logstash 활용 ]**<br/>
 > > **[ 데이터 흐름 ]** RDB 데이터 적재 => Logstash => ES 데이터 적재<br/>
 > **[ ES, Logstash, RDB ]**
