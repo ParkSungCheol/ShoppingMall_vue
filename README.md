@@ -47,7 +47,7 @@
 + **[ CI/CD ]** 
   + gitHub 커밋 => Webhooks를 이용해 Jenkins로 보냄 => Jenkins에서 빌드 후 AWS 인스턴스에 접근해서 배포
 + **[ Build Periodically ]** 
-  + 매일 00:00 모든 배치서버 STOP => 00:10 Logstash 메모리 부족으로 인한 성능저하 방지를 위해 재시작 => 01:00 모든 배치서버 자동시작
+  + 매일 00:00 모든 배치서버 STOP <br/>=> 00:10 Logstash 메모리 부족으로 인한 성능저하 방지를 위해 재시작 <br/>=> 01:00 모든 배치서버 자동시작
 + **[ 복호화 ]** 
   + git-secret을 이용해 GPG 알고리즘(RSA 기반)으로 암호화된 파일을 PrivateKey를 credential로 저장 후 application.yml을 복호화
 > **[ 스프링 ]**
