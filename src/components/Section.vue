@@ -203,7 +203,7 @@ export default {
           top: scrollTarget.offsetTop,
         });
         // 로딩바 숨김
-        this.loader.hide();
+        // this.loader.hide();
       }
     },
 
