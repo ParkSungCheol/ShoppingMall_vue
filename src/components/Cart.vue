@@ -85,6 +85,12 @@
           canCancel: false,
         });
       },
+
+      // 로딩바 숨김
+      hideLoadingOverlay() {
+        this.loader.hide();
+      },
+
       // 유저의 데이터 가져오기
       async getSearch() {
         this.showLoadingOverlay();
@@ -106,12 +112,13 @@
               e.isSearchValueValid = true;
               this.items.push(e);
             });
+
+            // 데이터 로드 완료 후 로딩바 숨김
+            this.hideLoadingOverlay();
           });
         } catch(e) {
-          console.log(e);
-        } finally {
-          // 로딩바 숨김
-          this.loader.hide();
+          // 에러 발생 시에도 로딩바 숨김
+          this.hideLoadingOverlay();
         }
       },
       // item 배열에서 제거

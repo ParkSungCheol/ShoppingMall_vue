@@ -42,6 +42,12 @@
           canCancel: false,
         });
       },
+
+      // 로딩바 숨김
+      hideLoadingOverlay() {
+        this.loader.hide();
+      },
+
       // Submit의 제출은 막고 차트 그리는 function 호출
       onSubmit() {
         this.initializeChart();
@@ -75,12 +81,13 @@
               return 0; // a와 b가 동일할 때 0 반환
             });
             this.data = result.data;
+
+            // 데이터 로드 완료 후 로딩바 숨김
+            this.hideLoadingOverlay();
           });
         } catch(e) {
-          console.log(e);
-        } finally {
-          // 로딩바 숨김
-          this.loader.hide();
+          // 에러 발생 시에도 로딩바 숨김
+          this.hideLoadingOverlay();
         }
   
         // 그래프 input 데이터
