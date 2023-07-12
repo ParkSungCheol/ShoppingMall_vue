@@ -16,6 +16,6 @@
 + **[ API ]**<br/>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;적은 메모리로도 사용가능<br/>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;이미지를 포함한 상품의 모든 상세정보를 가져올 수 있으면서 최소한의 서버부하로 해결가능<br/>
 > **[ ES, Logstash, RDB ]**
 + **[ ES ]** <br/>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;최소 몇 백만 건 이상의 대규모 데이터를 가지고 실시간 검색 및 통계작업에 적합<br/>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;한국어 검색이 용이하도록 한국어형태소 분석기 Nori와 문자열을 잘라서 찾아내는 nGram 활용<br/>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;최소한의 검색연관도를 보장하기 위해 min_score : 20을 부여하여 질의<br/>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;메모리 부족으로 인한 성능저하 방지를 위해 최대 result 반환수를 800개로 한정<br/>
-+ **[ RDB ]** <br/>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;데이터의 일관성 및 무결성 보장, 정형화된 관계파악에 용이<br/>
-+ **[ Logstash ]** <br/>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;데이터베이스간의 동기화<br/>
++ **[ RDB ]** <br/>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;데이터의 일관성 및 무결성 보장, 정형화된 관계파악에 적합<br/>
++ **[ Logstash ]** <br/>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;RDB와 ES간의 동기화<br/>
 + **[ 데이터 흐름 ]** <br/>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;RDB 데이터 적재 => Logstash => ES 데이터 적재<br/>
