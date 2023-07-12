@@ -192,7 +192,7 @@
         if(this.searchQuery.trim().length > 1) {
           const scrollTarget = this.$refs.chart;
           window.scrollTo({
-            top: scrollTarget.offsetTop,
+            top: scrollTarget.offsetTop + 5,
           });
         }
       }
