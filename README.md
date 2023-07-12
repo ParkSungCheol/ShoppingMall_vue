@@ -25,10 +25,10 @@
   + API방식을 채택하여 메모리가 부족하지 않은 환경에서 멀티쓰레드를 적용하여 대량의 데이터를 단시간내에 적재
 + **[ 재시도 및 알림 ]**
   + API 호출 시 제대로 된 데이터를 받지 못했을 경우 3번 재시도 <br/>
-  => chunk단위가 실패하면 Decider를 설정하여 3번 해당 chunk 재시도 <br/>
-  => 모두 실패 시 Slack으로 알림을 띄우도록 설계하여 안정성 보장
+  => chunk단위가 실패하면 Decider를 설정하여 해당 chunk 3번 재시도 <br/>
+  => 모두 실패 시 Slack 알림 띄우도록 설계하여 안정성 보장
 + **[ DB Connection ]** 
-  + DB Connection open시 list형태로 트랙킹하고 배치종료 전 DB Connection 모두 close하도록 설계
+  + DB Connection open시 list형태로 트랙킹하고 배치종료 전 DB Connection 모두 close
 > **[ ES, Logstash, RDB ]**
 + **[ ES ]** 
   + 최소 몇 백만 건 이상의 대규모 데이터를 가지고 실시간 검색 및 통계작업에 적합
