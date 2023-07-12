@@ -40,4 +40,4 @@
 + **[ Logstash ]** 
   + RDB와 ES간의 동기화
 + **[ 데이터 흐름 ]** 
-  + RDB 데이터 적재 => Logstash => ES 데이터 적재
+  + 스프링 배치 => RDB 데이터 적재 => Logstash => ES 데이터 적재
