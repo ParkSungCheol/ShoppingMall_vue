@@ -56,6 +56,11 @@
       // 차트 그리기
       async initializeChart() {
   
+        if(this.searchQuery.trim().length < 2) {
+          alert("검색어는 최소 2글자 이상 입력해주세요!");
+          return;
+        }
+
         this.showLoadingOverlay();
         
         try {
@@ -181,7 +186,7 @@
           ));
         }
         // 검색 시 스크롤링 위치를 inputBox로 이동
-        if(this.searchQuery != '') {
+        if(this.searchQuery.trim().length > 1) {
           const scrollTarget = this.$refs.scrollTarget;
           window.scrollTo({
             top: scrollTarget.offsetTop,

@@ -17,7 +17,7 @@
             <tr v-for="item in items" :key="item.id">
                 <td>
                 <input type="text" v-model="item.searchValue" class="input-field" @input="validateSearchValue(item)">
-                <div v-if="!item.isSearchValueValid" class="error-feedback">검색어를 입력해주세요!</div>
+                <div v-if="!item.isSearchValueValid" class="error-feedback">최소 2글자 이상 입력해주세요!</div>
                 </td>
                 <td>
                 <input type="text" v-model="item.price" class="input-field" @input="validatePrice(item)">
@@ -155,13 +155,13 @@
       },
       // 검색어 검증
       validateSearchValue(item) {
-        item.isSearchValueValid = item.searchValue.trim() !== '';
+        item.isSearchValueValid = item.searchValue.trim().length > 1;
       },
       // item 배열 DB에 저장
       async saveItems() {
         const isSearchValueValid = this.items.every(item => item.isSearchValueValid);
         if (!isSearchValueValid) {
-          alert('검색어가 입력되지 않은 항목이 있습니다!');
+          alert('검색어가 올바르게 입력되지 않은 항목이 있습니다!');
           return;
         }
         const isPriceValid = this.items.every(item => item.isPriceValid);

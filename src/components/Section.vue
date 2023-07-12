@@ -180,6 +180,12 @@ export default {
           if(this.searchSort == position.substring(position.indexOf("_") + 1)) return;
           this.searchSort = position.substring(position.indexOf("_") + 1);
         }
+
+        if(this.searchValue.trim().length < 2) {
+          alert("검색어는 최소 2글자 이상 입력해주세요!");
+          return;
+        }
+
         let queryParams = {
           page: (page) ? page : 1,
           recordSize: 8,
