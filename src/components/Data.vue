@@ -190,7 +190,7 @@
         }
         // 검색 시 스크롤링 위치를 inputBox로 이동
         if(this.searchQuery.trim().length > 1) {
-          const scrollTarget = this.$refs.scrollTarget;
+          const scrollTarget = this.$refs.chart;
           window.scrollTo({
             top: scrollTarget.offsetTop,
           });
