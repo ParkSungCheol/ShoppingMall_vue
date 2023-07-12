@@ -77,7 +77,7 @@
     <img width="901" alt="화면 캡처 2023-07-12 172721" src="https://github.com/ParkSungCheol/ShoppingMall_vue/assets/93702296/6beb4687-8c34-4db0-85fd-f66d3fbf69a0">
   + 통계화면(시계열검색)
     <img width="904" alt="화면 캡처 2023-07-12 172846" src="https://github.com/ParkSungCheol/ShoppingMall_vue/assets/93702296/dbfea2eb-c336-478f-9aa9-8701d9830349">
-  + 문자메시지 전송시스
+  + 문자메시지 전송시스템
     <img width="914" alt="화면 캡처 2023-07-12 172920" src="https://github.com/ParkSungCheol/ShoppingMall_vue/assets/93702296/f31d9f9f-78bd-4085-908a-0bf091a76054">
 ------------
 ### 현재 데이터 적재 대상 검색어를 알려주세요.
