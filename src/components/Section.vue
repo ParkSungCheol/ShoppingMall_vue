@@ -149,6 +149,11 @@ export default {
       });
     },
 
+    // 로딩바 숨김
+    hideLoadingOverlay() {
+      this.loader.hide();
+    },
+
     // Submit의 제출은 막고 상품리스트 조회
     onSubmit() {
       this.movePage(1, 'search');
@@ -193,17 +198,19 @@ export default {
           this.goods = result.data.list;
           this.pagination = result.data.pagination;
           this.searchDto = result.data.searchDto;
+
+          // 데이터 로드 완료 후 로딩바 숨김
+          this.hideLoadingOverlay();
         });
       } catch(e) {
-        console.log(e);
+        // 에러 발생 시에도 로딩바 숨김
+        this.hideLoadingOverlay();
       } finally {
         // 검색 시 스크롤링 위치를 inputBox로 이동
         const scrollTarget = this.$refs.scrollTarget;
         window.scrollTo({
           top: scrollTarget.offsetTop,
         });
-        // 로딩바 숨김
-        this.loader.hide();
       }
     },
 
