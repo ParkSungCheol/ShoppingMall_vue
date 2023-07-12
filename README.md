@@ -19,11 +19,14 @@
 > **[ 스프링 배치 ]**
 + **[ Chunk ]** 
   + Tasklet 방식은 tasklet 전체가 트랜잭션으로 다뤄져서 완료되지 않는 이상 DB에 적재하지 않음
-  + Chunk방식은 유연한 트랜잭션 관리를 제공해서 chunk 1단위씩 끊어서 트랜잭션을 구성하여 언제라도 interrupt가 발생하면 이전 chunk까지의 진행상황은 DB에 적재
+  + Chunk방식은 유연한 트랜잭션 관리를 제공해서 chunk 1단위씩 끊어서 트랜잭션을 구성하여 <br/>
+  언제라도 interrupt가 발생하면 이전 chunk까지의 진행상황은 DB에 적재
 + **[ 멀티쓰레드 ]** 
   + API방식을 채택하여 메모리가 부족하지 않은 환경에서 멀티쓰레드를 적용하여 대량의 데이터를 단시간내에 적재
 + **[ 재시도 및 알림 ]**
-  + API 호출 시 제대로 된 데이터를 받지 못했을 경우 3번 재시도 => chunk단위가 실패하면 Decider를 설정하여 3번 해당 chunk를 재시도 => 모두 실패 시 Slack으로 알림을 띄우도록 설계하여 안정성 보장
+  + API 호출 시 제대로 된 데이터를 받지 못했을 경우 3번 재시도 <br/>
+  => chunk단위가 실패하면 Decider를 설정하여 3번 해당 chunk를 재시도 <br/>
+  => 모두 실패 시 Slack으로 알림을 띄우도록 설계하여 안정성 보장
 + **[ DB Connection ]** 
   + DB Connection open시 list형태로 트랙킹하고 배치종료 전 DB Connection 모두 close하도록 설계
 > **[ ES, Logstash, RDB ]**
