@@ -162,6 +162,12 @@ export default {
 
     // 각 페이지별 상품리스트 조회
     movePage(page, position) {
+      
+      if(this.searchValue.trim().length < 2) {
+          alert("검색어는 최소 2글자 이상 입력해주세요!");
+          return;
+      }
+
       this.showLoadingOverlay();
       this.searchMessage = this.searchValue? '검색결과가 존재하지 않습니다.' : '검색어를 입력해주세요.';
 
@@ -179,11 +185,6 @@ export default {
           // 기존 정렬방식과 동일한 경우
           if(this.searchSort == position.substring(position.indexOf("_") + 1)) return;
           this.searchSort = position.substring(position.indexOf("_") + 1);
-        }
-
-        if(this.searchValue.trim().length < 2) {
-          alert("검색어는 최소 2글자 이상 입력해주세요!");
-          return;
         }
 
         let queryParams = {

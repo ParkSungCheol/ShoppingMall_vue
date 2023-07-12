@@ -55,44 +55,47 @@
       },
       // 차트 그리기
       async initializeChart() {
-  
-        if(this.searchQuery.trim().length < 2) {
-          alert("검색어는 최소 2글자 이상 입력해주세요!");
-          return;
-        }
 
-        this.showLoadingOverlay();
+        // 처음 차트 그려진 후 사용자가 검색어 입력 후부터
+        if (this.chart){
+          if(this.searchQuery.trim().length < 2) {
+            alert("검색어는 최소 2글자 이상 입력해주세요!");
+            return;
+          }
+
+          this.showLoadingOverlay();
         
-        try {
-          const baseURI = 'https://api.jurospring.o-r.kr';
-          const axiosInstance = axios.create({
-            withCredentials: true,
-          });
-          const result = await axiosInstance.get(`${baseURI}/` + "statistic",
-          {
-            params : {
-              searchValue : this.searchQuery
-            }
-          },
-          ).then((result) => {
-            // 날짜 기준으로 ASC로 정렬
-            result.data.sort(function(a, b) {
-              if (a.keyAsString < b.keyAsString) {
-                return -1; // a가 b보다 앞에 올 때 음수 반환
-              }
-              if (a.keyAsString > b.keyAsString) {
-                return 1; // a가 b보다 뒤에 올 때 양수 반환
-              }
-              return 0; // a와 b가 동일할 때 0 반환
+          try {
+            const baseURI = 'https://api.jurospring.o-r.kr';
+            const axiosInstance = axios.create({
+              withCredentials: true,
             });
-            this.data = result.data;
+            const result = await axiosInstance.get(`${baseURI}/` + "statistic",
+            {
+              params : {
+                searchValue : this.searchQuery
+              }
+            },
+            ).then((result) => {
+              // 날짜 기준으로 ASC로 정렬
+              result.data.sort(function(a, b) {
+                if (a.keyAsString < b.keyAsString) {
+                  return -1; // a가 b보다 앞에 올 때 음수 반환
+                }
+                if (a.keyAsString > b.keyAsString) {
+                  return 1; // a가 b보다 뒤에 올 때 양수 반환
+                }
+                return 0; // a와 b가 동일할 때 0 반환
+              });
+              this.data = result.data;
 
-            // 데이터 로드 완료 후 로딩바 숨김
+              // 데이터 로드 완료 후 로딩바 숨김
+              this.hideLoadingOverlay();
+            });
+          } catch(e) {
+            // 에러 발생 시에도 로딩바 숨김
             this.hideLoadingOverlay();
-          });
-        } catch(e) {
-          // 에러 발생 시에도 로딩바 숨김
-          this.hideLoadingOverlay();
+          }
         }
   
         // 그래프 input 데이터
