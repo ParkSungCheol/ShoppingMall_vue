@@ -444,6 +444,9 @@ export default {
             params.phone = this.$refs.sendMessage.value;
         }
 
+        console.log("params.beforePwd : ", params.beforePwd);
+        console.log("params.afterPwd : ", params.afterPwd);
+
         const baseURI = 'https://api.jurospring.o-r.kr';
         try{
             const axiosInstance = axios.create({
